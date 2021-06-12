@@ -7,15 +7,20 @@ import './header.scss';
 const Header = () => (
     <header className="header">
 
-        <div className="header__logo">
+        <NavLink 
+        to="/"
+        exact
+        className="header__logo"
+        >
             {/* En attente du logo */}
             <img className="header__logo_img" src="#" alt="Logo" />
             <span className="header__logo__title">Poker Tool</span>
-        </div>
+        </NavLink>
 
         <nav className="header__navbar">
             <NavLink
-                to="/accueil"
+                to="/"
+                exact
                 className="header__navbar__element"
                 activeClassName="header__navbar__element--selected"
             >Accueil</NavLink>
