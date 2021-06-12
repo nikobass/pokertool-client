@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './header.scss';
 
 
-const Header = () => (
+const Header = ({isLogged}) => (
     <header className="header">
 
         <NavLink 
@@ -52,11 +53,14 @@ const Header = () => (
         </nav>
 
         <div className="header__connexion">
-            <button className="header__connexion__button">Connexion</button>
+            <button className="header__connexion__button">{isLogged ? 'déconnexion' : 'connexion'}</button>
         </div>
 
     </header >
-
 )
 
-export default Header;
+const mapStateToProps = (state) => ({
+    isLogged: state.user.isLogged
+})
+
+export default connect(mapStateToProps)(Header);
