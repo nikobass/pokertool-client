@@ -19,8 +19,6 @@
     }
 
     &__navbar{
-    
-        &__list{
             display: flex;
     
             &__element{
@@ -31,13 +29,16 @@
                 border-bottom: 2px solid #000000;
                 padding: 0.3rem 0;
     
-                &:hover{
+                &--selected{
                     color: #EE581E;
-                    cursor: pointer; 
                     border-bottom: 2px solid #EE581E;
                 }
+
+                &:hover{
+                    cursor: pointer;
+                    color: #EE581E;
+                }
             }
-        }
     }
 
     &__connexion{
