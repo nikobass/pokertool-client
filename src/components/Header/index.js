@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './header.scss';
 
@@ -58,6 +59,10 @@ const Header = ({isLogged}) => (
 
     </header >
 )
+
+Header.propTypes = {
+    isLogged: PropTypes.bool.isRequired
+}
 
 const mapStateToProps = (state) => ({
     isLogged: state.user.isLogged
