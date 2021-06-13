@@ -18,7 +18,7 @@ const Profil = ({
     passwordValue
 }) => (
     <main className="profil">
-
+        
         <form className="profil__form">
             <h2 className="profil__form__subtitle">Mon profil</h2>
 
@@ -34,6 +34,7 @@ const Profil = ({
             {/* Ici les ternaires gèrent l'affiche du bouton pour modifier le profil ou du bouton pour valider la saisie selon si l'utilisateur est en train de consulter ou modifier son profil*/}
             <button type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>
             <button onClick={handleModifyProfil} className={!modifying ? "profil__form__button" : "profil__form__button invisible"}>Modifier mon profil</button>
+            <span className="profil__form__delete">Supprimer mon profil utilisateur</span>
         </form>
 
     </main>

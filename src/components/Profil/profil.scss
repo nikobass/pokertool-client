@@ -1,14 +1,14 @@
 .profil{
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    margin: 2rem auto;
+    padding: 1rem;
 
     &__form{
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 2rem;
-        border: 1px solid black;
         margin: 2rem auto;
         background-color: #19191e;
 
@@ -63,8 +63,22 @@
             }
         }
 
-        .invisible{
-            display: none;
+        &__delete{
+            color: #f2f2f2;
+            margin-top: 2rem;
+            transition: 0.2s;
+            text-decoration: underline;
+            font-size: 0.9rem;
+
+            &:hover{
+                cursor: pointer;
+                color: #ee581e;
+            }
         }
+
     }
+}
+
+.invisible{
+    display: none;
 }
