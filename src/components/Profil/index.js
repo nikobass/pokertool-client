@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {toggleModifyProfil, changeInputValue} from 'src/actions/user';
 
@@ -39,6 +40,15 @@ const Profil = ({
 
     </main>
 )
+
+Profil.propTypes = {
+    handleModifyProfil: PropTypes.func.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    modifying: PropTypes.bool.isRequired,
+    nicknameValue: PropTypes.string.isRequired,
+    emailValue: PropTypes.string.isRequired,
+    passwordValue: PropTypes.string.isRequired
+}
 
 const mapStateToProps = (state) => ({
     modifying: state.user.profil.modifying,
