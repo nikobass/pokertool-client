@@ -12,6 +12,7 @@ import Profil from 'src/components/Profil';
 
 const App = () => (
   <div className="app">
+    {/* Le switch est provisoire. Il va falloir qu'on gère ça plus tard. Pour le moment, il sert à afficher la page Profil sur la route /Profil */}
     <Switch>
       <Route exact path="/">
         <Header />
