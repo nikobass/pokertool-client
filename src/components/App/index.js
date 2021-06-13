@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 // == Import
 import './styles.css';
@@ -11,9 +12,17 @@ import Profil from 'src/components/Profil';
 
 const App = () => (
   <div className="app">
-    <Header/>
-    <Profil/>
-    <Footer/>
+    <Switch>
+      <Route exact path="/">
+        <Header />
+        <Footer />
+      </Route>
+      <Route path="/profil">
+        <Header />
+        <Profil />
+        <Footer />
+      </Route>
+    </Switch>
   </div>
 );
 
