@@ -13,6 +13,7 @@ import Footer from 'src/components/Footer';
 import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import { useDispatch } from 'react-redux';
+import ResetPassword from 'src/components/ResetPassword';
 
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
         </Route>
         <Route path="/resetPassword">
           <Header />
+          <ResetPassword />
           <Footer />
         </Route>
       </Switch>
