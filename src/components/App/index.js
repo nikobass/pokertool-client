@@ -1,9 +1,8 @@
 // == Import npm
 import React, { useEffect, setState } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
-import { withRouter } from 'react-router';
 
-import { resetProfilModif } from 'src/actions/user';
+import { resetProfilModif, hideModal } from 'src/actions/user';
 
 // == Import
 import './styles.css';
@@ -25,6 +24,7 @@ const App = () => {
     if (currentLocation === '/profil') {
       dispatch(resetProfilModif());
     }
+    dispatch(hideModal());
   })
 
   return (
@@ -56,6 +56,10 @@ const App = () => {
         <Route path="/profil">
           <Header />
           <Profil />
+          <Footer />
+        </Route>
+        <Route path="/resetPassword">
+          <Header />
           <Footer />
         </Route>
       </Switch>
