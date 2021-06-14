@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, setState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import {toggleModifyProfil, changeInputValue} from 'src/actions/user';
 
@@ -12,7 +13,8 @@ const Profil = ({
     //Fonction qui gère la modification des inputs: pseudo, email et password (champs controlés)
     handleInputChange,
     //Booléen qui modifie le state pour savoir si le profil est en train d'être édité. Il conditionne l'ouverture des inputs.
-    modifying, 
+    modifying,
+    currentLocation,
     // La valeur des 3 inputs pour les champs controlés.
     nicknameValue,
     emailValue,
@@ -50,11 +52,12 @@ Profil.propTypes = {
     passwordValue: PropTypes.string.isRequired
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
     modifying: state.user.profil.modifying,
     nicknameValue: state.user.nickname,
     emailValue: state.user.email,
-    passwordValue: state.user.password
+    passwordValue: state.user.password,
+    currentLocation: ownProps.location.pathname
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -72,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profil);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profil));

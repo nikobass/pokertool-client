@@ -1,6 +1,9 @@
 // == Import npm
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useEffect, setState } from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
+import {resetProfilModif} from 'src/actions/user';
 
 // == Import
 import './styles.css';
@@ -9,8 +12,21 @@ import './styles.css';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Profil from 'src/components/Profil';
+import { connect, useDispatch } from 'react-redux';
 
-const App = () => (
+const App = () => {
+
+  const currentLocation = useLocation().pathname;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(currentLocation)
+    if(currentLocation === '/profil'){
+      dispatch(resetProfilModif());
+    }
+  })
+  
+  return (
   <div className="app">
     {/* Le switch est provisoire. Il va falloir qu'on gère ça plus tard. Pour le moment, il sert à afficher la chaque page pour pouvoir tester nos composants */}
     <Switch>
@@ -41,7 +57,7 @@ const App = () => (
       </Route>
     </Switch>
   </div>
-);
+)}
 
 // == Export
 export default App;

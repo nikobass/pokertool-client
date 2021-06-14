@@ -1,4 +1,4 @@
-import {TOGGLE_MODIFY_PROFIL, CHANGE_INPUT_VALUE} from 'src/actions/user';
+import {TOGGLE_MODIFY_PROFIL, CHANGE_INPUT_VALUE, RESET_PROFIL_MODIF} from 'src/actions/user';
 
 
 const initialState = {
@@ -35,6 +35,14 @@ const reducer = (state = initialState, action = {}) => {
                 // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
                 [action.inputName]: action.newInputValue
             }
+        case RESET_PROFIL_MODIF:
+            return {
+                ...state,
+                profil: {
+                    modifying: false
+                }
+            }
+
         default:
             return state;
     }
