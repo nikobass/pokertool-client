@@ -51,12 +51,11 @@ Profil.propTypes = {
     passwordValue: PropTypes.string.isRequired
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     modifying: state.user.profil.modifying,
     nicknameValue: state.user.nickname,
     emailValue: state.user.email,
     passwordValue: state.user.password,
-    currentLocation: ownProps.location.pathname
 })
 
 const mapDispatchToProps = (dispatch) => ({
