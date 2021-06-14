@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
     TOGGLE_MODIFY_PROFIL, 
     CHANGE_INPUT_VALUE, 
@@ -5,6 +6,9 @@ import {
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL
 } from 'src/actions/user';
+=======
+import {TOGGLE_MODIFY_PROFIL, CHANGE_INPUT_VALUE, RESET_PROFIL_MODIF, SHOW_CONNECTION_MODAL} from 'src/actions/user';
+>>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
 
 
 const initialState = {
@@ -20,7 +24,10 @@ const initialState = {
         modifying: false,
     },
     showConnectionModal: false,
+<<<<<<< HEAD
     
+=======
+>>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -56,11 +63,14 @@ const reducer = (state = initialState, action = {}) => {
                 ...state,
                 showConnectionModal: true
             }
+<<<<<<< HEAD
         case HIDE_MODAL:
             return{
                 ...state,
                 showConnectionModal: false
             }
+=======
+>>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
 
         default:
             return state;
