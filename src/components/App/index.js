@@ -13,7 +13,7 @@ import Footer from 'src/components/Footer';
 import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import { useDispatch } from 'react-redux';
-import ResetPassword from 'src/components/ResetPassword';
+import ResetPassword from 'src/components/ResetPasswordHome';
 
 
 const App = () => {
