@@ -4,7 +4,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0,0,0,.75);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,19 +19,16 @@
         }
 
         &__header{
-<<<<<<< HEAD
+
             position: relative;
-=======
->>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
 
             &__title{
                 color: #f2f2f2;
                 font-size: 1.5rem;
                 font-weight: bold;
-                margin-bottom: 2rem;
+                margin-top: 2rem;
                 text-align: center;
             }
-<<<<<<< HEAD
 
             &__close{
                 display: block;
@@ -51,22 +48,6 @@
                     border: 2px solid #EE581E;
                     cursor: pointer;
                 }
-=======
-        }
-
-        &__footer{
-            text-align: center;
-
-            &__button{
-                background-color: #ee581e;
-                color: #f2f2f2;
-                padding: 0.8rem 2rem;
-                border-radius: 5px;
-                font-weight: 700;
-                font-size: 1.1rem;
-                border: 2px solid #19191e;
-                margin-top: 0.5rem;
->>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
             }
         }
     }

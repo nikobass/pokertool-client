@@ -2,10 +2,7 @@ export const TOGGLE_MODIFY_PROFIL = 'TOGGLE_MODIFY_PROFIL';
 export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE';
 export const RESET_PROFIL_MODIF = 'RESET_PROFIL_MODIF';
 export const SHOW_CONNECTION_MODAL = 'SHOW_CONNECTION_MODAL';
-<<<<<<< HEAD
 export const HIDE_MODAL = 'HIDE_MODAL';
-=======
->>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
 
 export const toggleModifyProfil = () => ({
     type: TOGGLE_MODIFY_PROFIL
@@ -23,12 +20,8 @@ export const resetProfilModif = () => ({
 
 export const showConnectionModal = () => ({
     type: SHOW_CONNECTION_MODAL
-<<<<<<< HEAD
 })
 
 export const hideModal = () => ({
     type: HIDE_MODAL
 })
-=======
-})
->>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6

@@ -11,7 +11,6 @@ import './styles.css';
 // == Composant
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
-<<<<<<< HEAD
 import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import { useDispatch } from 'react-redux';
@@ -63,28 +62,6 @@ const App = () => {
     </div>
   );
 };
-=======
-import Profil from 'src/components/Profil';
-import { useDispatch } from 'react-redux';
-
-const App = () => {
-
-  const currentLocation = useLocation().pathname;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(currentLocation === '/profil'){
-      dispatch(resetProfilModif());
-    }
-  })
-  
-  return (
-  <div className="app">
-    <Header/>
-    <Footer/>
-  </div>
-);
->>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
 
 // == Export
 

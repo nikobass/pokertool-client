@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {showConnectionModal} from 'src/actions/user.js'
+import { showConnectionModal } from 'src/actions/user.js'
 import Modal from 'src/components/modal';
 import './header.scss';
 
@@ -61,11 +61,19 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => (
                 <button type="button" className={!isLogged ? "header__connexion__button invisible" : "header__connexion__button"}>Déconnexion</button>
             </div>
         </header >
-<<<<<<< HEAD
-        <Modal isOpen={showConnectionModal} title='Mon titre' content='Mon contenu'/>
-=======
-        <Modal open={showConnectionModal} title='Mon titre' content='Mon contenu'/>
->>>>>>> dac395b0a35f7a672c1c5aa5397dc2824864b3f6
+        <Modal
+            isOpen={showConnectionModal}
+            title='Connexion'
+            content={(
+                <form className="connexionForm">
+                    <label htmlFor="email" className="connexionForm__label">Email</label>
+                    <input type="email" name="connexionEmailInput" className="connexionForm__input" />
+                    <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
+                    <input type="password" name="connexionPasswordInput" className="connexionForm__input" />
+                    <button type="submit" className="connexionForm__submit">Se connecter</button>
+                </form>
+            )}
+        />
     </>
 )
 
@@ -78,7 +86,7 @@ const mapStateToProps = (state) => ({
     showConnectionModal: state.user.showConnectionModal
 })
 
-const mapDispatchToProps= (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
     handleShowModal: () => {
         dispatch(showConnectionModal());
     }
