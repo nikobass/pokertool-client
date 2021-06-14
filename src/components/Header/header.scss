@@ -1,0 +1,67 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    padding: 1.5rem;
+    color: #f2f2f2;
+
+    &__logo{
+
+        &__img{
+
+        }
+
+        &__title{
+            font-size: 3rem;
+            font-weight: bold;
+        }
+    }
+
+    &__navbar{
+            display: flex;
+    
+            &__element{
+                margin-right: 2rem;
+                font-weight: bold;
+                font-size: 1.1rem;
+                transition: 0.3s;
+                border-bottom: 2px solid #000000;
+                padding: 0.3rem 0;
+    
+                &--selected{
+                    color: #EE581E;
+                    border-bottom: 2px solid #EE581E;
+                }
+
+                &:hover{
+                    cursor: pointer;
+                    color: #EE581E;
+                }
+            }
+    }
+
+    &__connexion{
+
+        &__button{
+            background-color: #EE581E;
+            border: 2px solid #000000;
+            color: #f2f2f2;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s ;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #000000;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
+        }
+    }
+}
+
+
+
