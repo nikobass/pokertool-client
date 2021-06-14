@@ -1,28 +1,20 @@
-.faq { 
-    background-color: #19191e;
-    color: #f2f2f2;
-    width: 50vw;
-    height: 50px;
-    margin: auto;
-    margin-top: 50px;
-    padding: 1%;
-  }
-
-  h1{
-      font-size: 1.5rem;
-  }
-
-.question {
+main { 
     background-color: #f2f2f2;
-    color: #ee581e;
+    color: #19191e;
+    width: 60vw;
     margin: auto;
-    padding: 1%;
+    margin-top: 10px;
+    padding: 20px;
+    padding-left: 100px;
+  }
+
+h1 {
+    font-size: 1.5rem;
+    margin-top: 50px;
+    padding: autopx;
 }
 
-.answer {
-    background-color: #19191e;
-   
-    margin: auto;
-    padding: 1%;
+ul {
+    margin-top: 20px;
+    
 }
-  

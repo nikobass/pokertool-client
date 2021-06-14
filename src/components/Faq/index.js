@@ -5,37 +5,37 @@ import './faq.scss';
 
 const Faq = () => (
 
-    <div className="faq">
+    <main className="faq">
+        <h1>
+            Questions fréquement posées (FAQ):
+        </h1>  
         <ul> 
-            <h1>
-                Questions fréquement posées (FAQ):
-            </h1>
             <Faquestion 
                 question="Comment avoir accès aux fonctionnalités ?"
                 answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor."
             />
-                        <Faquestion 
+            <Faquestion 
                 question="L’application est-elle gratuite ?"
                 answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor."
             />
-                        <Faquestion 
+            <Faquestion 
                 question="Quelles sont précisément les fonctionnalités du site ?"
                 answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor."
             />
-                        <Faquestion 
+            <Faquestion 
                 question="Puis-je utiliser l’application à titre professionnel ?"
                 answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor."
             />
-                        <Faquestion 
+            <Faquestion 
                 question="Qu’en  est-il de la version mobile ?"
                 answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor."
             />
-                        <Faquestion 
+            <Faquestion 
                 question="Comment me désinscrire du site ?"
                 answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor."
             />
         </ul>
-    </div>
+    </main>
 
 )
 
