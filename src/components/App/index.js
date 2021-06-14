@@ -11,9 +11,8 @@ import './styles.css';
 // == Composant
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
-import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const App = () => {
 
@@ -21,7 +20,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(currentLocation)
     if(currentLocation === '/profil'){
       dispatch(resetProfilModif());
     }

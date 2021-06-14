@@ -1,4 +1,4 @@
-import {TOGGLE_MODIFY_PROFIL, CHANGE_INPUT_VALUE, RESET_PROFIL_MODIF} from 'src/actions/user';
+import {TOGGLE_MODIFY_PROFIL, CHANGE_INPUT_VALUE, RESET_PROFIL_MODIF, SHOW_CONNECTION_MODAL} from 'src/actions/user';
 
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
         // Le booléen qui gère si le profil est en cours de modification ou non.
         // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
         modifying: false,
-    }
+    },
+    showConnectionModal: false,
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -41,6 +42,12 @@ const reducer = (state = initialState, action = {}) => {
                 profil: {
                     modifying: false
                 }
+            }
+
+        case SHOW_CONNECTION_MODAL:
+            return{
+                ...state,
+                showConnectionModal: true
             }
 
         default:

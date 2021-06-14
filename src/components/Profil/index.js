@@ -1,7 +1,6 @@
 import React, { useEffect, setState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 
 import {toggleModifyProfil, changeInputValue} from 'src/actions/user';
 
