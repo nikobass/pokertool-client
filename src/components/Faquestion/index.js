@@ -2,16 +2,15 @@ import React from 'react';
 
 import './faquestion.scss';
 
-const Faquestion = () => (
+const Faquestion = ({question, answer}) => (
 
     <div className="faq">
         <ul>
             <li className="question">
-                Question: Blabla Blabla blaaaaa?
+                {question}
             </li>
             <li className="answer">
-                Réponse:
-                <span className="answer__"> blablablablablabla</span>
+                {answer}
             </li>
         </ul>
     </div>
