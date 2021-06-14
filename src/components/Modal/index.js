@@ -13,8 +13,8 @@ const Modal = ({
 
     //Donc au contraire, si open est à true elle affiche le contenu qui est retourné ci-dessous
     return (
-        <div className={isOpen ? 'modal show' : 'modal'} onClick={handleHideModal}>
-            <div className="modal__content" onClick={e => e.stopPropagation()}>
+        <div className={isOpen ? 'modal show' : 'modal'} onMouseDown={handleHideModal}>
+            <div className="modal__content" onMouseDown={e => e.stopPropagation()}>
 
                 <div className="modal__content__header">
                     <span onClick={handleHideModal} className="modal__content__header__close">X</span>

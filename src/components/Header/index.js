@@ -2,13 +2,22 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import { showConnectionModal } from 'src/actions/user.js'
 import Modal from 'src/components/modal';
 import './header.scss';
 
 
-const Header = ({ isLogged, handleShowModal, showConnectionModal }) => (
+const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
+    
+    const history = useHistory();
+
+    const redirectToResetPassword = () => {
+        history.push('/resetPassword');
+    }
+    
+    return (
     <>
         <header className="header">
 
@@ -70,12 +79,13 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => (
                     <input type="email" name="connexionEmailInput" className="connexionForm__input" />
                     <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
                     <input type="password" name="connexionPasswordInput" className="connexionForm__input" />
+                    <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
                     <button type="submit" className="connexionForm__submit">Se connecter</button>
                 </form>
             )}
         />
     </>
-)
+)}
 
 Header.propTypes = {
     isLogged: PropTypes.bool.isRequired

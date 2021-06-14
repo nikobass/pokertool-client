@@ -111,4 +111,19 @@
             color: #EE581E;
         }
     }
+
+    &__forgotPassword{
+        text-align: left;
+        margin-bottom: 2rem;
+        width: 400px;
+    }
+
+    &__forgotPasswordLink{
+        text-decoration: underline;
+
+        &:hover{
+            cursor: pointer;
+            color: #EE581E;
+        }
+    }
 }
