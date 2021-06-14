@@ -14,7 +14,6 @@ const Profil = ({
     handleInputChange,
     //Booléen qui modifie le state pour savoir si le profil est en train d'être édité. Il conditionne l'ouverture des inputs.
     modifying,
-    currentLocation,
     // La valeur des 3 inputs pour les champs controlés.
     nicknameValue,
     emailValue,
@@ -75,4 +74,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profil));
+export default connect(mapStateToProps, mapDispatchToProps)(Profil);
