@@ -11,6 +11,7 @@ import './styles.css';
 // == Composant
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
+import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import { connect, useDispatch } from 'react-redux';
 
@@ -28,6 +29,7 @@ const App = () => {
   
   return (
   <div className="app">
+
     {/* Le switch est provisoire. Il va falloir qu'on gère ça plus tard. Pour le moment, il sert à afficher la chaque page pour pouvoir tester nos composants */}
     <Switch>
       <Route exact path="/">
@@ -48,6 +50,7 @@ const App = () => {
       </Route>
       <Route exact path="/faq">
         <Header />
+        <Faq />
         <Footer />
       </Route>
       <Route path="/profil">
@@ -57,7 +60,8 @@ const App = () => {
       </Route>
     </Switch>
   </div>
-)}
+);
 
 // == Export
+
 export default App;
