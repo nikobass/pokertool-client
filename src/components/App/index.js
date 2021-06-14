@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import { Switch, Route } from 'react-router-dom'
 
 // == Import
 import './styles.css';
@@ -19,7 +20,7 @@ const App = () => (
       </Route>
       <Route path="/profil">
         <Header />
-        <Profil />
+        
         <Footer />
       </Route>
     </Switch>

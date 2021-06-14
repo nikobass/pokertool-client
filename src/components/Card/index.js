@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './card.scss'
 
@@ -11,5 +12,11 @@ const Card = ({image, description, title}) => {
     </div>
   );
 };
+
+Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  description:  PropTypes.string.isRequired,
+  title:  PropTypes.string.isRequired
+}
 
 export default Card;

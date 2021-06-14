@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 //components
 
@@ -27,6 +28,12 @@ const Home = ({openFormSignup, handleOpenForm}) => {
 
   );
 };
+
+Home.propTypes = {
+  openFormSignup: PropTypes.bool,
+  handleOpenForm: PropTypes.func.isRequired,
+}
+
 
 import {changeOpenForm} from 'src/actions/user';
 import { connect } from 'react-redux';
