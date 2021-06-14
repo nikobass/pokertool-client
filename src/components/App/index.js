@@ -11,9 +11,18 @@ import Home from 'src/components/Home';
 
 const App = () => (
   <div className="app">
-    <Header/>
-    <Home />
-    <Footer/>
+   <Switch>
+      <Route exact path="/">
+        <Header />
+        <Home />
+        <Footer />
+      </Route>
+      <Route path="/profil">
+        <Header />
+        <Profil />
+        <Footer />
+      </Route>
+    </Switch>
   </div>
 );
 
