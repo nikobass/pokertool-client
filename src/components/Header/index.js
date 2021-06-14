@@ -61,7 +61,7 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => (
                 <button type="button" className={!isLogged ? "header__connexion__button invisible" : "header__connexion__button"}>Déconnexion</button>
             </div>
         </header >
-        <Modal open={showConnectionModal} title='Mon titre' content='Mon contenu'/>
+        <Modal isOpen={showConnectionModal} title='Mon titre' content='Mon contenu'/>
     </>
 )
 

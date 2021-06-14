@@ -1,4 +1,10 @@
-import {TOGGLE_MODIFY_PROFIL, CHANGE_INPUT_VALUE, RESET_PROFIL_MODIF, SHOW_CONNECTION_MODAL} from 'src/actions/user';
+import {
+    TOGGLE_MODIFY_PROFIL, 
+    CHANGE_INPUT_VALUE, 
+    RESET_PROFIL_MODIF, 
+    SHOW_CONNECTION_MODAL,
+    HIDE_MODAL
+} from 'src/actions/user';
 
 
 const initialState = {
@@ -14,6 +20,7 @@ const initialState = {
         modifying: false,
     },
     showConnectionModal: false,
+    
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -48,6 +55,11 @@ const reducer = (state = initialState, action = {}) => {
             return{
                 ...state,
                 showConnectionModal: true
+            }
+        case HIDE_MODAL:
+            return{
+                ...state,
+                showConnectionModal: false
             }
 
         default:

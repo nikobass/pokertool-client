@@ -1,9 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { hideModal } from 'src/actions/user';
+
 import './modal.scss';
 
-const Modal = ({open, title, content}) => {
+const Modal = ({
+    isOpen, 
+    title, 
+    content,
+    handleHideModal
+}) => {
     
-    if(!open){
+    if(!isOpen){
         //si open est false alors la modal ne retourne rien.
         // c'est à dire que rien n'est affiché à l'écran
         
@@ -15,15 +23,19 @@ const Modal = ({open, title, content}) => {
         <div className="modal__content">
             <div className="modal__content__header">
                 <h2 className="modal__content__header__title">{title}</h2>
+                <span onClick={handleHideModal} className="modal__content__header__close">X</span>
             </div>
             <div className="modal__content__body">
                 {content}
-            </div>
-            <div className="modal__content__footer">
-                <button className="modal__content__footer__button">Close</button>
             </div>
         </div>
     </div>
 )}
 
-export default Modal;
+const mapDispatchToProps = (dispatch) => ({
+    handleHideModal: () => {
+        dispatch(hideModal());
+    }
+})
+
+export default connect(null, mapDispatchToProps)(Modal);
