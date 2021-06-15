@@ -14,9 +14,9 @@ const initialState = {
     isLogged: false,
     // la valeur par défaut des inputs, PROVISOIRE.
     // Ici on récupérera les données de la BDD lorsque l'utilisateur est connecté.
-    nickname: '',
-    email: '',
-    password: '',
+    nickname: localStorage.getItem('nickname') || '',
+    email: localStorage.getItem('email') || '',
+    password: '********',
     profil: {
         // Le booléen qui gère si le profil est en cours de modification ou non.
         // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
@@ -73,13 +73,11 @@ const reducer = (state = initialState, action = {}) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                nickname: action.nickname,
-                // TODO: stocker le token dans le localStorage
-                token: action.token,
+                nickname: action.apiData.nickname,
+                email: action.apiData.email,
+                token: action.apiData.token,
+                password: '********',
                 isLogged: true,
-                //On vide les données de l'utilisateur du state pour des raisons de sécurité.
-                email: '',
-                password: '',
                 showConnectionModal: false,
             };
 
