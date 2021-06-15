@@ -1,0 +1,17 @@
+.tournament--element{
+  padding: 1rem;
+  margin : 1rem 3rem; 
+  border: solid 1px #19191e;
+  
+  display: flex;
+  justify-content: space-between;
+
+  background-color: #EE581E;
+  color: #19191e;
+  font-size: 1.1rem;
+}
+
+span{
+ 
+  max-width: 8rem;
+}

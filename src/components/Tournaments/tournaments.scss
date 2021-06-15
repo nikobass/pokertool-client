@@ -1,0 +1,47 @@
+.tournaments-container{
+  text-align: center; 
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  
+
+
+  
+}
+
+.tournaments--title{
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: left;
+  padding: 2rem;
+
+  
+}
+
+.tournaments--list{
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+ul{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  
+  
+}
+
+.chevron-down{
+  border: none;
+  background-color: #f2f2f2;
+}
+
+.modify-tournament{
+  border: none;
+  background-color: #EE581E;
+}
