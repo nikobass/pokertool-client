@@ -14,7 +14,7 @@ const Tournaments = () => {
       nbPlayers: 8,
       maxPlayers: 10,
       date: '02/07/2021',
-      cashPrice: 'une journée avec les goélands',
+      cashPrice: 'Journée avec les goélands',
       statut: 'à venir',
       buyIn: 'Sac de graine ou pain',
       location: 'Chez Eteinne',
