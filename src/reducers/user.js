@@ -5,7 +5,9 @@
     RESET_PROFIL_MODIF,
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL,
-    CHANGE_OPEN_FORM
+    CHANGE_OPEN_FORM,
+    SHOW_DELETE_ACCOUNT_MODAL,
+    DELETE_USER_ACCOUNT
   } from 'src/actions/user';
 
 
@@ -22,6 +24,7 @@
       modifying: false,
     },
     showConnectionModal: false,
+    showDeleteAccountModal: false,
     openFormSignup: false,
 
   }
@@ -62,13 +65,24 @@
       case HIDE_MODAL:
         return {
           ...state,
-          showConnectionModal: false
+          showConnectionModal: false,
+          showDeleteAccountModal: false
         }
       case CHANGE_OPEN_FORM:
         return {
           ...state,
           openFormSignup: true,
         };
+      case SHOW_DELETE_ACCOUNT_MODAL:
+        return {
+          ...state,
+          showDeleteAccountModal: true
+        }
+      case DELETE_USER_ACCOUNT:
+        return {
+          ...state,
+          showDeleteAccountModal: false
+        }
 
       default:
         return state;

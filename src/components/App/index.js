@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useEffect, setState } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 
 import { resetProfilModif, hideModal } from 'src/actions/user';
