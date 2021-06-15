@@ -45,8 +45,8 @@ export const loginSuccess = (apiData) => ({
     type: LOGIN_SUCCESS,
     //a voir avec Pascal les données retournées par le back
     nickname: apiData.nickname,
-    email: apiData.email,
     token: apiData.token,
+    showConnectionModal: false
 });
 
 export const loginError = () => ({

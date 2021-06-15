@@ -80,6 +80,7 @@ const reducer = (state = initialState, action = {}) => {
                 //On vide les données de l'utilisateur du state pour des raisons de sécurité.
                 email: '',
                 password: '',
+                showConnectionModal: false,
             };
 
         default:
