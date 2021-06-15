@@ -1,3 +1,11 @@
 .app{
   font-family: 'Poppins', 'Roboto', sans-serif;
 }
+
+.main {
+  margin-bottom: 65px;
+}
+
+body{
+  background-color: #f2f2f2;
+}
