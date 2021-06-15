@@ -1,3 +1,6 @@
+export const CHANGE_OPEN_FORM = 'CHANGE_OPEN_FORM'
+
+
 export const TOGGLE_MODIFY_PROFIL = 'TOGGLE_MODIFY_PROFIL';
 export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE';
 export const RESET_PROFIL_MODIF = 'RESET_PROFIL_MODIF';
@@ -24,4 +27,8 @@ export const showConnectionModal = () => ({
 
 export const hideModal = () => ({
     type: HIDE_MODAL
+})
+
+export const changeOpenForm = () => ({
+  type: CHANGE_OPEN_FORM
 })

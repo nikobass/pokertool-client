@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import { showConnectionModal } from 'src/actions/user.js'
-import Modal from 'src/components/modal';
+import Modal from 'src/components/Modal';
 import './header.scss';
 
 

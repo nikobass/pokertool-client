@@ -10,6 +10,7 @@ import './styles.css';
 // == Composant
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
+import Home from 'src/components/Home';
 import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import { useDispatch } from 'react-redux';
@@ -35,6 +36,7 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Header />
+          <Home />
           <Footer />
         </Route>
         <Route exact path="/tournaments">
