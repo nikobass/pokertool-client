@@ -108,10 +108,9 @@ const Tournaments = () => {
                 nbPlayers={tournament.nbPlayers}
                 maxPlayers={tournament.maxPlayers}
               />
-
+             
             </li>
-
-
+        
 
           ))
         }

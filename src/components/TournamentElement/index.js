@@ -44,7 +44,10 @@ const TournamentElement = ({
       <button className="modify-tournament">
         <Trash2 />
       </button>
+      <button className="tournaments--play">Commencer</button>
     </div>
+    
+     
   );
 };
 
