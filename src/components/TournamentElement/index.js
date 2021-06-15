@@ -1,5 +1,7 @@
 import React from 'react';
 import { Edit, Eye, Trash2 } from 'react-feather';
+import PropTypes from 'prop-types';
+
 import './tournamentElement.scss'
 
 const TournamentElement = ({
@@ -50,5 +52,17 @@ const TournamentElement = ({
      
   );
 };
+
+TournamentElement.propTypes = {
+  name: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  cashPrice: PropTypes.string.isRequired,
+  nbPlayers: PropTypes.number.isRequired,
+  maxPlayers: PropTypes.number.isRequired,
+  buyIn: PropTypes.string.isRequired,
+  statut:PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+
+}
 
 export default TournamentElement;

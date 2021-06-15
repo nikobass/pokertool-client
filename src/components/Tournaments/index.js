@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import {ChevronDown} from 'react-feather';
 
 import TournamentElement from 'src/components/TournamentElement'
@@ -97,8 +97,9 @@ const Tournaments = () => {
         </li>
         {
           tournaments.map((tournament) => (
-            <li>
+            <li key={tournament.name}>
               <TournamentElement
+                
                 name={tournament.name}
                 date={tournament.date}
                 location={tournament.location}
