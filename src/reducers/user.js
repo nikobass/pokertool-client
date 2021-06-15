@@ -14,9 +14,9 @@ const initialState = {
     isLogged: false,
     // la valeur par défaut des inputs, PROVISOIRE.
     // Ici on récupérera les données de la BDD lorsque l'utilisateur est connecté.
-    nickname: 'nicknamedustate',
-    email: 'email@dustate.fr',
-    password: 'passworddustate',
+    nickname: '',
+    email: '',
+    password: '',
     profil: {
         // Le booléen qui gère si le profil est en cours de modification ou non.
         // Lorsqu'il passe a true, les inputs du profil s'ouvrent.

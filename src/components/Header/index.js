@@ -116,7 +116,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(submitLogin());
     },
     handleInputChange: (event) => {
-        dispatch(changeInputValue(event.target.value, event.target.name))
+        dispatch(changeInputValue(event.target.value, event.target.name));
     }
 })
 

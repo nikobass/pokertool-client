@@ -36,6 +36,7 @@ export const changeOpenForm = () => ({
 })
 
 //action qui sera gérée dans le middleware
+//Responsable de la requete vers le back
 export const submitLogin = () => ({
     type: SUBMIT_LOGIN,
   });
@@ -43,7 +44,7 @@ export const submitLogin = () => ({
 export const loginSuccess = (apiData) => ({
     type: LOGIN_SUCCESS,
     //a voir avec Pascal les données retournées par le back
-    nickname: apiData.username,
+    nickname: apiData.nickname,
     email: apiData.email,
     token: apiData.token,
 });
