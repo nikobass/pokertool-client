@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //components
 
 import Cards from 'src/components/Cards';
+import Signup from 'src/components/Signup';
 
 import './home.scss'
 
@@ -22,6 +23,7 @@ const Home = ({openFormSignup, handleOpenForm}) => {
           S'inscrire
         </button>
       </div>
+      <Signup />
       {!openFormSignup //todo component signup  
     }
     </div>

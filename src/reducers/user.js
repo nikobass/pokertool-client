@@ -23,6 +23,7 @@
     },
     showConnectionModal: false,
     openFormSignup: false,
+    showSignUpModal: true,
 
   }
 
