@@ -27,6 +27,8 @@ const authMiddleware = (store) => (next) => (action) => {
             //On éxécute la requete préparée ci-dessus
             axios(loginRequest)
                 .then((response) => {
+                    //TODO: gérer le cas ou il y a une erreur de requete
+                    //TODO: avec l'action loginError
                     // je stocke le token et le pseudo dans mon store
                     store.dispatch(loginSuccess(response.data));
                     // une fois que j'ai le token, je peux direct demander les favoris

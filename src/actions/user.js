@@ -35,6 +35,7 @@ export const changeOpenForm = () => ({
   type: CHANGE_OPEN_FORM
 })
 
+//action qui sera gérée dans le middleware
 export const submitLogin = () => ({
     type: SUBMIT_LOGIN,
   });

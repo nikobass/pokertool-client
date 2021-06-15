@@ -6,10 +6,16 @@ import { useHistory } from 'react-router-dom';
 
 import { showConnectionModal } from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
+import { submitLogin } from '../../actions/user';
+
 import './header.scss';
 
 
-const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
+const Header = ({ 
+    isLogged, 
+    handleShowModal, 
+    showConnectionModal,
+    handleSubmit }) => {
     
     const history = useHistory();
 
@@ -74,7 +80,7 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
             isOpen={showConnectionModal}
             title='Connexion'
             content={(
-                <form className="connexionForm">
+                <form className="connexionForm" onSubmit={handleLogin}>
                     <label htmlFor="email" className="connexionForm__label">Email</label>
                     <input type="email" name="connexionEmailInput" className="connexionForm__input" />
                     <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
@@ -88,7 +94,10 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
 )}
 
 Header.propTypes = {
-    isLogged: PropTypes.bool.isRequired
+    isLogged: PropTypes.bool.isRequired,
+    handleShowModal: PropTypes.func.isRequired,
+    showConnectionModal: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -99,6 +108,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     handleShowModal: () => {
         dispatch(showConnectionModal());
+    },
+    handleSubmit: (event) => {
+        event.preventDefault();
+        dispatch(submitLogin());
     }
 })
 
