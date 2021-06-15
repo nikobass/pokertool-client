@@ -26,7 +26,8 @@ const authMiddleware = (store) => (next) => (action) => {
                     store.dispatch(loginSuccess(response.data));
                     localStorage.setItem('nickname', response.data.nickname);
                     localStorage.setItem('email', response.data.email);
-                    
+                    localStorage.setItem('token', response.data.token);
+
                 })
                 .catch(error => console.log(error));
             break;

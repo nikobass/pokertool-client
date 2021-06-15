@@ -75,7 +75,6 @@ const reducer = (state = initialState, action = {}) => {
                 ...state,
                 nickname: action.apiData.nickname,
                 email: action.apiData.email,
-                token: action.apiData.token,
                 password: '********',
                 isLogged: true,
                 showConnectionModal: false,
