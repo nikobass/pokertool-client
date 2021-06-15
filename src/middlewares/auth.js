@@ -17,7 +17,7 @@ const authMiddleware = (store) => (next) => (action) => {
             const loginRequest = {
                 method: 'post',
                 //TODO: prévoir l'API_URL dans le .env
-                url: `${process.env.API_URL}/signin`,
+                url: `localhost:3000/signin`,
                 data: {
                     // A voir avec Pascal les données attendues côté back
                     email: state.user.email,
