@@ -5,8 +5,10 @@
     RESET_PROFIL_MODIF,
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL,
-    CHANGE_OPEN_FORM
+    SIGN_UP_FORM,
+    SHOW_SIGN_UP_MODAL
   } from 'src/actions/user';
+import { showSignUpModal } from '../actions/user';
 
 
   const initialState = {
@@ -22,8 +24,7 @@
       modifying: false,
     },
     showConnectionModal: false,
-    openFormSignup: false,
-    showSignUpModal: true,
+    showSignUpModal: false,
 
   }
 
@@ -60,16 +61,17 @@
           ...state,
           showConnectionModal: true
         }
+        case SIGN_UP_FORM:
+          return {
+            ...state,
+            showSignUpModal: true,
+          }
       case HIDE_MODAL:
         return {
           ...state,
-          showConnectionModal: false
+          showConnectionModal: false,
+          showSignUpModal: false
         }
-      case CHANGE_OPEN_FORM:
-        return {
-          ...state,
-          openFormSignup: true,
-        };
 
       default:
         return state;

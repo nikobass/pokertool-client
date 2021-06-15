@@ -9,7 +9,7 @@ import Signup from 'src/components/Signup';
 import './home.scss'
 
 
-const Home = ({openFormSignup, handleOpenForm}) => {
+const Home = ({openFormSignup, handleSignUpForm}) => {
 
   return (
     <div className='main'>
@@ -18,14 +18,14 @@ const Home = ({openFormSignup, handleOpenForm}) => {
       <div className="signup">
         <button 
         className="signup__button"
-        onClick={handleOpenForm}
+        onClick={handleSignUpForm}
         >
           S'inscrire
         </button>
       </div>
-      <Signup />
-      {!openFormSignup //todo component signup  
-    }
+      <Signup/>
+      {/* {!openFormSignup //todo component signup  
+    } */}
     </div>
 
   );
@@ -33,16 +33,16 @@ const Home = ({openFormSignup, handleOpenForm}) => {
 
 Home.propTypes = {
   openFormSignup: PropTypes.bool,
-  handleOpenForm: PropTypes.func.isRequired,
+  handleSignUpForm: PropTypes.func.isRequired,
 }
 
 
-import {changeOpenForm} from 'src/actions/user';
+import {signUpForm} from 'src/actions/user';
 import { connect } from 'react-redux';
 
 const mapDispatchToProps = (dispatch) => ({
-  handleOpenForm: () => {
-     dispatch(changeOpenForm())
+  handleSignUpForm: () => {
+     dispatch(signUpForm())
    }
 })
 

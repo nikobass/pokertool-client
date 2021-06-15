@@ -85,21 +85,21 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
             )}
         />
     </>
-)}
+)};
 
 Header.propTypes = {
     isLogged: PropTypes.bool.isRequired
-}
+};
 
 const mapStateToProps = (state) => ({
     isLogged: state.user.isLogged,
     showConnectionModal: state.user.showConnectionModal
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
     handleShowModal: () => {
         dispatch(showConnectionModal());
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
