@@ -2,3 +2,12 @@
   font-family: 'Poppins', 'Roboto', sans-serif;
   height: 100vh;
 }
+
+
+.main {
+  margin-bottom: 65px;
+}
+
+body{
+  background-color: #f2f2f2;
+}
