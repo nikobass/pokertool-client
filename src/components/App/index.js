@@ -13,6 +13,8 @@ import Footer from 'src/components/Footer';
 import Home from 'src/components/Home';
 import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
+import About from 'src/components/About';
+import Cgu from 'src/components/Cgu';
 import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
 
@@ -64,6 +66,16 @@ const App = () => {
         <Route path="/resetPassword">
           <Header />
           <ResetPassword />
+          <Footer />
+        </Route>
+        <Route path="/cgu">
+          <Header />
+          <Cgu />
+          <Footer />
+        </Route>
+        <Route path="/about">
+          <Header />
+          <About />
           <Footer />
         </Route>
       </Switch>
