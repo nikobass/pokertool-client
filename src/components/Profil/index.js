@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {toggleModifyProfil, changeInputValue, showDeleteAccountModal, hideModal, deleteUserAccount} from 'src/actions/user';
+import {
+  toggleModifyProfil, 
+  changeInputValue, 
+  showDeleteAccountModal, 
+  hideModal, 
+  deleteUserAccount,
+  submitProfil
+} from 'src/actions/user';
 import Modal from 'src/components/Modal';
 
 import './profil.scss';
@@ -22,7 +29,8 @@ const Profil = ({
   showDeleteAccountModal,
   handleShowModal,
   handleCloseModal,
-  submitDeleteAccount
+  submitDeleteAccount,
+  handleSubmitProfil
 }) => (
   <main className="profil">        
     <form className="profil__form">
@@ -38,7 +46,7 @@ const Profil = ({
       <input onChange={handleInputChange} type="password" name="password" className="profil__form__input" value={passwordValue} disabled={modifying ? "" : "disabled"}></input>
 
       {/* Ici les ternaires gèrent l'affiche du bouton pour modifier le profil ou du bouton pour valider la saisie selon si l'utilisateur est en train de consulter ou modifier son profil*/}
-      <button type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>
+      <button onClick={handleSubmitProfil} type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>
       <button onClick={handleModifyProfil} className={!modifying ? "profil__form__button" : "profil__form__button invisible"}>Modifier mon profil</button>
       <button 
         className="profil__form__delete"
@@ -85,9 +93,9 @@ Profil.propTypes = {
 
 const mapStateToProps = (state) => ({
   modifying: state.user.profil.modifying,
-  nicknameValue: state.user.nickname,
-  emailValue: state.user.email,
-  passwordValue: state.user.password,
+  nicknameValue: state.user.profil.nickname,
+  emailValue: state.user.profil.email,
+  passwordValue: state.user.profil.password,
   showDeleteAccountModal: state.user.showDeleteAccountModal
 });
 
@@ -113,6 +121,9 @@ const mapDispatchToProps = (dispatch) => ({
   submitDeleteAccount: () => {     
     dispatch(deleteUserAccount());   
   },
+  handleSubmitProfil: () => {
+    dispatch(submitProfil())
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profil);

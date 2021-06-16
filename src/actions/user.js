@@ -10,7 +10,8 @@ export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
-
+export const SUBMIT_PROFIL= 'SUBMIT_PROFIL';
+export const SUBMIT_PROFIL_SUCCESS = 'SUBMIT_PROFIL_SUCCESS';
 
 export const toggleModifyProfil = () => ({
     type: TOGGLE_MODIFY_PROFIL
@@ -63,3 +64,11 @@ export const loginSuccess = (apiData) => ({
 export const loginError = () => ({
     //TODO: gérer l'erreur
 });
+
+export const submitProfil = () => ({
+  type: SUBMIT_PROFIL,
+})
+
+export const submitProfilSuccess = () => ({
+  type: SUBMIT_PROFIL_SUCCESS,
+})

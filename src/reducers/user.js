@@ -17,9 +17,9 @@ const initialState = {
     userId: null,
     // la valeur par défaut des inputs, PROVISOIRE.
     // Ici on récupérera les données de la BDD lorsque l'utilisateur est connecté.
-    nickname: localStorage.getItem('nickname') || '',
-    email: localStorage.getItem('email') || '',
-    password: '********',
+    nickname: '',
+    email: '',
+    password: '',
     profil: {
         // Le booléen qui gère si le profil est en cours de modification ou non.
         // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
@@ -51,7 +51,11 @@ const reducer = (state = initialState, action = {}) => {
                 // Cela évite de coder 3 fonctions pour chaque input.
                 // [action.inputName] modifie donc dans le state soit: nickname, email ou password
                 // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
-                [action.inputName]: action.newInputValue
+                profil: {
+                  ...state.profil,
+                  modifying: true,
+                  [action.inputName]: action.newInputValue
+                }
             }
         case RESET_PROFIL_MODIF:
             return {
