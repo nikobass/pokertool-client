@@ -24,6 +24,8 @@ const initialState = {
         // Le booléen qui gère si le profil est en cours de modification ou non.
         // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
         modifying: false,
+        nickname: '',
+        email: ''
     },
     showConnectionModal: false,
     showDeleteAccountModal: false,
