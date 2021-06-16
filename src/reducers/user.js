@@ -6,7 +6,8 @@ import {
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL,
     CHANGE_OPEN_FORM,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    SHOW_UNAUTHORIZED_MODAL
 } from 'src/actions/user';
 
 
@@ -60,7 +61,13 @@ const reducer = (state = initialState, action = {}) => {
         case SHOW_CONNECTION_MODAL:
             return {
                 ...state,
-                showConnectionModal: true
+                showConnectionModal: true,
+            }
+
+        case SHOW_UNAUTHORIZED_MODAL:
+            return {
+                ...state,
+                showUnauthorizedModal: true
             }
         case HIDE_MODAL:
             return {

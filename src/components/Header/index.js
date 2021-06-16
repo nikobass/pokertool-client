@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-import { showConnectionModal, showUnauthorizedModal, changeInputValue, submitLogin } from 'src/actions/user.js'
+import { showConnectionModal, showUnauthorizedModal, changeInputValue, submitLogin, hideModal } from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
 
 import './header.scss';
@@ -18,7 +18,7 @@ const Header = ({
     showUnauthorizedModal,
     handleLogin,
     handleInputChange,
-    handleUnauthorizedModal
+    handleUnauthorizedModal,
 }) => {
 
     const history = useHistory();
@@ -104,7 +104,7 @@ const Header = ({
                 content={(
                     <div className="modalUnauthorized">
                         <p className="modalUnauthorized__paragraph">Vous devez être connecté pour accéder à ce contenu.</p>
-                        <p className="modalUnauthorized__paragraph">Déjà inscrit ? <button className="modalUnauthorized__button">Me connecter</button></p>
+                        <p className="modalUnauthorized__paragraph">Déjà inscrit ? <button onClick={handleShowModal} className="modalUnauthorized__button">Me connecter</button></p>
                         <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button className="modalUnauthorized__button">Créer un compte</button></p>
                     </div>
                 )}
@@ -141,7 +141,11 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleUnauthorizedModal: () => {
         dispatch(showUnauthorizedModal());
-    }
+    },
+    handleShowModal: () => {
+        dispatch(hideModal());
+        dispatch(showConnectionModal());
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

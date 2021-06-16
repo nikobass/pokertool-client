@@ -7,6 +7,7 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const SHOW_UNAUTHORIZED_MODAL ='SHOW_UNAUTHORIZED_MODAL'
 
 
 export const toggleModifyProfil = () => ({
@@ -49,3 +50,7 @@ export const loginSuccess = (apiData) => ({
 export const loginError = () => ({
     //TODO: gérer l'erreur
 });
+
+export const showUnauthorizedModal = () => ({
+    type: SHOW_UNAUTHORIZED_MODAL
+})

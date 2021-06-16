@@ -30,7 +30,7 @@ const App = ({ isLogged }) => {
     if (currentLocation === '/profil') {
       dispatch(resetProfilModif());
     }
-    dispatch(hideModal());
+    { dispatch(hideModal()) }
   })
 
   return (
@@ -85,7 +85,33 @@ const App = ({ isLogged }) => {
             </Route>
           </>
           :
-          <Redirect to="/" />}
+          <>
+            <Route exact path="/tournaments">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route exact path="/chip">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route exact path="/distributor">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route path="/profil">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route path="/resetPassword">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+          </>}
       </Switch>
     </div>
   );

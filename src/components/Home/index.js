@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 //components
 
 import Cards from 'src/components/Cards';
-import Modal from 'src/components/Modal';
+import {changeOpenForm} from 'src/actions/user';
+import { connect } from 'react-redux';
 
 import './home.scss'
 
 
-const Home = ({openFormSignup, handleOpenForm, showUnauthorizedModal}) => {
+const Home = ({openFormSignup, handleOpenForm}) => {
 
   return (
     <div className='main'>
@@ -26,34 +27,14 @@ const Home = ({openFormSignup, handleOpenForm, showUnauthorizedModal}) => {
       {!openFormSignup //todo component signup  
     }
     
-    <Modal 
-    isOpen={showUnauthorizedModal}
-    title="Contenu inaccessible"
-    content={(
-      <div className="modalUnauthorized">
-      <p className="modalUnauthorized__paragraph">Vous devez être connecté pour accéder à ce contenu.</p>
-      <p className="modalUnauthorized__paragraph">Déjà inscrit ? <button className="modalUnauthorized__button">Me connecter</button></p>
-      <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button className="modalUnauthorized__button">Créer un compte</button></p>
-      </div>
-    )}
-    />
     </div>
   );
 };
 
 Home.propTypes = {
   openFormSignup: PropTypes.bool,
-  handleOpenForm: PropTypes.func.isRequired,
-  showUnauthorizedModal: PropTypes.bool.isRequired
+  handleOpenForm: PropTypes.func.isRequired
 }
-
-
-import {changeOpenForm} from 'src/actions/user';
-import { connect } from 'react-redux';
-
-const mapStateToProps = (state) => ({
-  showUnauthorizedModal: state.user.showUnauthorizedModal
-})
 
 const mapDispatchToProps = (dispatch) => ({
   handleOpenForm: () => {
@@ -62,4 +43,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
