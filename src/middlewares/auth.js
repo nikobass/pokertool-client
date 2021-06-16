@@ -48,7 +48,6 @@ const authMiddleware = (store) => (next) => (action) => {
           store.dispatch(deleteUserAccountSucces());
           localStorage.removeItem('token');
           localStorage.removeItem('userId');
-          localStorage.removeItem('nickname');
         })
         .catch((error) => console.log(error));
       break;
@@ -57,6 +56,7 @@ const authMiddleware = (store) => (next) => (action) => {
 
       const state = store.getState();
       const loggedUserId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
 
       axios({
         method: 'patch',
@@ -68,8 +68,7 @@ const authMiddleware = (store) => (next) => (action) => {
         },
         headers: { "Authorization": `Bearer ${token}` }
       })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           store.dispatch(submitProfilSuccess());
         })
         .catch(error => console.log(error));

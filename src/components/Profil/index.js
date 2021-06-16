@@ -121,7 +121,8 @@ const mapDispatchToProps = (dispatch) => ({
   submitDeleteAccount: () => {     
     dispatch(deleteUserAccount());   
   },
-  handleSubmitProfil: () => {
+  handleSubmitProfil: (event) => {
+    event.preventDefault();
     dispatch(submitProfil())
   }
 });

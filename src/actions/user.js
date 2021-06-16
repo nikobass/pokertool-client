@@ -12,6 +12,10 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const SUBMIT_PROFIL= 'SUBMIT_PROFIL';
 export const SUBMIT_PROFIL_SUCCESS = 'SUBMIT_PROFIL_SUCCESS';
+export const SHOW_UNAUTHORIZED_MODAL ='SHOW_UNAUTHORIZED_MODAL';
+export const LOGOUT = 'LOGOUT';
+export const CHANGE_CONNECTION_INPUT = 'CHANGE_CONNECTION_INPUT';
+
 
 export const toggleModifyProfil = () => ({
     type: TOGGLE_MODIFY_PROFIL
@@ -19,6 +23,12 @@ export const toggleModifyProfil = () => ({
 
 export const changeInputValue = (newInputValue, inputName) => ({
     type: CHANGE_INPUT_VALUE,
+    newInputValue,
+    inputName
+})
+
+export const changeConnectionInput =(newInputValue, inputName) => ({
+  type: CHANGE_CONNECTION_INPUT,
     newInputValue,
     inputName
 })
@@ -72,3 +82,10 @@ export const submitProfil = () => ({
 export const submitProfilSuccess = () => ({
   type: SUBMIT_PROFIL_SUCCESS,
 })
+export const showUnauthorizedModal = () => ({
+    type: SHOW_UNAUTHORIZED_MODAL
+});
+
+export const submitLogout = () => ({
+  type: LOGOUT
+});
