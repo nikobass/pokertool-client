@@ -10,7 +10,8 @@ export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
-export const SHOW_UNAUTHORIZED_MODAL ='SHOW_UNAUTHORIZED_MODAL'
+export const SHOW_UNAUTHORIZED_MODAL ='SHOW_UNAUTHORIZED_MODAL';
+export const LOGOUT = 'LOGOUT';
 
 
 export const toggleModifyProfil = () => ({
@@ -67,4 +68,8 @@ export const loginError = () => ({
 
 export const showUnauthorizedModal = () => ({
     type: SHOW_UNAUTHORIZED_MODAL
-})
+});
+
+export const submitLogout = () => ({
+  type: LOGOUT
+});
