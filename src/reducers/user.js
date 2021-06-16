@@ -6,9 +6,9 @@
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL,
     SIGN_UP_FORM,
-    SHOW_SIGN_UP_MODAL
+    // SHOW_SIGN_UP_MODAL
   } from 'src/actions/user';
-import { showSignUpModal } from '../actions/user';
+// import { showSignUpModal } from '../actions/user';
 
 
   const initialState = {
@@ -21,7 +21,7 @@ import { showSignUpModal } from '../actions/user';
     profil: {
       // Le booléen qui gère si le profil est en cours de modification ou non.
       // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
-      modifying: false,
+    modifying: false,
     },
     showConnectionModal: false,
     showSignUpModal: false,
