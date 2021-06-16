@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useEffect, setState } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 
 import { resetProfilModif, hideModal } from 'src/actions/user';
@@ -18,9 +18,10 @@ import Cgu from 'src/components/Cgu';
 import Tournaments from 'src/components/Tournaments'
 import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
+import { connect } from 'react-redux';
 
 
-const App = () => {
+const App = ({ isLogged }) => {
 
   const currentLocation = useLocation().pathname;
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const App = () => {
     if (currentLocation === '/profil') {
       dispatch(resetProfilModif());
     }
-    dispatch(hideModal());
+    { dispatch(hideModal()) }
   })
 
   return (
@@ -42,34 +43,6 @@ const App = () => {
           <Home />
           <Footer />
         </Route>
-        <Route exact path="/tournaments">
-          <Header />
-          <Tournaments />
-          <Footer />
-        </Route>
-        <Route exact path="/chip">
-          <Header />
-          <Footer />
-        </Route>
-        <Route exact path="/distributor">
-          <Header />
-          <Footer />
-        </Route>
-        <Route exact path="/faq">
-          <Header />
-          <Faq />
-          <Footer />
-        </Route>
-        <Route path="/profil">
-          <Header />
-          <Profil />
-          <Footer />
-        </Route>
-        <Route path="/resetPassword">
-          <Header />
-          <ResetPassword />
-          <Footer />
-        </Route>
         <Route path="/cgu">
           <Header />
           <Cgu />
@@ -80,11 +53,72 @@ const App = () => {
           <About />
           <Footer />
         </Route>
+        <Route exact path="/faq">
+          <Header />
+          <Faq />
+          <Footer />
+        </Route>
+        {isLogged ?
+          <>
+            <Route exact path="/tournaments">
+              <Header />
+              <Tournaments />
+              <Footer />
+            </Route>
+            <Route exact path="/chip">
+              <Header />
+              <Footer />
+            </Route>
+            <Route exact path="/distributor">
+              <Header />
+              <Footer />
+            </Route>
+            <Route path="/profil">
+              <Header />
+              <Profil />
+              <Footer />
+            </Route>
+            <Route path="/resetPassword">
+              <Header />
+              <ResetPassword />
+              <Footer />
+            </Route>
+          </>
+          :
+          <>
+            <Route exact path="/tournaments">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route exact path="/chip">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route exact path="/distributor">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route path="/profil">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route path="/resetPassword">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+          </>}
       </Switch>
     </div>
   );
 };
 
-// == Export
+const mapStateToProps = (state) => ({
+  isLogged: state.user.isLogged
+})
 
-export default App;
+export default connect(mapStateToProps)(App);
