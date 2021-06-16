@@ -46,7 +46,8 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         profil: {
-          modifying: true
+          ...state.profil,
+          modifying: true,
         }
       }
     // action qui gère la modification des inputs du profil

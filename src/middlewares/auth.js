@@ -67,7 +67,7 @@ const authMiddleware = (store) => (next) => (action) => {
         method: 'patch',
         url: `http://localhost:3000/profil/${loggedUserId}`,
         data: {
-          nickname: state.user.profil.nickname,
+          user_name: state.user.profil.nickname,
           email: state.user.profil.email,
           password: state.user.profil.password,
         },
