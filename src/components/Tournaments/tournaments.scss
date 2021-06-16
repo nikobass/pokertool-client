@@ -6,15 +6,34 @@
   
 }
 
+.tournaments--header {
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+}
 
+.addButton {
+  margin-top: 2rem;
+  background-color: #ee581e;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 0rem 2rem;
+
+  &:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #ee581e;
+    transition : 0.4s ease-out;
+    border: 1px solid black;
+  }
+}
 
 .tournaments--title{
   font-weight: bold;
   font-size: 2rem;
   text-align: left;
-  padding: 2rem;
-
-  
+  padding: 2rem;  
 }
 
 .tournaments--list{

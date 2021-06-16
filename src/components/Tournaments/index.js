@@ -1,12 +1,16 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import {ChevronDown} from 'react-feather';
 
+import {createTournamentModal} from 'src/actions/tournament';
+
+
+import Modal from 'src/components/Modal';
 import TournamentElement from 'src/components/TournamentElement'
 
 import './tournaments.scss'
 
-const Tournaments = () => {
+const Tournaments = ({handleShowModal, showCreateTournamentModal}) => {
   // liste de tournoi pour test, à finir avec BDD fini
   const tournaments = [
     {
@@ -39,86 +43,107 @@ const Tournaments = () => {
       buyIn: '1€',
       location: 'Chez Michel',
     },
-
-
   ]
 
 
   return (
-    <div className="tournaments-container">
-      <h2 className="tournaments--title">
-        Mes Tournois
-      </h2>
-      <ul>
-        <li className="tournaments--list">
+    <>
+      <div className="tournaments-container">
+        <div className="tournaments--header">
+          <h2 className="tournaments--title">
+            Mes Tournois
+          </h2>
+          <button 
+            className="addButton"
+            onClick={handleShowModal}
+          >
+            Créer un tournoi
+          </button>
+        </div>
+        <ul>
+          <li className="tournaments--list">
 
-          <span>
-            Nom
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-          <span>
-            Date
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-          <span>
-            Lieu
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-          <span>
-            Buy-in
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-          <span>
-            Cash-price
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-          <span>
-            Statut
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-          <span>
-            Joueurs
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
-            </button>
-          </span>
-        </li>
-        {
-          tournaments.map((tournament) => (
-            <li key={tournament.name}>
-              <TournamentElement
-                
-                name={tournament.name}
-                date={tournament.date}
-                location={tournament.location}
-                buyIn={tournament.buyIn}
-                cashPrice={tournament.cashPrice}
-                statut={tournament.statut}
-                nbPlayers={tournament.nbPlayers}
-                maxPlayers={tournament.maxPlayers}
-              />
-             
-            </li>
-        
-
-          ))
-        }
-      </ul>
-
-    </div>
+            <span>
+              Nom
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+            <span>
+              Date
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+            <span>
+              Lieu
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+            <span>
+              Buy-in
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+            <span>
+              Cash-price
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+            <span>
+              Statut
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+            <span>
+              Joueurs
+              <button className="chevron-down">
+                <ChevronDown  size={15} />
+              </button>
+            </span>
+          </li>
+          {
+            tournaments.map((tournament) => (
+              <li key={tournament.name}>
+                <TournamentElement
+                  
+                  name={tournament.name}
+                  date={tournament.date}
+                  location={tournament.location}
+                  buyIn={tournament.buyIn}
+                  cashPrice={tournament.cashPrice}
+                  statut={tournament.statut}
+                  nbPlayers={tournament.nbPlayers}
+                  maxPlayers={tournament.maxPlayers}
+                />              
+              </li>      
+            ))
+          }
+        </ul>   
+      </div>  
+      <Modal
+          isOpen={showCreateTournamentModal}
+          title='Création de mon tournoi'
+          content={(
+              <h1>Je suis la modal tournoi</h1>
+          )}
+        />  
+    </>  
   );
-};
+}
 
-export default Tournaments;
+const mapStateToProps = (state) => ({
+  showCreateTournamentModal: state.tournament.showCreateTournamentModal
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleShowModal: () => {
+    dispatch(createTournamentModal())
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tournaments);
