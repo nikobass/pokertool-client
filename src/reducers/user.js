@@ -14,6 +14,7 @@ import {
   LOGOUT,
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
+  UPDATE_PROFIL_FROM_API
 } from 'src/actions/user';
 
 const initialState = {
@@ -144,6 +145,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: true
+      }
+
+    case UPDATE_PROFIL_FROM_API:
+      return {
+        ...state,
+        profil: {
+          modifying: false,
+          nickname: action.dataAPI.user_name,
+          email: action.dataAPI.email,
+          password: action.dataAPI.password
+        }
       }
     default:
       return state;

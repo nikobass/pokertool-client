@@ -17,6 +17,8 @@ export const LOGOUT = 'LOGOUT';
 export const CHANGE_CONNECTION_INPUT = 'CHANGE_CONNECTION_INPUT';
 export const CHECK_IS_LOGGED= 'CHECK_IS_LOGGED';
 export const LOG_USER = 'LOG_USER';
+export const GET_PROFIL_FROM_API = 'GET_PROFIL_FROM_API';
+export const UPDATE_PROFIL_FROM_API = 'UPDATE_PROFIL_FROM_API'
 
 
 export const toggleModifyProfil = () => ({
@@ -98,4 +100,13 @@ export const checkIsLogged = () => ({
 
 export const logUser = () => ({
   type: LOG_USER
+})
+
+export const getProfilFromAPI = () => ({
+  type: GET_PROFIL_FROM_API
+})
+
+export const updateProfilFromAPI = (dataAPI) => ({
+  type: UPDATE_PROFIL_FROM_API,
+  dataAPI
 })

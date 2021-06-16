@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {
@@ -9,7 +9,8 @@ import {
   showDeleteAccountModal, 
   hideModal, 
   deleteUserAccount,
-  submitProfil
+  submitProfil,
+  getProfilFromAPI
 } from 'src/actions/user';
 import Modal from 'src/components/Modal';
 
@@ -30,9 +31,13 @@ const Profil = ({
   handleShowModal,
   handleCloseModal,
   submitDeleteAccount,
-  handleSubmitProfil
+  handleSubmitProfil,
 }) => {
   
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProfilFromAPI())
+  }, []);
   
   return (
   <main className="profil">        

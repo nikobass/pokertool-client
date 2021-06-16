@@ -27,9 +27,9 @@ const App = ({ isLogged }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentLocation === '/profil') {
-      dispatch(resetProfilModif());
-    };
+    // if (currentLocation === '/profil') {
+    //   dispatch(resetProfilModif());
+    // };
     dispatch(hideModal());
 
     dispatch(checkIsLogged());

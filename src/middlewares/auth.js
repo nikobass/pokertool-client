@@ -6,7 +6,9 @@ import {
   loginSuccess,
   SUBMIT_PROFIL,
   CHECK_IS_LOGGED,
-  logUser
+  logUser,
+  GET_PROFIL_FROM_API,
+  updateProfilFromAPI
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
 
@@ -85,6 +87,23 @@ const authMiddleware = (store) => (next) => (action) => {
       if(token){
         store.dispatch(logUser())
       }
+    }
+
+    case GET_PROFIL_FROM_API: {
+
+      const token = localStorage.getItem('token');
+      const loggedUserId = localStorage.getItem('userId');
+
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/profil/${loggedUserId}`,
+        headers: { "Authorization": `Bearer ${token}` }
+      })
+      .then((response) => {
+        console.log(response);
+        store.dispatch(updateProfilFromAPI(response.data))
+      })
+      .catch(error => console.log(error));
 
     }
     default:
