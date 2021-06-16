@@ -23,11 +23,12 @@ const authMiddleware = (store) => (next) => (action) => {
                 },
               })
               .then(response => {
-                    console.log(response.data);
-                    // je stocke le token et le pseudo ou l'id ou l'adresse email, dans mon store
+
                     store.dispatch(loginSuccess(response.data));
+                    localStorage.setItem('userId', response.data.userId);
                     localStorage.setItem('nickname', response.data.nickname);
-                    localStorage.setItem('email', response.data.email);
+                    localStorage.setItem('token', response.data.token);
+
                 })
                 .catch(error => console.log(error));
             break;
