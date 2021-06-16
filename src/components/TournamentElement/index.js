@@ -12,7 +12,9 @@ const TournamentElement = ({
   maxPlayers,
   buyIn,
   statut,
-  date
+  date,
+  handleTournamentDetails
+  
 }) => {
   return (
     <div className="tournament--element">
@@ -37,7 +39,8 @@ const TournamentElement = ({
       <span>
         {nbPlayers}/{maxPlayers}
       </span>
-      <button className="modify-tournament">
+      <button onClick={handleTournamentDetails} className="modify-tournament">
+        <TournamentDetails />
         <Eye />
       </button>
       <button className="modify-tournament">
@@ -62,7 +65,23 @@ TournamentElement.propTypes = {
   buyIn: PropTypes.string.isRequired,
   statut:PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  handleTournamentDetails : PropTypes.func.isRequired,
 
 }
 
-export default TournamentElement;
+import { connect } from 'react-redux';
+import {tournamentDetailsModal} from 'src/actions/tournament';
+import TournamentDetails from '../TournamentDetails';
+
+
+
+const mapDispatchToProps = (dispatch) => ({
+  handleTournamentDetails : () => {
+    dispatch(tournamentDetailsModal())
+  },
+  handleShowModal: () => {
+    dispatch(closeTournamentDetailsModal());
+}
+})
+
+export default connect (null, mapDispatchToProps) (TournamentElement);
