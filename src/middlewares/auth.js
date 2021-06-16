@@ -66,9 +66,10 @@ const authMiddleware = (store) => (next) => (action) => {
           email: state.user.profil.email,
           password: state.user.profil.password,
         },
-        headers: { "Authorization": `Bearer ${token}` }
+        // headers: { "Authorization": `Bearer ${token}` }
       })
-        .then(() => {
+        .then((response) => {
+          console.log(response);
           store.dispatch(submitProfilSuccess());
         })
         .catch(error => console.log(error));

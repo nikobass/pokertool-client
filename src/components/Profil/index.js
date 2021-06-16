@@ -86,9 +86,6 @@ Profil.propTypes = {
   handleModifyProfil: PropTypes.func.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   modifying: PropTypes.bool.isRequired,
-  nicknameValue: PropTypes.string.isRequired,
-  emailValue: PropTypes.string.isRequired,
-  passwordValue: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

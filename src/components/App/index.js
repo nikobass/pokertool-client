@@ -58,6 +58,11 @@ const App = ({ isLogged }) => {
           <Faq />
           <Footer />
         </Route>
+        <Route path="/resetPassword">
+              <Header />
+              <ResetPassword />
+              <Footer />
+            </Route>
         {isLogged ?
           <>
             <Route exact path="/tournaments">
@@ -76,11 +81,6 @@ const App = ({ isLogged }) => {
             <Route path="/profil">
               <Header />
               <Profil />
-              <Footer />
-            </Route>
-            <Route path="/resetPassword">
-              <Header />
-              <ResetPassword />
               <Footer />
             </Route>
           </>

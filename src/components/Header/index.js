@@ -135,7 +135,7 @@ Header.propTypes = {
     handleShowModal: PropTypes.func.isRequired,
     showConnectionModal: PropTypes.bool.isRequired,
     handleLogin: PropTypes.func.isRequired,
-    handleInputChange: PropTypes.func.isRequired
+    handleConnectionInput: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
