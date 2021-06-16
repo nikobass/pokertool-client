@@ -159,7 +159,8 @@ const mapDispatchToProps = (dispatch) => ({
     handleLogout: () => {
         dispatch(submitLogout());
         localStorage.removeItem('token');
-        localStorage.removeItem('userId');    
+        localStorage.removeItem('userId');  
+        localStorage.removeItem('nickname');  
     }
 })
 
