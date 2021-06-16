@@ -9,6 +9,7 @@ import Modal from 'src/components/Modal';
 import { submitLogin } from '../../actions/user';
 
 import './header.scss';
+import logo from 'src/assets/images/logo.png'
 
 
 const Header = ({ 
@@ -34,7 +35,7 @@ const Header = ({
                 className="header__logo"
             >
                 {/* En attente du logo */}
-                <img className="header__logo_img" src="#" alt="Logo" />
+                <img className="header__logo__img" src={logo} alt="Logo" />
                 <span className="header__logo__title">Poker Tool</span>
             </NavLink>
 
@@ -87,7 +88,7 @@ const Header = ({
                     <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
                     <input onChange={handleInputChange} type="password" name="password" className="connexionForm__input" />
                     <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
-                    <button type="submit" className="connexionForm__submit">Se connecter</button>
+                    {<button type="submit" className="connexionForm__submit">Se connecter</button>}
                 </form>
             )}
         />
@@ -114,7 +115,6 @@ const mapDispatchToProps = (dispatch) => ({
     handleLogin: (event) => {
         event.preventDefault();
         //TODO: controle des saisies.......................
-
         dispatch(submitLogin());
     },
     handleInputChange: (event) => {

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //components
 
 import Cards from 'src/components/Cards';
+import Modal from 'src/components/Modal';
 
 import './home.scss'
 
