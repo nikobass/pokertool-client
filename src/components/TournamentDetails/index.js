@@ -4,18 +4,25 @@ import { connect } from 'react-redux';
 
 import 'src/components/TournamentDetails/tournamentDetails.scss'
 
+
+
+
+
 const TournamentDetails = ({
   openDetailsModal,
-  
 } ) => {
+
+    
   return (
    
       <Modal
       isOpen={ openDetailsModal }
       title= 'Détails du tournoi'
       content={(
+     
         <div className="tournament-containerDetail">
-          <p>Nom du tournoi:</p>
+         
+          <p>Nom du tournoi: </p>
           <br/>
           <p>date du tournoi:</p>
           <br/>
@@ -35,7 +42,9 @@ const TournamentDetails = ({
           <div className="tournament-containerDetail__comment">
             <p>Commentaire(s) du tournoi:</p>
           </div>
+          
         </div>
+   
         
     )}
       />
