@@ -6,10 +6,11 @@ import {
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL,
     CHANGE_OPEN_FORM,
+    SHOW_DELETE_ACCOUNT_MODAL,
+    DELETE_USER_ACCOUNT,
     LOGIN_SUCCESS,
-    SHOW_UNAUTHORIZED_MODAL
-} from 'src/actions/user';
-
+    DELETE_SUCCESS
+  } from 'src/actions/user';  
 
 const initialState = {
     isLogged: false,
@@ -25,8 +26,8 @@ const initialState = {
         modifying: false,
     },
     showConnectionModal: false,
+    showDeleteAccountModal: false,
     openFormSignup: false,
-    showUnauthorizedModal: false,
     token: null
 }
 
@@ -58,40 +59,62 @@ const reducer = (state = initialState, action = {}) => {
                 }
             }
 
-        case SHOW_CONNECTION_MODAL:
-            return {
-                ...state,
-                showConnectionModal: true,
-            }
-
-        case SHOW_UNAUTHORIZED_MODAL:
-            return {
-                ...state,
-                showUnauthorizedModal: true
-            }
-        case HIDE_MODAL:
-            return {
-                ...state,
-                showConnectionModal: false,
-                showUnauthorizedModal: false
-            }
-        case CHANGE_OPEN_FORM:
-            return {
-                ...state,
-                openFormSignup: true,
-            };
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                nickname: action.apiData.nickname,
-                email: action.apiData.email,
-                password: '********',
-                isLogged: true,
-                showConnectionModal: false,
-            };
-
-        default:
-            return state;
+      case SHOW_CONNECTION_MODAL:
+        return {
+          ...state,
+          showConnectionModal: true
+        }
+      case HIDE_MODAL:
+        return {
+          ...state,
+          showConnectionModal: false,
+          showDeleteAccountModal: false
+        }
+      case CHANGE_OPEN_FORM:
+        return {
+          ...state,
+          openFormSignup: true,
+        };
+      case SHOW_DELETE_ACCOUNT_MODAL:
+        return {
+          ...state,
+          showDeleteAccountModal: true
+        }
+      case DELETE_USER_ACCOUNT:
+        return {
+          ...state,
+          showDeleteAccountModal: false
+        }
+      case DELETE_SUCCESS:
+        return {
+          ...state,
+          isLogged: false
+        }
+      case SHOW_CONNECTION_MODAL:
+          return {
+              ...state,
+              showConnectionModal: true
+          }
+      case HIDE_MODAL:
+          return {
+              ...state,
+              showConnectionModal: false
+          }
+      case CHANGE_OPEN_FORM:
+          return {
+              ...state,
+              openFormSignup: true,
+          };
+      case LOGIN_SUCCESS:
+          return {
+              ...state,
+              nickname: action.apiData.nickname,
+              password: '********',
+              isLogged: true,
+              showConnectionModal: false,
+          };
+      default:
+          return state;
     }
 }
 
