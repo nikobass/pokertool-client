@@ -51,7 +51,7 @@ const Profil = ({
       <input onChange={handleInputChange} type="email" name="email"className="profil__form__input" value={emailValue} disabled={modifying ? "" : "disabled"}></input>
 
       <label htmlFor="password" className="profil__form__label">Mot de passe</label>
-      <input onChange={handleInputChange} type="password" name="password" className="profil__form__input" value={passwordValue} disabled={modifying ? "" : "disabled"}></input>
+      <input onChange={handleInputChange} type="password" name="password" className="profil__form__input" value={passwordValue} disabled={modifying ? "" : "disabled"} placeholder="nouveau mot de passe"></input>
 
       {/* Ici les ternaires gèrent l'affiche du bouton pour modifier le profil ou du bouton pour valider la saisie selon si l'utilisateur est en train de consulter ou modifier son profil*/}
       <button onClick={handleSubmitProfil} type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>

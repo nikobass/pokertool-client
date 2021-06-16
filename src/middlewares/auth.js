@@ -8,7 +8,8 @@ import {
   CHECK_IS_LOGGED,
   logUser,
   GET_PROFIL_FROM_API,
-  updateProfilFromAPI
+  updateProfilFromAPI,
+  submitProfilSuccess
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
 

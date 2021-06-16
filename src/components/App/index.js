@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 
-import { resetProfilModif, hideModal, checkIsLogged } from 'src/actions/user';
+import { hideModal, checkIsLogged } from 'src/actions/user';
 
 // == Import
 import './styles.css';
@@ -27,11 +27,7 @@ const App = ({ isLogged }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (currentLocation === '/profil') {
-    //   dispatch(resetProfilModif());
-    // };
     dispatch(hideModal());
-
     dispatch(checkIsLogged());
   })
 

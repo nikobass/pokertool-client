@@ -14,7 +14,8 @@ import {
   LOGOUT,
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
-  UPDATE_PROFIL_FROM_API
+  UPDATE_PROFIL_FROM_API,
+  SUBMIT_PROFIL_SUCCESS
 } from 'src/actions/user';
 
 const initialState = {
@@ -132,7 +133,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         nickname: action.apiData.nickname,
-        password: '********',
         isLogged: true,
         showConnectionModal: false,
       };
@@ -146,6 +146,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLogged: true
       }
+    case SUBMIT_PROFIL_SUCCESS:
+      return{
+        ...state,
+        profil: {
+          modifying: false
+        }
+      }
 
     case UPDATE_PROFIL_FROM_API:
       return {
@@ -154,7 +161,6 @@ const reducer = (state = initialState, action = {}) => {
           modifying: false,
           nickname: action.dataAPI.user_name,
           email: action.dataAPI.email,
-          password: action.dataAPI.password
         }
       }
     default:
