@@ -8,7 +8,8 @@ import {
     CHANGE_OPEN_FORM,
     SHOW_DELETE_ACCOUNT_MODAL,
     DELETE_USER_ACCOUNT,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    DELETE_SUCCESS
   } from 'src/actions/user';  
 
 const initialState = {
@@ -84,33 +85,36 @@ const reducer = (state = initialState, action = {}) => {
           ...state,
           showDeleteAccountModal: false
         }
-        case SHOW_CONNECTION_MODAL:
-            return {
-                ...state,
-                showConnectionModal: true
-            }
-        case HIDE_MODAL:
-            return {
-                ...state,
-                showConnectionModal: false
-            }
-        case CHANGE_OPEN_FORM:
-            return {
-                ...state,
-                openFormSignup: true,
-            };
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                nickname: action.apiData.nickname,
-                email: action.apiData.email,
-                password: '********',
-                isLogged: true,
-                showConnectionModal: false,
-            };
-
-        default:
-            return state;
+      case DELETE_SUCCESS:
+        return {
+          ...state,
+          isLogged: false
+        }
+      case SHOW_CONNECTION_MODAL:
+          return {
+              ...state,
+              showConnectionModal: true
+          }
+      case HIDE_MODAL:
+          return {
+              ...state,
+              showConnectionModal: false
+          }
+      case CHANGE_OPEN_FORM:
+          return {
+              ...state,
+              openFormSignup: true,
+          };
+      case LOGIN_SUCCESS:
+          return {
+              ...state,
+              nickname: action.apiData.nickname,
+              password: '********',
+              isLogged: true,
+              showConnectionModal: false,
+          };
+      default:
+          return state;
     }
 }
 

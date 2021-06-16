@@ -5,6 +5,7 @@ import {
     DELETE_USER_ACCOUNT,
     loginSuccess,
 } from 'src/actions/user';
+import { deleteUserAccountSucces } from '../actions/user';
 
 const authMiddleware = (store) => (next) => (action) => {
 
@@ -33,20 +34,20 @@ const authMiddleware = (store) => (next) => (action) => {
                 .catch(error => console.log(error));
             break;
         }
-        case DELETE_USER_ACCOUNT: {
-          const state = store.getState();
-          // todo get l'id du user en cours (via localstorage ou via une requete get back?)
+        case DELETE_USER_ACCOUNT: {              
+          const loggedUserId = localStorage.getItem('userId');
+          const token = localStorage.getItem('token');    
 
           axios({
             method: 'delete',
-            url: `http://localhost:3000/profil/${id}`,
-            data: {
-
-            },
+            url: `http://localhost:3000/profil/${loggedUserId}`,
+            headers: {"Authorization" : `Bearer ${token}`}
           })
-          .then((response) => {
-            console.log(response.data);
-
+          .then(() => {
+            store.dispatch(deleteUserAccountSucces());
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');    
+            localStorage.removeItem('nickname');         
           })
           .catch((error) => console.log(error));
         break;
