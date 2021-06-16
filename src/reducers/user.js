@@ -12,7 +12,8 @@ import {
   DELETE_USER_ACCOUNT,
   DELETE_SUCCESS,
   LOGOUT,
-  CHANGE_CONNECTION_INPUT
+  CHANGE_CONNECTION_INPUT,
+  LOG_USER,
 } from 'src/actions/user';
 
 const initialState = {
@@ -138,6 +139,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: false
+      }
+    case LOG_USER:
+      return {
+        ...state,
+        isLogged: true
       }
     default:
       return state;

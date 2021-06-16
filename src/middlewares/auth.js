@@ -5,6 +5,8 @@ import {
   DELETE_USER_ACCOUNT,
   loginSuccess,
   SUBMIT_PROFIL,
+  CHECK_IS_LOGGED,
+  logUser
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
 
@@ -75,6 +77,15 @@ const authMiddleware = (store) => (next) => (action) => {
         .catch(error => console.log(error));
 
       break;
+    }
+
+    case CHECK_IS_LOGGED: {
+
+      const token = localStorage.getItem('token');
+      if(token){
+        store.dispatch(logUser())
+      }
+
     }
     default:
       next(action);

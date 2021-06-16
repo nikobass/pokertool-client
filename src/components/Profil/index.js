@@ -31,7 +31,10 @@ const Profil = ({
   handleCloseModal,
   submitDeleteAccount,
   handleSubmitProfil
-}) => (
+}) => {
+  
+  
+  return (
   <main className="profil">        
     <form className="profil__form">
       <h2 className="profil__form__subtitle">Mon profil</h2>
@@ -80,7 +83,7 @@ const Profil = ({
       )}
     />
   </main>    
-);
+);}
 
 Profil.propTypes = {
   handleModifyProfil: PropTypes.func.isRequired,

@@ -15,6 +15,8 @@ export const SUBMIT_PROFIL_SUCCESS = 'SUBMIT_PROFIL_SUCCESS';
 export const SHOW_UNAUTHORIZED_MODAL ='SHOW_UNAUTHORIZED_MODAL';
 export const LOGOUT = 'LOGOUT';
 export const CHANGE_CONNECTION_INPUT = 'CHANGE_CONNECTION_INPUT';
+export const CHECK_IS_LOGGED= 'CHECK_IS_LOGGED';
+export const LOG_USER = 'LOG_USER';
 
 
 export const toggleModifyProfil = () => ({
@@ -89,3 +91,11 @@ export const showUnauthorizedModal = () => ({
 export const submitLogout = () => ({
   type: LOGOUT
 });
+
+export const checkIsLogged = () => ({
+  type: CHECK_IS_LOGGED
+})
+
+export const logUser = () => ({
+  type: LOG_USER
+})
