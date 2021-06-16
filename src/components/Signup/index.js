@@ -14,6 +14,9 @@ const Signup = ({ showSignUpModal }) => {
 					title="inscription"
 					content={(
 						<form className="inscriptionForm">
+								<label htmlFor="email" className="inscriptionForm__label">Pseudo</label>
+								<input type="email" name="inscriptionEmailInput" className="inscriptionForm__input" />
+
 								<label htmlFor="email" className="inscriptionForm__label">Email</label>
 								<input type="email" name="inscriptionEmailInput" className="inscriptionForm__input" />
 
@@ -26,7 +29,7 @@ const Signup = ({ showSignUpModal }) => {
 								<label htmlFor="password" className="inscriptionForm__label">Confirmation du mot de passe</label>
 								<input type="password" name="inscriptionPasswordInput" className="inscriptionForm__input" />
 
-								<button type="submit" className="inscriptionForm__submit">S'inscrire'</button>
+								<button type="submit" className="inscriptionForm__submit">Valider</button>
 						</form>
 				)}
 			/>
