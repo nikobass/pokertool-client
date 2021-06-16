@@ -10,7 +10,8 @@ import {
   SHOW_UNAUTHORIZED_MODAL,
   SHOW_DELETE_ACCOUNT_MODAL,
   DELETE_USER_ACCOUNT,
-  DELETE_SUCCESS
+  DELETE_SUCCESS,
+  LOGOUT
 } from 'src/actions/user';
 
 const initialState = {
@@ -20,7 +21,7 @@ const initialState = {
   // Ici on récupérera les données de la BDD lorsque l'utilisateur est connecté.
   nickname: localStorage.getItem('nickname') || '',
   email: localStorage.getItem('email') || '',
-  password: '********',
+  password: '',
   profil: {
     // Le booléen qui gère si le profil est en cours de modification ou non.
     // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
@@ -64,7 +65,7 @@ const reducer = (state = initialState, action = {}) => {
     case SHOW_CONNECTION_MODAL:
       return {
         ...state,
-        showConnectionModal: true,
+        showConnectionModal: true
       };
 
     case SHOW_UNAUTHORIZED_MODAL:
@@ -107,6 +108,11 @@ const reducer = (state = initialState, action = {}) => {
         isLogged: true,
         showConnectionModal: false,
       };
+    case LOGOUT:
+      return {
+        ...state,
+        isLogged: false
+      }
     default:
       return state;
   }

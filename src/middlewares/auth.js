@@ -46,8 +46,7 @@ const authMiddleware = (store) => (next) => (action) => {
           .then(() => {
             store.dispatch(deleteUserAccountSucces());
             localStorage.removeItem('token');
-            localStorage.removeItem('userId');    
-            localStorage.removeItem('nickname');         
+            localStorage.removeItem('userId');         
           })
           .catch((error) => console.log(error));
         break;

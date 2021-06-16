@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-import { showConnectionModal, showUnauthorizedModal, changeInputValue, submitLogin, hideModal } from 'src/actions/user.js'
+import { showConnectionModal, showUnauthorizedModal, changeInputValue, submitLogin, hideModal, submitLogout } from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
 
 import './header.scss';
@@ -19,6 +19,7 @@ const Header = ({
     handleLogin,
     handleInputChange,
     handleUnauthorizedModal,
+    handleLogout
 }) => {
 
     const history = useHistory();
@@ -81,7 +82,16 @@ const Header = ({
 
                 <div className="header__connexion">
                     <button onClick={handleShowModal} type="button" className={isLogged ? "header__connexion__button invisible" : "header__connexion__button"}>Connexion</button>
-                    <button type="button" className={!isLogged ? "header__connexion__button invisible" : "header__connexion__button"}>Déconnexion</button>
+                    <NavLink
+                      to="/">
+                      <button 
+                        type="button" 
+                        className={!isLogged ? "header__connexion__button invisible" : "header__connexion__button"}
+                        onClick={handleLogout}
+                        >
+                          Déconnexion
+                      </button>
+                    </NavLink>
                 </div>
             </header >
             <Modal
@@ -146,6 +156,11 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(hideModal());
         dispatch(showConnectionModal());
     },
+    handleLogout: () => {
+        dispatch(submitLogout());
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');    
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
