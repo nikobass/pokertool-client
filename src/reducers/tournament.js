@@ -8,7 +8,7 @@ import {
 } from 'src/actions/user'
 
 const initialState = {
-  openModal: false,
+  openDetailsModal: false,
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -16,13 +16,13 @@ const reducer = (state = initialState, action = {}) => {
     case OPEN_MODAL_TOURNAMENT_DETAILS :
       return {
         ...state,
-        openModal: true,
+        openDetailsModal: true,
       }
       
         case HIDE_MODAL :
           return{
             ...state,
-            openModal: false
+            openDetailsModal: false
           }
       default :
       return state;

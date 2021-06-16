@@ -1,53 +1,54 @@
 import React from 'react';
 import Modal from '../Modal';
+import { connect } from 'react-redux';
 
 import 'src/components/TournamentDetails/tournamentDetails.scss'
 
 const TournamentDetails = ({
-  openModal,
+  openDetailsModal,
   
 } ) => {
   return (
-    <div>
+   
       <Modal
-      isOpen={ openModal }
+      isOpen={ openDetailsModal }
       title= 'Détails du tournoi'
       content={(
         <div className="tournament-containerDetail">
-          Nom du tournoi:
+          <p>Nom du tournoi:</p>
           <br/>
-          date du tournoi:
+          <p>date du tournoi:</p>
           <br/>
-          Lieu du tournoi:
+          <p>Lieu du tournoi:</p>
           <br/>
-          Nombre de joueurs:
+          <p>Nombre de joueurs:</p>
           <br/>
-          Durée des étapes:
+          <p>Durée des étapes:</p>
           <br/>
-          Tapis de départ:
+          <p>Tapis de départ:</p>
           <br/>
-          Buy-in:
+          <p> Buy-in:</p>
           <br/>
-          Cash-price:
+          <p> Cash-price:</p>
           <br/>
-          Statut:
+          <p>Statut:</p>
           <div className="tournament-containerDetail__comment">
-            Commentaire(s) du tournoi:
+            <p>Commentaire(s) du tournoi:</p>
           </div>
         </div>
         
     )}
       />
       
-    </div>
+    
   );
 };
 
-import { connect } from 'react-redux';
-import { closeTournamentDetailsModal } from 'src/actions/tournament.js'
+
+
 
 const mapStateToProps = (state) => ({
-	openModal: state.tournament.openModal,
+	openDetailsModal: state.tournament.openDetailsModal,
 });
 
 

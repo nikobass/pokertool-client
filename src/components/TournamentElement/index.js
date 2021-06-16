@@ -2,6 +2,9 @@ import React from 'react';
 import { Edit, Eye, Trash2 } from 'react-feather';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import {tournamentDetailsModal} from 'src/actions/tournament';
+
 import './tournamentElement.scss'
 
 const TournamentElement = ({
@@ -40,7 +43,7 @@ const TournamentElement = ({
         {nbPlayers}/{maxPlayers}
       </span>
       <button onClick={handleTournamentDetails} className="modify-tournament">
-        <TournamentDetails />
+        
         <Eye />
       </button>
       <button className="modify-tournament">
@@ -69,9 +72,7 @@ TournamentElement.propTypes = {
 
 }
 
-import { connect } from 'react-redux';
-import {tournamentDetailsModal} from 'src/actions/tournament';
-import TournamentDetails from '../TournamentDetails';
+
 
 
 

@@ -3,6 +3,7 @@ import React from 'react';
 import {ChevronDown} from 'react-feather';
 
 import TournamentElement from 'src/components/TournamentElement'
+import TournamentDetails from '../TournamentDetails';
 
 import './tournaments.scss'
 
@@ -116,7 +117,7 @@ const Tournaments = () => {
           ))
         }
       </ul>
-
+      <TournamentDetails />
     </div>
   );
 };

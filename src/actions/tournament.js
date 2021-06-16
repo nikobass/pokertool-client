@@ -5,6 +5,4 @@ export const tournamentDetailsModal = () => ({
   type : OPEN_MODAL_TOURNAMENT_DETAILS
 })
 
-export const closeTournamentDetailsModal = () => ({
-  type: CLOSE_TOURNAMENT_DETAILS_MODAL
-})
+

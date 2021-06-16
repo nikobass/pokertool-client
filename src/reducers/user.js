@@ -62,7 +62,7 @@
       case HIDE_MODAL:
         return {
           ...state,
-          showConnectionModal: false
+          showConnectionModal: false,
         }
       case CHANGE_OPEN_FORM:
         return {
