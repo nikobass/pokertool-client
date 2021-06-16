@@ -12,6 +12,7 @@ import {
 
 const initialState = {
     isLogged: false,
+    userId: null,
     // la valeur par défaut des inputs, PROVISOIRE.
     // Ici on récupérera les données de la BDD lorsque l'utilisateur est connecté.
     nickname: localStorage.getItem('nickname') || '',
