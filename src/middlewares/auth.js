@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
     SUBMIT_LOGIN,
+    DELETE_USER_ACCOUNT,
     loginSuccess,
 } from 'src/actions/user';
 
@@ -30,6 +31,24 @@ const authMiddleware = (store) => (next) => (action) => {
                 })
                 .catch(error => console.log(error));
             break;
+        }
+        case DELETE_USER_ACCOUNT: {
+          const state = store.getState();
+          // todo get l'id du user en cours (via localstorage ou via une requete get back?)
+
+          axios({
+            method: 'delete',
+            url: `http://localhost:3000/profil/${id}`,
+            data: {
+
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+
+          })
+          .catch((error) => console.log(error));
+        break;
         }
         default:
             next(action);
