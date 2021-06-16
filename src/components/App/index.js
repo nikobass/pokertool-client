@@ -15,6 +15,7 @@ import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import About from 'src/components/About';
 import Cgu from 'src/components/Cgu';
+import Tournaments from 'src/components/Tournaments'
 import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
 
@@ -43,6 +44,7 @@ const App = () => {
         </Route>
         <Route exact path="/tournaments">
           <Header />
+          <Tournaments />
           <Footer />
         </Route>
         <Route exact path="/chip">

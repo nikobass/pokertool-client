@@ -4,12 +4,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-import { showConnectionModal } from 'src/actions/user.js'
+import { showConnectionModal, changeInputValue } from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
+import { submitLogin } from '../../actions/user';
+
 import './header.scss';
 
 
-const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
+const Header = ({ 
+    isLogged, 
+    handleShowModal, 
+    showConnectionModal,
+    handleLogin,
+    handleInputChange }) => {
     
     const history = useHistory();
 
@@ -74,11 +81,11 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
             isOpen={showConnectionModal}
             title='Connexion'
             content={(
-                <form className="connexionForm">
+                <form className="connexionForm" onSubmit={handleLogin}>
                     <label htmlFor="email" className="connexionForm__label">Email</label>
-                    <input type="email" name="connexionEmailInput" className="connexionForm__input" />
+                    <input onChange={handleInputChange} type="email" name="email" className="connexionForm__input" />
                     <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
-                    <input type="password" name="connexionPasswordInput" className="connexionForm__input" />
+                    <input onChange={handleInputChange} type="password" name="password" className="connexionForm__input" />
                     <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
                     <button type="submit" className="connexionForm__submit">Se connecter</button>
                 </form>
@@ -88,8 +95,12 @@ const Header = ({ isLogged, handleShowModal, showConnectionModal }) => {
 )};
 
 Header.propTypes = {
-    isLogged: PropTypes.bool.isRequired
-};
+    isLogged: PropTypes.bool.isRequired,
+    handleShowModal: PropTypes.func.isRequired,
+    showConnectionModal: PropTypes.bool.isRequired,
+    handleLogin: PropTypes.func.isRequired,
+    handleInputChange: PropTypes.func.isRequired
+}
 
 const mapStateToProps = (state) => ({
     isLogged: state.user.isLogged,
@@ -99,6 +110,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     handleShowModal: () => {
         dispatch(showConnectionModal());
+    },
+    handleLogin: (event) => {
+        event.preventDefault();
+        //TODO: controle des saisies.......................
+
+        dispatch(submitLogin());
+    },
+    handleInputChange: (event) => {
+        dispatch(changeInputValue(event.target.value, event.target.name));
     }
 });
 
