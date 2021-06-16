@@ -1,3 +1,5 @@
+/* eslint-disable import/no-duplicates */
+/* eslint-disable import/no-unresolved */
 // == Import npm
 import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
@@ -30,7 +32,7 @@ const App = ({ isLogged }) => {
     if (currentLocation === '/profil') {
       dispatch(resetProfilModif());
     }
-    { dispatch(hideModal()) }
+    {dispatch(hideModal())}
   })
 
   return (

@@ -1,4 +1,3 @@
-
 import {
   TOGGLE_MODIFY_PROFIL,
   CHANGE_INPUT_VALUE,
@@ -10,8 +9,9 @@ import {
   SHOW_UNAUTHORIZED_MODAL,
   SHOW_DELETE_ACCOUNT_MODAL,
   DELETE_USER_ACCOUNT,
-  DELETE_SUCCESS
-} from 'src/actions/user';
+  DELETE_SUCCESS,
+}
+from 'src/actions/user';
 
 const initialState = {
   isLogged: false,
@@ -40,9 +40,9 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         profil: {
-          modifying: true
-        }
-      }
+          modifying: true,
+        },
+      };
     // action qui gère la modification des inputs du profil
     case CHANGE_INPUT_VALUE:
       return {
@@ -51,8 +51,8 @@ const reducer = (state = initialState, action = {}) => {
         // Cela évite de coder 3 fonctions pour chaque input.
         // [action.inputName] modifie donc dans le state soit: nickname, email ou password
         // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
-        [action.inputName]: action.newInputValue
-      }
+        [action.inputName]: action.newInputValue,
+      };
     case RESET_PROFIL_MODIF:
       return {
         ...state,
@@ -71,14 +71,14 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         showUnauthorizedModal: true,
-      }
+      };
     case HIDE_MODAL:
       return {
         ...state,
         showConnectionModal: false,
         showUnauthorizedModal: false,
         showDeleteAccountModal: false,
-      }
+      };
     case CHANGE_OPEN_FORM:
       return {
         ...state,
@@ -87,18 +87,18 @@ const reducer = (state = initialState, action = {}) => {
     case SHOW_DELETE_ACCOUNT_MODAL:
       return {
         ...state,
-        showDeleteAccountModal: true
+        showDeleteAccountModal: true,
       }
     case DELETE_USER_ACCOUNT:
       return {
         ...state,
-        showDeleteAccountModal: false
-      }
+        showDeleteAccountModal: false,
+      };
     case DELETE_SUCCESS:
       return {
         ...state,
-        isLogged: false
-      }
+        isLogged: false,
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -110,6 +110,6 @@ const reducer = (state = initialState, action = {}) => {
     default:
       return state;
   }
-}
+};
 
 export default reducer;
