@@ -9,7 +9,7 @@ import Modal from 'src/components/Modal';
 import './home.scss'
 
 
-const Home = ({openFormSignup, handleOpenForm}) => {
+const Home = ({openFormSignup, handleOpenForm, showUnauthorizedModal}) => {
 
   return (
     <div className='main'>
@@ -25,19 +25,35 @@ const Home = ({openFormSignup, handleOpenForm}) => {
       </div>
       {!openFormSignup //todo component signup  
     }
+    
+    <Modal 
+    isOpen={showUnauthorizedModal}
+    title="Contenu inaccessible"
+    content={(
+      <div className="modalUnauthorized">
+      <p className="modalUnauthorized__paragraph">Vous devez être connecté pour accéder à ce contenu.</p>
+      <p className="modalUnauthorized__paragraph">Déjà inscrit ? <button className="modalUnauthorized__button">Me connecter</button></p>
+      <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button className="modalUnauthorized__button">Créer un compte</button></p>
+      </div>
+    )}
+    />
     </div>
-
   );
 };
 
 Home.propTypes = {
   openFormSignup: PropTypes.bool,
   handleOpenForm: PropTypes.func.isRequired,
+  showUnauthorizedModal: PropTypes.bool.isRequired
 }
 
 
 import {changeOpenForm} from 'src/actions/user';
 import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  showUnauthorizedModal: state.user.showUnauthorizedModal
+})
 
 const mapDispatchToProps = (dispatch) => ({
   handleOpenForm: () => {
@@ -46,4 +62,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

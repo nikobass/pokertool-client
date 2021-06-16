@@ -25,6 +25,7 @@ const initialState = {
     },
     showConnectionModal: false,
     openFormSignup: false,
+    showUnauthorizedModal: false,
     token: null
 }
 
@@ -64,7 +65,8 @@ const reducer = (state = initialState, action = {}) => {
         case HIDE_MODAL:
             return {
                 ...state,
-                showConnectionModal: false
+                showConnectionModal: false,
+                showUnauthorizedModal: false
             }
         case CHANGE_OPEN_FORM:
             return {
