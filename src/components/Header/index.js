@@ -27,7 +27,9 @@ const Header = ({
     handleConnectionInput,
     handleUnauthorizedModal,
     handleLogout,
-    isSigninError
+    isSigninError,
+    emailValue,
+    passwordValue
 }) => {
 
     const history = useHistory();
@@ -108,9 +110,9 @@ const Header = ({
                 content={(
                     <form className="connexionForm" onSubmit={handleLogin}>
                         <label htmlFor="email" required className="connexionForm__label">Email</label>
-                        <input onChange={handleConnectionInput} type="email" name="email" required className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="email" name="email" required value={emailValue} className="connexionForm__input" />
                         <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
-                        <input onChange={handleConnectionInput} type="password" name="password" required className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="password" name="password" required value={passwordValue}className="connexionForm__input" />
                         <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
                         {isSigninError && <p>{isSigninError}</p>}
                         {<button type="submit" className="connexionForm__submit">Se connecter</button>}
@@ -144,6 +146,8 @@ const mapStateToProps = (state) => ({
     isLogged: state.user.isLogged,
     showConnectionModal: state.user.showConnectionModal,
     showUnauthorizedModal: state.user.showUnauthorizedModal,
+    emailValue: state.user.email,
+    passwordValue: state.user.password,
     isSigninError: state.user.loginError
 })
 
