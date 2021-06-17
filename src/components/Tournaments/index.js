@@ -111,7 +111,7 @@ const Tournaments = () => {
                 cashPrice={tournament.cashPrice}
                 statut={tournament.statut}
                 nbPlayers={tournament.nbPlayers}
-                maxPlayers={tournament.maxPlayers}
+               
               />
              
             </li>

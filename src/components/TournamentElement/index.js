@@ -40,7 +40,7 @@ const TournamentElement = ({
         {statut}
       </span>
       <span>
-        {nbPlayers}/{maxPlayers}
+        {nbPlayers}
       </span>
       <button onClick={handleTournamentDetails} className="modify-tournament">
         
@@ -64,7 +64,6 @@ TournamentElement.propTypes = {
   location: PropTypes.string.isRequired,
   cashPrice: PropTypes.string.isRequired,
   nbPlayers: PropTypes.number.isRequired,
-  maxPlayers: PropTypes.number.isRequired,
   buyIn: PropTypes.string.isRequired,
   statut:PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
