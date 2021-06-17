@@ -41,24 +41,22 @@ const Signup = ({
 				)}
 			/>
 		</div>
-	);
+  );
 };
 
 const mapStateToProps = (state) => ({
-	isLogged: state.user.isLogged,
-	showSignUpModal: state.user.showSignUpModal,
+  isLogged: state.user.isLogged,
+  showSignUpModal: state.user.showSignUpModal,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	handleSignUpChange: (event) => {
-		dispatch(submitSignUpValues(event.target.value, event.target.name))
-	},
-	handleSignUpSubmit: (event) => {
-		event.preventDefault();
-		dispatch(signupSubmit());
-	},
-
-
+  handleSignUpChange: (event) => {
+    dispatch(submitSignUpValues(event.target.value, event.target.name))
+  },
+  handleSignUpSubmit: (event) => {
+    event.preventDefault();
+    dispatch(signupSubmit());
+  },
 });
 
 Signup.propTypes = {
