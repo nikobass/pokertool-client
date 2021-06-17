@@ -9,7 +9,6 @@ import {
     LOGIN_SUCCESS,
     SIGN_UP_SUCCESS,
     SUBMIT_SIGN_UP_VALUES,
-    TOGGLE_SIGN_UP,
 } from 'src/actions/user';
 
 
@@ -103,6 +102,7 @@ const reducer = (state = initialState, action = {}) => {
           return {
               ...state,
               isLogged: true,
+              showSignUpModal: false,
               };
 
         default:

@@ -5,7 +5,6 @@ import {
   loginSuccess,
   signUpSuccess,
   SUBMIT_SIGN_UP,
-  SIGN_UP_SUCCESS
 
 } from 'src/actions/user';
 
