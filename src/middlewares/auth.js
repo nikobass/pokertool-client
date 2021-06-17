@@ -37,7 +37,9 @@ const authMiddleware = (store) => (next) => (action) => {
           localStorage.setItem('token', response.data.token);
 
         })
-        .catch(error => console.log(error));
+        .catch(err => {
+          console.log(err.response.data.message)
+        });
       break;
     }
     case DELETE_USER_ACCOUNT: {
