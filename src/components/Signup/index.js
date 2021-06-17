@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './signup.scss';
-import { changeInputValue } from '../../actions/user';
+import { signupSubmit, submitSignUpValues } from '../../actions/user';
 // import { showSignUpModal } from 'src/actions/user.js';
 
 const Signup = ({ 
-	
 	showSignUpModal,
     //Fonction qui gère la modification des inputs: pseudo, email emailConfirm password et passwordConfirm (champs controlés)
-	handleSignUpChange
+	handleSignUpChange,
+	//Fonction qui gère la soumission des inputs: pseudo, email emailConfirm password et passwordConfirm
+	handleSignUpSubmit
 }) => {
 	return (
 		<div>
@@ -19,20 +20,20 @@ const Signup = ({
 			    isOpen={ showSignUpModal }
 					title="inscription"
 					content={(
-						<form className="inscriptionForm">
+						<form onSubmit= { handleSignUpSubmit } className="inscriptionForm">
 								<label htmlFor="email" className="inscriptionForm__label">Pseudo</label>
-								<input onChange={ handleSignUpChange } type="text" name="signUpPseudoInput" className="inscriptionForm__input" />
+								<input onChange={ handleSignUpChange } type="text" name="nickname" className="inscriptionForm__input" />
 
 								<label htmlFor="email" className="inscriptionForm__label">Email</label>
-								<input onChange={ handleSignUpChange } type="email" name="SignUpEmailInput" className="inscriptionForm__input" />
+								<input onChange={ handleSignUpChange } type="email" name="email" className="inscriptionForm__input" />
 
 								<label htmlFor="emailConfirmation" className="inscriptionForm__label">Confirmation de l'Email</label>
 								<input onChange={ handleSignUpChange } type="email" name="signUpEmailConfirmInput" className="inscriptionForm__input" />
 
-								<label htmlFor="passwordConfirmation" className="inscriptionForm__label">Mot de passe</label>
-								<input onChange={ handleSignUpChange } type="password" name="signUpPasswordInput" className="inscriptionForm__input" />
+								<label htmlFor="password" className="inscriptionForm__label">Mot de passe</label>
+								<input onChange={ handleSignUpChange } type="password" name="password" className="inscriptionForm__input" />
 
-								<label htmlFor="password" className="inscriptionForm__label">Confirmation du mot de passe</label>
+								<label htmlFor="passwordConfirmation" className="inscriptionForm__label">Confirmation du mot de passe</label>
 								<input onChange={ handleSignUpChange } type="password" name="signUpPasswordConfirmInput" className="inscriptionForm__input" />
 
 								<button type="submit" className="inscriptionForm__submit">Valider</button>
@@ -50,8 +51,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	handleSignUpChange: (event) => {
-		dispatch(changeInputValue(event.target.value, event.target.name))
-	}
+		dispatch(submitSignUpValues(event.target.value, event.target.name))
+	},
+	handleSignUpSubmit: (event) => {
+		event.preventDefault();
+		dispatch(signupSubmit());
+	},
+
+
 });
 
 Signup.propTypes = {

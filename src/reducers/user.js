@@ -6,7 +6,10 @@ import {
     SHOW_CONNECTION_MODAL,
     HIDE_MODAL,
     SIGN_UP_FORM,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    SIGN_UP_SUCCESS,
+    SUBMIT_SIGN_UP_VALUES,
+    TOGGLE_SIGN_UP,
 } from 'src/actions/user';
 
 
@@ -25,7 +28,14 @@ const initialState = {
     },
     showConnectionModal: false,
     showSignUpModal: false,
-    token: null
+    token: null,
+    //handleSignUpSubmit: false,
+    signup:{
+        nickname:null,
+        email: null,
+        password: null,
+
+    }
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -35,7 +45,7 @@ const reducer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 profil: {
-                    modifying: true
+                    modifying: true,
                 }
             }
         // action qui gère la modification des inputs du profil
@@ -52,20 +62,20 @@ const reducer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 profil: {
-                    modifying: false
+                    modifying: false,
                 }
             }
 
         case SHOW_CONNECTION_MODAL:
             return {
                 ...state,
-                showConnectionModal: true
+                showConnectionModal: true,
             }
         case HIDE_MODAL:
             return {
                 ...state,
                 showConnectionModal: false,
-                showSignUpModal: false
+                showSignUpModal: false,
             }
         case SIGN_UP_FORM:
             return {
@@ -81,6 +91,19 @@ const reducer = (state = initialState, action = {}) => {
                 isLogged: true,
                 showConnectionModal: false,
             };
+        case SUBMIT_SIGN_UP_VALUES:
+            return{ 
+                ...state,
+                signup:{
+                    ...state.signup,
+                    [action.inputName]: action.newInputValue,
+                }
+            };
+        case SIGN_UP_SUCCESS:
+          return {
+              ...state,
+              isLogged: true,
+              };
 
         default:
             return state;
