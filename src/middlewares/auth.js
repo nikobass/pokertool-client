@@ -79,7 +79,9 @@ const authMiddleware = (store) => (next) => (action) => {
           console.log(response);
           store.dispatch(submitProfilSuccess());
         })
-        .catch(error => console.log(error));
+        .catch(err => {
+          console.log(err.response.data.message)
+        });
 
       break;
     }
