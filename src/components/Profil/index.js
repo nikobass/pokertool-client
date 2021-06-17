@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {toggleModifyProfil, changeInputValue, showDeleteAccountModal, hideModal, deleteUserAccount} from 'src/actions/user';
+import {
+  toggleModifyProfil, 
+  changeInputValue, 
+  showDeleteAccountModal, 
+  hideModal, 
+  deleteUserAccount,
+  submitProfil,
+  getProfilFromAPI
+} from 'src/actions/user';
 import Modal from 'src/components/Modal';
 
 import './profil.scss';
@@ -22,8 +30,16 @@ const Profil = ({
   showDeleteAccountModal,
   handleShowModal,
   handleCloseModal,
-  submitDeleteAccount
-}) => (
+  submitDeleteAccount,
+  handleSubmitProfil,
+}) => {
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProfilFromAPI())
+  }, []);
+  
+  return (
   <main className="profil">        
     <form className="profil__form">
       <h2 className="profil__form__subtitle">Mon profil</h2>
@@ -35,10 +51,10 @@ const Profil = ({
       <input onChange={handleInputChange} type="email" name="email"className="profil__form__input" value={emailValue} disabled={modifying ? "" : "disabled"}></input>
 
       <label htmlFor="password" className="profil__form__label">Mot de passe</label>
-      <input onChange={handleInputChange} type="password" name="password" className="profil__form__input" value={passwordValue} disabled={modifying ? "" : "disabled"}></input>
+      <input onChange={handleInputChange} type="password" name="password" className="profil__form__input" value={passwordValue} disabled={modifying ? "" : "disabled"} placeholder="********"></input>
 
       {/* Ici les ternaires gèrent l'affiche du bouton pour modifier le profil ou du bouton pour valider la saisie selon si l'utilisateur est en train de consulter ou modifier son profil*/}
-      <button type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>
+      <button onClick={handleSubmitProfil} type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>
       <button onClick={handleModifyProfil} className={!modifying ? "profil__form__button" : "profil__form__button invisible"}>Modifier mon profil</button>
       <button 
         className="profil__form__delete"
@@ -72,22 +88,19 @@ const Profil = ({
       )}
     />
   </main>    
-);
+);}
 
 Profil.propTypes = {
   handleModifyProfil: PropTypes.func.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   modifying: PropTypes.bool.isRequired,
-  nicknameValue: PropTypes.string.isRequired,
-  emailValue: PropTypes.string.isRequired,
-  passwordValue: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
   modifying: state.user.profil.modifying,
-  nicknameValue: state.user.nickname,
-  emailValue: state.user.email,
-  passwordValue: state.user.password,
+  nicknameValue: state.user.profil.nickname,
+  emailValue: state.user.profil.email,
+  passwordValue: state.user.profil.password,
   showDeleteAccountModal: state.user.showDeleteAccountModal
 });
 
@@ -113,6 +126,10 @@ const mapDispatchToProps = (dispatch) => ({
   submitDeleteAccount: () => {     
     dispatch(deleteUserAccount());   
   },
+  handleSubmitProfil: (event) => {
+    event.preventDefault();
+    dispatch(submitProfil())
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profil);

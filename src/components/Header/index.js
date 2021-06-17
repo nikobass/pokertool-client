@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-import { showConnectionModal, showUnauthorizedModal, changeInputValue, submitLogin, hideModal, submitLogout } from 'src/actions/user.js'
+import { 
+    showConnectionModal, 
+    showUnauthorizedModal, 
+    changeConnectionInput, 
+    submitLogin, 
+    hideModal, 
+    submitLogout 
+} from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
 
 import './header.scss';
@@ -17,7 +24,7 @@ const Header = ({
     showConnectionModal,
     showUnauthorizedModal,
     handleLogin,
-    handleInputChange,
+    handleConnectionInput,
     handleUnauthorizedModal,
     handleLogout
 }) => {
@@ -100,9 +107,9 @@ const Header = ({
                 content={(
                     <form className="connexionForm" onSubmit={handleLogin}>
                         <label htmlFor="email" className="connexionForm__label">Email</label>
-                        <input onChange={handleInputChange} type="email" name="email" className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="email" name="email" className="connexionForm__input" />
                         <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
-                        <input onChange={handleInputChange} type="password" name="password" className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="password" name="password" className="connexionForm__input" />
                         <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
                         {<button type="submit" className="connexionForm__submit">Se connecter</button>}
                     </form>
@@ -128,7 +135,7 @@ Header.propTypes = {
     handleShowModal: PropTypes.func.isRequired,
     showConnectionModal: PropTypes.bool.isRequired,
     handleLogin: PropTypes.func.isRequired,
-    handleInputChange: PropTypes.func.isRequired
+    handleConnectionInput: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -146,8 +153,8 @@ const mapDispatchToProps = (dispatch) => ({
         //TODO: controle des saisies.......................
         dispatch(submitLogin());
     },
-    handleInputChange: (event) => {
-        dispatch(changeInputValue(event.target.value, event.target.name));
+    handleConnectionInput: (event) => {
+        dispatch(changeConnectionInput(event.target.value, event.target.name));
     },
     handleUnauthorizedModal: () => {
         dispatch(showUnauthorizedModal());
