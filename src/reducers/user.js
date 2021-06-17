@@ -31,7 +31,8 @@ const initialState = {
     // Lorsqu'il passe a true, les inputs du profil s'ouvrent.
     modifying: false,
     nickname: '',
-    email: ''
+    email: '',
+    password: ''
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -151,6 +152,7 @@ const reducer = (state = initialState, action = {}) => {
       return{
         ...state,
         profil: {
+          ...state.profil,
           modifying: false
         }
       }
