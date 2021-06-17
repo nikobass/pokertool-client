@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-case */
 
 import {
   TOGGLE_MODIFY_PROFIL,
@@ -12,11 +13,17 @@ import {
   DELETE_USER_ACCOUNT,
   DELETE_SUCCESS,
   LOGOUT,
+<<<<<<< HEAD
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
   SUBMIT_PROFIL_SUCCESS
 } from 'src/actions/user';
+=======
+}
+// eslint-disable-next-line import/no-unresolved
+  from 'src/actions/user';
+>>>>>>> tounaments
 
 const initialState = {
   isLogged: false,
@@ -47,10 +54,16 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         profil: {
+<<<<<<< HEAD
           ...state.profil,
           modifying: true,
         }
       }
+=======
+          modifying: true,
+        },
+      };
+>>>>>>> tounaments
     // action qui gère la modification des inputs du profil
     case CHANGE_INPUT_VALUE:
       return {
@@ -59,6 +72,7 @@ const reducer = (state = initialState, action = {}) => {
         // Cela évite de coder 3 fonctions pour chaque input.
         // [action.inputName] modifie donc dans le state soit: nickname, email ou password
         // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
+<<<<<<< HEAD
         profil: {
           ...state.profil,
           modifying: true,
@@ -70,6 +84,10 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.inputName]: action.newInputValue
       }
+=======
+        [action.inputName]: action.newInputValue,
+      };
+>>>>>>> tounaments
     case RESET_PROFIL_MODIF:
       return {
         ...state,
@@ -81,6 +99,7 @@ const reducer = (state = initialState, action = {}) => {
     case SHOW_CONNECTION_MODAL:
       return {
         ...state,
+<<<<<<< HEAD
         showConnectionModal: true
       }
     case CHANGE_OPEN_FORM:
@@ -97,20 +116,33 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         showConnectionModal: true
+=======
+        showConnectionModal: true,
+      }
+    case HIDE_MODAL:
+      return {
+        ...state,
+        showConnectionModal: false,
+      }
+    case CHANGE_OPEN_FORM:
+      return {
+        ...state,
+        openFormSignup: true,
+>>>>>>> tounaments
       };
 
     case SHOW_UNAUTHORIZED_MODAL:
       return {
         ...state,
         showUnauthorizedModal: true,
-      }
+      };
     case HIDE_MODAL:
       return {
         ...state,
         showConnectionModal: false,
         showUnauthorizedModal: false,
         showDeleteAccountModal: false,
-      }
+      };
     case CHANGE_OPEN_FORM:
       return {
         ...state,
@@ -119,17 +151,17 @@ const reducer = (state = initialState, action = {}) => {
     case SHOW_DELETE_ACCOUNT_MODAL:
       return {
         ...state,
-        showDeleteAccountModal: true
-      }
+        showDeleteAccountModal: true,
+      };
     case DELETE_USER_ACCOUNT:
       return {
         ...state,
-        showDeleteAccountModal: false
+        showDeleteAccountModal: false,
       }
     case DELETE_SUCCESS:
       return {
         ...state,
-        isLogged: false
+        isLogged: false,
       }
     case LOGIN_SUCCESS:
       return {
@@ -141,6 +173,7 @@ const reducer = (state = initialState, action = {}) => {
     case LOGOUT:
       return {
         ...state,
+<<<<<<< HEAD
         isLogged: false
       }
     case LOG_USER:
@@ -166,9 +199,13 @@ const reducer = (state = initialState, action = {}) => {
           email: action.dataAPI.email,
         }
       }
+=======
+        isLogged: false,
+      };
+>>>>>>> tounaments
     default:
       return state;
   }
-}
+};
 
 export default reducer;
