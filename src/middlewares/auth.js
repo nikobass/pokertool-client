@@ -50,9 +50,9 @@ const authMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then(() => {
-          store.dispatch(deleteUserAccountSucces());
           localStorage.removeItem('token');
           localStorage.removeItem('userId');
+          store.dispatch(deleteUserAccountSucces());
         })
         .catch((error) => console.log(error));
       break;
@@ -86,6 +86,7 @@ const authMiddleware = (store) => (next) => (action) => {
 
       const token = localStorage.getItem('token');
       if(token){
+        console.log(token)
         store.dispatch(logUser())
       }
     }
