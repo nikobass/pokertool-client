@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-import { showConnectionModal, showUnauthorizedModal, changeInputValue, submitLogin, hideModal, submitLogout } from 'src/actions/user.js'
+import { 
+    showConnectionModal, 
+    showUnauthorizedModal, 
+    changeConnectionInput, 
+    submitLogin, 
+    hideModal, 
+    submitLogout 
+} from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
 
 import './header.scss';
@@ -17,9 +24,12 @@ const Header = ({
     showConnectionModal,
     showUnauthorizedModal,
     handleLogin,
-    handleInputChange,
+    handleConnectionInput,
     handleUnauthorizedModal,
-    handleLogout
+    handleLogout,
+    isSigninError,
+    emailValue,
+    passwordValue
 }) => {
 
     const history = useHistory();
@@ -99,11 +109,12 @@ const Header = ({
                 title='Connexion'
                 content={(
                     <form className="connexionForm" onSubmit={handleLogin}>
-                        <label htmlFor="email" className="connexionForm__label">Email</label>
-                        <input onChange={handleInputChange} type="email" name="email" className="connexionForm__input" />
+                        <label htmlFor="email" required className="connexionForm__label">Email</label>
+                        <input onChange={handleConnectionInput} type="email" name="email" required value={emailValue} className="connexionForm__input" />
                         <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
-                        <input onChange={handleInputChange} type="password" name="password" className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="password" name="password" required value={passwordValue} className="connexionForm__input" />
                         <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
+                        {isSigninError && <p>{isSigninError}</p>}
                         {<button type="submit" className="connexionForm__submit">Se connecter</button>}
                     </form>
                 )}
@@ -128,13 +139,16 @@ Header.propTypes = {
     handleShowModal: PropTypes.func.isRequired,
     showConnectionModal: PropTypes.bool.isRequired,
     handleLogin: PropTypes.func.isRequired,
-    handleInputChange: PropTypes.func.isRequired
+    handleConnectionInput: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     isLogged: state.user.isLogged,
     showConnectionModal: state.user.showConnectionModal,
     showUnauthorizedModal: state.user.showUnauthorizedModal,
+    emailValue: state.user.email,
+    passwordValue: state.user.password,
+    isSigninError: state.user.loginError
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -146,8 +160,8 @@ const mapDispatchToProps = (dispatch) => ({
         //TODO: controle des saisies.......................
         dispatch(submitLogin());
     },
-    handleInputChange: (event) => {
-        dispatch(changeInputValue(event.target.value, event.target.name));
+    handleConnectionInput: (event) => {
+        dispatch(changeConnectionInput(event.target.value, event.target.name));
     },
     handleUnauthorizedModal: () => {
         dispatch(showUnauthorizedModal());
@@ -162,6 +176,6 @@ const mapDispatchToProps = (dispatch) => ({
         localStorage.removeItem('userId');  
         localStorage.removeItem('nickname');  
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

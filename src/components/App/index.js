@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 
-import { resetProfilModif, hideModal } from 'src/actions/user';
+import { hideModal, checkIsLogged } from 'src/actions/user';
 
 // == Import
 import './styles.css';
@@ -27,10 +27,8 @@ const App = ({ isLogged }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentLocation === '/profil') {
-      dispatch(resetProfilModif());
-    }
-    { dispatch(hideModal()) }
+    dispatch(hideModal());
+    dispatch(checkIsLogged());
   })
 
   return (
@@ -58,6 +56,11 @@ const App = ({ isLogged }) => {
           <Faq />
           <Footer />
         </Route>
+        <Route path="/resetPassword">
+              <Header />
+              <ResetPassword />
+              <Footer />
+            </Route>
         {isLogged ?
           <>
             <Route exact path="/tournaments">
@@ -76,11 +79,6 @@ const App = ({ isLogged }) => {
             <Route path="/profil">
               <Header />
               <Profil />
-              <Footer />
-            </Route>
-            <Route path="/resetPassword">
-              <Header />
-              <ResetPassword />
               <Footer />
             </Route>
           </>
