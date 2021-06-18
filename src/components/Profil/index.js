@@ -101,7 +101,7 @@ const mapStateToProps = (state) => ({
   nicknameValue: state.user.profil.nickname,
   emailValue: state.user.profil.email,
   passwordValue: state.user.profil.password,
-  showDeleteAccountModal: state.user.showDeleteAccountModal
+  showDeleteAccountModal: state.user.showDeleteAccountModal,
 });
 
 const mapDispatchToProps = (dispatch) => ({

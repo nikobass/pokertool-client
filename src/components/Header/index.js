@@ -112,7 +112,7 @@ const Header = ({
                         <label htmlFor="email" required className="connexionForm__label">Email</label>
                         <input onChange={handleConnectionInput} type="email" name="email" required value={emailValue} className="connexionForm__input" />
                         <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
-                        <input onChange={handleConnectionInput} type="password" name="password" required value={passwordValue}className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="password" name="password" required value={passwordValue} className="connexionForm__input" />
                         <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
                         {isSigninError && <p>{isSigninError}</p>}
                         {<button type="submit" className="connexionForm__submit">Se connecter</button>}
@@ -176,6 +176,6 @@ const mapDispatchToProps = (dispatch) => ({
         localStorage.removeItem('userId');  
         localStorage.removeItem('nickname');  
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

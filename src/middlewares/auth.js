@@ -2,8 +2,10 @@ import axios from 'axios';
 
 import {
   SUBMIT_LOGIN,
-  DELETE_USER_ACCOUNT,
   loginSuccess,
+  signUpSuccess,
+  SUBMIT_SIGN_UP,
+  DELETE_USER_ACCOUNT,
   SUBMIT_PROFIL,
   CHECK_IS_LOGGED,
   logUser,
@@ -31,12 +33,35 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       })
         .then(response => {
-
           store.dispatch(loginSuccess(response.data));
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('nickname', response.data.nickname);
           localStorage.setItem('token', response.data.token);
+        })
+        .catch((err) => {          
+          store.dispatch(loginError((err.response.data.message)));
+        });
+      break;
+    }
+    case SUBMIT_SIGN_UP: {
+      const state = store.getState();
 
+      axios ({
+        method: 'post',
+        url: `http://localhost:3000/signup`,
+        data: {
+          user_name: state.user.signup.nickname,
+          email: state.user.signup.email,
+          password: state.user.signup.password,
+          // emailConfirm: state.user.signup.emailConfirm,
+          // passwordConfirm: state.user.signup.passwordConfirm,
+        },
+      })
+        .then(response => {
+          console.log(response.data);
+          store.dispatch(signUpSuccess(response.data));
+          localStorage.setItem('userId', response.data.userId);
+          localStorage.setItem('nickname', response.data.nickname);
         })
         .catch((err) => {          
           store.dispatch(loginError((err.response.data.message)));
@@ -94,7 +119,9 @@ const authMiddleware = (store) => (next) => (action) => {
         console.log(token)
         store.dispatch(logUser())
       }
+      break;
     }
+    
 
     case GET_PROFIL_FROM_API: {
 
@@ -111,7 +138,7 @@ const authMiddleware = (store) => (next) => (action) => {
         store.dispatch(updateProfilFromAPI(response.data))
       })
       .catch(error => console.log(error));
-
+      break;
     }
     default:
       next(action);
