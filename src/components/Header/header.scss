@@ -115,12 +115,14 @@
     }
 
     &__forgotPassword{
+        display: none;
         text-align: left;
         margin-bottom: 2rem;
         width: 400px;
     }
 
     &__forgotPasswordLink{
+        display: none;
         text-decoration: underline;
 
         &:hover{
