@@ -16,7 +16,8 @@ import {
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
-  SUBMIT_PROFIL_SUCCESS
+  SUBMIT_PROFIL_SUCCESS,
+  UPDATE_PROFIL_ERROR
 } from 'src/actions/user';
 
 const initialState = {
@@ -33,7 +34,12 @@ const initialState = {
     modifying: false,
     nickname: '',
     email: '',
-    password: ''
+    password: '',
+    error: {
+      emailAlreadyExist: null,
+      nicknameAlreadyExist: null,
+      passwordWrongFormat: null,
+    }
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -162,9 +168,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         profil: {
+          ...state.profil,
           modifying: false,
           nickname: action.dataAPI.user_name,
           email: action.dataAPI.email,
+        }
+      }
+    case UPDATE_PROFIL_ERROR:
+      return {
+        ...state,
+        profil: {
+          ...state.profil,
+
         }
       }
     default:
