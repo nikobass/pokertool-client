@@ -4,6 +4,8 @@ export const GET_TOURNAMENTS_ALL_USER = 'GET_TOURNAMENTS_ALL_USER'
 export const GET_TOURNAMENTS_SUCCESS = 'GET_TOURNAMENTS_SUCCESS'
 
 
+/*************************** Modal Tournaments ****************************/
+
 // ouverture de la modal détail d'un tournoi
 export const tournamentDetailsModal = () => ({
   type : OPEN_MODAL_TOURNAMENT_DETAILS

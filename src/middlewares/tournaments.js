@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 import {
-  GET_TOURNAMENTS_ALL_USER
+  GET_TOURNAMENTS_ALL_USER,
+  getTournamentUserSuccess
 } from 'src/actions/tournament';
-import { getTournamentUserSuccess } from '../actions/tournament';
+
 
 const tournamentsMiddleware = (store) => (next) => (action) => {
 
@@ -24,7 +25,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
        
         next(action)
       break;
-      
+
       default:
         next(action);
         break;

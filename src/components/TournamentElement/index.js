@@ -62,9 +62,9 @@ const TournamentElement = ({
 TournamentElement.propTypes = {
   name: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  cashPrice: PropTypes.string.isRequired,
+  cashPrice: PropTypes.number.isRequired,
   nbPlayers: PropTypes.number.isRequired,
-  buyIn: PropTypes.string.isRequired,
+  buyIn: PropTypes.number.isRequired,
   statut:PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   handleTournamentDetails : PropTypes.func.isRequired,

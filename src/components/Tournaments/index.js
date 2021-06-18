@@ -1,13 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React , { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import {ChevronDown} from 'react-feather';
+import { getTournamentUser } from 'src/actions/tournament';
 
 import TournamentElement from 'src/components/TournamentElement'
 import TournamentDetails from '../TournamentDetails';
 
 import './tournaments.scss'
 
-const Tournaments = (tournaments) => {
+const Tournaments = ({tournaments}) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTournamentUser())
+  }, []);
+
 
   return (
     <div className="tournaments-container">
@@ -60,6 +66,7 @@ const Tournaments = (tournaments) => {
             </button>
           </span>
         </li>
+        
         {
           tournaments.map((tournament) => (
             <li key={tournament.id}>
@@ -68,10 +75,10 @@ const Tournaments = (tournaments) => {
                 name={tournament.name}
                 date={tournament.date}
                 location={tournament.location}
-                buyIn={tournament.buyIn}
-                cashPrice={tournament.cashPrice}
-                statut={tournament.statut}
-                nbPlayers={tournament.nbPlayers}
+                buyIn={tournament.buy_in}
+                cashPrice={tournament.cash_price}
+                statut={tournament.status}
+                nbPlayers={tournament.nb_players}
                
               />
              
@@ -87,10 +94,20 @@ const Tournaments = (tournaments) => {
   );
 };
 
+Tournaments.defaultProps = {
+  tournaments: null,
+};
+
+
 const mapStateToProps = (state) => ({
-  tournaments : state.tournaments.tournamentList
+  tournaments : state.tournament.tournamentList
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
 
 })
 
 
-export default connect(null, mapStateToProps)(Tournaments);
+
+export default connect(mapStateToProps, mapDispatchToProps )(Tournaments);
