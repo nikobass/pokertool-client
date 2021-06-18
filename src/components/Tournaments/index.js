@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import {ChevronDown} from 'react-feather';
 
 import TournamentElement from 'src/components/TournamentElement'
@@ -7,46 +7,7 @@ import TournamentDetails from '../TournamentDetails';
 
 import './tournaments.scss'
 
-const Tournaments = () => {
-  // liste de tournoi pour test, à finir avec BDD fini
-  const tournaments = [
-    {
-      id:1,
-      name: 'Le tournoi de la mort chez Eteinne',
-      nbPlayers: 8,
-      maxPlayers: 10,
-      date: '02/07/2021',
-      cashPrice: 'Journée avec les goélands',
-      statut: 'à venir',
-      buyIn: 'Sac de graine ou pain',
-      location: 'Chez Eteinne',
-    },
-    {
-      id:2,
-      name: 'Le tournoi de Juan',
-      nbPlayers: 15,
-      maxPlayers: 16,
-      date: '25/06/2021',
-      cashPrice: '200€',
-      statut: 'à venir',
-      buyIn: '20€',
-      location: 'Chez Juan',
-    },
-    {
-      id:3,
-      name: 'Le tournoi de Baptiste',
-      nbPlayers: 10,
-      maxPlayers: 10,
-      date: '01/06/2021',
-      cashPrice: '10€',
-      statut: 'Terminer',
-      buyIn: '1€',
-      location: 'Chez Michel',
-    },
-
-
-  ]
-
+const Tournaments = (tournaments) => {
 
   return (
     <div className="tournaments-container">
@@ -126,4 +87,10 @@ const Tournaments = () => {
   );
 };
 
-export default Tournaments;
+const mapStateToProps = (state) => ({
+  tournaments : state.tournaments.tournamentList
+
+})
+
+
+export default connect(null, mapStateToProps)(Tournaments);

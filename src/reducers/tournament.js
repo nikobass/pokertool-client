@@ -1,6 +1,8 @@
 
 import {
   OPEN_MODAL_TOURNAMENT_DETAILS,
+  GET_TOURNAMENTS_ALL_USER,
+  GET_TOURNAMENTS_SUCCESS,
 } from 'src/actions/tournament'
 
 import {
@@ -9,6 +11,9 @@ import {
 
 const initialState = {
   openDetailsModal: false,
+  tournamentList : [],
+  loading: false,
+
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -24,6 +29,24 @@ const reducer = (state = initialState, action = {}) => {
             ...state,
             openDetailsModal: false
           }
+          /************************* GET Tournaments ******************************/
+        case GET_TOURNAMENTS_ALL_USER :
+          return{
+            ...state,
+            loading: true,
+          }
+        case GET_TOURNAMENTS_SUCCESS :
+          return {
+            ...state,
+            // copie les tounois dans la tournamentList
+            tournamentList: action.tournaments,
+            loading: false
+          }  
+          /************************* POST Tournaments ******************************/
+
+
+
+          /************************* DELETE Tournaments ******************************/
       default :
       return state;
   }
