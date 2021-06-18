@@ -104,7 +104,10 @@ const mapStateToProps = (state) => ({
   emailValue: state.user.profil.email,
   passwordValue: state.user.profil.password,
   showDeleteAccountModal: state.user.showDeleteAccountModal,
+<<<<<<< HEAD
   errorMessage: state.user.profil.errorMessage
+=======
+>>>>>>> dev
 });
 
 const mapDispatchToProps = (dispatch) => ({
