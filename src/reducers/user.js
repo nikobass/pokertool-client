@@ -36,11 +36,7 @@ const initialState = {
     nickname: '',
     email: '',
     password: '',
-    error: {
-      emailAlreadyExist: null,
-      nicknameAlreadyExist: null,
-      passwordWrongFormat: null,
-    }
+    errorMessage: null
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -75,7 +71,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       }
     case CHANGE_CONNECTION_INPUT:
-      return{
+      return {
         ...state,
         [action.inputName]: action.newInputValue
       }
@@ -160,7 +156,7 @@ const reducer = (state = initialState, action = {}) => {
         isLogged: true
       }
     case SUBMIT_PROFIL_SUCCESS:
-      return{
+      return {
         ...state,
         profil: {
           ...state.profil,
@@ -178,21 +174,20 @@ const reducer = (state = initialState, action = {}) => {
           email: action.dataAPI.email,
         }
       }
-<<<<<<< HEAD
     case UPDATE_PROFIL_ERROR:
       return {
         ...state,
         profil: {
           ...state.profil,
-
+          errorMessage: action.errorMsg
         }
-=======
+      }
     case LOGIN_ERROR:
       return {
         ...state,
         loginError: action.errorMsg
->>>>>>> 40b81e9ec6c17082bc27416a3b6a61e9eb68eb4a
       }
+
     default:
       return state;
   }

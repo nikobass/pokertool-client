@@ -32,7 +32,7 @@ const Profil = ({
   handleCloseModal,
   submitDeleteAccount,
   handleSubmitProfil,
-  nicknameAlreadyExist
+  errorMessage
 }) => {
   
   const dispatch = useDispatch();
@@ -47,7 +47,6 @@ const Profil = ({
 
       <label htmlFor="username" className="profil__form__label">Pseudo</label>
       <input onChange={handleInputChange} type="text" name="nickname" className="profil__form__input" value={nicknameValue} disabled={modifying ? "" : "disabled"} required/>
-      {nicknameAlreadyExist && <p>{nicknameAlreadyExist}</p>}
 
       <label htmlFor="email" className="profil__form__label">Email</label>
       <input onChange={handleInputChange} type="email" name="email"className="profil__form__input" value={emailValue} disabled={modifying ? "" : "disabled"} required/>
@@ -56,6 +55,7 @@ const Profil = ({
       <input onChange={handleInputChange} type="password" name="password" className="profil__form__input" value={passwordValue} disabled={modifying ? "" : "disabled"} placeholder="********" />
 
       {/* Ici les ternaires gèrent l'affiche du bouton pour modifier le profil ou du bouton pour valider la saisie selon si l'utilisateur est en train de consulter ou modifier son profil*/}
+      {errorMessage && <p className="profil__form__errorMsg">{errorMessage}</p>}
       <button type="submit" className={modifying ? "profil__form__button" : "profil__form__button invisible"}>Valider</button>
       <button onClick={handleModifyProfil} className={!modifying ? "profil__form__button" : "profil__form__button invisible"}>Modifier mon profil</button>
       <button 
@@ -103,7 +103,8 @@ const mapStateToProps = (state) => ({
   nicknameValue: state.user.profil.nickname,
   emailValue: state.user.profil.email,
   passwordValue: state.user.profil.password,
-  showDeleteAccountModal: state.user.showDeleteAccountModal
+  showDeleteAccountModal: state.user.showDeleteAccountModal,
+  errorMessage: state.user.profil.errorMessage
 });
 
 const mapDispatchToProps = (dispatch) => ({

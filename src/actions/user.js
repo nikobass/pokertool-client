@@ -113,7 +113,7 @@ export const updateProfilFromAPI = (dataAPI) => ({
   dataAPI
 })
 
-export const UpdateProfilError = (message) => ({
+export const UpdateProfilError = (errorMsg) => ({
   type: UPDATE_PROFIL_ERROR,
-  message
+  errorMsg
 })

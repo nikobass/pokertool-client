@@ -11,6 +11,7 @@ import {
   updateProfilFromAPI,
   submitProfilSuccess,
   loginError,
+  UpdateProfilError
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
 
