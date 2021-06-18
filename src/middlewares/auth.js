@@ -93,7 +93,6 @@ const authMiddleware = (store) => (next) => (action) => {
 
       const token = localStorage.getItem('token');
       if(token){
-        console.log(token)
         store.dispatch(logUser())
       }
     }
