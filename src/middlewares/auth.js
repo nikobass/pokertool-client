@@ -9,7 +9,8 @@ import {
   logUser,
   GET_PROFIL_FROM_API,
   updateProfilFromAPI,
-  submitProfilSuccess
+  submitProfilSuccess,
+  loginError,
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
 
@@ -37,8 +38,8 @@ const authMiddleware = (store) => (next) => (action) => {
           localStorage.setItem('token', response.data.token);
 
         })
-        .catch(err => {
-          console.log(err.response.data.message)
+        .catch((err) => {          
+          store.dispatch(loginError((err.response.data.message)));
         });
       break;
     }

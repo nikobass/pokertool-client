@@ -76,8 +76,9 @@ export const loginSuccess = (apiData) => ({
     apiData
 });
 
-export const loginError = () => ({
-    //TODO: gérer l'erreur
+export const loginError = (errorMsg) => ({
+    type: LOGIN_ERROR,
+    errorMsg
 });
 
 export const submitProfil = () => ({

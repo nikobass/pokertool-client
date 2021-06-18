@@ -8,6 +8,7 @@ import {
   HIDE_MODAL,
   CHANGE_OPEN_FORM,
   LOGIN_SUCCESS,
+  LOGIN_ERROR,
   SHOW_UNAUTHORIZED_MODAL,
   SHOW_DELETE_ACCOUNT_MODAL,
   DELETE_USER_ACCOUNT,
@@ -44,7 +45,8 @@ const initialState = {
   showConnectionModal: false,
   showDeleteAccountModal: false,
   openFormSignup: false,
-  token: null
+  token: null,
+  loginError: null
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -117,6 +119,7 @@ const reducer = (state = initialState, action = {}) => {
         showConnectionModal: false,
         showUnauthorizedModal: false,
         showDeleteAccountModal: false,
+        loginError: null
       };
     case CHANGE_OPEN_FORM:
       return {
@@ -144,6 +147,7 @@ const reducer = (state = initialState, action = {}) => {
         nickname: action.apiData.nickname,
         isLogged: true,
         showConnectionModal: false,
+        loginError: null
       };
     case LOGOUT:
       return {
@@ -174,6 +178,7 @@ const reducer = (state = initialState, action = {}) => {
           email: action.dataAPI.email,
         }
       }
+<<<<<<< HEAD
     case UPDATE_PROFIL_ERROR:
       return {
         ...state,
@@ -181,6 +186,12 @@ const reducer = (state = initialState, action = {}) => {
           ...state.profil,
 
         }
+=======
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        loginError: action.errorMsg
+>>>>>>> 40b81e9ec6c17082bc27416a3b6a61e9eb68eb4a
       }
     default:
       return state;
