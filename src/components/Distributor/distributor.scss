@@ -16,7 +16,51 @@
             color: #f2f2f2;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        &__importChips{
+            background-color: #ee581e;
+            color: #f2f2f2;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: 2px solid #19191e;
+            margin-bottom: 1rem;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #19191e;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
+        }
+
+        &__container{
+            
+            &__addChip{
+                display: flex;
+                background-color: #19191e;
+                color: #f2f2f2;
+                border-radius: 5px;
+                font-weight: 700;
+                font-size: 1.1rem;
+                border: 2px solid #19191e;
+                margin-top: 0.5rem;
+                align-items: center;
+                margin-left: 1rem;
+
+                &::before{
+                    content: "+";
+                    margin-right: .5rem;
+                    font-size: 3rem;
+                }
+
+                &:hover{
+                    color: #ee581e;
+                }
+            }
         }
     }
 }
