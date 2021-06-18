@@ -34,3 +34,29 @@
    padding : 1rem 2rem;
   }
 }
+
+.modalUnauthorized{
+
+  padding: 2rem;
+
+  &__paragraph{
+    margin-bottom: 2rem;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+  &__button{
+    color: #EE581E;
+    background-color: #19191e;
+    border: none;
+    font-size: 1.1rem;
+    text-decoration: underline;
+
+    &:hover{
+      cursor: pointer;
+      color: #f2f2f2;
+    }
+  }
+}

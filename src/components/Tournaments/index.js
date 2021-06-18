@@ -3,6 +3,7 @@ import React from 'react';
 import {ChevronDown} from 'react-feather';
 
 import TournamentElement from 'src/components/TournamentElement'
+import TournamentDetails from '../TournamentDetails';
 
 import './tournaments.scss'
 
@@ -10,6 +11,7 @@ const Tournaments = () => {
   // liste de tournoi pour test, à finir avec BDD fini
   const tournaments = [
     {
+      id:1,
       name: 'Le tournoi de la mort chez Eteinne',
       nbPlayers: 8,
       maxPlayers: 10,
@@ -20,6 +22,7 @@ const Tournaments = () => {
       location: 'Chez Eteinne',
     },
     {
+      id:2,
       name: 'Le tournoi de Juan',
       nbPlayers: 15,
       maxPlayers: 16,
@@ -30,6 +33,7 @@ const Tournaments = () => {
       location: 'Chez Juan',
     },
     {
+      id:3,
       name: 'Le tournoi de Baptiste',
       nbPlayers: 10,
       maxPlayers: 10,
@@ -97,9 +101,9 @@ const Tournaments = () => {
         </li>
         {
           tournaments.map((tournament) => (
-            <li key={tournament.name}>
+            <li key={tournament.id}>
               <TournamentElement
-                
+                id={tournament.id}
                 name={tournament.name}
                 date={tournament.date}
                 location={tournament.location}
@@ -107,7 +111,7 @@ const Tournaments = () => {
                 cashPrice={tournament.cashPrice}
                 statut={tournament.statut}
                 nbPlayers={tournament.nbPlayers}
-                maxPlayers={tournament.maxPlayers}
+               
               />
              
             </li>
@@ -116,7 +120,8 @@ const Tournaments = () => {
           ))
         }
       </ul>
-
+      <TournamentDetails 
+      />
     </div>
   );
 };
