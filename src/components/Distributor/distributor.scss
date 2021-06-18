@@ -1,0 +1,22 @@
+.distributor{
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+    padding: 1rem;
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        margin: 2rem auto;
+        background-color: #19191e;
+
+        &__subtitle{
+            color: #f2f2f2;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+    }
+}
