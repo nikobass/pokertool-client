@@ -1,12 +1,14 @@
 import { 
     CHANGE_DISTRIBUTOR_FORM_INPUT, 
     ADD_CHIP,
-    REMOVE_CHIP
+    REMOVE_CHIP,
+    LAUNCH_DISTRIBUTOR
 } from 'src/actions/distributor';
 
 
 const initialState = {
     nbChips: 0,
+    isResult: false,
     chips: [
 
     ],
@@ -46,6 +48,11 @@ const reducer = (state = initialState, action = {}) => {
                         ...state.chips.slice(action.index + 1)
                     ]
     
+                }
+            case LAUNCH_DISTRIBUTOR:
+                return {
+                    ...state,
+                    isResult: true,
                 }
     }
     return state;
