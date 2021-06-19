@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Trash2 } from 'react-feather';
 
 import './distributorChipElement.scss';
 
 import {
     changeDistributorFormInput,
+    removeChip
 } from 'src/actions/distributor';
 
 const DistributorChipElement = ({
@@ -12,8 +14,8 @@ const DistributorChipElement = ({
     value, 
     number, 
     handleDistributorFormInput,
-    index,
-    chipColor
+    chipColor,
+    handleRemoveChip
 }) => (
     <li className="chipElement">
 
@@ -74,18 +76,19 @@ const DistributorChipElement = ({
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Couleur</label>
-            <input onChange={handleDistributorFormInput} type="color" name="color" className="chipElement__field__inputColor" value={color} data-index={index}/>
+            <input onChange={handleDistributorFormInput} type="color" name="color" className="chipElement__field__inputColor" value={color} />
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Valeur</label>
-            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber" value={value} data-index={index} />
+            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber" value={value} />
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Nombre</label>
-            <input onChange={handleDistributorFormInput} type="number" name="number" className="chipElement__field__inputNumber" value={number} data-index={index}/>
+            <input onChange={handleDistributorFormInput} type="number" name="number" className="chipElement__field__inputNumber" value={number} />
         </div>
+        <Trash2 onClick={handleRemoveChip} className="chipElement__field__logo" />
     </li>
 )
 
@@ -97,11 +100,16 @@ const mapStateToProps = (state, ownprops) => {
         chipColor: state.distributor.chips[ownprops.index].color,
     }
 }
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownprops) => {
+    return {
     handleDistributorFormInput: (event) => {
         console.log(event.target.dataset.index)
-        dispatch(changeDistributorFormInput(event.target.value, event.target.name, event.target.dataset.index));
-    }
-})
+        dispatch(changeDistributorFormInput(event.target.value, event.target.name, ownprops.index));
+    },
+    handleRemoveChip: (event) => {
+        event.preventDefault()
+        dispatch(removeChip(ownprops.index))
+    },
+}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DistributorChipElement);

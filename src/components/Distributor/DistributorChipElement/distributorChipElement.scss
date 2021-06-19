@@ -39,5 +39,18 @@
                 font-size: 1.3rem;
                 font-weight: bold;
             }
+
+            &__logo{
+                display: flex;
+                align-items: center;
+                margin-top: 0.8rem;
+                margin-right: 1rem;
+                color: #f2f2f2;
+
+                &:hover{
+                    color: #ee581e;
+                    cursor: pointer;
+                }
+            }
         }
 }

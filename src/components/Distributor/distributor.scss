@@ -1,8 +1,8 @@
 .distributor{
     display: flex;
     justify-content: center;
-    margin: 2rem auto;
     padding: 1rem;
+    height: 87vh;
 
     &__form{
         display: flex;
@@ -11,6 +11,7 @@
         padding: 2rem;
         margin: 2rem auto;
         background-color: #19191e;
+        margin-bottom: 95px;
 
         &__subtitle{
             color: #f2f2f2;
@@ -38,27 +39,42 @@
         }
 
         &__container{
+            overflow-y: scroll;
             
-            &__addChip{
+            &__buttons{
                 display: flex;
-                background-color: #19191e;
-                color: #f2f2f2;
-                border-radius: 5px;
-                font-weight: 700;
-                font-size: 1.1rem;
-                border: 2px solid #19191e;
-                margin-top: 0.5rem;
-                align-items: center;
-                margin-left: 1rem;
 
-                &::before{
-                    content: "+";
-                    margin-right: .5rem;
-                    font-size: 3rem;
+                &__button{
+                    display: flex;
+                    background-color: #19191e;
+                    color: #f2f2f2;
+                    border-radius: 5px;
+                    font-weight: 700;
+                    font-size: 1rem;
+                    border: 2px solid #19191e;
+                    margin-top: 0.5rem;
+                    align-items: center;
+                    margin-left: 1rem;
+    
+                    &:hover{
+                        color: #ee581e;
+                    }
                 }
-
-                &:hover{
-                    color: #ee581e;
+                &__addChip{
+                    &::before{
+                        content: "+";
+                        margin-right: .5rem;
+                        font-size: 2rem;
+                    }
+                }
+    
+                &__removeChip{
+                    &::before{
+                        content: "-";
+                        margin-right: .5rem;
+                        font-size: 2rem;
+                        margin-bottom: 0.5rem;
+                    }
                 }
             }
         }
