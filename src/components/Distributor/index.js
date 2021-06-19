@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './distributor.scss';
 import DistributorChipElement from './DistributorChipElement';
@@ -32,9 +33,15 @@ const Distributor = ({
                 <button onClick={handleAddChip} className="distributor__form__container__buttons__button distributor__form__container__buttons__addChip">Ajouter un jeton</button>
                 </div>
             </div>
+            <button className="distributor__form__calculate">Lancer le répartiteur</button>
         </form>
     </main>
 )}
+
+Distributor.propTypes = {
+    nbChips: PropTypes.number.isRequired,
+    handleAddChip: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = (state) => ({
     nbChips: state.distributor.nbChips,

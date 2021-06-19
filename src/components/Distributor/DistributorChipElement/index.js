@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Trash2 } from 'react-feather';
+import PropTypes from 'prop-types';
 
 import './distributorChipElement.scss';
 
@@ -91,6 +92,15 @@ const DistributorChipElement = ({
         <Trash2 onClick={handleRemoveChip} className="chipElement__field__logo" />
     </li>
 )
+
+DistributorChipElement.propTypes = {
+    color: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    number: PropTypes.number.isRequired,
+    handleDistributorFormInput: PropTypes.func.isRequired,
+    chipColor: PropTypes.string.isRequired,
+    handleRemoveChip: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = (state, ownprops) => {
     return {

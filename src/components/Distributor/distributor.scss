@@ -38,8 +38,31 @@
             }
         }
 
+        &__calculate{
+            background-color: #ee581e;
+            color: #f2f2f2;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 2px solid #19191e;
+            margin: 1rem;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #19191e;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
+        }
+
         &__container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             overflow-y: scroll;
+            width: 500px;
+            height: 100%;
             
             &__buttons{
                 display: flex;
@@ -61,6 +84,8 @@
                     }
                 }
                 &__addChip{
+
+
                     &::before{
                         content: "+";
                         margin-right: .5rem;
