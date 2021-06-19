@@ -1,13 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './distributorChipElement.scss';
 
-import chipSVG from 'src/images/chip.svg';
+import {
+    changeDistributorFormInput,
+} from 'src/actions/distributor';
 
-const DistributorChipElement = () => (
+const DistributorChipElement = ({
+    color, 
+    value, 
+    number, 
+    handleDistributorFormInput,
+    index,
+    chipColor
+}) => (
     <li className="chipElement">
 
-        <svg className="chipElement__img" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 296.477 296.477" style={{ enableBackground: 'new 0 0 296.477 296.477' }} xmlSpace="preserve">
+        <svg className="chipElement__img" fill={chipColor} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 296.477 296.477" style={{ enableBackground: 'new 0 0 296.477 296.477' }} xmlSpace="preserve">
             <g>
                 <path d="M244.63,35.621c-21.771-18.635-47.382-29.855-73.767-33.902C121.871-5.797,70.223,11.421,35.622,51.847
 		c-53.236,62.198-45.972,155.773,16.226,209.01c21.771,18.634,47.381,29.853,73.766,33.901
@@ -64,19 +74,34 @@ const DistributorChipElement = () => (
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Couleur</label>
-            <input type="color" className="chipElement__field__inputColor" />
+            <input onChange={handleDistributorFormInput} type="color" name="color" className="chipElement__field__inputColor" value={color} data-index={index}/>
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Valeur</label>
-            <input type="number" className="chipElement__field__inputNumber" />
+            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber" value={value} data-index={index} />
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Nombre</label>
-            <input type="number" className="chipElement__field__inputNumber" />
+            <input onChange={handleDistributorFormInput} type="number" name="number" className="chipElement__field__inputNumber" value={number} data-index={index}/>
         </div>
     </li>
 )
 
-export default DistributorChipElement;
+const mapStateToProps = (state, ownprops) => {
+    return {
+        color: state.distributor.chips[ownprops.index].color,
+        value: state.distributor.chips[ownprops.index].value,
+        number: state.distributor.chips[ownprops.index].number,
+        chipColor: state.distributor.chips[ownprops.index].color,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+    handleDistributorFormInput: (event) => {
+        console.log(event.target.dataset.index)
+        dispatch(changeDistributorFormInput(event.target.value, event.target.name, event.target.dataset.index));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DistributorChipElement);

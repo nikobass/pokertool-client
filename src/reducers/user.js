@@ -87,13 +87,16 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.inputName]: action.newInputValue
       }
+
     case RESET_PROFIL_MODIF:
       return {
         ...state,
         profil: {
           modifying: false
         }
-        case CHANGE_CONNECTION_INPUT:
+      }
+
+    case CHANGE_CONNECTION_INPUT:
           return {
             ...state,
             [action.inputName]: action.newInputValue
