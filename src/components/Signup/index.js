@@ -36,7 +36,7 @@ const Signup = ({
 
 								<label htmlFor="passwordConfirmation" className="inscriptionForm__label">Confirmation du mot de passe</label>
 								<input onChange={ handleSignUpChange } type="password" name="signUpPasswordConfirmInput" className="inscriptionForm__input" />
-								{signUpError && <p> { signUpError }</p>}
+								{signUpError && <p className="signUpError"> { signUpError }</p>}
 								<button type="submit" className="inscriptionForm__submit">Valider</button>
 						</form>
 				)}
