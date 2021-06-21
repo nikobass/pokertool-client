@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 //components
 
 import Cards from 'src/components/Cards';
-import {changeOpenForm} from 'src/actions/user';
+import Signup from 'src/components/Signup';
+import { signUpForm} from 'src/actions/user';
 import { connect } from 'react-redux';
 
-import './home.scss'
+import './home.scss';
 
 
-const Home = ({openFormSignup, handleOpenForm}) => {
+const Home = ({handleSignUpForm}) => {
 
   return (
     <div className='main'>
@@ -19,26 +20,26 @@ const Home = ({openFormSignup, handleOpenForm}) => {
       <div className="signup">
         <button 
         className="signup__button"
-        onClick={handleOpenForm}
+        onClick={handleSignUpForm}
         >
           S'inscrire
         </button>
       </div>
-      {!openFormSignup //todo component signup  
-    }
-    
+      <Signup/>
+      {/* {!openFormSignup //todo component signup  
+    } */}
     </div>
   );
 };
 
 Home.propTypes = {
   openFormSignup: PropTypes.bool,
-  handleOpenForm: PropTypes.func.isRequired
+  handleSignUpForm: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleOpenForm: () => {
-     dispatch(changeOpenForm())
+  handleSignUpForm: () => {
+     dispatch(signUpForm())
    }
 })
 
