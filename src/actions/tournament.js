@@ -2,13 +2,23 @@ export const OPEN_MODAL_TOURNAMENT_DETAILS = 'OPEN_MODAL_TOURNAMENT_DETAILS'
 export const CLOSE_TOURNAMENT_DETAILS_MODAL = 'CLOSE_TOURNAMENT_DETAILS_MODAL'
 export const GET_TOURNAMENTS_ALL_USER = 'GET_TOURNAMENTS_ALL_USER'
 export const GET_TOURNAMENTS_SUCCESS = 'GET_TOURNAMENTS_SUCCESS'
+export const DELETE_TOURNAMENT_USER = 'DELETE_TOURNAMENT_USER'
+export const DELETE_TOURNAMENT_SUCCESS = 'DELETE_TOURNAMENT_SUCCESS'
+export const SHOW_DELETE_TOURNAMENT_MODAL = 'SHOW_DELETE_TOURNAMENT_MODAL'
+export const OPEN_MODAL_TOURNAMENT_DELETE = 'OPEN_MODAL_TOURNAMENT_DELETE'
 
+import {HIDE_MODAL} from './user'
 
 /*************************** Modal Tournaments ****************************/
 
 // ouverture de la modal détail d'un tournoi
 export const tournamentDetailsModal = () => ({
   type : OPEN_MODAL_TOURNAMENT_DETAILS
+})
+
+export const tournamentDeleteModal = (currentId) => ({
+  type : OPEN_MODAL_TOURNAMENT_DELETE,
+  currentId
 })
 
 /************************* GET Tournaments ******************************/
@@ -31,3 +41,26 @@ export const getTournamentUserSuccess = (tournaments) => ({
 
 
 /************************* DELETE Tournaments ******************************/
+
+// ouverture modal supprimer un tournoi
+export const showDeleteTournamentModal = () => ({
+  type: SHOW_DELETE_TOURNAMENT_MODAL
+});
+
+// pars dans le middleware pour requete delete
+export const deleteTournamentUser = (tournamentId) => ({
+  type: DELETE_TOURNAMENT_USER,
+  tournamentId
+  
+
+});
+
+// retour depuis le middleware
+export const deleteTournamentSucces = () => ({
+  type: DELETE_TOURNAMENT_SUCCESS
+});
+
+// ferme la modal au bouton annuler
+export const hideModalDelete = () => ({
+  type : HIDE_MODAL
+})

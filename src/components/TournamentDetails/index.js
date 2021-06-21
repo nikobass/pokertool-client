@@ -58,6 +58,7 @@ const TournamentDetails = ({
 
 const mapStateToProps = (state) => ({
 	openDetailsModal: state.tournament.openDetailsModal,
+ 
 });
 
 

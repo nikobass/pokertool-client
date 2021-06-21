@@ -1,18 +1,29 @@
 import React , { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {ChevronDown} from 'react-feather';
-import { getTournamentUser } from 'src/actions/tournament';
+import {
+  getTournamentUser,
+  deleteTournamentUser,
+  tournamentDeleteModal,
+  hideModalDelete,
+  } from 'src/actions/tournament';
+import Modal from 'src/components/Modal'
 
 import TournamentElement from 'src/components/TournamentElement'
 import TournamentDetails from '../TournamentDetails';
 
 import './tournaments.scss'
 
-const Tournaments = ({tournaments}) => {
+const Tournaments = ({
+  tournaments,
+  showDeleteTournamentModal,
+  submitDeleteTournament,
+  handleCloseModal,
+}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTournamentUser())
-  }, []);
+  }, [tournaments]);
 
 
   return (
@@ -71,7 +82,7 @@ const Tournaments = ({tournaments}) => {
           tournaments.map((tournament) => (
             <li key={tournament.id}>
               <TournamentElement
-                id={tournament.id}
+                currentId={tournament.id}
                 name={tournament.name}
                 date={tournament.date}
                 location={tournament.location}
@@ -79,8 +90,9 @@ const Tournaments = ({tournaments}) => {
                 cashPrice={tournament.cash_price}
                 statut={tournament.status}
                 nbPlayers={tournament.nb_players}
-               
-              />
+                
+                />
+                
              
             </li>
         
@@ -90,6 +102,30 @@ const Tournaments = ({tournaments}) => {
       </ul>
       <TournamentDetails 
       />
+      <Modal
+      isOpen={ showDeleteTournamentModal}
+      title='Supprimer un tournoi'
+      content={(
+        <div>
+          <p>Voulez-vous vraiment supprimer ce tournoi ?</p>
+          
+            <button 
+            type="submit" 
+            className="deleteTournament__submit"
+            onClick={submitDeleteTournament}    
+            >
+              OK
+            </button>
+         
+          <button          
+          className="deleteTournament__submit"
+          onClick={handleCloseModal}
+          >
+            Annuler
+          </button>
+        </div>
+      )}
+    />
     </div>
   );
 };
@@ -100,11 +136,23 @@ Tournaments.defaultProps = {
 
 
 const mapStateToProps = (state) => ({
-  tournaments : state.tournament.tournamentList
+  tournaments : state.tournament.tournamentList,
+  showDeleteTournamentModal : state.tournament.openDeleteModal,
+ 
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
+
+
+  handleCloseModal: () => {
+    dispatch(hideModalDelete());
+  },
+
+  submitDeleteTournament: (event) => {
+   
+    dispatch(deleteTournamentUser())
+  }
 
 })
 

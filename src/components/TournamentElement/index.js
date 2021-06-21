@@ -3,7 +3,10 @@ import { Edit, Eye, Trash2 } from 'react-feather';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import {tournamentDetailsModal} from 'src/actions/tournament';
+import {
+  tournamentDetailsModal,
+  tournamentDeleteModal,
+} from 'src/actions/tournament';
 
 import './tournamentElement.scss'
 
@@ -12,15 +15,17 @@ const TournamentElement = ({
   location,
   cashPrice,
   nbPlayers,
-  maxPlayers,
   buyIn,
   statut,
   date,
-  handleTournamentDetails
+  currentId,
+  handleTournamentDetails,
+  handleTournamentDelete,
+  
   
 }) => {
   return (
-    <div className="tournament--element">
+    <div className="tournament--element" >
       <span>
         {name}
       </span>
@@ -42,6 +47,7 @@ const TournamentElement = ({
       <span>
         {nbPlayers}
       </span>
+    
       <button onClick={handleTournamentDetails} className="modify-tournament">
         
         <Eye />
@@ -49,7 +55,10 @@ const TournamentElement = ({
       <button className="modify-tournament">
         <Edit />
       </button>
-      <button className="modify-tournament">
+      <button 
+      className="modify-tournament"
+      onClick={handleTournamentDelete}
+      >
         <Trash2 />
       </button>
       <button className="tournaments--play">Commencer</button>
@@ -75,12 +84,12 @@ TournamentElement.propTypes = {
 
 
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
     dispatch(tournamentDetailsModal())
   },
-  handleShowModal: () => {
-    dispatch(closeTournamentDetailsModal());
+  handleTournamentDelete: () => {
+    dispatch(tournamentDeleteModal(ownprops.currentId));
 }
 })
 
