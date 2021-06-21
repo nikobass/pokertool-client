@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './signup.scss';
-import { signupSubmit, submitSignUpValues } from '../../actions/user';
+import { signupSubmit, submitSignUpValues, signupSubmitConfirmError } from '../../actions/user';
 // import { showSignUpModal } from 'src/actions/user.js';
 
-const Signup = ({ 
+const Signup = ({
 	showSignUpModal,
     //Fonction qui gère la modification des inputs: pseudo, email emailConfirm password et passwordConfirm (champs controlés)
 	handleSignUpChange,
 	//Fonction qui gère la soumission des inputs: pseudo, email emailConfirm password et passwordConfirm
-	handleSignUpSubmit
+	handleSignUpSubmit,
+	signUpError,
 }) => {
 	return (
 		<div>
@@ -35,7 +36,7 @@ const Signup = ({
 
 								<label htmlFor="passwordConfirmation" className="inscriptionForm__label">Confirmation du mot de passe</label>
 								<input onChange={ handleSignUpChange } type="password" name="signUpPasswordConfirmInput" className="inscriptionForm__input" />
-
+								{signUpError && <p className="signUpError"> { signUpError }</p>}
 								<button type="submit" className="inscriptionForm__submit">Valider</button>
 						</form>
 				)}
@@ -47,6 +48,7 @@ const Signup = ({
 const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
   showSignUpModal: state.user.showSignUpModal,
+  signUpError: state.user.signup.signUpError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -54,13 +56,22 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(submitSignUpValues(event.target.value, event.target.name))
   },
   handleSignUpSubmit: (event) => {
+	
     event.preventDefault();
-    dispatch(signupSubmit());
+	if ( event.target.email.value === event.target.signUpEmailConfirmInput.value
+		& event.target.password.value === event.target.signUpPasswordConfirmInput.value) {
+		
+		dispatch(signupSubmit());
+	}
+	else {
+		let errorEmailPassword = 'Les deux mails ou les deux mots de passe ne corespondent pas. Veuillez corriger.';
+		dispatch(signupSubmitConfirmError(errorEmailPassword));
+	}
   },
 });
 
 Signup.propTypes = {
   showSignUpModal: PropTypes.bool.isRequired,
-}
+};
 
-export default connect (mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -20,7 +20,9 @@ import {
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
-  SUBMIT_PROFIL_SUCCESS
+  SUBMIT_PROFIL_SUCCESS,
+  SIGN_UP_ERROR,
+  SIGN_UP_SUBMIT_CONFIRM_ERROR,
 } from 'src/actions/user';
 
 const initialState = {
@@ -51,7 +53,7 @@ const initialState = {
     nickname: null,
     email: null,
     password: null,
-
+    signUpError: null,
   }
 }
 
@@ -168,54 +170,71 @@ const reducer = (state = initialState, action = {}) => {
                   ...state,
                   showDeleteAccountModal: false,
                 }
-                case DELETE_SUCCESS:
+              case DELETE_SUCCESS:
+                return {
+                  ...state,
+                  isLogged: false,
+                }
+              case LOGIN_SUCCESS:
+                return {
+                  ...state,
+                  nickname: action.apiData.nickname,
+                    isLogged: true,
+                    showConnectionModal: false,
+                    loginError: null
+                };
+              case LOGOUT:
+                return {
+                  ...state,
+                  isLogged: false
+                }
+              case LOG_USER:
+                return {
+                  ...state,
+                  isLogged: true
+                }
+              case SUBMIT_PROFIL_SUCCESS:
+                return {
+                  ...state,
+                  profil: {
+                    ...state.profil,
+                    modifying: false
+                  }
+                }
+
+              case UPDATE_PROFIL_FROM_API:
+                return {
+                  ...state,
+                  profil: {
+                    modifying: false,
+                    nickname: action.dataAPI.user_name,
+                    email: action.dataAPI.email,
+                  }
+                }
+              case LOGIN_ERROR:
+                return {
+                  ...state,
+                  loginError: action.errorMsg
+                }
+                case SIGN_UP_ERROR:
                   return {
                     ...state,
-                    isLogged: false,
-                  }
-                  case LOGIN_SUCCESS:
-                    return {
-                      ...state,
-                      nickname: action.apiData.nickname,
-                        isLogged: true,
-                        showConnectionModal: false,
-                        loginError: null
-                    };
-                  case LOGOUT:
-                    return {
-                      ...state,
-                      isLogged: false
+                    signup: {
+                      ...state.signup,
+                      signUpError: action.errorAPI
                     }
-                    case LOG_USER:
-                      return {
-                        ...state,
-                        isLogged: true
+                  }
+                  case SIGN_UP_SUBMIT_CONFIRM_ERROR:
+                    return {
+                      ...state,
+                      signup: {
+                        ...state.signup,
+                      signUpError: action.confirmMailPasswordError
                       }
-                      case SUBMIT_PROFIL_SUCCESS:
-                        return {
-                          ...state,
-                          profil: {
-                            ...state.profil,
-                            modifying: false
-                          }
-                        }
 
-                        case UPDATE_PROFIL_FROM_API:
-                          return {
-                            ...state,
-                            profil: {
-                              modifying: false,
-                              nickname: action.dataAPI.user_name,
-                              email: action.dataAPI.email,
-                            }
-                          }
-                          case LOGIN_ERROR:
-                            return {
-                              ...state,
-                              loginError: action.errorMsg
-                            }
-                            default:
-                              return state;
+                    }
+                default:
+                  return state;
   }
 };
 
