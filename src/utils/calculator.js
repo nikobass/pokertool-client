@@ -8,7 +8,6 @@ export const calculator = (chips, nbPlayer, startingStack) => {
     let error;
 
     const isChipTooBig = chips.find(chip => chip.value > startingStack);
-    const isChipBadAmount = chips.find(chip => chip.value > 10 && !chip.value % 5);
 
     // je vérifie si il y a deux couleurs identiques
     if(checkForDuplicates(chips, 'color')){
@@ -22,14 +21,12 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         result = {};
         result.error = error;
         return result;
-    } else {
-
-    if (isChipTooBig) {
+    } else if (isChipTooBig) {
         error = "Un jeton ne peut pas être supérieur au tapis de départ. Veuillez vérifier votre saisie."
         result = {};
         result.error = error;
         return result;
-    }
+    } else {
 
     chips.forEach(chip => {
         let tries = 0;
@@ -83,24 +80,3 @@ export const calculator = (chips, nbPlayer, startingStack) => {
     }
 }
 }
-
-
-// const myChips = [
-//     {
-//         color: '#ff',
-//         value: 25,
-//         number: 50,
-//     },
-//     {
-//         color: '#ff',
-//         value: 100,
-//         number: 50,
-//     },
-//     {
-//         color: '#ff',
-//         value: 1000,
-//         number: 50,
-//     },
-// ]
-
-// console.log(calculator(myChips, 5, 50000));
