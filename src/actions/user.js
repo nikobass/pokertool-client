@@ -25,8 +25,8 @@ export const CHANGE_CONNECTION_INPUT = 'CHANGE_CONNECTION_INPUT';
 export const CHECK_IS_LOGGED= 'CHECK_IS_LOGGED';
 export const LOG_USER = 'LOG_USER';
 export const GET_PROFIL_FROM_API = 'GET_PROFIL_FROM_API';
-export const UPDATE_PROFIL_FROM_API = 'UPDATE_PROFIL_FROM_API'
-
+export const UPDATE_PROFIL_FROM_API = 'UPDATE_PROFIL_FROM_API';
+export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 
 export const toggleModifyProfil = () => ({
   type: TOGGLE_MODIFY_PROFIL,
@@ -139,4 +139,9 @@ export const getProfilFromAPI = () => ({
 export const updateProfilFromAPI = (dataAPI) => ({
   type: UPDATE_PROFIL_FROM_API,
   dataAPI
+})
+
+export const signUpError = (errorAPI) => ({
+  type: SIGN_UP_ERROR,
+  errorAPI
 })

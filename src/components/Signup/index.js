@@ -12,7 +12,8 @@ const Signup = ({
     //Fonction qui gère la modification des inputs: pseudo, email emailConfirm password et passwordConfirm (champs controlés)
 	handleSignUpChange,
 	//Fonction qui gère la soumission des inputs: pseudo, email emailConfirm password et passwordConfirm
-	handleSignUpSubmit
+	handleSignUpSubmit,
+	signUpError,
 }) => {
 	return (
 		<div>
@@ -35,7 +36,7 @@ const Signup = ({
 
 								<label htmlFor="passwordConfirmation" className="inscriptionForm__label">Confirmation du mot de passe</label>
 								<input onChange={ handleSignUpChange } type="password" name="signUpPasswordConfirmInput" className="inscriptionForm__input" />
-
+								{signUpError && <p> { signUpError }</p>}
 								<button type="submit" className="inscriptionForm__submit">Valider</button>
 						</form>
 				)}
@@ -47,6 +48,7 @@ const Signup = ({
 const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
   showSignUpModal: state.user.showSignUpModal,
+  signUpError: state.user.signup.signUpError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -54,8 +56,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(submitSignUpValues(event.target.value, event.target.name))
   },
   handleSignUpSubmit: (event) => {
+	console.log(event);
     event.preventDefault();
-    dispatch(signupSubmit());
+	if (true){
+		dispatch(signupSubmit());
+	}
+    
   },
 });
 
