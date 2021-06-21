@@ -176,6 +176,23 @@
                         display: flex;
                         justify-content: center;
                         flex-wrap: wrap;
+
+                        &__errorTitle{
+                            color: #ee581e;
+                            font-size: 2rem;
+                            font-weight: bold;
+                            margin-top: 2rem;
+                            text-align: center;
+
+                        }
+
+                        &__error{
+                            color: #f2f2f2;
+                            font-size: 1.2rem;
+                            font-weight: bold;
+                            margin-top: 2rem;
+                            text-align: justify;
+                        }
                     }
                 }
         }

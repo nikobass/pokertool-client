@@ -141,6 +141,7 @@ const authMiddleware = (store) => (next) => (action) => {
       .catch(error => console.log(error));
       break;
     }
+    
     default:
       next(action);
       break;

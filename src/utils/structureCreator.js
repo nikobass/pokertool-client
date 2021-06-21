@@ -1,12 +1,12 @@
-function roundnum(num){
-    return Math.round(num / 50)*50;
+function roundnum(num, round){
+    return Math.round(num / round)*round;
     }
 
 const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
 
     const totalChips = nbPlayer * startingStack;
     let stage = 1;
-    let currentSB = smallestChip*2;
+    let currentSB = smallestChip;
     let currentBB = currentSB*2;
     const structure = [{
         stage: stage,
@@ -16,7 +16,7 @@ const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
 
 
     while(currentSB < totalChips/20){
-        currentSB = roundnum(currentSB*1.33);
+        currentSB = roundnum(currentSB*1.5, smallestChip);
         currentBB = currentSB*2;
 
         structure.push({
@@ -25,10 +25,12 @@ const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
             bigBlind: currentBB,
         })
     }
+
+    const duration = (stageTime * structure.length) / 60;
     return {
         structure,
-        'durée aproximative': `Durée aproximative :${Math.round((stageTime * structure.length)/60)} heures`
+        'durée aproximative': `${Math.round(duration*2)/2} heures`
     };
 }
 
-console.log(structureCreator(100, 5, 10000, 20));
+console.log(structureCreator(25, 5, 10000, 20));

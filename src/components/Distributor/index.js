@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './distributor.scss';
+
 import DistributorChipElement from './DistributorChipElement';
 import DistributorResultElement from './DistributorResultElement';
-
-import { addChip, launchDistributor } from 'src/actions/distributor';
+import { 
+    addChip, 
+    launchDistributor, 
+    changeTournamentInfo ,
+    importChips
+} from 'src/actions/distributor';
 
 const Distributor = ({
     nbChips,
@@ -14,14 +19,18 @@ const Distributor = ({
     chips,
     handleLaunchDistributor,
     isResult,
+    handleTournamentInfo,
+    startingStack,
+    nbPlayer,
+    result,
+    handleImportChips
 }) => {
 
-    const children = [];
+    let children = [];
 
-    for (let i = 0; i < nbChips; i++) {
+    for (let i = 0; i < chips.length; i++) {
         children.push(<DistributorChipElement key={i} index={i} />)
     }
-
 
     return (
 
@@ -29,9 +38,9 @@ const Distributor = ({
 
             <h2 className="distributor__form__subtitle">Répartiteur de jetons</h2>
 
-            <form className="distributor__form">
+            <form className="distributor__form" onSubmit={handleLaunchDistributor}>
                 <div className="distributor__form__chips">
-                    <button className="distributor__form__importChips">Importer mes jetons</button>
+                    <button onClick={handleImportChips} type="button" className="distributor__form__importChips">Importer mes jetons</button>
 
                     <div className="distributor__form__container">
                         {
@@ -47,18 +56,14 @@ const Distributor = ({
 
                         <div className="distributor__form__tournament__inputs__container">
                             <label className="distributor__form__tournament__inputs__container__label">Joueurs</label>
-                            <input type="number" className="distributor__form__tournament__inputs__container__input" />
+                            <input onChange={handleTournamentInfo} value={nbPlayer} type="number" name="nbPlayer" className="distributor__form__tournament__inputs__container__input" min="2"/>
                         </div>
                         <div className="distributor__form__tournament__inputs__container">
-                            <label className="distributor__form__tournament__inputs__container__label">Tapis</label>
-                            <input type="number" className="distributor__form__tournament__inputs__container__input" />
-                        </div>
-                        <div className="distributor__form__tournament__inputs__container">
-                            <label className="distributor__form__tournament__inputs__container__label">Petite blind min</label>
-                            <input type="number" className="distributor__form__tournament__inputs__container__input" />
+                            <label className="distributor__form__tournament__inputs__container__label">Tapis de départ</label>
+                            <input onChange={handleTournamentInfo} value={startingStack} type="number" name="startingStack" className="distributor__form__tournament__inputs__container__input" min="1"/>
                         </div>
                     </div >
-                    <button onClick={handleLaunchDistributor} className="distributor__form__calculate">Lancer le répartiteur</button>
+                    <button className="distributor__form__calculate">Lancer le répartiteur</button>
                 </div>
                 {
                 isResult &&
@@ -66,11 +71,19 @@ const Distributor = ({
 
                     <div className="distributor__form__tournament__result">
                         <h2 className="distributor__form__tournament__result__title">Résultat</h2>
-                        <p className="distributor__form__tournament__result__text">Quantité à distribuer par joueur:</p>
+                        {!result.error && <p className="distributor__form__tournament__result__text">Jetons à distribuer à chaque joueur:</p>}
 
                         {/* Ne doit être affiché qu'après le calcul du résultat */}
                         <div className="distributor__form__tournament__result__chips">
-                            {chips.map((chip, i) => <DistributorResultElement key={i} chipColor={chip.color} value={10} />)}
+                            { !result.error 
+                            ? 
+                            result.map((chip, i) => <DistributorResultElement key={i} chipColor={chip.color} number={chip.number} />)
+                            :
+                            <>
+                                <h3 className="distributor__form__tournament__result__chips__errorTitle">CALCUL IMPOSSIBLE</h3>
+                                <p className="distributor__form__tournament__result__chips__error">{result.error}</p>
+                            </>
+                        }
                         </div>
                     </div>
                 </div>}
@@ -80,20 +93,23 @@ const Distributor = ({
     )
 }
 
-Distributor.propTypes = {
-    nbChips: PropTypes.number.isRequired,
-    handleAddChip: PropTypes.func.isRequired,
-    chips: PropTypes.arrayOf(PropTypes.shape({
-        color: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired,
-        number: PropTypes.number.isRequired
-    }).isRequired).isRequired,
-}
+// Distributor.propTypes = {
+//     nbChips: PropTypes.number.isRequired,
+//     handleAddChip: PropTypes.func.isRequired,
+//     chips: PropTypes.arrayOf(PropTypes.shape({
+//         color: PropTypes.string.isRequired,
+//         value: PropTypes.number.isRequired,
+//         number: PropTypes.number.isRequired
+//     }).isRequired).isRequired,
+// }
 
 const mapStateToProps = (state) => ({
     nbChips: state.distributor.nbChips,
     chips: state.distributor.chips,
     isResult: state.distributor.isResult,
+    startingStack: state.distributor.startingStack,
+    nbPlayer: state.distributor.nbPlayer,
+    result: state.distributor.result,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -104,6 +120,13 @@ const mapDispatchToProps = (dispatch) => ({
     handleLaunchDistributor: (event) => {
         event.preventDefault()
         dispatch(launchDistributor())
+    },
+    handleTournamentInfo: (event) => {
+        dispatch(changeTournamentInfo(event.target.value, event.target.name))
+    },
+    handleImportChips: (event) => {
+        event.preventDefault();
+        dispatch(importChips());
     }
 })
 

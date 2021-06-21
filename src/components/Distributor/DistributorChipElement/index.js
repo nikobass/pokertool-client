@@ -13,10 +13,10 @@ import {
 const DistributorChipElement = ({
     color, 
     value, 
-    number, 
+    quantity, 
     handleDistributorFormInput,
     chipColor,
-    handleRemoveChip
+    handleRemoveChip,
 }) => (
     <li className="chipElement">
 
@@ -77,17 +77,17 @@ const DistributorChipElement = ({
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Couleur</label>
-            <input onChange={handleDistributorFormInput} type="color" name="color" className="chipElement__field__inputColor" value={color} />
+            <input onChange={handleDistributorFormInput} type="color" name="color" className="chipElement__field__inputColor" value={color} required/>
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Valeur</label>
-            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber" value={value} />
+            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber" value={value} min="1" required/>
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Nombre</label>
-            <input onChange={handleDistributorFormInput} type="number" name="number" className="chipElement__field__inputNumber" value={number} />
+            <input onChange={handleDistributorFormInput} type="number" name="quantity" className="chipElement__field__inputNumber" value={quantity} min="1" required/>
         </div>
         <Trash2 onClick={handleRemoveChip} className="chipElement__field__logo" />
     </li>
@@ -96,7 +96,7 @@ const DistributorChipElement = ({
 DistributorChipElement.propTypes = {
     color: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired,
-    number: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired,
     handleDistributorFormInput: PropTypes.func.isRequired,
     chipColor: PropTypes.string.isRequired,
     handleRemoveChip: PropTypes.func.isRequired,
@@ -105,15 +105,14 @@ DistributorChipElement.propTypes = {
 const mapStateToProps = (state, ownprops) => {
     return {
         color: state.distributor.chips[ownprops.index].color,
-        value: state.distributor.chips[ownprops.index].value,
-        number: state.distributor.chips[ownprops.index].number,
+        value: parseInt(state.distributor.chips[ownprops.index].value, 10),
+        quantity: parseInt(state.distributor.chips[ownprops.index].quantity, 10),
         chipColor: state.distributor.chips[ownprops.index].color,
     }
 }
 const mapDispatchToProps = (dispatch, ownprops) => {
     return {
     handleDistributorFormInput: (event) => {
-        console.log(event.target.dataset.index)
         dispatch(changeDistributorFormInput(event.target.value, event.target.name, ownprops.index));
     },
     handleRemoveChip: (event) => {
