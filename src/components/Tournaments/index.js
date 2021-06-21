@@ -19,12 +19,16 @@ const Tournaments = ({
   showDeleteTournamentModal,
   submitDeleteTournament,
   handleCloseModal,
+  refreshTournaments,
 }) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getTournamentUser())
-  }, [tournaments]);
+  }, [refreshTournaments]);
 
+
+  const tournamentDetail = tournaments.find( e => e === e.id)
 
   return (
     <div className="tournaments-container">
@@ -92,15 +96,15 @@ const Tournaments = ({
                 nbPlayers={tournament.nb_players}
                 
                 />
-                
-             
             </li>
+            
         
 
           ))
         }
       </ul>
       <TournamentDetails 
+      
       />
       <Modal
       isOpen={ showDeleteTournamentModal}
@@ -138,6 +142,7 @@ Tournaments.defaultProps = {
 const mapStateToProps = (state) => ({
   tournaments : state.tournament.tournamentList,
   showDeleteTournamentModal : state.tournament.openDeleteModal,
+  refreshTournaments: state.tournament.refreshTournaments,
  
 
 })
@@ -149,7 +154,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(hideModalDelete());
   },
 
-  submitDeleteTournament: (event) => {
+  submitDeleteTournament: () => {
    
     dispatch(deleteTournamentUser())
   }

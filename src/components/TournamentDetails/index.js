@@ -10,9 +10,11 @@ import 'src/components/TournamentDetails/tournamentDetails.scss'
 
 const TournamentDetails = ({
   openDetailsModal,
+  
+
 } ) => {
 
-    
+ 
   return (
    
       <Modal
@@ -21,6 +23,7 @@ const TournamentDetails = ({
       content={(
      
         <div className="tournament-containerDetail">
+          
          
           <p>Nom du tournoi: </p>
           <br/>
@@ -54,13 +57,10 @@ const TournamentDetails = ({
 };
 
 
-
-
 const mapStateToProps = (state) => ({
 	openDetailsModal: state.tournament.openDetailsModal,
- 
+  
 });
-
 
 export default connect (mapStateToProps)(TournamentDetails);
 

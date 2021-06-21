@@ -5,7 +5,10 @@ import {
   GET_TOURNAMENTS_SUCCESS,
   OPEN_MODAL_TOURNAMENT_DELETE,
   DELETE_TOURNAMENT_USER,
-  DELETE_TOURNAMENT_SUCCESS
+  DELETE_TOURNAMENT_SUCCESS,
+  GET_ONE_TOURNAMENT_USER,
+  GET_ONE_TOURNAMENT_USER_SUCCESS
+
 } from 'src/actions/tournament'
 
 import {
@@ -18,8 +21,7 @@ const initialState = {
   tournamentList : [],
   loading: false,
   currentId: null,
-
-
+  refreshTournaments: false,
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -28,6 +30,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         openDetailsModal: true,
+        currentId: action.currentId
       }
       case OPEN_MODAL_TOURNAMENT_DELETE:
         return{
@@ -53,9 +56,21 @@ const reducer = (state = initialState, action = {}) => {
             ...state,
             // copie les tounois dans la tournamentList
             tournamentList: action.tournaments,
-          
-            loading: false
+            loading: false,
+            refreshTournaments: false,
           }  
+          case GET_ONE_TOURNAMENT_USER :
+            return {
+              ...state,
+              loading: true,
+            }
+          case GET_ONE_TOURNAMENT_USER_SUCCESS:
+            return {
+              ...state,
+              loading: false,
+              tournamentList: action.tournaments
+
+            }
           /************************* POST Tournaments ******************************/
 
 
@@ -70,11 +85,8 @@ const reducer = (state = initialState, action = {}) => {
           case DELETE_TOURNAMENT_SUCCESS:
             return{
               ...state,
-              tournamentList: [
-                ...state.tournamentList,
-              ],
-              openDeleteModal: false
-
+              openDeleteModal: false,
+              refreshTournaments: true,
             }  
       default :
       return state;

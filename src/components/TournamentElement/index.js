@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
   tournamentDetailsModal,
   tournamentDeleteModal,
+  getOneTournamentUser
 } from 'src/actions/tournament';
 
 import './tournamentElement.scss'
@@ -18,7 +19,6 @@ const TournamentElement = ({
   buyIn,
   statut,
   date,
-  currentId,
   handleTournamentDetails,
   handleTournamentDelete,
   
@@ -81,12 +81,12 @@ TournamentElement.propTypes = {
 }
 
 
-
-
-
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
-    dispatch(tournamentDetailsModal())
+    dispatch(tournamentDetailsModal(ownprops.currentId))
+    {console.log(ownprops.currentId)}
+    dispatch(getOneTournamentUser())
+   
   },
   handleTournamentDelete: () => {
     dispatch(tournamentDeleteModal(ownprops.currentId));
