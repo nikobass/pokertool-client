@@ -22,6 +22,7 @@ import {
   UPDATE_PROFIL_FROM_API,
   SUBMIT_PROFIL_SUCCESS,
   SIGN_UP_ERROR,
+  SIGN_UP_SUBMIT_CONFIRM_ERROR,
 } from 'src/actions/user';
 
 const initialState = {
@@ -223,6 +224,15 @@ const reducer = (state = initialState, action = {}) => {
                       signUpError: action.errorAPI
                     }
                   }
+                  case SIGN_UP_SUBMIT_CONFIRM_ERROR:
+                    return {
+                      ...state,
+                      signup: {
+                        ...state.signup,
+                      signUpError: action.confirmMailPasswordError
+                      }
+
+                    }
                 default:
                   return state;
   }

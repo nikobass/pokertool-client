@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './signup.scss';
-import { signupSubmit, submitSignUpValues } from '../../actions/user';
+import { signupSubmit, submitSignUpValues, signupSubmitConfirmError } from '../../actions/user';
 // import { showSignUpModal } from 'src/actions/user.js';
 
-const Signup = ({ 
+const Signup = ({
 	showSignUpModal,
     //Fonction qui gère la modification des inputs: pseudo, email emailConfirm password et passwordConfirm (champs controlés)
 	handleSignUpChange,
@@ -60,18 +60,18 @@ const mapDispatchToProps = (dispatch) => ({
     event.preventDefault();
 	if ( event.target.email.value === event.target.signUpEmailConfirmInput.value
 		& event.target.password.value === event.target.signUpPasswordConfirmInput.value) {
-		console.log("La confirmation du mail correspond au mail; La confirmation du password correspond au password ");
+		
 		dispatch(signupSubmit());
 	}
 	else {
-		console.log("Il y a une erreur dans les confirmations de mail ou de password!");
-		// dispatch(signupSubmitError());
+		let errorEmailPassword = 'Les deux mails ou les deux mots de passe ne corespondent pas. Veuillez corriger.';
+		dispatch(signupSubmitConfirmError(errorEmailPassword));
 	}
   },
 });
 
 Signup.propTypes = {
   showSignUpModal: PropTypes.bool.isRequired,
-}
+};
 
-export default connect (mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
