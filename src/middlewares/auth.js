@@ -107,7 +107,6 @@ const authMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
       .then((response) => {
-        console.log(response);
         store.dispatch(updateProfilFromAPI(response.data))
       })
       .catch(error => console.log(error));

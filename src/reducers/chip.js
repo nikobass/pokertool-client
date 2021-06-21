@@ -1,35 +1,42 @@
 import {
-  CHANGE_CHIP_INPUT
+  CHANGE_CHIP_INPUT,
+  ADD_CHIP,
+  GET_CHIPS_SUCCESS
 } from 'src/actions/chip';
 
 const initialState = { 
-  chips: [
-    {   
-      color: '#e66465',
-      value: 5,
-      quantity: 10
-    },
-    {
-      color: '#e62144',
-      value: 666,
-      quantity: 69
-    },
-  ],
+  chips: [],
+  nbChips: null
 }
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_CHIP_INPUT:
-      const index = state.chips.findIndex(chip => chip);
-      console.log('index', index);
+    case ADD_CHIP:
       return {
         ...state,
-        chips: [         
-          { 
-            ...state.chips[0], 
-            [action.inputName]: action.newInputValue 
-          }         
-        ]      
+        nbChips: state.chips.length + 1,
+        chips: [
+            ...state.chips,
+            {
+                color:'#00000',
+                value: 0,
+                quantity: 0,
+            }
+        ]
+    }
+    case CHANGE_CHIP_INPUT:
+      return {
+        ...state,
+        chips: state.chips.map(
+            (chip, i) => i == action.index 
+            ? {...chip, [action.inputName]:action.newInputValue} 
+            : chip
+        )
+    }
+    case GET_CHIPS_SUCCESS:
+      return {
+        ...state,
+        chips: action.chipsFromAPI
       }
     default:
       return state;

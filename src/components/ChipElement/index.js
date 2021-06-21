@@ -5,9 +5,9 @@ import {changeChipInput} from 'src/actions/chip.js';
 import './chipelement.scss';
 
 const ChipElement = ({
-  currentChipColor,
-  currentChipValue,
-  currentChipQuantity,
+  color,
+  value,
+  quantity,
   handleInputChipChange
 }) => (
   <>    
@@ -15,43 +15,42 @@ const ChipElement = ({
     <input 
       type="color"
       name="color" 
-      value={currentChipColor}
+      value={color}
       onChange={handleInputChipChange}
     />  
     <label htmlFor="value">Valeur</label>
     <input 
       type="number"
       name="value" 
-      value={currentChipValue}
+      value={value}
       onChange={handleInputChipChange}
     />
     <label htmlFor="quantity">Quantitée</label>
     <input 
       type="number"
       name="quantity" 
-      value={currentChipQuantity}
+      value={quantity}
       onChange={handleInputChipChange}
     />
     <br />
   </>
 );
 
-const mapStateToProps = (state) => {
-  let i=0;
-  console.log(state.chip.chips);
-  // for (i=0; i < state.chip.chips.length; i++) {
-  //   return ({
-  //     currentChipColor: state.chip.chips[i].color,
-  //     currentChipValue: state.chip.chips[i].value,
-  //     currentChipQuantity: state.chip.chips[i].quantity
-  //   })
-  // }
+const mapStateToProps = (state, ownprops) => {
+  return {
+    color: state.chip.chips[ownprops.index].color,
+    value: state.chip.chips[ownprops.index].value,
+    quantity: state.chip.chips[ownprops.index].quantity,
+    // chipColor: state.chips.chips[ownprops.index].color
+  }
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownprops) => ({
   handleInputChipChange: (event) => {
-    dispatch(changeChipInput(event.target.value, event.target.name));
+    console.log(ownprops.index)
+    dispatch(changeChipInput(event.target.value, event.target.name, ownprops.index));
   }
+  
 });
 
 
