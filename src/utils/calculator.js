@@ -53,20 +53,18 @@ export const calculator = (chips, nbPlayer, startingStack) => {
 
     });
 
-    while (chipNumber > startingStack) {
+    if(chipNumber > startingStack) {
 
         let diff = chipNumber - startingStack;
         result.reverse();
 
         result.forEach(chip => {
-            while (chip.value <= diff) {
-                if (chip.value <= diff) {
-                    console.log(chipNumber)
-                    console.log(chip.value)
+            while (chip.value <= diff && chip.quantity > 0){
+                console.log("total : ", chipNumber, " je retire : ", chip.value )
                     chipNumber -= chip.value;
                     diff = chipNumber - startingStack;
                     chip.quantity -= 1;
-                }
+                    console.log(result)
             }
         })
         result.reverse();
@@ -80,7 +78,10 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         result.error = error;
         return result
     } else {
-        error = "Un problème est survenu. Veuillez vérifier vos saisies et relancer le répartiteur."
+        error = "Impossible d'atteindre le montant du tapis de départ avec la valeur des jetons actuelles. Vérifiez la valeur des jetons et/ou le tapis de départ."
+        result = {};
+        result.error = error;
+        return result
     }
 }
 }

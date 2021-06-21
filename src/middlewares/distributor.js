@@ -22,7 +22,7 @@ const distributorMiddleware = (store) => (next) => (action) => {
                 console.log(response);
                 store.dispatch(importChipsSuccess(response.data))
               })
-              .catch(error => console.log(error));
+              .catch(error => console.log(error.response.data.message));
 
             break;
 
