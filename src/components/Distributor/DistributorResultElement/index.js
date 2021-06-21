@@ -5,7 +5,7 @@ import './distributorResultElement.scss';
 
 const DistributorResultElement = ({
     chipColor,
-    number
+    quantity
 }) => (
 
 <div className="element">
@@ -63,7 +63,7 @@ c17.789-3.467,34.585-12.651,47.394-27.342l36.121,31.409C233.154,252.087,214.257,
     <g>
     </g>
 </svg>
-<h3 className="element__value">{number}</h3>
+<h3 className="element__value">{quantity}</h3>
 </div>
 )
 

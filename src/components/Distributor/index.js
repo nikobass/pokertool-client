@@ -77,7 +77,7 @@ const Distributor = ({
                         <div className="distributor__form__tournament__result__chips">
                             { !result.error 
                             ? 
-                            result.map((chip, i) => <DistributorResultElement key={i} chipColor={chip.color} number={chip.number} />)
+                            result.map((chip, i) => <DistributorResultElement key={i} chipColor={chip.color} quantity={chip.quantity} />)
                             :
                             <>
                                 <h3 className="distributor__form__tournament__result__chips__errorTitle">CALCUL IMPOSSIBLE</h3>

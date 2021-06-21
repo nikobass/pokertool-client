@@ -9,6 +9,8 @@ export const calculator = (chips, nbPlayer, startingStack) => {
 
     const isChipTooBig = chips.find(chip => chip.value > startingStack);
 
+
+
     // je vérifie si il y a deux couleurs identiques
     if(checkForDuplicates(chips, 'color')){
         error = "Plusieurs jetons ont la même couleur. Veuillez vérifier votre saisie."
@@ -45,7 +47,7 @@ export const calculator = (chips, nbPlayer, startingStack) => {
             result.push({
                 color: chip.color,
                 value: chip.value,
-                number: tries,
+                quantity: tries,
             })
         }
 
@@ -59,6 +61,8 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         result.forEach(chip => {
             while (chip.value <= diff) {
                 if (chip.value <= diff) {
+                    console.log(chipNumber)
+                    console.log(chip.value)
                     chipNumber -= chip.value;
                     diff = chipNumber - startingStack;
                     chip.quantity -= 1;
@@ -68,7 +72,7 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         result.reverse();
     }
 
-    if (chipNumber == startingStack) {
+    if (chipNumber === startingStack) {
         return result;
     } else if (chipNumber < startingStack) {
         error = "Les valeurs saisies ne permettent pas d'atteindre le tapis de départ. Veuillez augmenter la valeur des jetons ou réduire la tapis de départ. Il est recommandé de prévoir entre 50 et 200 big blinds pour le tapis de départ."
