@@ -56,12 +56,17 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(submitSignUpValues(event.target.value, event.target.name))
   },
   handleSignUpSubmit: (event) => {
-	console.log(event);
+	
     event.preventDefault();
-	if (true){
+	if ( event.target.email.value === event.target.signUpEmailConfirmInput.value
+		& event.target.password.value === event.target.signUpPasswordConfirmInput.value) {
+		console.log("La confirmation du mail correspond au mail; La confirmation du password correspond au password ");
 		dispatch(signupSubmit());
 	}
-    
+	else {
+		console.log("Il y a une erreur dans les confirmations de mail ou de password!");
+		// dispatch(signupSubmitError());
+	}
   },
 });
 
