@@ -26,6 +26,8 @@ export const CHECK_IS_LOGGED= 'CHECK_IS_LOGGED';
 export const LOG_USER = 'LOG_USER';
 export const GET_PROFIL_FROM_API = 'GET_PROFIL_FROM_API';
 export const UPDATE_PROFIL_FROM_API = 'UPDATE_PROFIL_FROM_API';
+export const UPDATE_PROFIL_ERROR= 'UPDATE_PROFIL_ERROR';
+
 export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 export const SIGN_UP_SUBMIT_CONFIRM_ERROR = 'SIGN_UP_SUBMIT_CONFIRM_ERROR';
 
@@ -142,6 +144,10 @@ export const updateProfilFromAPI = (dataAPI) => ({
   dataAPI
 })
 
+export const UpdateProfilError = (errorMsg) => ({
+  type: UPDATE_PROFIL_ERROR,
+  errorMsg
+})
 export const signUpError = (errorAPI) => ({
   type: SIGN_UP_ERROR,
   errorAPI

@@ -13,6 +13,7 @@ import {
   updateProfilFromAPI,
   submitProfilSuccess,
   loginError,
+  UpdateProfilError,
   signUpError,
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
@@ -108,6 +109,7 @@ const authMiddleware = (store) => (next) => (action) => {
         })
         .catch(err => {
           console.log(err.response.data.message)
+          store.dispatch(UpdateProfilError(err.response.data.message))
         });
 
       break;
@@ -117,7 +119,6 @@ const authMiddleware = (store) => (next) => (action) => {
 
       const token = localStorage.getItem('token');
       if(token){
-        console.log(token)
         store.dispatch(logUser())
       }
       break;

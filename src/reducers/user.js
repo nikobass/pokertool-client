@@ -21,6 +21,7 @@ import {
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
   SUBMIT_PROFIL_SUCCESS,
+  UPDATE_PROFIL_ERROR,
   SIGN_UP_ERROR,
   SIGN_UP_SUBMIT_CONFIRM_ERROR,
 } from 'src/actions/user';
@@ -40,7 +41,8 @@ const initialState = {
     modifying: false,
     nickname: '',
     email: '',
-    password: ''
+    password: '',
+    errorMessage: null
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -68,20 +70,32 @@ const reducer = (state = initialState, action = {}) => {
           modifying: true,
         }
       }
-      // action qui gère la modification des inputs du profil
-      case CHANGE_INPUT_VALUE:
-        return {
-          ...state,
-          // On modifie le state selon le champ modifié par l'utilisateur
-          // Cela évite de coder 3 fonctions pour chaque input.
-          // [action.inputName] modifie donc dans le state soit: nickname, email ou password
-          // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
-          profil: {
-            ...state.profil,
-            modifying: true,
-            [action.inputName]: action.newInputValue
-          }
+    // action qui gère la modification des inputs du profil
+    case CHANGE_INPUT_VALUE:
+      return {
+        ...state,
+        // On modifie le state selon le champ modifié par l'utilisateur
+        // Cela évite de coder 3 fonctions pour chaque input.
+        // [action.inputName] modifie donc dans le state soit: nickname, email ou password
+        // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
+        profil: {
+          ...state.profil,
+          modifying: true,
+          [action.inputName]: action.newInputValue
         }
+      }
+    case CHANGE_CONNECTION_INPUT:
+      return {
+        ...state,
+        [action.inputName]: action.newInputValue
+      }
+    case RESET_PROFIL_MODIF:
+      return {
+        ...state,
+        profil: {
+          modifying: false
+        }
+      }
         case CHANGE_CONNECTION_INPUT:
           return {
             ...state,
@@ -206,11 +220,20 @@ const reducer = (state = initialState, action = {}) => {
                 return {
                   ...state,
                   profil: {
+                    ...state.profil,
                     modifying: false,
                     nickname: action.dataAPI.user_name,
                     email: action.dataAPI.email,
                   }
                 }
+                case UPDATE_PROFIL_ERROR:
+                  return {
+                    ...state,
+                    profil: {
+                      ...state.profil,
+                      errorMessage: action.errorMsg
+                    }
+                  }
               case LOGIN_ERROR:
                 return {
                   ...state,
