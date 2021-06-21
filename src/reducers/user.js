@@ -20,7 +20,10 @@ import {
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
-  SUBMIT_PROFIL_SUCCESS
+  SUBMIT_PROFIL_SUCCESS,
+  UPDATE_PROFIL_ERROR,
+  SIGN_UP_ERROR,
+  SIGN_UP_SUBMIT_CONFIRM_ERROR,
 } from 'src/actions/user';
 
 const initialState = {
@@ -38,7 +41,8 @@ const initialState = {
     modifying: false,
     nickname: '',
     email: '',
-    password: ''
+    password: '',
+    errorMessage: null
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -51,7 +55,7 @@ const initialState = {
     nickname: null,
     email: null,
     password: null,
-
+    signUpError: null,
   }
 }
 
@@ -66,20 +70,32 @@ const reducer = (state = initialState, action = {}) => {
           modifying: true,
         }
       }
-      // action qui gère la modification des inputs du profil
-      case CHANGE_INPUT_VALUE:
-        return {
-          ...state,
-          // On modifie le state selon le champ modifié par l'utilisateur
-          // Cela évite de coder 3 fonctions pour chaque input.
-          // [action.inputName] modifie donc dans le state soit: nickname, email ou password
-          // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
-          profil: {
-            ...state.profil,
-            modifying: true,
-            [action.inputName]: action.newInputValue
-          }
+    // action qui gère la modification des inputs du profil
+    case CHANGE_INPUT_VALUE:
+      return {
+        ...state,
+        // On modifie le state selon le champ modifié par l'utilisateur
+        // Cela évite de coder 3 fonctions pour chaque input.
+        // [action.inputName] modifie donc dans le state soit: nickname, email ou password
+        // Pour mieux comprendre se référer au composant Profil -> action.inputName correspond à event.target.name
+        profil: {
+          ...state.profil,
+          modifying: true,
+          [action.inputName]: action.newInputValue
         }
+      }
+    case CHANGE_CONNECTION_INPUT:
+      return {
+        ...state,
+        [action.inputName]: action.newInputValue
+      }
+    case RESET_PROFIL_MODIF:
+      return {
+        ...state,
+        profil: {
+          modifying: false
+        }
+      }
         case CHANGE_CONNECTION_INPUT:
           return {
             ...state,
@@ -168,54 +184,80 @@ const reducer = (state = initialState, action = {}) => {
                   ...state,
                   showDeleteAccountModal: false,
                 }
-                case DELETE_SUCCESS:
+              case DELETE_SUCCESS:
+                return {
+                  ...state,
+                  isLogged: false,
+                }
+              case LOGIN_SUCCESS:
+                return {
+                  ...state,
+                  nickname: action.apiData.nickname,
+                    isLogged: true,
+                    showConnectionModal: false,
+                    loginError: null
+                };
+              case LOGOUT:
+                return {
+                  ...state,
+                  isLogged: false
+                }
+              case LOG_USER:
+                return {
+                  ...state,
+                  isLogged: true
+                }
+              case SUBMIT_PROFIL_SUCCESS:
+                return {
+                  ...state,
+                  profil: {
+                    ...state.profil,
+                    modifying: false
+                  }
+                }
+
+              case UPDATE_PROFIL_FROM_API:
+                return {
+                  ...state,
+                  profil: {
+                    ...state.profil,
+                    modifying: false,
+                    nickname: action.dataAPI.user_name,
+                    email: action.dataAPI.email,
+                  }
+                }
+                case UPDATE_PROFIL_ERROR:
                   return {
                     ...state,
-                    isLogged: false,
-                  }
-                  case LOGIN_SUCCESS:
-                    return {
-                      ...state,
-                      nickname: action.apiData.nickname,
-                        isLogged: true,
-                        showConnectionModal: false,
-                        loginError: null
-                    };
-                  case LOGOUT:
-                    return {
-                      ...state,
-                      isLogged: false
+                    profil: {
+                      ...state.profil,
+                      errorMessage: action.errorMsg
                     }
-                    case LOG_USER:
-                      return {
-                        ...state,
-                        isLogged: true
+                  }
+              case LOGIN_ERROR:
+                return {
+                  ...state,
+                  loginError: action.errorMsg
+                }
+                case SIGN_UP_ERROR:
+                  return {
+                    ...state,
+                    signup: {
+                      ...state.signup,
+                      signUpError: action.errorAPI
+                    }
+                  }
+                  case SIGN_UP_SUBMIT_CONFIRM_ERROR:
+                    return {
+                      ...state,
+                      signup: {
+                        ...state.signup,
+                      signUpError: action.confirmMailPasswordError
                       }
-                      case SUBMIT_PROFIL_SUCCESS:
-                        return {
-                          ...state,
-                          profil: {
-                            ...state.profil,
-                            modifying: false
-                          }
-                        }
 
-                        case UPDATE_PROFIL_FROM_API:
-                          return {
-                            ...state,
-                            profil: {
-                              modifying: false,
-                              nickname: action.dataAPI.user_name,
-                              email: action.dataAPI.email,
-                            }
-                          }
-                          case LOGIN_ERROR:
-                            return {
-                              ...state,
-                              loginError: action.errorMsg
-                            }
-                            default:
-                              return state;
+                    }
+                default:
+                  return state;
   }
 };
 
