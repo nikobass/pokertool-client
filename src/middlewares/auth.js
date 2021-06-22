@@ -77,8 +77,7 @@ const authMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then(() => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('userId');
+          localStorage.clear();      
           store.dispatch(deleteUserAccountSucces());
         })
         .catch((error) => console.log(error));
