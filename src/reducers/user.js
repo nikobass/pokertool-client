@@ -21,7 +21,9 @@ import {
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
   SUBMIT_PROFIL_SUCCESS,
-  UPDATE_PROFIL_ERROR
+  UPDATE_PROFIL_ERROR,
+  SIGN_UP_ERROR,
+  SIGN_UP_SUBMIT_CONFIRM_ERROR,
 } from 'src/actions/user';
 
 const initialState = {
@@ -40,7 +42,7 @@ const initialState = {
     nickname: '',
     email: '',
     password: '',
-    errorMessage: null
+    errorMessage: null,
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -53,7 +55,7 @@ const initialState = {
     nickname: null,
     email: null,
     password: null,
-
+    signUpError: null,
   }
 }
 
@@ -87,7 +89,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.inputName]: action.newInputValue
       }
-
+      
     case RESET_PROFIL_MODIF:
       return {
         ...state,
@@ -95,12 +97,7 @@ const reducer = (state = initialState, action = {}) => {
           modifying: false
         }
       }
-
-    case CHANGE_CONNECTION_INPUT:
-          return {
-            ...state,
-            [action.inputName]: action.newInputValue
-          }
+      
         case RESET_PROFIL_MODIF:
           return {
             ...state,
@@ -155,19 +152,11 @@ const reducer = (state = initialState, action = {}) => {
                   ...state,
                   showConnectionModal: true
                 };
-
+      
     case SHOW_UNAUTHORIZED_MODAL:
       return {
         ...state,
         showUnauthorizedModal: true,
-      };
-    case HIDE_MODAL:
-      return {
-        ...state,
-        showConnectionModal: false,
-        showUnauthorizedModal: false,
-        showDeleteAccountModal: false,
-        loginError: null
       };
     case CHANGE_OPEN_FORM:
       return {
@@ -189,14 +178,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
       }
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        nickname: action.apiData.nickname,
-        isLogged: true,
-        showConnectionModal: false,
-        loginError: null
-      };
     case LOGOUT:
       return {
         ...state,
@@ -240,8 +221,25 @@ const reducer = (state = initialState, action = {}) => {
         loginError: action.errorMsg
       }
 
-    default:
-      return state;
+                case SIGN_UP_ERROR:
+                  return {
+                    ...state,
+                    signup: {
+                      ...state.signup,
+                      signUpError: action.errorAPI
+                    }
+                  }
+                  case SIGN_UP_SUBMIT_CONFIRM_ERROR:
+                    return {
+                      ...state,
+                      signup: {
+                        ...state.signup,
+                      signUpError: action.confirmMailPasswordError
+                      }
+
+                    }
+                default:
+                  return state;
   }
 };
 

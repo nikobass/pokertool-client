@@ -11,7 +11,8 @@ import { connect } from 'react-redux';
 import './home.scss';
 
 
-const Home = ({ handleSignUpForm}) => {
+
+const Home = ({handleSignUpForm}) => {
 
   return (
     <div className='main'>
