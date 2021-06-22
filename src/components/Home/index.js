@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import './home.scss';
 
 
+
 const Home = ({handleSignUpForm}) => {
 
   return (
@@ -26,8 +27,6 @@ const Home = ({handleSignUpForm}) => {
         </button>
       </div>
       <Signup/>
-      {/* {!openFormSignup //todo component signup  
-    } */}
     </div>
   );
 };
