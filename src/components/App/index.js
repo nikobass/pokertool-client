@@ -19,6 +19,7 @@ import Tournaments from 'src/components/Tournaments'
 import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
 import { connect } from 'react-redux';
+import Distributor from '../Distributor';
 
 
 const App = ({ isLogged }) => {
@@ -54,6 +55,11 @@ const App = ({ isLogged }) => {
         <Route exact path="/faq">
           <Header />
           <Faq />
+          <Footer />
+        </Route>
+        <Route exact path="/distributor">
+          <Header />
+          <Distributor />
           <Footer />
         </Route>
         <Route path="/resetPassword">

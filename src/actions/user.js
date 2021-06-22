@@ -1,5 +1,4 @@
 export const SIGN_UP_FORM = 'SIGN_UP_FORM';
-
 export const CHANGE_OPEN_FORM = 'CHANGE_OPEN_FORM';
 export const TOGGLE_MODIFY_PROFIL = 'TOGGLE_MODIFY_PROFIL';
 export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE';
@@ -148,6 +147,7 @@ export const UpdateProfilError = (errorMsg) => ({
   type: UPDATE_PROFIL_ERROR,
   errorMsg
 })
+
 export const signUpError = (errorAPI) => ({
   type: SIGN_UP_ERROR,
   errorAPI
