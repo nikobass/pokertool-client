@@ -42,7 +42,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           headers: { "Authorization": `Bearer ${token}` }
         })
         .then((response) => {
-          store.dispatch(getOneTournamentUserSuccess());
+          store.dispatch(getOneTournamentUserSuccess(response.data));
+          console.log(response.data)
         })
         .catch((error) => console.log(error));
       break;

@@ -22,6 +22,7 @@ const initialState = {
   loading: false,
   currentId: null,
   refreshTournaments: false,
+  oneTournament:[],
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -68,7 +69,7 @@ const reducer = (state = initialState, action = {}) => {
             return {
               ...state,
               loading: false,
-              tournamentList: action.tournaments
+              oneTournament: action.tournaments
 
             }
           /************************* POST Tournaments ******************************/

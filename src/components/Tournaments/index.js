@@ -4,7 +4,6 @@ import {ChevronDown} from 'react-feather';
 import {
   getTournamentUser,
   deleteTournamentUser,
-  tournamentDeleteModal,
   hideModalDelete,
   } from 'src/actions/tournament';
 import Modal from 'src/components/Modal'
@@ -20,6 +19,7 @@ const Tournaments = ({
   submitDeleteTournament,
   handleCloseModal,
   refreshTournaments,
+  oneTournament
 }) => {
   const dispatch = useDispatch();
 
@@ -27,8 +27,6 @@ const Tournaments = ({
     dispatch(getTournamentUser())
   }, [refreshTournaments]);
 
-
-  const tournamentDetail = tournaments.find( e => e === e.id)
 
   return (
     <div className="tournaments-container">
@@ -103,9 +101,12 @@ const Tournaments = ({
           ))
         }
       </ul>
+      {!oneTournament &&(
       <TournamentDetails 
       
-      />
+      /> )
+      }
+      
       <Modal
       isOpen={ showDeleteTournamentModal}
       title='Supprimer un tournoi'
