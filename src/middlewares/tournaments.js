@@ -6,7 +6,10 @@ import {
   DELETE_TOURNAMENT_USER,
   deleteTournamentSucces,
   getOneTournamentUserSuccess,
-  GET_ONE_TOURNAMENT_USER 
+  GET_ONE_TOURNAMENT_USER ,
+  tournamentSubmitSuccess,
+  TOURNAMENT_SUBMIT,
+
 
 } from 'src/actions/tournament';
 
@@ -63,6 +66,39 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             store.dispatch(deleteTournamentSucces(tournamentId));
           })
           .catch((error) => console.log(error));
+        break;
+      }
+
+      case TOURNAMENT_SUBMIT: {
+        const state = store.getState();
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+  
+        axios ({
+          method: 'post',
+          url: `http://localhost:3000/tournament/${userId}`,
+          headers: { "Authorization": `Bearer ${token}` },
+          data: {
+            name: state.tournament.creatTournament.name,
+            date: state.tournament.creatTournament.date,
+            location: state.tournament.creatTournament.location,
+            speed:state.tournament.creatTournament.speed,
+            nb_players:state.tournament.creatTournament.nb_players,
+            comments:state.tournament.creatTournament.comments,
+            cash_price:state.tournament.creatTournament.cash_price,
+            buy_in:state.tournament.creatTournament.buy_in,
+            starting_stack: state.tournament.creatTournament.starting_stack,
+          },
+        })
+          .then(response => {
+            console.log(response.data);
+            console.log('test')
+            store.dispatch(tournamentSubmitSuccess(response.data));
+            
+          })
+          .catch((err) => {          
+            console.log(err.response.data.message);
+          });
         break;
       }
 

@@ -8,6 +8,10 @@ export const SHOW_DELETE_TOURNAMENT_MODAL = 'SHOW_DELETE_TOURNAMENT_MODAL'
 export const OPEN_MODAL_TOURNAMENT_DELETE = 'OPEN_MODAL_TOURNAMENT_DELETE'
 export const GET_ONE_TOURNAMENT_USER = 'GET_ONE_TOURNAMENT_USER'
 export const GET_ONE_TOURNAMENT_USER_SUCCESS ='GET_ONE_TOURNAMENT_USER_SUCCESS'
+export const SHOW_CREATE_TOURNAMENT_MODAL = 'SHOW_CREATE_TOURNAMENT_MODAL';
+export const SUBMIT_CREAT_TOURNAMENT_VALUES = 'SUBMIT_CREAT_TOURNAMENT_VALUES'
+export const TOURNAMENT_SUBMIT = 'TOURNAMENT_FORM'
+export const TOURNAMENT_SUBMIT_SUCCESS = 'TOURNAMENT_SUBMIT_SUCCESS'
 
 import {HIDE_MODAL} from './user'
 
@@ -24,6 +28,13 @@ export const tournamentDeleteModal = (currentId) => ({
   type : OPEN_MODAL_TOURNAMENT_DELETE,
   currentId
 })
+
+
+
+export const createTournamentModal = () => ({
+  type: SHOW_CREATE_TOURNAMENT_MODAL
+});
+
 
 /************************* GET Tournaments ******************************/
 
@@ -52,7 +63,21 @@ export const getOneTournamentUserSuccess = (tournaments) => ({
 
 /************************* POST Tournaments ******************************/
 
+// envoie du form
+export const tournamentSubmit = () => ({
+  type : TOURNAMENT_SUBMIT,
+})
 
+// recupère les infos des inputs
+export const submitCreatTournamentValues = (newInputValue, inputName ) => ({
+  type: SUBMIT_CREAT_TOURNAMENT_VALUES,
+  newInputValue,
+  inputName,
+});
+
+export const tournamentSubmitSuccess = () => ({
+  type : TOURNAMENT_SUBMIT_SUCCESS
+})
 
 
 /************************* DELETE Tournaments ******************************/

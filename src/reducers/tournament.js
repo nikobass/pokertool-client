@@ -7,7 +7,11 @@ import {
   DELETE_TOURNAMENT_USER,
   DELETE_TOURNAMENT_SUCCESS,
   GET_ONE_TOURNAMENT_USER,
-  GET_ONE_TOURNAMENT_USER_SUCCESS
+  GET_ONE_TOURNAMENT_USER_SUCCESS,
+  SHOW_CREATE_TOURNAMENT_MODAL,
+  TOURNAMENT_SUBMIT_SUCCESS,
+  TOURNAMENT_SUBMIT,
+  SUBMIT_CREAT_TOURNAMENT_VALUES,
 
 } from 'src/actions/tournament'
 
@@ -23,6 +27,20 @@ const initialState = {
   currentId: null,
   refreshTournaments: false,
   oneTournament:[],
+  showCreateTournamentModal: false,
+  creatTournament: {
+    name: null,
+    date: null,
+    location: null,
+    speed: null,
+    nb_players: null,
+    buy_in: null,
+    cash_price: null,
+    status: null,
+    comments: null,
+    starting_stack: null,
+
+  }
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -44,8 +62,14 @@ const reducer = (state = initialState, action = {}) => {
           return{
             ...state,
             openDetailsModal: false,
-            openDeleteModal: false
+            openDeleteModal: false,
+            showCreateTournamentModal: false
           }
+        case SHOW_CREATE_TOURNAMENT_MODAL:
+      return {
+        ...state,
+        showCreateTournamentModal: true
+      }
           /************************* GET Tournaments ******************************/
         case GET_TOURNAMENTS_ALL_USER :
           return{
@@ -73,7 +97,20 @@ const reducer = (state = initialState, action = {}) => {
 
             }
           /************************* POST Tournaments ******************************/
-
+          case SUBMIT_CREAT_TOURNAMENT_VALUES:
+                return {
+                  ...state,
+                  creatTournament: {
+                    ...state.creatTournament,
+                    [action.inputName]: action.newInputValue,
+                  }
+                };
+          case TOURNAMENT_SUBMIT_SUCCESS:
+                return {
+                    ...state,
+                    showCreateTournamentModal: false,
+                    refreshTournaments: true
+                  };
 
 
           /************************* DELETE Tournaments ******************************/
