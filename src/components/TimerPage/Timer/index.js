@@ -4,7 +4,15 @@ import { connect } from 'react-redux';
 
 import './timer.scss';
 
-const Timer = ({ minute, seconde, stage }) => (
+import { toggleTimer } from 'src/actions/timer';
+
+const Timer = ({ 
+    minute, 
+    seconde, 
+    stage, 
+    isLaunch, 
+    handleToggleTimer,
+}) => (
 
     <div className="timer">
         <div className="timer__reset">
@@ -33,8 +41,12 @@ const Timer = ({ minute, seconde, stage }) => (
             </div>
         </div>
         <div className="timer__play">
-            <Play size={50} className="icon"/>
-            {/* <Pause /> */}
+            {
+            isLaunch ? 
+            <Pause onClick={handleToggleTimer} size={50} className="icon"/>
+            :
+            <Play onClick={handleToggleTimer} size={50} className="icon"/>
+            }
         </div>
     </div>
 
@@ -47,9 +59,17 @@ const Timer = ({ minute, seconde, stage }) => (
 )
 
 const mapStateToProps = (state) => ({
-    minute: state.timer.minute,
-    seconde: state.timer.seconde,
-    stage: state.timer.stage,
+    minute: state.timer.currentValues.minute,
+    seconde: state.timer.currentValues.seconde,
+    stage: state.timer.currentValues.stage,
+    isLaunch: state.timer.isLaunch,
 })
 
-export default connect(mapStateToProps)(Timer);
+const mapDispatchToProps = (dispatch) => ({
+    handleToggleTimer: () => {
+        dispatch(toggleTimer());
+    }
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);
