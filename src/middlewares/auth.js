@@ -21,8 +21,6 @@ const authMiddleware = (store) => (next) => (action) => {
     case SUBMIT_LOGIN: {
       //on récupère le state
       const state = store.getState();
-      console.log(state);
-
       axios({
         method: 'post',
         url: `http://localhost:3000/signin`,

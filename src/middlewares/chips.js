@@ -30,16 +30,15 @@ const chipsMiddleware = (store) => (next) => (action) => {
       const loggedUserId = localStorage.getItem('userId');
       const token = localStorage.getItem('token');
       const state = store.getState();
-      console.log(state)
-      const array = [...state.chip.chips];
-      console.log(array);
+      const arrayOfChips = [...state.chip.chips];
+          
       axios({
         method: 'post',
         url: `http://localhost:3000/chip/${loggedUserId}`,
         headers: { "Authorization": `Bearer ${token}` },
         data: [
           ...
-          array
+          arrayOfChips
         ],
       })
         .then((response) => {  

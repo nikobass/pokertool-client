@@ -8,32 +8,36 @@ import './chipcaseform.scss';
 const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip}) => {
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getChipsFromAPI())
+  useEffect(() => {       
+    dispatch(getChipsFromAPI()); 
   }, []);
 
   return (
-    <form>
-    <button onClick={handleAddChip} className="">Ajouter un jeton</button> <br />
-      {       
-        chipsList.map((chip, i) => (
-            <ChipElement 
-            color={chip.color}
-            value={chip.value}
-            quantity={chip.quantity}
-            key={i}
-            index={i}
-          />
-        ))
-      }        
-      <button onClick={handleSubmitForm}type="submit">Valider</button>
-    </form>
+    <main className="chips">   
+     <h2 className="chips__form__subtitle">Gestion de mes jetons</h2> 
+      <form className="chips__form">
+      <div className="chips__form__chips">
+      <button onClick={handleAddChip} className="chips__form__addChip">Ajouter un jeton</button>
+        {       
+          chipsList && chipsList.map((chip, i) => (
+              <ChipElement 
+              color={chip.color}
+              value={chip.value}
+              quantity={chip.quantity}
+              key={i}
+              index={i}
+            />
+          ))
+        }        
+      <button onClick={handleSubmitForm} className="chips__form__submitChips" type="submit">Valider</button>
+      </div>
+      </form>
+    </main>
   )
 };
 
 const mapStateToProps = (state) => ({
   chipsList: state.chip.chips,
-
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -42,8 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addChip())
   },
   handleSubmitForm: (event) => {
-    event.preventDefault();
-    console.log('form submited')    
+    event.preventDefault() 
     dispatch(submitChips());  
   },
 })
