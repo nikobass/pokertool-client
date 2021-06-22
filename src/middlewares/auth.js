@@ -21,6 +21,7 @@ const authMiddleware = (store) => (next) => (action) => {
     case SUBMIT_LOGIN: {
       //on récupère le state
       const state = store.getState();
+      console.log(state);
 
       axios({
         method: 'post',
@@ -91,7 +92,6 @@ const authMiddleware = (store) => (next) => (action) => {
 
       const token = localStorage.getItem('token');
       if(token){
-        console.log(token)
         store.dispatch(logUser())
       }
     }

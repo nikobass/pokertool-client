@@ -1,14 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {changeChipInput} from 'src/actions/chip.js';
+import {changeChipInput, removeChip} from 'src/actions/chip.js';
 
+import { Trash2 } from 'react-feather';
 import './chipelement.scss';
 
 const ChipElement = ({
   color,
   value,
   quantity,
-  handleInputChipChange
+  handleInputChipChange,
+  handleRemoveChip,
 }) => (
   <>    
     <label htmlFor="color">Couleur</label>    
@@ -32,6 +34,7 @@ const ChipElement = ({
       value={quantity}
       onChange={handleInputChipChange}
     />
+    <Trash2 onClick={handleRemoveChip}/>
     <br />
   </>
 );
@@ -47,10 +50,12 @@ const mapStateToProps = (state, ownprops) => {
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleInputChipChange: (event) => {
-    console.log(ownprops.index)
     dispatch(changeChipInput(event.target.value, event.target.name, ownprops.index));
-  }
-  
+  },
+  handleRemoveChip: (event) => {
+    event.preventDefault()
+    dispatch(removeChip(ownprops.index));
+  } 
 });
 
 
