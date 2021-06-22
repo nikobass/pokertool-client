@@ -58,7 +58,7 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         let diff = chipNumber - startingStack;
         result.reverse();
 
-        result.forEach(chip => {
+        result.forEach((chip, i) => {
             while (chip.value <= diff && chip.quantity > 0){
                 console.log("total : ", chipNumber, " je retire : ", chip.value )
                     chipNumber -= chip.value;
@@ -66,7 +66,13 @@ export const calculator = (chips, nbPlayer, startingStack) => {
                     chip.quantity -= 1;
                     console.log(result)
             }
+            if(chip.quantity == 0){
+                result.splice(i, 1);
+            }
         })
+
+        
+
         result.reverse();
     }
 
@@ -78,7 +84,7 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         result.error = error;
         return result
     } else {
-        error = "Impossible d'atteindre le montant du tapis de départ avec la valeur des jetons actuelles. Vérifiez la valeur des jetons et/ou le tapis de départ."
+        error = "Impossible d'atteindre le montant du tapis de départ avec la valeur actuelle des jetons. Vérifiez la valeur des jetons et/ou le tapis de départ."
         result = {};
         result.error = error;
         return result
