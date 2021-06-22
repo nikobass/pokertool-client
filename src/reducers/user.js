@@ -42,7 +42,7 @@ const initialState = {
     nickname: '',
     email: '',
     password: '',
-    errorMessage: null
+    errorMessage: null,
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
@@ -89,6 +89,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.inputName]: action.newInputValue
       }
+      
     case RESET_PROFIL_MODIF:
       return {
         ...state,
@@ -96,11 +97,7 @@ const reducer = (state = initialState, action = {}) => {
           modifying: false
         }
       }
-        case CHANGE_CONNECTION_INPUT:
-          return {
-            ...state,
-            [action.inputName]: action.newInputValue
-          }
+      
         case RESET_PROFIL_MODIF:
           return {
             ...state,
@@ -155,90 +152,75 @@ const reducer = (state = initialState, action = {}) => {
                   ...state,
                   showConnectionModal: true
                 };
+      
+    case SHOW_UNAUTHORIZED_MODAL:
+      return {
+        ...state,
+        showUnauthorizedModal: true,
+      };
+    case CHANGE_OPEN_FORM:
+      return {
+        ...state,
+        openFormSignup: true,
+      };
+    case SHOW_DELETE_ACCOUNT_MODAL:
+      return {
+        ...state,
+        showDeleteAccountModal: true,
+      };
+    case DELETE_USER_ACCOUNT:
+      return {
+        ...state,
+        showDeleteAccountModal: false,
+      }
+    case DELETE_SUCCESS:
+      return {
+        ...state,
+        isLogged: false,
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        isLogged: false
+      }
+    case LOG_USER:
+      return {
+        ...state,
+        isLogged: true
+      }
+    case SUBMIT_PROFIL_SUCCESS:
+      return {
+        ...state,
+        profil: {
+          ...state.profil,
+          modifying: false
+        }
+      }
 
-              case SHOW_UNAUTHORIZED_MODAL:
-                return {
-                  ...state,
-                  showUnauthorizedModal: true,
-                };
-              case HIDE_MODAL:
-                return {
-                  ...state,
-                  showConnectionModal: false,
-                    showUnauthorizedModal: false,
-                    showDeleteAccountModal: false,
-                    loginError: null
-                };
-              case CHANGE_OPEN_FORM:
-                return {
-                  ...state,
-                  openFormSignup: true,
-                };
-              case SHOW_DELETE_ACCOUNT_MODAL:
-                return {
-                  ...state,
-                  showDeleteAccountModal: true,
-                };
-              case DELETE_USER_ACCOUNT:
-                return {
-                  ...state,
-                  showDeleteAccountModal: false,
-                }
-              case DELETE_SUCCESS:
-                return {
-                  ...state,
-                  isLogged: false,
-                }
-              case LOGIN_SUCCESS:
-                return {
-                  ...state,
-                  nickname: action.apiData.nickname,
-                    isLogged: true,
-                    showConnectionModal: false,
-                    loginError: null
-                };
-              case LOGOUT:
-                return {
-                  ...state,
-                  isLogged: false
-                }
-              case LOG_USER:
-                return {
-                  ...state,
-                  isLogged: true
-                }
-              case SUBMIT_PROFIL_SUCCESS:
-                return {
-                  ...state,
-                  profil: {
-                    ...state.profil,
-                    modifying: false
-                  }
-                }
+    case UPDATE_PROFIL_FROM_API:
+      return {
+        ...state,
+        profil: {
+          ...state.profil,
+          modifying: false,
+          nickname: action.dataAPI.user_name,
+          email: action.dataAPI.email,
+        }
+      }
+    case UPDATE_PROFIL_ERROR:
+      return {
+        ...state,
+        profil: {
+          ...state.profil,
+          errorMessage: action.errorMsg
+        }
+      }
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        loginError: action.errorMsg
+      }
 
-              case UPDATE_PROFIL_FROM_API:
-                return {
-                  ...state,
-                  profil: {
-                    ...state.profil,
-                    modifying: false,
-                    nickname: action.dataAPI.user_name,
-                    email: action.dataAPI.email,
-                  }
-                }
-                case UPDATE_PROFIL_ERROR:
-                  return {
-                    ...state,
-                    profil: {
-                      ...state.profil,
-                      errorMessage: action.errorMsg
-                    }
-                  }
-              case LOGIN_ERROR:
-                return {
-                  ...state,
-                  loginError: action.errorMsg
-                }
                 case SIGN_UP_ERROR:
                   return {
                     ...state,
