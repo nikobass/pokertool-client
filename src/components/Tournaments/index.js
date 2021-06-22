@@ -1,51 +1,31 @@
-import React from 'react';
-
+import React , { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import {ChevronDown} from 'react-feather';
+import {
+  getTournamentUser,
+  deleteTournamentUser,
+  hideModalDelete,
+  } from 'src/actions/tournament';
+import Modal from 'src/components/Modal'
 
 import TournamentElement from 'src/components/TournamentElement'
 import TournamentDetails from '../TournamentDetails';
 
 import './tournaments.scss'
 
-const Tournaments = () => {
-  // liste de tournoi pour test, à finir avec BDD fini
-  const tournaments = [
-    {
-      id:1,
-      name: 'Le tournoi de la mort chez Eteinne',
-      nbPlayers: 8,
-      maxPlayers: 10,
-      date: '02/07/2021',
-      cashPrice: 'Journée avec les goélands',
-      statut: 'à venir',
-      buyIn: 'Sac de graine ou pain',
-      location: 'Chez Eteinne',
-    },
-    {
-      id:2,
-      name: 'Le tournoi de Juan',
-      nbPlayers: 15,
-      maxPlayers: 16,
-      date: '25/06/2021',
-      cashPrice: '200€',
-      statut: 'à venir',
-      buyIn: '20€',
-      location: 'Chez Juan',
-    },
-    {
-      id:3,
-      name: 'Le tournoi de Baptiste',
-      nbPlayers: 10,
-      maxPlayers: 10,
-      date: '01/06/2021',
-      cashPrice: '10€',
-      statut: 'Terminer',
-      buyIn: '1€',
-      location: 'Chez Michel',
-    },
+const Tournaments = ({
+  tournaments,
+  showDeleteTournamentModal,
+  submitDeleteTournament,
+  handleCloseModal,
+  refreshTournaments,
+  oneTournament
+}) => {
+  const dispatch = useDispatch();
 
-
-  ]
+  useEffect(() => {
+    dispatch(getTournamentUser())
+  }, [refreshTournaments]);
 
 
   return (
@@ -99,31 +79,89 @@ const Tournaments = () => {
             </button>
           </span>
         </li>
+        
         {
           tournaments.map((tournament) => (
             <li key={tournament.id}>
               <TournamentElement
-                id={tournament.id}
+                currentId={tournament.id}
                 name={tournament.name}
                 date={tournament.date}
                 location={tournament.location}
-                buyIn={tournament.buyIn}
-                cashPrice={tournament.cashPrice}
-                statut={tournament.statut}
-                nbPlayers={tournament.nbPlayers}
-               
-              />
-             
+                buyIn={tournament.buy_in}
+                cashPrice={tournament.cash_price}
+                statut={tournament.status}
+                nbPlayers={tournament.nb_players}
+                
+                />
             </li>
+            
         
 
           ))
         }
       </ul>
+      {!oneTournament &&(
       <TournamentDetails 
-      />
+      
+      /> )
+      }
+      
+      <Modal
+      isOpen={ showDeleteTournamentModal}
+      title='Supprimer un tournoi'
+      content={(
+        <div>
+          <p>Voulez-vous vraiment supprimer ce tournoi ?</p>
+          
+            <button 
+            type="submit" 
+            className="deleteTournament__submit"
+            onClick={submitDeleteTournament}    
+            >
+              OK
+            </button>
+         
+          <button          
+          className="deleteTournament__submit"
+          onClick={handleCloseModal}
+          >
+            Annuler
+          </button>
+        </div>
+      )}
+    />
     </div>
   );
 };
 
-export default Tournaments;
+Tournaments.defaultProps = {
+  tournaments: null,
+};
+
+
+const mapStateToProps = (state) => ({
+  tournaments : state.tournament.tournamentList,
+  showDeleteTournamentModal : state.tournament.openDeleteModal,
+  refreshTournaments: state.tournament.refreshTournaments,
+ 
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+
+  handleCloseModal: () => {
+    dispatch(hideModalDelete());
+  },
+
+  submitDeleteTournament: () => {
+   
+    dispatch(deleteTournamentUser())
+  }
+
+})
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps )(Tournaments);
