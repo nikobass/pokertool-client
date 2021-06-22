@@ -10,8 +10,10 @@ import {
   GET_ONE_TOURNAMENT_USER_SUCCESS,
   SHOW_CREATE_TOURNAMENT_MODAL,
   TOURNAMENT_SUBMIT_SUCCESS,
-  TOURNAMENT_SUBMIT,
   SUBMIT_CREAT_TOURNAMENT_VALUES,
+  OPEN_MODAL_TOURNAMENT_UPDATE,
+  CHANGE_INPUT_VALUE,
+  TOGGLE_MODIFY_TOURNAMENT,
 
 } from 'src/actions/tournament'
 
@@ -22,6 +24,7 @@ import {
 const initialState = {
   openDetailsModal: false,
   openDeleteModal: false,
+  openUpdateModal: false,
   tournamentList : [],
   loading: false,
   currentId: null,
@@ -40,7 +43,9 @@ const initialState = {
     comments: null,
     starting_stack: null,
 
-  }
+  },
+  modifying: false,
+  errorMessage: null,
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -58,12 +63,21 @@ const reducer = (state = initialState, action = {}) => {
           currentId: action.currentId
         }
       
+        case OPEN_MODAL_TOURNAMENT_UPDATE :
+          return{
+            ...state,
+            openUpdateModal: true,
+            currentId: action.currentId
+
+          }
+      
         case HIDE_MODAL :
           return{
             ...state,
             openDetailsModal: false,
             openDeleteModal: false,
-            showCreateTournamentModal: false
+            showCreateTournamentModal: false,
+            openUpdateModal: false
           }
         case SHOW_CREATE_TOURNAMENT_MODAL:
       return {
@@ -96,7 +110,29 @@ const reducer = (state = initialState, action = {}) => {
               oneTournament: action.tournaments
 
             }
+
           /************************* POST Tournaments ******************************/
+         
+          case TOGGLE_MODIFY_TOURNAMENT:
+            return{
+              ...state,
+              modifying: true,
+              oneTournament: tournament.id,
+              oneTournament:{
+                ...state.oneTournament
+              }
+            }
+
+          case CHANGE_INPUT_VALUE:
+            return{
+              ...state,
+              oneTournament: {
+                ...state.oneTournament,
+                [action.inputName]: action.newInputValue
+              },
+              modifying: true,
+            }
+          
           case SUBMIT_CREAT_TOURNAMENT_VALUES:
                 return {
                   ...state,

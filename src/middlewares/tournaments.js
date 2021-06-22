@@ -46,6 +46,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         })
         .then((response) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));
+          store.dispatch(toggleModifyTournament(tournamentId))
           console.log(response.data)
         })
         .catch((error) => console.log(error));

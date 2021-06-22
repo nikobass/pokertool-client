@@ -11,10 +11,11 @@ import {
 
   } 
   from 'src/actions/tournament';
-import Modal from 'src/components/Modal'
+import Modal from 'src/components/Modal';
 
-import TournamentElement from 'src/components/TournamentElement'
-import TournamentDetails from '../TournamentDetails';
+import TournamentElement from 'src/components/TournamentElement';
+import TournamentDetails from 'src/components/TournamentDetails';
+import TournamentUpdate from 'src/components/TournamentUpdate';
 
 import './tournaments.scss'
 
@@ -119,9 +120,13 @@ const Tournaments = ({
         }
       </ul>
       {!oneTournament &&(
-      <TournamentDetails 
-      
-      /> )
+      <TournamentDetails /> )
+      }
+      {
+        !oneTournament &&(
+          <TournamentUpdate/>
+
+        )
       }
       
       <Modal

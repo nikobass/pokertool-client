@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import {
   tournamentDetailsModal,
   tournamentDeleteModal,
-  getOneTournamentUser
+  getOneTournamentUser,
+  tounamentUpdateModale
 } from 'src/actions/tournament';
 
 import './tournamentElement.scss'
@@ -21,6 +22,7 @@ const TournamentElement = ({
   date,
   handleTournamentDetails,
   handleTournamentDelete,
+  handleTournamentUpdate
   
   
 }) => {
@@ -52,7 +54,10 @@ const TournamentElement = ({
         
         <Eye />
       </button>
-      <button className="modify-tournament">
+      <button
+       className="modify-tournament"
+       onClick={handleTournamentUpdate}
+       >
         <Edit />
       </button>
       <button 
@@ -90,6 +95,10 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
   },
   handleTournamentDelete: () => {
     dispatch(tournamentDeleteModal(ownprops.currentId));
+},
+  handleTournamentUpdate: () => {
+    dispatch(tounamentUpdateModale(ownprops.currentId))
+
 }
 })
 
