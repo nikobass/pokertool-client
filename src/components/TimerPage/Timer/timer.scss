@@ -1,0 +1,50 @@
+.timer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: 15px solid white;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #19191e;
+    color: #f2f2f2;
+    position: relative;
+    margin: 1rem auto 0 auto;
+
+    &__reset{
+        margin-top: 1rem;
+    }
+
+    &__stage{
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+        font-size: 3rem;
+
+        &__stage, &__chevronLeft, &__chevronRight{
+            height: 100%;
+        }
+
+        &__stage{
+            margin: 0 2rem;
+        }
+    }
+
+    &__timer{
+        display: flex;
+        position: absolute;
+        top: 38%;
+        font-size: 7rem;
+        font-weight: bold;
+    }
+
+    &__play{
+        position: relative;
+        top: 40%;
+    }
+}
+
+.icon{
+    color: #ee581e;
+}

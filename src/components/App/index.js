@@ -19,7 +19,8 @@ import Tournaments from 'src/components/Tournaments'
 import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
 import { connect } from 'react-redux';
-import Distributor from '../Distributor';
+import Distributor from 'src/components/Distributor';
+import Timer from 'src/components/TimerPage/Timer';
 
 
 const App = ({ isLogged }) => {
@@ -85,6 +86,11 @@ const App = ({ isLogged }) => {
             <Route path="/profil">
               <Header />
               <Profil />
+              <Footer />
+            </Route>
+            <Route path="/timer">
+              <Header />
+              <Timer />
               <Footer />
             </Route>
           </>
