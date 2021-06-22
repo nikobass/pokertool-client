@@ -7,7 +7,9 @@ import 'src/components/TournamentUpdate/tournamentUpdate.scss'
 import {
   toggleModifyTournament,
   submitTournamentUpdate,
-  getOneTournamentUser
+  changeInputValue,
+  modifyTournamentValidate,
+  
 } from 'src/actions/tournament'
 
 const TournamentUpdate = ({
@@ -20,10 +22,19 @@ const TournamentUpdate = ({
   nameValue,
   dateValue,
   locationValue,
-  currentId
+  handleModifyTournamentConfirm,
+  statusValue ,
+  cashPriceValue,
+  buyInValue,
+  speedValue,
+  nbPlayersValue,
+  startingStackValue,
+  commentsValue
+  
   
 
 }) => {
+
   return (
     <div>
       <Modal
@@ -42,8 +53,32 @@ const TournamentUpdate = ({
       <label htmlFor="location" className="tournamentUpdate__form__label">lieu</label>
       <input onChange={handleInputChange} type="text" name="location" className="tournamentUpdate__form__input" value={locationValue} disabled={modifying ? "" : "disabled"}  />
 
+      <label htmlFor="nb_players" className="tournamentUpdate__form__label">Nombre de joueurs</label>
+      <input onChange={handleInputChange} type="number" name="nb_players" className="tournamentUpdate__form__input" value={nbPlayersValue} disabled={modifying ? "" : "disabled"}  />
+
+      <label htmlFor="speed" className="tournamentUpdate__form__label">vitesse</label>
+      <input onChange={handleInputChange} type="number" name="speed" className="tournamentUpdate__form__input" value={speedValue} disabled={modifying ? "" : "disabled"}  />
+
+      <label htmlFor="starting_stack" className="tournamentUpdate__form__label">Tapis de départ</label>
+      <input onChange={handleInputChange} type="number" name="starting_stack" className="tournamentUpdate__form__input" value={startingStackValue} disabled={modifying ? "" : "disabled"}  />
+
+      <label htmlFor="buy_in" className="tournamentUpdate__form__label">Buy in</label>
+      <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input" value={buyInValue} disabled={modifying ? "" : "disabled"}  />
+
+      <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
+      <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
+
+      <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
+      <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue} disabled={modifying ? "" : "disabled"}  />
+
+
+      <label htmlFor="comments" className="tournamentUpdate__form__label">Commentaire</label>
+      <input onChange={handleInputChange} type="text" name="comments" className="tournamentUpdate__form__input" value={commentsValue} disabled={modifying ? "" : "disabled"}  />
+
+
+
       {errorMessage && <p className="tournamentUpdate__form__errorMsg">{errorMessage}</p>}
-      <button type="submit" className={modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Valider</button>
+      <button type="submit" onClick={handleModifyTournamentConfirm} className={modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Valider</button>
       <button onClick={handleModifyTournament} className={!modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Modifier mon tournoi</button>
       </form>
       )}
@@ -59,6 +94,13 @@ const mapStateToProps = (state) => ({
   nameValue: state.tournament.oneTournament.name,
   locationValue: state.tournament.oneTournament.location,
   dateValue : state.tournament.oneTournament.date,
+  statusValue :state.tournament.oneTournament.status,
+  cashPriceValue:state.tournament.oneTournament.cash_price,
+  buyInValue:state.tournament.oneTournament.buy_in,
+  speedValue:state.tournament.oneTournament.speed,
+  commentsValue:state.tournament.oneTournament.comments,
+  nbPlayersValue:state.tournament.oneTournament.nb_players,
+  startingStackValue:state.tournament.oneTournament.starting_stack,
   errorMessage: state.tournament.errorMessage,
   openUpdateModal : state.tournament.openUpdateModal,
   currentId: state.tournament.currentId
@@ -67,8 +109,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>({
   handleModifyTournament: (event) => {
     event.preventDefault();
-    dispatch(getOneTournamentUser())
-    dispatch(toggleModifyTournament(currentId));
+    dispatch(toggleModifyTournament())
+    
   },
   handleInputChange: (event) => {
     dispatch(changeInputValue(event.target.value, event.target.name))
@@ -76,6 +118,11 @@ const mapDispatchToProps = (dispatch) =>({
   handleSubmitUpdateTournament: (event) => {
     event.preventDefault();
     dispatch(submitTournamentUpdate())
+  },
+
+  handleModifyTournamentConfirm: (event) => {
+    event.preventDefault();
+    dispatch(modifyTournamentValidate())
   }
 
 })

@@ -7,7 +7,10 @@ import {
   tournamentDetailsModal,
   tournamentDeleteModal,
   getOneTournamentUser,
-  tounamentUpdateModale
+  tounamentUpdateModale,
+  tounamentUpdateModaleTest,
+  
+ 
 } from 'src/actions/tournament';
 
 import './tournamentElement.scss'
@@ -98,6 +101,7 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
 },
   handleTournamentUpdate: () => {
     dispatch(tounamentUpdateModale(ownprops.currentId))
+    dispatch(getOneTournamentUser())
 
 }
 })

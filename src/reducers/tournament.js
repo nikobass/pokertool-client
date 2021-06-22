@@ -14,6 +14,7 @@ import {
   OPEN_MODAL_TOURNAMENT_UPDATE,
   CHANGE_INPUT_VALUE,
   TOGGLE_MODIFY_TOURNAMENT,
+  MODIFY_TOURNAMENT_SUCESS
 
 } from 'src/actions/tournament'
 
@@ -117,12 +118,17 @@ const reducer = (state = initialState, action = {}) => {
             return{
               ...state,
               modifying: true,
-              oneTournament: tournament.id,
-              oneTournament:{
-                ...state.oneTournament
+              loading: true
               }
-            }
 
+          case MODIFY_TOURNAMENT_SUCESS :
+            return{
+              ...state,
+              modifying: false,
+              loading: false,
+              oneTournament: action.tournaments,
+              creatTournament: []
+            }    
           case CHANGE_INPUT_VALUE:
             return{
               ...state,

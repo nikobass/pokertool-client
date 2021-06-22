@@ -16,6 +16,9 @@ export const OPEN_MODAL_TOURNAMENT_UPDATE = 'OPEN_MODAL_TOURNAMENT_UPDATE'
 export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE'
 export const TOGGLE_MODIFY_TOURNAMENT = 'TOGGLE_MODIFY_TOURNAMENT'
 export const SUBMIT_TOURNAMENT_UPDATE = 'SUBMIT_TOURNAMENT_UPDATE'
+export const MODIFY_TOURNAMENT_SUCESS ='MODIFY_TOURNAMENT_SUCESS'
+export const MODIFY_TOURNAMENT_VALIDATE = 'MODIFY_TOURNAMENT_VALIDATE'
+
 
 import {HIDE_MODAL} from './user'
 
@@ -43,7 +46,12 @@ export const tounamentUpdateModale = (currentId) => ({
   type: OPEN_MODAL_TOURNAMENT_UPDATE,
   currentId
 })
+/*********************************** PATCH  **************************/
 
+export const modifyTournamentValidate = () =>({
+  type: MODIFY_TOURNAMENT_VALIDATE,
+  
+})
 /************************* GET Tournaments ******************************/
 
 // récupération de la list des tournois depuis le back 
@@ -97,6 +105,12 @@ export const toggleModifyTournament = (tournaments) => ({
   type: TOGGLE_MODIFY_TOURNAMENT,
   tournaments
 });
+
+export const modifyTournamentSuccess = (tournaments) =>({
+  type: MODIFY_TOURNAMENT_SUCESS,
+  tournaments
+
+})
 
 // middleware =>
 export const submitTournamentUpdate = () => ({

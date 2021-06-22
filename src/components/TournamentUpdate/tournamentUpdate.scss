@@ -3,6 +3,7 @@
   justify-content: center;
   margin: 2rem auto;
   padding: 1rem;
+  
 
   &__form{
       display: flex;
@@ -11,6 +12,8 @@
       padding: 2rem;
       margin: 2rem auto;
       background-color: #19191e;
+      overflow-y: scroll;
+      height: 40rem;
 
       &__subtitle{
           color: #f2f2f2;

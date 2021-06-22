@@ -9,8 +9,9 @@ import {
   GET_ONE_TOURNAMENT_USER ,
   tournamentSubmitSuccess,
   TOURNAMENT_SUBMIT,
-
-
+  modifyTournamentSuccess,
+  TOGGLE_MODIFY_TOURNAMENT,
+  MODIFY_TOURNAMENT_VALIDATE
 } from 'src/actions/tournament';
 
 
@@ -46,7 +47,6 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         })
         .then((response) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));
-          store.dispatch(toggleModifyTournament(tournamentId))
           console.log(response.data)
         })
         .catch((error) => console.log(error));
@@ -102,6 +102,39 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           });
         break;
       }
+      case MODIFY_TOURNAMENT_VALIDATE : {
+        const state = store.getState();
+        const tournamentId = state.tournament.currentId;
+        const token = localStorage.getItem('token');
+
+        axios({
+          method:'patch',
+          url: `http://localhost:3000/tournament/${tournamentId}`,
+          headers: { "Authorization": `Bearer ${token}` },
+          data: {
+            name: state.tournament.creatTournament.name,
+            date: state.tournament.creatTournament.date,
+            location: state.tournament.creatTournament.location,
+            speed:state.tournament.creatTournament.speed,
+            nb_players:state.tournament.creatTournament.nb_players,
+            comments:state.tournament.creatTournament.comments,
+            cash_price:state.tournament.creatTournament.cash_price,
+            buy_in:state.tournament.creatTournament.buy_in,
+            starting_stack: state.tournament.creatTournament.starting_stack,
+          },
+        
+        
+        })
+        .then((response) => {
+
+          console.log(response.data)
+          store.dispatch(modifyTournamentSuccess(response.data));
+        })
+        .catch((err) => console.log(err.response.data.message));
+      break;
+    }
+     
+    
 
       default:
         next(action);
