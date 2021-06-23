@@ -13,7 +13,10 @@ const Signup = ({
 	handleSignUpChange,
 	//Fonction qui gère la soumission des inputs: pseudo, email emailConfirm password et passwordConfirm
 	handleSignUpSubmit,
-	signUpError,
+  signUpError,
+  nicknameValue,
+  emailValue,
+  passwordValue
 }) => {
 	return (
 		<div>
@@ -23,16 +26,16 @@ const Signup = ({
 					content={(
 						<form onSubmit= { handleSignUpSubmit } className="inscriptionForm">
 								<label htmlFor="email" className="inscriptionForm__label">Pseudo</label>
-								<input onChange={ handleSignUpChange } type="text" name="nickname" className="inscriptionForm__input" />
+								<input onChange={ handleSignUpChange } type="text" name="nickname" value={nicknameValue} className="inscriptionForm__input" />
 
 								<label htmlFor="email" className="inscriptionForm__label">Email</label>
-								<input onChange={ handleSignUpChange } type="email" name="email" className="inscriptionForm__input" />
+								<input onChange={ handleSignUpChange } type="email" name="email" value={emailValue} className="inscriptionForm__input" />
 
 								<label htmlFor="emailConfirmation" className="inscriptionForm__label">Confirmation de l'Email</label>
 								<input onChange={ handleSignUpChange } type="email" name="signUpEmailConfirmInput" className="inscriptionForm__input" />
 
 								<label htmlFor="password" className="inscriptionForm__label">Mot de passe</label>
-								<input onChange={ handleSignUpChange } type="password" name="password" className="inscriptionForm__input" />
+								<input onChange={ handleSignUpChange } type="password" name="password" value={passwordValue} className="inscriptionForm__input" />
 
 								<label htmlFor="passwordConfirmation" className="inscriptionForm__label">Confirmation du mot de passe</label>
 								<input onChange={ handleSignUpChange } type="password" name="signUpPasswordConfirmInput" className="inscriptionForm__input" />
@@ -49,6 +52,9 @@ const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
   showSignUpModal: state.user.showSignUpModal,
   signUpError: state.user.signup.signUpError,
+  nicknameValue: state.user.signup.nickname,
+  emailValue: state.user.signup.email,
+  passwordValue: state.user.signup.password
 });
 
 const mapDispatchToProps = (dispatch) => ({
