@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 
 import './timer.scss';
 
-import { toggleTimer } from 'src/actions/timer';
+import { 
+    toggleTimer, 
+    resetTimer, 
+    goToPreviousStage,
+    goToNextStage
+} from 'src/actions/timer';
 
 const Timer = ({ 
     minute, 
@@ -12,21 +17,24 @@ const Timer = ({
     stage, 
     isLaunch, 
     handleToggleTimer,
+    handleResetTimer,
+    handlePreviousStage,
+    handleNextStage,
 }) => (
 
     <div className="timer">
         <div className="timer__reset">
-            <RotateCcw size={50} className="icon"/>
+            <RotateCcw onClick={handleResetTimer} size={50} className="icon"/>
         </div>
         <div className="timer__stage">
             <div className="timer__stage__chevronLeft">
-                <ChevronLeft size={50} className="icon"/>
+                <ChevronLeft onClick={handlePreviousStage} size={50} className="icon"/>
             </div>
             <div className="timer__stage__stage">
                 Étape {stage}
             </div>
             <div className="timer__stage__chevronRight">
-                <ChevronRight size={50} className="icon"/>
+                <ChevronRight onClick={handleNextStage} size={50} className="icon"/>
             </div>
         </div>
         <div className="timer__timer">
@@ -68,6 +76,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     handleToggleTimer: () => {
         dispatch(toggleTimer());
+    },
+    handleResetTimer: () => {
+        dispatch(resetTimer());
+    },
+    handlePreviousStage: () => {
+        dispatch(goToPreviousStage())
+    },
+    handleNextStage: () => {
+        dispatch(goToNextStage())
     }
 })
 

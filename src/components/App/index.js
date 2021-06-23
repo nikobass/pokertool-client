@@ -89,9 +89,7 @@ const App = ({ isLogged }) => {
               <Footer />
             </Route>
             <Route path="/timer">
-              <Header />
               <Timer />
-              <Footer />
             </Route>
           </>
           :

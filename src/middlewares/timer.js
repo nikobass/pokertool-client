@@ -1,30 +1,71 @@
-import { 
+import {
 
     TOGGLE_TIMER,
     changeCurrentValues,
+    RESET_TIMER,
+    resetCurrentValues,
+    GO_TO_PREVIOUS_STAGE,
+    loadPreviousStage,
+    GO_TO_NEXT_STAGE,
+    loadNextStage,
 
 } from 'src/actions/timer';
 
 const timerMiddleware = (store) => (next) => (action) => {
+
     switch (action.type) {
-        case TOGGLE_TIMER:
 
-        const state = store.getState();
-        const intervalId = state.timer.intervalId;
-        
+        case RESET_TIMER: {
+            const state = store.getState();
+            const intervalId = state.timer.intervalId;
 
-        if(!state.timer.isLaunch){
-            console.log("play")
-            const intervalId = setInterval(() => {
-                store.dispatch(changeCurrentValues(intervalId));
-            }, 1000)
-        } else {
-            console.log('pause')
             clearInterval(intervalId);
+
+            store.dispatch(resetCurrentValues());
+
+            break;
         }
 
-        next(action);
-        break;
+        case GO_TO_PREVIOUS_STAGE: {
+
+            const state = store.getState();
+            const intervalId = state.timer.intervalId;
+
+            clearInterval(intervalId);
+
+            store.dispatch(loadPreviousStage());
+
+            break;
+        }
+
+        case GO_TO_NEXT_STAGE: {
+
+            const state = store.getState();
+            const intervalId = state.timer.intervalId;
+
+            clearInterval(intervalId);
+
+            store.dispatch(loadNextStage());
+
+            break;
+        }
+        case TOGGLE_TIMER: {
+
+            const state = store.getState();
+            const intervalId = state.timer.intervalId;
+
+
+            if (!state.timer.isLaunch) {
+                const intervalId = setInterval(() => {
+                    store.dispatch(changeCurrentValues(intervalId));
+                }, 10)
+            } else {
+                clearInterval(intervalId);
+            }
+
+            next(action);
+            break;
+        }
 
         default:
             next(action);
