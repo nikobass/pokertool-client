@@ -91,7 +91,7 @@ const ChipElement = ({
       </div>
       <div className="chipElement__field">
         <label className="chipElement__field__label" htmlFor="quantity">Quantitée</label>
-        <input 
+        <input           
           min="1"
           type="number"
           name="quantity" 

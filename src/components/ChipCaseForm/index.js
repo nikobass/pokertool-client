@@ -16,8 +16,7 @@ const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip}) => {
     <main className="chips">   
      <h2 className="chips__form__subtitle">Gestion de mes jetons</h2> 
       <form className="chips__form">
-      <div className="chips__form__chips">
-      <button onClick={handleAddChip} className="chips__form__addChip">Ajouter un jeton</button>
+      <div className="chips__form__chips">     
         {       
           chipsList && chipsList.map((chip, i) => (
               <ChipElement 
@@ -29,6 +28,7 @@ const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip}) => {
             />
           ))
         }        
+      <button onClick={handleAddChip} className="chips__form__addChip">Ajouter un jeton</button>
       <button onClick={handleSubmitForm} className="chips__form__submitChips" type="submit">Valider</button>
       </div>
       </form>
