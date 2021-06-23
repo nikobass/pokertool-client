@@ -12,19 +12,20 @@ import './home.scss';
 
 
 
-const Home = ({handleSignUpForm}) => {
+const Home = ({handleSignUpForm, isLogged}) => {
 
   return (
     <div className='main'>
       <h1 className="main__title">Gérez facilement vos tournois de poker entre amis</h1>
       < Cards />
       <div className="signup">
-        <button 
+       { !isLogged && <button 
         className="signup__button"
         onClick={handleSignUpForm}
         >
           S'inscrire
         </button>
+       }
       </div>
       <Signup/>
     </div>
@@ -35,7 +36,9 @@ Home.propTypes = {
   openFormSignup: PropTypes.bool,
   handleSignUpForm: PropTypes.func.isRequired,
 }
-
+const mapStateToProps = (state) => ({
+  isLogged: state.user.isLogged
+})
 const mapDispatchToProps = (dispatch) => ({
   handleSignUpForm: () => {
      dispatch(signUpForm())
@@ -43,4 +46,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
