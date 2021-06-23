@@ -5,7 +5,7 @@ import  { submitChips, addChip, getChipsFromAPI } from 'src/actions/chip.js';
 
 import './chipcaseform.scss';
 
-const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip}) => {
+const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip, errorMsgChips}) => {
 
   const dispatch = useDispatch();
   useEffect(() => {       
@@ -29,6 +29,7 @@ const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip}) => {
           ))
         }        
       <button onClick={handleAddChip} className="chips__form__addChip">Ajouter un jeton</button>
+      {errorMsgChips && <p className="chips__form__errorMsg">{errorMsgChips}</p>}
       <button onClick={handleSubmitForm} className="chips__form__submitChips" type="submit">Valider</button>
       </div>
       </form>
@@ -38,6 +39,7 @@ const ChipCaseForm = ({chipsList, handleSubmitForm, handleAddChip}) => {
 
 const mapStateToProps = (state) => ({
   chipsList: state.chip.chips,
+  errorMsgChips: state.chip.errorMsgChips
 });
 
 const mapDispatchToProps = (dispatch) => ({

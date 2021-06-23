@@ -110,14 +110,18 @@ const mapStateToProps = (state, ownprops) => {
   return {
     color: state.chip.chips[ownprops.index].color,
     value: state.chip.chips[ownprops.index].value,
-    quantity: state.chip.chips[ownprops.index].quantity,
-    // chipColor: state.chips.chips[ownprops.index].color
+    quantity: state.chip.chips[ownprops.index].quantity
   }
 };
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleInputChipChange: (event) => {
-    dispatch(changeChipInput(event.target.value, event.target.name, ownprops.index));
+    if(event.target.name === 'color'){
+      dispatch(changeChipInput(event.target.value, event.target.name, ownprops.index));
+    } else {
+      dispatch(changeChipInput(parseInt(event.target.value), event.target.name, ownprops.index));
+    }
+   
   },
   handleRemoveChip: (event) => {
     event.preventDefault()

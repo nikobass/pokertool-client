@@ -3,12 +3,14 @@ import {
   ADD_CHIP,
   GET_CHIPS_SUCCESS,
   REMOVE_CHIP,
-  SUBMIT_CHIPS_SUCCESS
+  SUBMIT_CHIPS_SUCCESS,
+  CHIPS_ERROR_MSG
 } from 'src/actions/chip';
 
 const initialState = { 
   chips: [],
-  nbChips: null
+  nbChips: null,
+  errorMsgChips: null
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -20,9 +22,9 @@ const reducer = (state = initialState, action = {}) => {
         chips: [
             ...state.chips,
             {
-                color:'#000000',
-                value: 0,
-                quantity: 0,
+              quantity: 0,
+              color:'#000000',
+              value: 0,                
             }
         ]
     }
@@ -52,7 +54,13 @@ const reducer = (state = initialState, action = {}) => {
     case SUBMIT_CHIPS_SUCCESS:
       return {
         ...state,
-        chips: action.chipsFromAPI
+        chips: action.chipsFromAPI,
+        errorMsgChips: null
+      }
+    case CHIPS_ERROR_MSG:
+      return {
+        ...state,
+        errorMsgChips: action.msgError
       }
     default:
       return state;
