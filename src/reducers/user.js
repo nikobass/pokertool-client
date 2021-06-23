@@ -52,9 +52,9 @@ const initialState = {
   loginError: null,
   //handleSignUpSubmit: false,
   signup: {
-    nickname: null,
-    email: null,
-    password: null,
+    nickname: '',
+    email: '',
+    password: '',
     signUpError: null,
   }
 }
