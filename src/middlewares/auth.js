@@ -36,7 +36,6 @@ const authMiddleware = (store) => (next) => (action) => {
       })
         .then(response => {
           store.dispatch(loginSuccess(response.data));
-          console.log(response.data)
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('nickname', response.data.nickname);
           localStorage.setItem('token', response.data.token);
@@ -55,16 +54,13 @@ const authMiddleware = (store) => (next) => (action) => {
         data: {
           user_name: state.user.signup.nickname,
           email: state.user.signup.email,
-          password: state.user.signup.password,
-          // emailConfirm: state.user.signup.emailConfirm,
-          // passwordConfirm: state.user.signup.passwordConfirm,
+          password: state.user.signup.password
         },
       })
-        .then(response => {
-          console.log(response.data);
+        .then(response => {         
           store.dispatch(signUpSuccess(response.data));
-          localStorage.setItem('userId', response.data.userId);
-          localStorage.setItem('nickname', response.data.nickname);
+          localStorage.setItem('userId', response.data.id);
+          localStorage.setItem('nickname', response.data.user_name);
         })
         .catch((err) => {          
           store.dispatch(signUpError((err.response.data.message)));
@@ -81,8 +77,7 @@ const authMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then(() => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('userId');
+          localStorage.clear();      
           store.dispatch(deleteUserAccountSucces());
         })
         .catch((error) => console.log(error));
@@ -104,8 +99,7 @@ const authMiddleware = (store) => (next) => (action) => {
         },
         // headers: { "Authorization": `Bearer ${token}` }
       })
-        .then((response) => {
-          console.log(response);
+        .then((response) => {         
           store.dispatch(submitProfilSuccess());
         })
         .catch(err => {
@@ -136,8 +130,7 @@ const authMiddleware = (store) => (next) => (action) => {
         url: `http://localhost:3000/profil/${loggedUserId}`,
         headers: { "Authorization": `Bearer ${token}` }
       })
-      .then((response) => {
-        console.log(response);
+      .then((response) => {      
         store.dispatch(updateProfilFromAPI(response.data))
       })
       .catch(error => console.log(error));
