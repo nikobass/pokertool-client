@@ -15,7 +15,10 @@ import {
 import Modal from 'src/components/Modal';
 
 import './header.scss';
-import logo from 'src/assets/images/logo.png'
+// import logo from 'src/assets/images/logo.png';
+import logo from 'src/assets/images/logo_blanc.svg';
+// import logo from 'src/assets/images/logo_noir_text.svg';
+// import logo from 'src/assets/images/logo_noir.svg';
 
 
 const Header = ({
