@@ -120,8 +120,7 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
       dispatch(changeChipInput(event.target.value, event.target.name, ownprops.index));
     } else {
       dispatch(changeChipInput(parseInt(event.target.value), event.target.name, ownprops.index));
-    }
-   
+    }   
   },
   handleRemoveChip: (event) => {
     event.preventDefault()
