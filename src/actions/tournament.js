@@ -23,6 +23,7 @@ export const GET_STRUCTURE_TOURNAMENT_SUCCESS = 'GET_STRUCTURE_TOURNAMENT_SUCCES
 export const CREATE_STRUCTURE ='CREATE_STRUCTURE'
 export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
 export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
+export const ERROR_MESSAGE ='ERROR_MESSAGE'
 
 import {HIDE_MODAL} from './user'
 
@@ -168,4 +169,9 @@ export const deleteTournamentSucces = (tournamentId) => ({
 // ferme la modal au bouton annuler
 export const hideModalDelete = () => ({
   type : HIDE_MODAL
+})
+
+export const errMessage = (errMessage) => ({
+  type : ERROR_MESSAGE,
+  errMessage
 })

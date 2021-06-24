@@ -37,6 +37,7 @@ const Tournaments = ({
   oneTournament,
   handleShowModal,
   handleCreatTournamentChange,
+  errorMessage,
 }) => {
   const dispatch = useDispatch();
 
@@ -199,8 +200,9 @@ const Tournaments = ({
             <label htmlFor="comments" className="creatTournamentForm__label">commentaires:</label>
             <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input" />
 
-
+            {errorMessage && <p className="errorMessage"> { errorMessage }</p>}
             <button type="submit" className="creatTournamentForm__submit">Valider</button>
+
         </form>
           )}
         />  
@@ -217,7 +219,8 @@ const mapStateToProps = (state) => ({
   tournaments : state.tournament.tournamentList,
   showDeleteTournamentModal : state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
-  showCreateTournamentModal: state.tournament.showCreateTournamentModal
+  showCreateTournamentModal: state.tournament.showCreateTournamentModal,
+  errorMessage: state.tournament.errorMessage
  
 
 })
@@ -250,7 +253,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createStructure())
     //Quand c'est fait, RDV dans le middleware
     //dispatch(tournamentSubmit()) //A supprimer puisque ce sera appelé dans l'action que tu crées juste au dessus
-    dispatch(hideModalDelete())
+    if (!errorMessage){
+      dispatch(hideModalDelete())
+
+    }
   }
 
 })

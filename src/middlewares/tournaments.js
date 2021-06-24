@@ -18,7 +18,8 @@ import {
   CREATE_STRUCTURE,
   addStructureToState,
   tournamentSubmit,
-  clearTournament
+  clearTournament,
+  errMessage
 
 } from 'src/actions/tournament';
 
@@ -39,9 +40,10 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           store.dispatch(getTournamentUserSuccess(response.data))
           
         })
-        .catch((err) => console.log(err),
-        store.dispatch(clearTournament())
-        );
+        .catch((err) =>{  console.log(err),
+        store.dispatch(clearTournament());
+        store.dispatch(errMessage(err.response.data.message))
+        });
        
       break;
 
@@ -60,6 +62,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
          
         })
         .catch((error) => console.log(error));
+        store.dispatch(errMessage(err.response.data.message))
       break;
     }
 
@@ -77,6 +80,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             store.dispatch(deleteTournamentSucces(tournamentId));
           })
           .catch((error) => console.log(error));
+          store.dispatch(errMessage(err.response.data.message))
         break;
       }
 
@@ -120,6 +124,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           })
           .catch((err) => {          
             console.log(err.response.data.message)
+            store.dispatch(errMessage(err.response.data.message))
             
           });
         break;
@@ -158,6 +163,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           store.dispatch(modifyTournamentSuccess(response.data));
         })
         .catch((err) => console.log(err.response.data.message));
+        store.dispatch(errMessage(err.response.data.message))
       
       break;
     }
@@ -181,6 +187,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         
       })
       .catch((err) => console.log(err));
+      store.dispatch(errMessage(err.response.data.message))
       break;
     }
 

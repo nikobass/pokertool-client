@@ -17,7 +17,8 @@ import {
   MODIFY_TOURNAMENT_SUCESS,
   GET_STRUCTURE_TOURNAMENT_SUCCESS,
   ADD_STRUCTURE_TO_STATE,
-  CLEAR_TOURNAMENT
+  CLEAR_TOURNAMENT,
+  ERROR_MESSAGE
 
 } from 'src/actions/tournament'
 
@@ -90,6 +91,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         showCreateTournamentModal: true
       }
+
+      case ERROR_MESSAGE :
+        return {
+          ...state,
+          errorMessage: action.errMessage
+          
+        }
           /************************* GET Tournaments ******************************/
         case GET_TOURNAMENTS_ALL_USER :
           return{
