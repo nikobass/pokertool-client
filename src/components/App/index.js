@@ -19,7 +19,9 @@ import Tournaments from 'src/components/Tournaments'
 import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
 import { connect } from 'react-redux';
+import ChipCaseForm from 'src/components/ChipCaseForm';
 import Distributor from '../Distributor';
+
 
 
 const App = ({ isLogged }) => {
@@ -76,6 +78,7 @@ const App = ({ isLogged }) => {
             </Route>
             <Route exact path="/chip">
               <Header />
+              <ChipCaseForm />
               <Footer />
             </Route>
             <Route exact path="/distributor">
@@ -97,7 +100,7 @@ const App = ({ isLogged }) => {
             </Route>
             <Route exact path="/chip">
               <Header />
-              <Home />
+              <ChipCaseForm />
               <Footer />
             </Route>
             <Route exact path="/distributor">

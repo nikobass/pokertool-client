@@ -10,7 +10,8 @@ import {
     changeConnectionInput, 
     submitLogin, 
     hideModal, 
-    submitLogout 
+    submitLogout ,
+    signUpForm
 } from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
 
@@ -32,7 +33,8 @@ const Header = ({
     handleLogout,
     isSigninError,
     emailValue,
-    passwordValue
+    passwordValue,
+    handleShowSignupModal
 }) => {
 
     const history = useHistory();
@@ -129,7 +131,7 @@ const Header = ({
                     <div className="modalUnauthorized">
                         <p className="modalUnauthorized__paragraph">Vous devez être connecté pour accéder à ce contenu.</p>
                         <p className="modalUnauthorized__paragraph">Déjà inscrit ? <button onClick={handleShowModal} className="modalUnauthorized__button">Me connecter</button></p>
-                        <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button className="modalUnauthorized__button">Créer un compte</button></p>
+                        <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button onClick={handleShowSignupModal} className="modalUnauthorized__button">Créer un compte</button></p>
                     </div>
                 )}
             />
@@ -157,6 +159,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     handleShowModal: () => {
         dispatch(showConnectionModal());
+    },
+    handleShowSignupModal: () => {
+      dispatch(signUpForm());
     },
     handleLogin: (event) => {
         event.preventDefault();

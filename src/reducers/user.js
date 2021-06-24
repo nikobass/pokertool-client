@@ -98,60 +98,62 @@ const reducer = (state = initialState, action = {}) => {
         }
       }
       
-        case RESET_PROFIL_MODIF:
-          return {
-            ...state,
-            profil: {
-              modifying: false,
-            }
-          }
+    case RESET_PROFIL_MODIF:
+      return {
+        ...state,
+        profil: {
+          modifying: false,
+        }
+      }
 
-          case SHOW_CONNECTION_MODAL:
-            return {
-              ...state,
-              showConnectionModal: true,
-            }
-            case HIDE_MODAL:
-              return {
-                ...state,
-                showConnectionModal: false,
-                  showSignUpModal: false,
-                  showUnauthorizedModal: false,
-                  showDeleteAccountModal: false,
-                  loginError: null
-              }
-              case SIGN_UP_FORM:
-                return {
-                  ...state,
-                  showSignUpModal: true,
-                };
-              case LOGIN_SUCCESS:
-                return {
-                  ...state,
-                  nickname: action.apiData.nickname,
-                    isLogged: true,
-                    showConnectionModal: false,
-                    loginError: null
-                };
-              case SUBMIT_SIGN_UP_VALUES:
-                return {
-                  ...state,
-                  signup: {
-                    ...state.signup,
-                    [action.inputName]: action.newInputValue,
-                  }
-                };
-              case SIGN_UP_SUCCESS:
-                return {
-                  ...state,
-                  isLogged: true,
-                    showSignUpModal: false,
-                };
-              case SHOW_CONNECTION_MODAL:
-                return {
-                  ...state,
-                  showConnectionModal: true
-                };
+    case SHOW_CONNECTION_MODAL:
+    return {
+      ...state,
+      showConnectionModal: true,
+    }
+    case HIDE_MODAL:
+    return {
+      ...state,
+      showConnectionModal: false,
+      showSignUpModal: false,
+      showUnauthorizedModal: false,
+      showDeleteAccountModal: false,
+      loginError: null
+    }
+    case SIGN_UP_FORM:
+      return {
+        ...state,
+        showSignUpModal: true,
+        showUnauthorizedModal: false
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        nickname: action.apiData.nickname,
+        isLogged: true,
+        showConnectionModal: false,
+        loginError: null
+      };
+    case SUBMIT_SIGN_UP_VALUES:
+      return {
+        ...state,
+        signup: {
+          ...state.signup,
+          [action.inputName]: action.newInputValue,
+        }
+      };
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,                 
+        showSignUpModal: false,
+        showConnectionModal: true,
+        showUnauthorizedModal: false
+      };
+    case SHOW_CONNECTION_MODAL:
+      return {
+        ...state,
+        showConnectionModal: true
+      };
       
     case SHOW_UNAUTHORIZED_MODAL:
       return {
@@ -181,7 +183,9 @@ const reducer = (state = initialState, action = {}) => {
     case LOGOUT:
       return {
         ...state,
-        isLogged: false
+        isLogged: false,
+        email: '',
+        password: ''
       }
     case LOG_USER:
       return {
@@ -221,25 +225,25 @@ const reducer = (state = initialState, action = {}) => {
         loginError: action.errorMsg
       }
 
-                case SIGN_UP_ERROR:
-                  return {
-                    ...state,
-                    signup: {
-                      ...state.signup,
-                      signUpError: action.errorAPI
-                    }
-                  }
-                  case SIGN_UP_SUBMIT_CONFIRM_ERROR:
-                    return {
-                      ...state,
-                      signup: {
-                        ...state.signup,
-                      signUpError: action.confirmMailPasswordError
-                      }
+    case SIGN_UP_ERROR:
+      return {
+        ...state,
+        signup: {
+          ...state.signup,
+          signUpError: action.errorAPI
+        }
+      }
+      case SIGN_UP_SUBMIT_CONFIRM_ERROR:
+        return {
+          ...state,
+          signup: {
+            ...state.signup,
+          signUpError: action.confirmMailPasswordError
+          }
 
-                    }
-                default:
-                  return state;
+        }
+    default:
+      return state;
   }
 };
 
