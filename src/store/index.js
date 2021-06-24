@@ -2,6 +2,7 @@
 import { createStore, applyMiddleware } from 'redux';
 
 import authMiddleware from '../middlewares/auth';
+import chipMiddleware from '../middlewares/chips';
 
 import tournamentsMiddleware from '../middlewares/tournaments';
 
@@ -13,8 +14,7 @@ import reducer from 'src/reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancers = composeEnhancers(
-  applyMiddleware(authMiddleware, distributorMiddleware, tournamentsMiddleware),
-
+  applyMiddleware(authMiddleware, chipMiddleware, distributorMiddleware, tournamentsMiddleware),
 );
 
 const store = createStore(reducer, enhancers);

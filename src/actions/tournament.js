@@ -10,7 +10,7 @@ export const GET_ONE_TOURNAMENT_USER = 'GET_ONE_TOURNAMENT_USER';
 export const GET_ONE_TOURNAMENT_USER_SUCCESS = 'GET_ONE_TOURNAMENT_USER_SUCCESS';
 export const SORT_TOURNAMENT_BY_NAME = 'SORT_TOURNAMENT_BY_NAME';
 
-import {HIDE_MODAL} from './user'
+import {HIDE_MODAL} from './user';
 
 /*************************** Modal Tournaments ****************************/
 
@@ -27,7 +27,7 @@ export const tournamentDeleteModal = (currentId) => ({
 
 /************************* GET Tournaments ******************************/
 
-// récupération de la list des tournois depuis le back 
+// récupération de la list des tournois depuis le back
 export const getTournamentUser = () => ({
   type: GET_TOURNAMENTS_ALL_USER,
 });
@@ -41,7 +41,7 @@ export const getTournamentUserSuccess = (tournaments) => ({
 
 // récupération des détails d'un tournoi
 export const getOneTournamentUser = () => ({
-  type: GET_ONE_TOURNAMENT_USER  ,
+  type: GET_ONE_TOURNAMENT_USER,
 });
 
 // retour du middleware pour les details d'un tournoi

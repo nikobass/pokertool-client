@@ -183,7 +183,9 @@ const reducer = (state = initialState, action = {}) => {
     case LOGOUT:
       return {
         ...state,
-        isLogged: false
+        isLogged: false,
+        email: '',
+        password: ''
       }
     case LOG_USER:
       return {

@@ -1,0 +1,76 @@
+.chips{
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  padding: 2rem 1rem;
+  margin: 2rem auto;
+  background-color: #19191e;
+  margin-bottom: 95px;
+  width: 30%;
+  align-items: center;   
+  overflow-y: scroll;
+  height: 80%;
+
+  &__form {
+      display: flex; 
+     
+
+      &__chips {
+        display: flex;
+        flex-direction: column;
+        align-items: center;        
+    }
+
+      &__subtitle{
+          color: #f2f2f2;
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 2rem;
+          text-align: center;
+      }
+
+      &__addChip{            
+          background-color: #ee581e;
+          color: #f2f2f2;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          font-weight: 700;
+          font-size: 0.8rem;
+          border: 2px solid #19191e;
+          margin-bottom: 1rem;
+
+          &:hover{
+              cursor: pointer;
+              background-color: #19191e;
+              border: 2px solid #f2f2f2;
+              color: #EE581E;
+          }
+      }
+
+      &__errorMsg{
+        color: white;
+      }
+
+      &__submitChips{
+          background-color: #ee581e;
+          color: #f2f2f2;
+          padding: 1rem 2rem;
+          border-radius: 5px;
+          font-weight: 700;
+          font-size: 1.1rem;
+          border: 2px solid #19191e;
+          margin-top: 2rem;
+
+          &:hover{
+              cursor: pointer;
+              background-color: #19191e;
+              border: 2px solid #f2f2f2;
+              color: #EE581E;
+          }
+
+          &--none{
+            display: none;
+          }
+      }
+  }
+}
