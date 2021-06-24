@@ -5,7 +5,7 @@ import {
   getTournamentUser,
   deleteTournamentUser,
   hideModalDelete,
-  SortTournamentByName,
+  SortTournamentByLocation,
 } from 'src/actions/tournament';
 import Modal from 'src/components/Modal';
 
@@ -21,7 +21,7 @@ const Tournaments = ({
   handleCloseModal,
   refreshTournaments,
   oneTournament,
-  HandleOnclickSortTournamentByName,
+  handleOnclickSortTournamentByLocation,
 }) => {
   const dispatch = useDispatch();
 
@@ -29,17 +29,17 @@ const Tournaments = ({
     dispatch(getTournamentUser());
   }, [refreshTournaments]);
 
-  const compareDate = (a, b) => {
-    if (a.name < b.name) {
+  const compareLocation = (a, b) => {
+    if (a.location < b.location) {
       return -1;
     }
-    if (a.name > b.name) {
+    if (a.location > b.location) {
       return 1;
     }
     return 0;
   };
-  const TournamentListByName = () => tournaments.sort(compareDate);
-
+  const tournamentListByLocation = () => tournaments.sort(compareLocation);
+  console.log(tournamentListByLocation);
  
   // console.log(sortByDate);
 
@@ -63,7 +63,7 @@ const Tournaments = ({
             Nom
             <button 
             className="chevron-down"
-            onClick={HandleOnclickSortTournamentByName} 
+            
             >
               <ChevronDown  size={15} />
             </button>
@@ -76,7 +76,10 @@ const Tournaments = ({
           </span>
           <span>
             Lieu
-            <button className="chevron-down">
+            <button 
+            className="chevron-down"
+            onClick={handleOnclickSortTournamentByLocation} 
+            >
               <ChevronDown  size={15} />
             </button>
           </span>
@@ -182,8 +185,8 @@ const mapDispatchToProps = (dispatch) => ({
   submitDeleteTournament: () => {
     dispatch(deleteTournamentUser());
   },
-  HandleOnclickSortTournamentByName: () => {
-    dispatch(SortTournamentByName(TournamentListByName()));
+  handleOnclickSortTournamentByLocation: () => {    
+    dispatch(SortTournamentByLocation(tournamentListByLocation()));
   },
 
 });

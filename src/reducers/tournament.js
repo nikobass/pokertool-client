@@ -7,7 +7,7 @@ import {
   DELETE_TOURNAMENT_SUCCESS,
   GET_ONE_TOURNAMENT_USER,
   GET_ONE_TOURNAMENT_USER_SUCCESS,
-  SORT_TOURNAMENT_BY_NAME,
+  SORT_TOURNAMENT_BY_LOCATION,
 
 } from 'src/actions/tournament';
 
@@ -85,7 +85,7 @@ const reducer = (state = initialState, action = {}) => {
         openDeleteModal: false,
         refreshTournaments: true,
       };
-    case SORT_TOURNAMENT_BY_NAME:
+    case SORT_TOURNAMENT_BY_LOCATION:
       return {
         ...state,
         tournamentList: action.tournamentList,
