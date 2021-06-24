@@ -1,17 +1,18 @@
-import React , { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import {ChevronDown} from 'react-feather';
+import { ChevronDown } from 'react-feather';
 import {
   getTournamentUser,
   deleteTournamentUser,
   hideModalDelete,
-  } from 'src/actions/tournament';
-import Modal from 'src/components/Modal'
+  SortTournamentByName,
+} from 'src/actions/tournament';
+import Modal from 'src/components/Modal';
 
-import TournamentElement from 'src/components/TournamentElement'
+import TournamentElement from 'src/components/TournamentElement';
 import TournamentDetails from '../TournamentDetails';
 
-import './tournaments.scss'
+import './tournaments.scss';
 
 const Tournaments = ({
   tournaments,
@@ -19,14 +20,36 @@ const Tournaments = ({
   submitDeleteTournament,
   handleCloseModal,
   refreshTournaments,
-  oneTournament
+  oneTournament,
+  HandleOnclickSortTournamentByName,
 }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTournamentUser())
+    dispatch(getTournamentUser());
   }, [refreshTournaments]);
 
+  const compareDate = (a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  };
+  const TournamentListByName = () => tournaments.sort(compareDate);
+
+ 
+  // console.log(sortByDate);
+
+  // const reverseId = tournaments.reverse();
+  // console.log(reverseId);
+  // const sortId = tournaments.sort();
+  // console.log(sortId);
+  // {const mapTournament = tournaments.map((tournament) => (tournament.location));
+  // console.log ("Y'a quoi dans mapTournament?");
+  // console.log (mapTournament);}
 
   return (
     <div className="tournaments-container">
@@ -38,7 +61,10 @@ const Tournaments = ({
 
           <span>
             Nom
-            <button className="chevron-down">
+            <button 
+            className="chevron-down"
+            onClick={HandleOnclickSortTournamentByName} 
+            >
               <ChevronDown  size={15} />
             </button>
           </span>
@@ -99,7 +125,9 @@ const Tournaments = ({
         
 
           ))
+          
         }
+
       </ul>
       {!oneTournament &&(
       <TournamentDetails 
@@ -139,29 +167,25 @@ Tournaments.defaultProps = {
   tournaments: null,
 };
 
-
 const mapStateToProps = (state) => ({
-  tournaments : state.tournament.tournamentList,
-  showDeleteTournamentModal : state.tournament.openDeleteModal,
+  tournaments: state.tournament.tournamentList,
+  showDeleteTournamentModal: state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
- 
-
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
-
 
   handleCloseModal: () => {
     dispatch(hideModalDelete());
   },
 
   submitDeleteTournament: () => {
-   
-    dispatch(deleteTournamentUser())
-  }
+    dispatch(deleteTournamentUser());
+  },
+  HandleOnclickSortTournamentByName: () => {
+    dispatch(SortTournamentByName(TournamentListByName()));
+  },
 
-})
+});
 
-
-
-export default connect(mapStateToProps, mapDispatchToProps )(Tournaments);
+export default connect(mapStateToProps, mapDispatchToProps)(Tournaments);

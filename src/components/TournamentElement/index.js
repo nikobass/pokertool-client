@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import {
   tournamentDetailsModal,
   tournamentDeleteModal,
-  getOneTournamentUser
+  getOneTournamentUser,
 } from 'src/actions/tournament';
 
-import './tournamentElement.scss'
+import './tournamentElement.scss';
 
 const TournamentElement = ({
   name,
@@ -56,8 +56,8 @@ const TournamentElement = ({
         <Edit />
       </button>
       <button 
-      className="modify-tournament"
-      onClick={handleTournamentDelete}
+        className="modify-tournament"
+        onClick={handleTournamentDelete}
       >
         <Trash2 />
       </button>
@@ -74,23 +74,20 @@ TournamentElement.propTypes = {
   cashPrice: PropTypes.number.isRequired,
   nbPlayers: PropTypes.number.isRequired,
   buyIn: PropTypes.number.isRequired,
-  statut:PropTypes.string.isRequired,
+  statut: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  handleTournamentDetails : PropTypes.func.isRequired,
-
-}
-
+  handleTournamentDetails: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
-    dispatch(tournamentDetailsModal(ownprops.currentId))
-    {console.log(ownprops.currentId)}
-    dispatch(getOneTournamentUser())
-   
+    dispatch(tournamentDetailsModal(ownprops.currentId));
+    {console.log(ownprops.currentId)};
+    dispatch(getOneTournamentUser());
   },
   handleTournamentDelete: () => {
     dispatch(tournamentDeleteModal(ownprops.currentId));
-}
-})
+  },
+});
 
-export default connect (null, mapDispatchToProps) (TournamentElement);
+export default connect(null, mapDispatchToProps)(TournamentElement);

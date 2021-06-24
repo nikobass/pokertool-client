@@ -1,13 +1,14 @@
-export const OPEN_MODAL_TOURNAMENT_DETAILS = 'OPEN_MODAL_TOURNAMENT_DETAILS'
-export const CLOSE_TOURNAMENT_DETAILS_MODAL = 'CLOSE_TOURNAMENT_DETAILS_MODAL'
-export const GET_TOURNAMENTS_ALL_USER = 'GET_TOURNAMENTS_ALL_USER'
-export const GET_TOURNAMENTS_SUCCESS = 'GET_TOURNAMENTS_SUCCESS'
-export const DELETE_TOURNAMENT_USER = 'DELETE_TOURNAMENT_USER'
-export const DELETE_TOURNAMENT_SUCCESS = 'DELETE_TOURNAMENT_SUCCESS'
-export const SHOW_DELETE_TOURNAMENT_MODAL = 'SHOW_DELETE_TOURNAMENT_MODAL'
-export const OPEN_MODAL_TOURNAMENT_DELETE = 'OPEN_MODAL_TOURNAMENT_DELETE'
-export const GET_ONE_TOURNAMENT_USER = 'GET_ONE_TOURNAMENT_USER'
-export const GET_ONE_TOURNAMENT_USER_SUCCESS ='GET_ONE_TOURNAMENT_USER_SUCCESS'
+export const OPEN_MODAL_TOURNAMENT_DETAILS = 'OPEN_MODAL_TOURNAMENT_DETAILS';
+export const CLOSE_TOURNAMENT_DETAILS_MODAL = 'CLOSE_TOURNAMENT_DETAILS_MODAL';
+export const GET_TOURNAMENTS_ALL_USER = 'GET_TOURNAMENTS_ALL_USER';
+export const GET_TOURNAMENTS_SUCCESS = 'GET_TOURNAMENTS_SUCCESS';
+export const DELETE_TOURNAMENT_USER = 'DELETE_TOURNAMENT_USER';
+export const DELETE_TOURNAMENT_SUCCESS = 'DELETE_TOURNAMENT_SUCCESS';
+export const SHOW_DELETE_TOURNAMENT_MODAL = 'SHOW_DELETE_TOURNAMENT_MODAL';
+export const OPEN_MODAL_TOURNAMENT_DELETE = 'OPEN_MODAL_TOURNAMENT_DELETE';
+export const GET_ONE_TOURNAMENT_USER = 'GET_ONE_TOURNAMENT_USER';
+export const GET_ONE_TOURNAMENT_USER_SUCCESS = 'GET_ONE_TOURNAMENT_USER_SUCCESS';
+export const SORT_TOURNAMENT_BY_NAME = 'SORT_TOURNAMENT_BY_NAME';
 
 import {HIDE_MODAL} from './user'
 
@@ -15,40 +16,39 @@ import {HIDE_MODAL} from './user'
 
 // ouverture de la modal détail d'un tournoi
 export const tournamentDetailsModal = (currentId ) => ({
-  type : OPEN_MODAL_TOURNAMENT_DETAILS,
+  type: OPEN_MODAL_TOURNAMENT_DETAILS,
   currentId,
-  
-})
+});
 
 export const tournamentDeleteModal = (currentId) => ({
-  type : OPEN_MODAL_TOURNAMENT_DELETE,
-  currentId
-})
+  type: OPEN_MODAL_TOURNAMENT_DELETE,
+  currentId,
+});
 
 /************************* GET Tournaments ******************************/
 
 // récupération de la list des tournois depuis le back 
 export const getTournamentUser = () => ({
-  type : GET_TOURNAMENTS_ALL_USER,
-})
+  type: GET_TOURNAMENTS_ALL_USER,
+});
 
 // retour du middleware pour la 
 // récupération de la list des tournois depuis le back 
 export const getTournamentUserSuccess = (tournaments) => ({
-  type : GET_TOURNAMENTS_SUCCESS,
-  tournaments
-})
+  type: GET_TOURNAMENTS_SUCCESS,
+  tournaments,
+});
 
 // récupération des détails d'un tournoi
 export const getOneTournamentUser = () => ({
-  type : GET_ONE_TOURNAMENT_USER  
-})
+  type: GET_ONE_TOURNAMENT_USER  ,
+});
 
 // retour du middleware pour les details d'un tournoi
 export const getOneTournamentUserSuccess = (tournaments) => ({
-  type : GET_ONE_TOURNAMENT_USER_SUCCESS,
-  tournaments
-})
+  type: GET_ONE_TOURNAMENT_USER_SUCCESS,
+  tournaments,
+});
 
 /************************* POST Tournaments ******************************/
 
@@ -59,24 +59,29 @@ export const getOneTournamentUserSuccess = (tournaments) => ({
 
 // ouverture modal supprimer un tournoi
 export const showDeleteTournamentModal = () => ({
-  type: SHOW_DELETE_TOURNAMENT_MODAL
+  type: SHOW_DELETE_TOURNAMENT_MODAL,
 });
 
 // pars dans le middleware pour requete delete
 export const deleteTournamentUser = (tournamentId) => ({
   type: DELETE_TOURNAMENT_USER,
-  tournamentId
-  
+  tournamentId,
 
 });
 
 // retour depuis le middleware
 export const deleteTournamentSucces = (tournamentId) => ({
   type: DELETE_TOURNAMENT_SUCCESS,
-  tournamentId
+  tournamentId,
 });
 
 // ferme la modal au bouton annuler
 export const hideModalDelete = () => ({
-  type : HIDE_MODAL
-})
+  type: HIDE_MODAL,
+});
+
+// trie les tournois par nom
+export const SortTournamentByName = (tournamentList) => ({
+  type: SORT_TOURNAMENT_BY_NAME,
+  tournamentList,
+});
