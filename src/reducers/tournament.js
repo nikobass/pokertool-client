@@ -38,8 +38,7 @@ const reducer = (state = initialState, action = {}) => {
           ...state,
           openDeleteModal: true,
           currentId: action.currentId
-        }
-      
+        }  
         case HIDE_MODAL :
           return{
             ...state,
@@ -51,6 +50,7 @@ const reducer = (state = initialState, action = {}) => {
           return{
             ...state,
             loading: true,
+            refreshTournaments: true,
           }
         case GET_TOURNAMENTS_SUCCESS :
           return {

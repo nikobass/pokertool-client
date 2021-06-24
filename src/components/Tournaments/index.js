@@ -80,7 +80,7 @@ const Tournaments = ({
           </span>
         </li>
         
-        {
+        {tournaments &&
           tournaments.map((tournament) => (
             <li key={tournament.id}>
               <TournamentElement
