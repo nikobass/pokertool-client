@@ -8,7 +8,8 @@ import {
     toggleTimer, 
     resetTimer, 
     goToPreviousStage,
-    goToNextStage
+    goToNextStage,
+    changeRange
 } from 'src/actions/timer';
 
 const Timer = ({ 
@@ -20,6 +21,9 @@ const Timer = ({
     handleResetTimer,
     handlePreviousStage,
     handleNextStage,
+    handleRangeChange,
+    rangeValue,
+    rangeValueMax,
 }) => (
 
     <div className="timer">
@@ -45,8 +49,11 @@ const Timer = ({
                 :
             </div>
             <div className="timer__timer__seconde">
-                {seconde < 10 ? "0"+seconde : seconde}
+                {seconde < 10 && seconde >= 0 ? "0"+seconde : seconde}
             </div>
+        </div>
+        <div className="timer__range">
+            <input onChange={handleRangeChange} className="timer__range__input" type="range" value={rangeValue} min={0} max={rangeValueMax} />
         </div>
         <div className="timer__play">
             {
@@ -71,6 +78,8 @@ const mapStateToProps = (state) => ({
     seconde: state.timer.currentValues.seconde,
     stage: state.timer.currentValues.stage,
     isLaunch: state.timer.isLaunch,
+    rangeValue: state.timer.rangeValue,
+    rangeValueMax: state.timer.rangeValueMax,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -85,6 +94,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleNextStage: () => {
         dispatch(goToNextStage())
+    },
+    handleRangeChange: (event) => {
+        dispatch(changeRange(event.target.value))
     }
 })
 

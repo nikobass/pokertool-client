@@ -5,12 +5,15 @@ import {
     RESET_CURRENT_VALUES,
     LOAD_PREVIOUS_STAGE,
     LOAD_NEXT_STAGE,
+    CHANGE_RANGE,
 
 } from 'src/actions/timer';
 
 
 const initialState = {
     isLaunch: false,
+    rangeValue: 0,
+    rangeValueMax: 300,
     intervalId: null,
     currentTournament: {
         minute: 5,
@@ -53,6 +56,7 @@ const timer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 intervalId: action.intervalId,
+                rangeValue: state.rangeValueMax - (state.currentValues.minute * 60 + state.currentValues.seconde),
                 currentValues: {
                     ...state.currentValues,
                     //gestion des secondes
@@ -102,11 +106,13 @@ const timer = (state = initialState, action = {}) => {
                 ...state,
                 isLaunch: false,
                 currentValues: state.currentTournament,
+                rangeValue: 0,
             }
 
         case LOAD_PREVIOUS_STAGE:
             return {
                 ...state,
+                rangeValue: 0,
                 currentValues: {
                     ...state.currentValues,
                     minute: state.currentTournament.minute,
@@ -117,17 +123,22 @@ const timer = (state = initialState, action = {}) => {
                         :
                         state.currentValues.stage,
                     smallBlind: state.currentValues.stage > 1
-                    ? state.currentStructure[state.currentValues.stage - 2].smallBlind
-                    : state.currentValues.smallBlind,
+                    ? 
+                    state.currentStructure[state.currentValues.stage - 2].smallBlind
+                    : 
+                    state.currentValues.smallBlind,
                     bigBlind: state.currentValues.stage > 1
-                    ? state.currentStructure[state.currentValues.stage - 2].bigBlind
-                    : state.currentValues.bigBlind
+                    ? 
+                    state.currentStructure[state.currentValues.stage - 2].bigBlind
+                    : 
+                    state.currentValues.bigBlind
                 }
             }
 
         case LOAD_NEXT_STAGE:
             return {
                 ...state,
+                rangeValue: 0,
                 currentValues: {
                     ...state.currentValues,
                     minute: state.currentTournament.minute,
@@ -138,12 +149,36 @@ const timer = (state = initialState, action = {}) => {
                         :
                         state.currentValues.stage,
                     smallBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length-1].stage
-                    ? state.currentStructure[state.currentValues.stage].smallBlind
-                    : state.currentValues.smallBlind,
+                    ? 
+                    state.currentStructure[state.currentValues.stage].smallBlind
+                    : 
+                    state.currentValues.smallBlind,
                     bigBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length-1].stage
-                    ? state.currentStructure[state.currentValues.stage].bigBlind
-                    : state.currentValues.bigBlind
+                    ? 
+                    state.currentStructure[state.currentValues.stage].bigBlind
+                    : 
+                    state.currentValues.bigBlind
                 }
+            }
+
+        case CHANGE_RANGE:
+            console.log((state.rangeValueMax - state.rangeValue - (state.currentValues.minute * 60))%60 === 0)
+            return{
+                ...state,   
+                rangeValue: parseInt(action.value),
+                currentValues: {
+                    ...state.currentValues,
+                    //minutes
+                    minute: state.currentTournament.minute-1 - Math.floor(state.rangeValue/60),
+                    seconde: 
+                    state.rangeValue === 299
+                    ?
+                    0
+                    :
+                    59 - state.rangeValue % 60
+
+                }
+
             }
     }
     return state;

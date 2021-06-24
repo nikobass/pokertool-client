@@ -58,7 +58,7 @@ const timerMiddleware = (store) => (next) => (action) => {
             if (!state.timer.isLaunch) {
                 const intervalId = setInterval(() => {
                     store.dispatch(changeCurrentValues(intervalId));
-                }, 10)
+                }, 1000)
             } else {
                 clearInterval(intervalId);
             }

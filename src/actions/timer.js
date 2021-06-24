@@ -6,6 +6,7 @@ export const GO_TO_PREVIOUS_STAGE = 'GO_TO_PREVIOUS_STAGE';
 export const LOAD_PREVIOUS_STAGE = 'LOAD_PREVIOUS_STAGE';
 export const GO_TO_NEXT_STAGE = 'GO_TO_NEXT_STAGE';
 export const LOAD_NEXT_STAGE = 'LOAD_NEXT_STAGE';
+export const CHANGE_RANGE = 'CHANGE_RANGE';
 
 export const toggleTimer = () => ({
     type: TOGGLE_TIMER
@@ -38,4 +39,9 @@ export const goToNextStage = () => ({
 
 export const loadNextStage = () => ({
     type: LOAD_NEXT_STAGE
+})
+
+export const changeRange = (value) => ({
+    type: CHANGE_RANGE,
+    value
 })
