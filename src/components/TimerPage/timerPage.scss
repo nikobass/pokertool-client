@@ -1,0 +1,19 @@
+.timerPage{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/images/bg-timer.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+
+    &__infos{
+        display: flex;
+        justify-content: space-around;
+
+        &__timer{
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+    }
+}

@@ -8,12 +8,30 @@ import {
     loadPreviousStage,
     GO_TO_NEXT_STAGE,
     loadNextStage,
+    REFRESH_TIME,
+    show_time
 
 } from 'src/actions/timer';
 
 const timerMiddleware = (store) => (next) => (action) => {
 
     switch (action.type) {
+
+        case REFRESH_TIME: {
+
+            setInterval(() => {
+                let now = new Date();
+                let currentTime = {
+                    hour: now.getHours() >= 10 ? now.getHours() : "0" + now.getHours(),
+                    minute: now.getMinutes() >= 10 ? now.getMinutes() : "0" + now.getMinutes(),
+                    second: now.getSeconds() >= 10 ? now.getSeconds() : "0" + now.getSeconds(),
+                }
+
+                store.dispatch(show_time(currentTime));
+            }, 1000)
+        }
+
+            break;
 
         case RESET_TIMER: {
             const state = store.getState();

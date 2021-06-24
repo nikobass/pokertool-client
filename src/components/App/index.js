@@ -20,7 +20,7 @@ import { useDispatch } from 'react-redux';
 import ResetPassword from 'src/components/ResetPasswordHome';
 import { connect } from 'react-redux';
 import Distributor from 'src/components/Distributor';
-import Timer from 'src/components/TimerPage/Timer';
+import TimerPage from 'src/components/TimerPage';
 
 
 const App = ({ isLogged }) => {
@@ -89,7 +89,7 @@ const App = ({ isLogged }) => {
               <Footer />
             </Route>
             <Route path="/timer">
-              <Timer />
+              <TimerPage />
             </Route>
           </>
           :

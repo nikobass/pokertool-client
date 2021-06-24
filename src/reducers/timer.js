@@ -5,29 +5,41 @@ import {
     RESET_CURRENT_VALUES,
     LOAD_PREVIOUS_STAGE,
     LOAD_NEXT_STAGE,
-    CHANGE_RANGE,
+    SKIP_BACK,
+    SKIP_FORWARD,
+    SHOW_TIME,
 
 } from 'src/actions/timer';
 
+const now = new Date();
 
 const initialState = {
+    currentTime: {
+        hour: now.getHours(),
+        minute: now.getMinutes(),
+        second: now.getSeconds(),
+    },
     isLaunch: false,
-    rangeValue: 0,
-    rangeValueMax: 1200,
     intervalId: null,
+    //TODO secondesLeft = durée du tournoi en secondes
+    secondesLeft: 300,
     currentTournament: {
-        minute: 20,
+        minute: 5,
         seconde: 0,
         stage: 1,
         smallBlind: 10,
         bigBlind: 20,
     },
     currentValues: {
-        minute: 20,
+        minute: 5,
         seconde: 0,
         stage: 1,
+        previousSB: 0,
+        previousBB: 0,
         smallBlind: 10,
         bigBlind: 20,
+        nextSB: 0,
+        nextBB: 0,
     },
     currentStructure: [
         { stage: 1, smallBlind: 10, bigBlind: 20 },
@@ -46,6 +58,12 @@ const initialState = {
 const timer = (state = initialState, action = {}) => {
 
     switch (action.type) {
+        case SHOW_TIME: {
+            return {
+                ...state,
+                currentTime: action.time,
+            }
+        }
         case TOGGLE_TIMER:
             return {
                 ...state,
@@ -56,10 +74,7 @@ const timer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 intervalId: action.intervalId,
-                rangeValue: state.rangeValue === 1200 ?
-                0
-                :
-                state.rangeValueMax - (state.currentValues.minute * 60 + state.currentValues.seconde-1),
+                secondesLeft: state.currentValues.minute * 60 + state.currentValues.seconde,
                 currentValues: {
                     ...state.currentValues,
                     //gestion des secondes
@@ -95,11 +110,28 @@ const timer = (state = initialState, action = {}) => {
                             state.currentValues.stage,
 
                     //gestion des blinds
+                    previousSB: 
+                    state.currentStructure[state.currentValues.stage - 2]
+                    ?
+                    state.currentStructure[state.currentValues.stage - 2].smallBlind
+                    :
+                    0,
+
+                    previousBB: state.currentStructure[state.currentValues.stage - 2]
+                    ?
+                        state.currentStructure[state.currentValues.stage - 2].bigBlind
+                    :
+                    0,
                     smallBlind:
                         state.currentStructure[state.currentValues.stage - 1].smallBlind,
 
                     bigBlind:
                         state.currentStructure[state.currentValues.stage - 1].bigBlind,
+                    nextSB:
+                        state.currentStructure[state.currentValues.stage].smallBlind,
+
+                    nextBB:
+                        state.currentStructure[state.currentValues.stage].bigBlind,
 
                 }
             }
@@ -108,6 +140,8 @@ const timer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isLaunch: false,
+                //TODO secondesLeft = durée du tournoi en secondes
+                secondesLeft: 300,
                 currentValues: state.currentTournament,
                 rangeValue: 0,
             }
@@ -115,7 +149,6 @@ const timer = (state = initialState, action = {}) => {
         case LOAD_PREVIOUS_STAGE:
             return {
                 ...state,
-                rangeValue: 0,
                 currentValues: {
                     ...state.currentValues,
                     minute: state.currentTournament.minute,
@@ -126,61 +159,87 @@ const timer = (state = initialState, action = {}) => {
                         :
                         state.currentValues.stage,
                     smallBlind: state.currentValues.stage > 1
-                    ? 
-                    state.currentStructure[state.currentValues.stage - 2].smallBlind
-                    : 
-                    state.currentValues.smallBlind,
+                        ?
+                        state.currentStructure[state.currentValues.stage - 2].smallBlind
+                        :
+                        state.currentValues.smallBlind,
                     bigBlind: state.currentValues.stage > 1
-                    ? 
-                    state.currentStructure[state.currentValues.stage - 2].bigBlind
-                    : 
-                    state.currentValues.bigBlind
+                        ?
+                        state.currentStructure[state.currentValues.stage - 2].bigBlind
+                        :
+                        state.currentValues.bigBlind
                 }
             }
 
         case LOAD_NEXT_STAGE:
             return {
                 ...state,
-                rangeValue: 0,
                 currentValues: {
                     ...state.currentValues,
                     minute: state.currentTournament.minute,
                     seconde: state.currentTournament.seconde,
-                    stage: state.currentValues.stage < state.currentStructure[state.currentStructure.length-1].stage
+                    stage: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
                         ?
                         state.currentValues.stage + 1
                         :
                         state.currentValues.stage,
-                    smallBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length-1].stage
-                    ? 
-                    state.currentStructure[state.currentValues.stage].smallBlind
-                    : 
-                    state.currentValues.smallBlind,
-                    bigBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length-1].stage
-                    ? 
-                    state.currentStructure[state.currentValues.stage].bigBlind
-                    : 
-                    state.currentValues.bigBlind
+                    smallBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
+                        ?
+                        state.currentStructure[state.currentValues.stage].smallBlind
+                        :
+                        state.currentValues.smallBlind,
+                    bigBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
+                        ?
+                        state.currentStructure[state.currentValues.stage].bigBlind
+                        :
+                        state.currentValues.bigBlind
                 }
             }
 
-        case CHANGE_RANGE:
-            console.log(state.rangeValue)
-            console.log(state.rangeValue % 60)
-            return{
-                ...state,   
-                rangeValue: parseInt(action.value),
+        case SKIP_BACK:
+            return {
+                ...state,
                 currentValues: {
                     ...state.currentValues,
-                    //minutes
-                    minute: state.currentTournament.minute-1 - Math.floor(state.rangeValue/60),
-                    seconde: state.rangeValue === 1200
-                    ?
-                    0
-                    :
-                    59 - state.rangeValue % 60
-                }
+                    minute: state.currentValues.seconde >= 30 && state.currentValues.minute < state.currentTournament.minute
+                        ?
+                        state.currentValues.minute + 1
+                        :
+                        state.currentValues.minute,
 
+                    seconde: state.currentValues.seconde < 30 && state.currentValues.minute < state.currentTournament.minute
+                        ?
+                        30
+                        :
+                        state.currentValues.seconde === 0 && state.currentValues.minute < state.currentTournament.minute
+                            ?
+                            30
+                            :
+                            0
+                }
+            }
+
+        case SKIP_FORWARD:
+            return {
+                ...state,
+                currentValues: {
+                    ...state.currentValues,
+                    minute: state.currentValues.seconde === 0 && state.currentValues.minute > 0
+                        ?
+                        state.currentValues.minute - 1
+                        :
+                        state.currentValues.minute,
+
+                    seconde: state.currentValues.seconde > 30
+                        ?
+                        30
+                        :
+                        state.currentValues.seconde === 0 && state.currentValues.minute > 0
+                            ?
+                            30
+                            :
+                            0
+                }
             }
     }
     return state;

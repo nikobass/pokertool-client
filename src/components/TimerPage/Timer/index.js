@@ -1,71 +1,85 @@
 import React from 'react';
-import { Play, Pause, RotateCcw, ChevronLeft, ChevronRight } from 'react-feather';
+import {
+    Play,
+    Pause,
+    RotateCcw,
+    Rewind,
+    FastForward,
+    SkipBack,
+    SkipForward,
+} from 'react-feather';
 import { connect } from 'react-redux';
 
 import './timer.scss';
 
-import { 
-    toggleTimer, 
-    resetTimer, 
+import {
+    toggleTimer,
+    resetTimer,
     goToPreviousStage,
     goToNextStage,
-    changeRange
+    skipBack,
+    skipForward,
 } from 'src/actions/timer';
 
-const Timer = ({ 
-    minute, 
-    seconde, 
-    stage, 
-    isLaunch, 
+const Timer = ({
+    minute,
+    seconde,
+    stage,
+    isLaunch,
     handleToggleTimer,
     handleResetTimer,
     handlePreviousStage,
     handleNextStage,
-    handleRangeChange,
-    rangeValue,
-    rangeValueMax,
+    handleSkipBack,
+    handleSkipForward,
 }) => (
-
-    <div className="timer">
-        <div className="timer__reset">
-            <RotateCcw onClick={handleResetTimer} size={50} className="icon"/>
+    <div className="firstBorder">
+        <div className="secondBorder">
+        <div className="timer">
+            <div className="timer__reset">
+                <RotateCcw onClick={handleResetTimer} size={50} strokeWidth="4px" className="icon" />
+            </div>
+            <div className="timer__stage">
+                <div className="timer__stage__chevronLeft">
+                    <SkipBack onClick={handlePreviousStage} size={50} strokeWidth="3px"className="icon" />
+                </div>
+                <div className="timer__stage__stage">
+                    Étape {stage}
+                </div>
+                <div className="timer__stage__chevronRight">
+                    <SkipForward onClick={handleNextStage} size={50} strokeWidth="3px"className="icon" />
+                </div>
+            </div>
+            <div className="timer__timer">
+                <div className="timer__timer__minute">
+                    {minute < 10 ? "0" + minute : minute}
+                </div>
+                <div className="timer__timer__separator">
+                    :
+                </div>
+                <div className="timer__timer__seconde">
+                    {seconde < 10 && seconde >= 0 ? "0" + seconde : seconde}
+                </div>
+            </div>
+            <div className="timer__controllers">
+                <div className={isLaunch ? "invisible" : "timer__controllers__skipBack"}>
+                    <Rewind onClick={handleSkipBack} size={50} strokeWidth="3px" className={isLaunch ? ".invisible" : "icon"} />
+                </div>
+                <div className="timer__controllers__play">
+                    {
+                        isLaunch ?
+                            <Pause onClick={handleToggleTimer} size={80} strokeWidth="3px" className="icon" />
+                            :
+                            <Play onClick={handleToggleTimer} size={80} strokeWidth="3px" className="icon" />
+                    }
+                </div>
+                <div className={isLaunch ? "invisible" : "timer__controllers__skipForward"}>
+                    <FastForward onClick={handleSkipForward} size={50} strokeWidth="3px" className="icon" />
+                </div>
+            </div>
         </div>
-        <div className="timer__stage">
-            <div className="timer__stage__chevronLeft">
-                <ChevronLeft onClick={handlePreviousStage} size={50} className="icon"/>
-            </div>
-            <div className="timer__stage__stage">
-                Étape {stage}
-            </div>
-            <div className="timer__stage__chevronRight">
-                <ChevronRight onClick={handleNextStage} size={50} className="icon"/>
-            </div>
-        </div>
-        <div className="timer__timer">
-            <div className="timer__timer__minute">
-                {minute <10 ? "0"+minute: minute}
-            </div>
-            <div className="timer__timer__separator">
-                :
-            </div>
-            <div className="timer__timer__seconde">
-                {seconde < 10 && seconde >= 0 ? "0"+seconde : seconde}
-            </div>
-        </div>
-        <div className="timer__range">
-            <input onChange={handleRangeChange} className="timer__range__input" type="range" value={rangeValue} min={0} max={rangeValueMax} />
-        </div>
-        <div className="timer__play">
-            {
-            isLaunch ? 
-            <Pause onClick={handleToggleTimer} size={50} className="icon"/>
-            :
-            <Play onClick={handleToggleTimer} size={50} className="icon"/>
-            }
         </div>
     </div>
-
-
 
 
 
@@ -78,8 +92,6 @@ const mapStateToProps = (state) => ({
     seconde: state.timer.currentValues.seconde,
     stage: state.timer.currentValues.stage,
     isLaunch: state.timer.isLaunch,
-    rangeValue: state.timer.rangeValue,
-    rangeValueMax: state.timer.rangeValueMax,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -95,9 +107,13 @@ const mapDispatchToProps = (dispatch) => ({
     handleNextStage: () => {
         dispatch(goToNextStage())
     },
-    handleRangeChange: (event) => {
-        dispatch(changeRange(event.target.value))
-    }
+    handleSkipBack: () => {
+        dispatch(skipBack())
+    },
+    handleSkipForward: () => {
+        dispatch(skipForward())
+    },
+
 })
 
 
