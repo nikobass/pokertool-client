@@ -23,7 +23,7 @@ const TimerBlinds = ({
 
     <div className="timerBlinds__current">
         <div className="timerBlinds__current__amount">
-            {smallBlind + "/" + bigBlind}
+            {smallBlind}<span className="timerBlinds__current__amount__slash">/</span>{bigBlind}
         </div>
         <div className="timerBlinds__current__text">
             Blinds actuelles
