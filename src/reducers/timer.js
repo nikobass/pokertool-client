@@ -13,17 +13,17 @@ import {
 const initialState = {
     isLaunch: false,
     rangeValue: 0,
-    rangeValueMax: 300,
+    rangeValueMax: 1200,
     intervalId: null,
     currentTournament: {
-        minute: 5,
+        minute: 20,
         seconde: 0,
         stage: 1,
         smallBlind: 10,
         bigBlind: 20,
     },
     currentValues: {
-        minute: 5,
+        minute: 20,
         seconde: 0,
         stage: 1,
         smallBlind: 10,
@@ -56,7 +56,10 @@ const timer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 intervalId: action.intervalId,
-                rangeValue: state.rangeValueMax - (state.currentValues.minute * 60 + state.currentValues.seconde),
+                rangeValue: state.rangeValue === 1200 ?
+                0
+                :
+                state.rangeValueMax - (state.currentValues.minute * 60 + state.currentValues.seconde-1),
                 currentValues: {
                     ...state.currentValues,
                     //gestion des secondes
@@ -162,7 +165,8 @@ const timer = (state = initialState, action = {}) => {
             }
 
         case CHANGE_RANGE:
-            console.log((state.rangeValueMax - state.rangeValue - (state.currentValues.minute * 60))%60 === 0)
+            console.log(state.rangeValue)
+            console.log(state.rangeValue % 60)
             return{
                 ...state,   
                 rangeValue: parseInt(action.value),
@@ -170,13 +174,11 @@ const timer = (state = initialState, action = {}) => {
                     ...state.currentValues,
                     //minutes
                     minute: state.currentTournament.minute-1 - Math.floor(state.rangeValue/60),
-                    seconde: 
-                    state.rangeValue === 299
+                    seconde: state.rangeValue === 1200
                     ?
                     0
                     :
                     59 - state.rangeValue % 60
-
                 }
 
             }

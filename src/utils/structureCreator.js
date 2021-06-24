@@ -27,10 +27,9 @@ const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
     }
 
     const duration = (stageTime * structure.length) / 60;
-    return {
-        structure,
-        'durée aproximative': `${Math.round(duration*2)/2} heures`
-    };
+    durationInHour = Math.round(duration*2)/2;
+
+    return structure,
 }
 
 console.log(structureCreator(25, 5, 10000, 20));
