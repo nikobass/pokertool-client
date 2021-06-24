@@ -3,7 +3,11 @@ import { Edit, Eye, Trash2 } from 'react-feather';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import {tournamentDetailsModal} from 'src/actions/tournament';
+import {
+  tournamentDetailsModal,
+  tournamentDeleteModal,
+  getOneTournamentUser
+} from 'src/actions/tournament';
 
 import './tournamentElement.scss'
 
@@ -12,15 +16,16 @@ const TournamentElement = ({
   location,
   cashPrice,
   nbPlayers,
-  maxPlayers,
   buyIn,
   statut,
   date,
-  handleTournamentDetails
+  handleTournamentDetails,
+  handleTournamentDelete,
+  
   
 }) => {
   return (
-    <div className="tournament--element">
+    <div className="tournament--element" >
       <span>
         {name}
       </span>
@@ -42,6 +47,7 @@ const TournamentElement = ({
       <span>
         {nbPlayers}
       </span>
+    
       <button onClick={handleTournamentDetails} className="modify-tournament">
         
         <Eye />
@@ -49,7 +55,10 @@ const TournamentElement = ({
       <button className="modify-tournament">
         <Edit />
       </button>
-      <button className="modify-tournament">
+      <button 
+      className="modify-tournament"
+      onClick={handleTournamentDelete}
+      >
         <Trash2 />
       </button>
       <button className="tournaments--play">Commencer</button>
@@ -62,9 +71,9 @@ const TournamentElement = ({
 TournamentElement.propTypes = {
   name: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  cashPrice: PropTypes.string.isRequired,
+  cashPrice: PropTypes.number.isRequired,
   nbPlayers: PropTypes.number.isRequired,
-  buyIn: PropTypes.string.isRequired,
+  buyIn: PropTypes.number.isRequired,
   statut:PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   handleTournamentDetails : PropTypes.func.isRequired,
@@ -72,15 +81,15 @@ TournamentElement.propTypes = {
 }
 
 
-
-
-
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
-    dispatch(tournamentDetailsModal())
+    dispatch(tournamentDetailsModal(ownprops.currentId))
+    {console.log(ownprops.currentId)}
+    dispatch(getOneTournamentUser())
+   
   },
-  handleShowModal: () => {
-    dispatch(closeTournamentDetailsModal());
+  handleTournamentDelete: () => {
+    dispatch(tournamentDeleteModal(ownprops.currentId));
 }
 })
 

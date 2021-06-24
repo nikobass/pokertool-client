@@ -2,8 +2,10 @@ import axios from 'axios';
 
 import {
   SUBMIT_LOGIN,
-  DELETE_USER_ACCOUNT,
   loginSuccess,
+  signUpSuccess,
+  SUBMIT_SIGN_UP,
+  DELETE_USER_ACCOUNT,
   SUBMIT_PROFIL,
   CHECK_IS_LOGGED,
   logUser,
@@ -11,6 +13,8 @@ import {
   updateProfilFromAPI,
   submitProfilSuccess,
   loginError,
+  UpdateProfilError,
+  signUpError,
 } from 'src/actions/user';
 import { deleteUserAccountSucces } from '../actions/user';
 
@@ -30,15 +34,33 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       })
         .then(response => {
-
           store.dispatch(loginSuccess(response.data));
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('nickname', response.data.nickname);
           localStorage.setItem('token', response.data.token);
-
         })
         .catch((err) => {          
           store.dispatch(loginError((err.response.data.message)));
+        });
+      break;
+    }
+    case SUBMIT_SIGN_UP: {
+      const state = store.getState();
+
+      axios ({
+        method: 'post',
+        url: `http://localhost:3000/signup`,
+        data: {
+          user_name: state.user.signup.nickname,
+          email: state.user.signup.email,
+          password: state.user.signup.password
+        },
+      })
+        .then(() => {         
+          store.dispatch(signUpSuccess());
+        })
+        .catch((err) => {          
+          store.dispatch(signUpError((err.response.data.message)));
         });
       break;
     }
@@ -52,8 +74,7 @@ const authMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then(() => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('userId');
+          localStorage.clear();      
           store.dispatch(deleteUserAccountSucces());
         })
         .catch((error) => console.log(error));
@@ -75,12 +96,12 @@ const authMiddleware = (store) => (next) => (action) => {
         },
         // headers: { "Authorization": `Bearer ${token}` }
       })
-        .then((response) => {
-          console.log(response);
+        .then((response) => {         
           store.dispatch(submitProfilSuccess());
         })
         .catch(err => {
           console.log(err.response.data.message)
+          store.dispatch(UpdateProfilError(err.response.data.message))
         });
 
       break;
@@ -92,7 +113,9 @@ const authMiddleware = (store) => (next) => (action) => {
       if(token){
         store.dispatch(logUser())
       }
+      break;
     }
+    
 
     case GET_PROFIL_FROM_API: {
 
@@ -104,12 +127,13 @@ const authMiddleware = (store) => (next) => (action) => {
         url: `http://localhost:3000/profil/${loggedUserId}`,
         headers: { "Authorization": `Bearer ${token}` }
       })
-      .then((response) => {
+      .then((response) => {      
         store.dispatch(updateProfilFromAPI(response.data))
       })
       .catch(error => console.log(error));
-
+      break;
     }
+    
     default:
       next(action);
       break;

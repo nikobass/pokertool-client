@@ -6,8 +6,11 @@ import {
   RESET_PROFIL_MODIF,
   SHOW_CONNECTION_MODAL,
   HIDE_MODAL,
-  CHANGE_OPEN_FORM,
+  SIGN_UP_FORM,
   LOGIN_SUCCESS,
+  SIGN_UP_SUCCESS,
+  SUBMIT_SIGN_UP_VALUES,
+  CHANGE_OPEN_FORM,
   LOGIN_ERROR,
   SHOW_UNAUTHORIZED_MODAL,
   SHOW_DELETE_ACCOUNT_MODAL,
@@ -17,10 +20,14 @@ import {
   CHANGE_CONNECTION_INPUT,
   LOG_USER,
   UPDATE_PROFIL_FROM_API,
-  SUBMIT_PROFIL_SUCCESS
+  SUBMIT_PROFIL_SUCCESS,
+  UPDATE_PROFIL_ERROR,
+  SIGN_UP_ERROR,
+  SIGN_UP_SUBMIT_CONFIRM_ERROR,
 } from 'src/actions/user';
 
 const initialState = {
+  // CURRENT CHANGES
   isLogged: false,
   userId: null,
   // la valeur par défaut des inputs, PROVISOIRE.
@@ -34,13 +41,22 @@ const initialState = {
     modifying: false,
     nickname: '',
     email: '',
-    password: ''
+    password: '',
+    errorMessage: null,
   },
   showConnectionModal: false,
   showDeleteAccountModal: false,
   openFormSignup: false,
+  showSignUpModal: false,
   token: null,
-  loginError: null
+  loginError: null,
+  //handleSignUpSubmit: false,
+  signup: {
+    nickname: '',
+    email: '',
+    password: '',
+    signUpError: null,
+  }
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -69,10 +85,11 @@ const reducer = (state = initialState, action = {}) => {
         }
       }
     case CHANGE_CONNECTION_INPUT:
-      return{
+      return {
         ...state,
         [action.inputName]: action.newInputValue
       }
+      
     case RESET_PROFIL_MODIF:
       return {
         ...state,
@@ -80,40 +97,68 @@ const reducer = (state = initialState, action = {}) => {
           modifying: false
         }
       }
+      
+    case RESET_PROFIL_MODIF:
+      return {
+        ...state,
+        profil: {
+          modifying: false,
+        }
+      }
 
+    case SHOW_CONNECTION_MODAL:
+    return {
+      ...state,
+      showConnectionModal: true,
+    }
+    case HIDE_MODAL:
+    return {
+      ...state,
+      showConnectionModal: false,
+      showSignUpModal: false,
+      showUnauthorizedModal: false,
+      showDeleteAccountModal: false,
+      loginError: null
+    }
+    case SIGN_UP_FORM:
+      return {
+        ...state,
+        showSignUpModal: true,
+        showUnauthorizedModal: false
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        nickname: action.apiData.nickname,
+        isLogged: true,
+        showConnectionModal: false,
+        loginError: null
+      };
+    case SUBMIT_SIGN_UP_VALUES:
+      return {
+        ...state,
+        signup: {
+          ...state.signup,
+          [action.inputName]: action.newInputValue,
+        }
+      };
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,                 
+        showSignUpModal: false,
+        showConnectionModal: true,
+        showUnauthorizedModal: false
+      };
     case SHOW_CONNECTION_MODAL:
       return {
         ...state,
         showConnectionModal: true
-      }
-    case CHANGE_OPEN_FORM:
-      return {
-        ...state,
-        openFormSignup: true,
       };
-    case SHOW_DELETE_ACCOUNT_MODAL:
-      return {
-        ...state,
-        showDeleteAccountModal: true
-      }
-    case SHOW_CONNECTION_MODAL:
-      return {
-        ...state,
-        showConnectionModal: true
-      };
-
+      
     case SHOW_UNAUTHORIZED_MODAL:
       return {
         ...state,
         showUnauthorizedModal: true,
-      };
-    case HIDE_MODAL:
-      return {
-        ...state,
-        showConnectionModal: false,
-        showUnauthorizedModal: false,
-        showDeleteAccountModal: false,
-        loginError: null
       };
     case CHANGE_OPEN_FORM:
       return {
@@ -135,14 +180,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
       }
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        nickname: action.apiData.nickname,
-        isLogged: true,
-        showConnectionModal: false,
-        loginError: null
-      };
     case LOGOUT:
       return {
         ...state,
@@ -154,7 +191,7 @@ const reducer = (state = initialState, action = {}) => {
         isLogged: true
       }
     case SUBMIT_PROFIL_SUCCESS:
-      return{
+      return {
         ...state,
         profil: {
           ...state.profil,
@@ -166,9 +203,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         profil: {
+          ...state.profil,
           modifying: false,
           nickname: action.dataAPI.user_name,
           email: action.dataAPI.email,
+        }
+      }
+    case UPDATE_PROFIL_ERROR:
+      return {
+        ...state,
+        profil: {
+          ...state.profil,
+          errorMessage: action.errorMsg
         }
       }
     case LOGIN_ERROR:
@@ -176,6 +222,24 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         loginError: action.errorMsg
       }
+
+    case SIGN_UP_ERROR:
+      return {
+        ...state,
+        signup: {
+          ...state.signup,
+          signUpError: action.errorAPI
+        }
+      }
+      case SIGN_UP_SUBMIT_CONFIRM_ERROR:
+        return {
+          ...state,
+          signup: {
+            ...state.signup,
+          signUpError: action.confirmMailPasswordError
+          }
+
+        }
     default:
       return state;
   }

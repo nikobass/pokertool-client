@@ -10,12 +10,16 @@ import {
     changeConnectionInput, 
     submitLogin, 
     hideModal, 
-    submitLogout 
+    submitLogout ,
+    signUpForm
 } from 'src/actions/user.js'
 import Modal from 'src/components/Modal';
 
 import './header.scss';
-import logo from 'src/assets/images/logo.png'
+// import logo from 'src/assets/images/logo.png';
+import logo from 'src/assets/images/logo_blanc.svg';
+// import logo from 'src/assets/images/logo_noir_text.svg';
+// import logo from 'src/assets/images/logo_noir.svg';
 
 
 const Header = ({
@@ -29,7 +33,8 @@ const Header = ({
     handleLogout,
     isSigninError,
     emailValue,
-    passwordValue
+    passwordValue,
+    handleShowSignupModal
 }) => {
 
     const history = useHistory();
@@ -112,7 +117,7 @@ const Header = ({
                         <label htmlFor="email" required className="connexionForm__label">Email</label>
                         <input onChange={handleConnectionInput} type="email" name="email" required value={emailValue} className="connexionForm__input" />
                         <label htmlFor="password" className="connexionForm__label">Mot de passe</label>
-                        <input onChange={handleConnectionInput} type="password" name="password" required value={passwordValue}className="connexionForm__input" />
+                        <input onChange={handleConnectionInput} type="password" name="password" required value={passwordValue} className="connexionForm__input" />
                         <p className="connexionForm__forgotPassword">Mot de passe oublié ? <span onClick={redirectToResetPassword} className="connexionForm__forgotPasswordLink">Cliquez-ici</span></p>
                         {isSigninError && <p>{isSigninError}</p>}
                         {<button type="submit" className="connexionForm__submit">Se connecter</button>}
@@ -126,7 +131,7 @@ const Header = ({
                     <div className="modalUnauthorized">
                         <p className="modalUnauthorized__paragraph">Vous devez être connecté pour accéder à ce contenu.</p>
                         <p className="modalUnauthorized__paragraph">Déjà inscrit ? <button onClick={handleShowModal} className="modalUnauthorized__button">Me connecter</button></p>
-                        <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button className="modalUnauthorized__button">Créer un compte</button></p>
+                        <p className="modalUnauthorized__paragraph">Pas encore inscrit ? <button onClick={handleShowSignupModal} className="modalUnauthorized__button">Créer un compte</button></p>
                     </div>
                 )}
             />
@@ -155,6 +160,9 @@ const mapDispatchToProps = (dispatch) => ({
     handleShowModal: () => {
         dispatch(showConnectionModal());
     },
+    handleShowSignupModal: () => {
+      dispatch(signUpForm());
+    },
     handleLogin: (event) => {
         event.preventDefault();
         //TODO: controle des saisies.......................
@@ -176,6 +184,6 @@ const mapDispatchToProps = (dispatch) => ({
         localStorage.removeItem('userId');  
         localStorage.removeItem('nickname');  
     }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

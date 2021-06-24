@@ -4,43 +4,46 @@ import PropTypes from 'prop-types';
 //components
 
 import Cards from 'src/components/Cards';
-import {changeOpenForm} from 'src/actions/user';
+import Signup from 'src/components/Signup';
+import { signUpForm} from 'src/actions/user';
 import { connect } from 'react-redux';
 
-import './home.scss'
+import './home.scss';
 
 
-const Home = ({openFormSignup, handleOpenForm}) => {
+
+const Home = ({handleSignUpForm, isLogged}) => {
 
   return (
     <div className='main'>
       <h1 className="main__title">Gérez facilement vos tournois de poker entre amis</h1>
       < Cards />
       <div className="signup">
-        <button 
+       { !isLogged && <button 
         className="signup__button"
-        onClick={handleOpenForm}
+        onClick={handleSignUpForm}
         >
           S'inscrire
         </button>
+       }
       </div>
-      {!openFormSignup //todo component signup  
-    }
-    
+      <Signup/>
     </div>
   );
 };
 
 Home.propTypes = {
   openFormSignup: PropTypes.bool,
-  handleOpenForm: PropTypes.func.isRequired
+  handleSignUpForm: PropTypes.func.isRequired,
 }
-
+const mapStateToProps = (state) => ({
+  isLogged: state.user.isLogged
+})
 const mapDispatchToProps = (dispatch) => ({
-  handleOpenForm: () => {
-     dispatch(changeOpenForm())
+  handleSignUpForm: () => {
+     dispatch(signUpForm())
    }
 })
 
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
