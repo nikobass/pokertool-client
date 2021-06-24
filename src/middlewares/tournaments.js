@@ -84,7 +84,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const state = store.getState();
         const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('token');
-        console.log(state.tournament.structureTournament)
+        
   
 
         axios ({
@@ -112,16 +112,15 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
         })
           .then(response => {
-            console.log(response.data);
-            console.log('test')
+           
             // Créer une autre action qui modifie le state (donc la dispatch)
             // le return de la fonction structureCreator remplacera structureTournament dans le state
-            store.dispatch(tournamentSubmitSuccess(dataEnvoyer));
+            store.dispatch(tournamentSubmitSuccess(response.data));
             
           })
           .catch((err) => {          
-            console.log(err.response.data);
-            console.log(dataEnvoyer)
+            console.log(err.response.data.message)
+            
           });
         break;
       }
@@ -129,27 +128,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const state = store.getState();
         const tournamentId = state.tournament.currentId;
         const token = localStorage.getItem('token');
-        console.log(state.tournament.structureTournament)
 
-        const dataEnvoyer = [    {
-          name: state.tournament.oneTournament.name,
-          date: state.tournament.oneTournament.date,
-          location: state.tournament.oneTournament.location,
-          speed:state.tournament.oneTournament.speed,
-          nb_players:state.tournament.oneTournament.nb_players,
-          comments:state.tournament.oneTournament.comments,
-          cash_price:state.tournament.oneTournament.cash_price,
-          buy_in:state.tournament.oneTournament.buy_in,
-          starting_stack: state.tournament.oneTournament.starting_stack,
-          small_blind: state.tournament.oneTournament.small_blind,
-          status: state.tournament.oneTournament.status,
-          chips_user: false,
-        },
-        
-          state.tournament.structureTournament
-
-        
-      ]
 
         axios({
           method:'patch',
@@ -169,7 +148,6 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             status: state.tournament.oneTournament.status,
             chips_user: false,
           },
-          
             state.tournament.structureTournament
 
           
@@ -177,12 +155,10 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         })
         .then((response) => {
 
-          console.log(response.data)
           store.dispatch(modifyTournamentSuccess(response.data));
         })
         .catch((err) => console.log(err.response.data.message));
-        console.log(dataEnvoyer)
-        ;
+      
       break;
     }
 
@@ -201,7 +177,6 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         }
       })
       .then((response) =>{
-        console.log(response.data)
         store.dispatch(getStructureTournamentSuccess(response.data))
         
       })

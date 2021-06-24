@@ -9,7 +9,8 @@ import {
   submitTournamentUpdate,
   changeInputValue,
   modifyTournamentValidate,
-  getStructureTournament
+  getStructureTournament,
+  hideModalDelete
   
 } from 'src/actions/tournament'
 
@@ -130,6 +131,7 @@ const mapDispatchToProps = (dispatch) =>({
   handleModifyTournamentConfirm: (event) => {
     event.preventDefault();
     dispatch(modifyTournamentValidate())
+    dispatch(hideModalDelete())
   }
 
 })

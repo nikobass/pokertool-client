@@ -33,7 +33,7 @@ const TournamentElement = ({
 }) => {
   return (
     <div className="tournament--element" >
-      <span>
+      <span >
         {name}
       </span>
       <span>
@@ -51,7 +51,7 @@ const TournamentElement = ({
       <span>
         {statut}
       </span>
-      <span>
+      <span >
         {nbPlayers}
       </span>
     

@@ -58,10 +58,11 @@ const Tournaments = ({
             Créer un tournoi
           </button>
         </div>
+      <div className="tournaments--list-grid">
       <ul>
         <li className="tournaments--list">
 
-          <span>
+          <span className="tournaments--list__name" >
             Nom
             <button className="chevron-down">
               <ChevronDown  size={15} />
@@ -107,7 +108,8 @@ const Tournaments = ({
         
         {
           tournaments.map((tournament) => (
-            <li key={tournament.id}>
+            <li  className="tournaments--list-grid"
+             key={tournament.id}>
               <TournamentElement
                 currentId={tournament.id}
                 name={tournament.name}
@@ -126,6 +128,7 @@ const Tournaments = ({
           ))
         }
       </ul>
+      </div>
       {!oneTournament &&(
       <TournamentDetails /> )
       }
@@ -247,6 +250,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createStructure())
     //Quand c'est fait, RDV dans le middleware
     //dispatch(tournamentSubmit()) //A supprimer puisque ce sera appelé dans l'action que tu crées juste au dessus
+    dispatch(hideModalDelete())
   }
 
 })

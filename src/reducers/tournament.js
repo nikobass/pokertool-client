@@ -141,7 +141,8 @@ const reducer = (state = initialState, action = {}) => {
             return{
               ...state,
               modifying: true,
-              loading: true
+              loading: true,
+              refreshTournaments: true,
               }
 
           case MODIFY_TOURNAMENT_SUCESS :
@@ -150,7 +151,8 @@ const reducer = (state = initialState, action = {}) => {
               modifying: false,
               loading: false,
               oneTournament: action.tournaments,
-              creatTournament: []
+              creatTournament: [],
+              refreshTournaments: true,
             }    
           case CHANGE_INPUT_VALUE:
             return{
@@ -168,7 +170,8 @@ const reducer = (state = initialState, action = {}) => {
                   creatTournament: {
                     ...state.creatTournament,
                     [action.inputName]: action.newInputValue,
-                  }
+                  },
+                 
                 };
           case TOURNAMENT_SUBMIT_SUCCESS:
                 return {
