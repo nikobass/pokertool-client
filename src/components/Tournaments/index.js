@@ -5,7 +5,7 @@ import {
   getTournamentUser,
   deleteTournamentUser,
   hideModalDelete,
-  SortTournamentByLocation,
+  sortLocationSubmit
 } from 'src/actions/tournament';
 import Modal from 'src/components/Modal';
 
@@ -27,19 +27,9 @@ const Tournaments = ({
 
   useEffect(() => {
     dispatch(getTournamentUser());
-  }, [refreshTournaments]);
+  }, []);
 
-  const compareLocation = (a, b) => {
-    if (a.location < b.location) {
-      return -1;
-    }
-    if (a.location > b.location) {
-      return 1;
-    }
-    return 0;
-  };
-  const tournamentListByLocation = () => tournaments.sort(compareLocation);
-  console.log(tournamentListByLocation);
+  
  
   // console.log(sortByDate);
 
@@ -186,7 +176,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(deleteTournamentUser());
   },
   handleOnclickSortTournamentByLocation: () => {    
-    dispatch(SortTournamentByLocation(tournamentListByLocation()));
+    dispatch(sortLocationSubmit());
   },
 
 });

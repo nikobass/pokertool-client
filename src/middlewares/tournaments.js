@@ -6,7 +6,9 @@ import {
   DELETE_TOURNAMENT_USER,
   deleteTournamentSucces,
   getOneTournamentUserSuccess,
-  GET_ONE_TOURNAMENT_USER 
+  GET_ONE_TOURNAMENT_USER,
+  sortTournamentByLocationSuccess,
+  SORT_LOCATION
 
 } from 'src/actions/tournament';
 
@@ -46,6 +48,22 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           console.log(response.data)
         })
         .catch((error) => console.log(error));
+      break;
+    }
+    case SORT_LOCATION: {
+      const state = store.getState();
+      const compareLocation = (a, b) => {
+        if (a.location < b.location) {
+          return -1;
+        }
+        if (a.location > b.location) {
+          return 1;
+        }
+        return 0;
+      };      
+      
+      const tournamentListByLocation = state.tournament.tournamentList.sort(compareLocation);
+      store.dispatch(sortTournamentByLocationSuccess(tournamentListByLocation));
       break;
     }
 

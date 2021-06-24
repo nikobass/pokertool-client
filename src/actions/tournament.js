@@ -8,7 +8,8 @@ export const SHOW_DELETE_TOURNAMENT_MODAL = 'SHOW_DELETE_TOURNAMENT_MODAL';
 export const OPEN_MODAL_TOURNAMENT_DELETE = 'OPEN_MODAL_TOURNAMENT_DELETE';
 export const GET_ONE_TOURNAMENT_USER = 'GET_ONE_TOURNAMENT_USER';
 export const GET_ONE_TOURNAMENT_USER_SUCCESS = 'GET_ONE_TOURNAMENT_USER_SUCCESS';
-export const SORT_TOURNAMENT_BY_LOCATION = 'SORT_TOURNAMENT_BY_LOCATION';
+export const SORT_TOURNAMENT_BY_LOCATION_SUCCESS = 'SORT_TOURNAMENT_BY_LOCATION_SUCCESS';
+export const SORT_LOCATION = 'SORT_LOCATION'
 
 import {HIDE_MODAL} from './user';
 
@@ -59,7 +60,7 @@ export const getOneTournamentUserSuccess = (tournaments) => ({
 
 // ouverture modal supprimer un tournoi
 export const showDeleteTournamentModal = () => ({
-  type: SHOW_DELETE_TOURNAMENT_MODAL,
+  type: SHOW_DELETE_TOURNAMENT_MODAL,q
 });
 
 // pars dans le middleware pour requete delete
@@ -81,7 +82,11 @@ export const hideModalDelete = () => ({
 });
 
 // trie les tournois par nom
-export const SortTournamentByLocation = (tournamentList) => ({
-  type: SORT_TOURNAMENT_BY_LOCATION,
-  tournamentList,
+export const sortTournamentByLocationSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_LOCATION_SUCCESS,
+  tournaments,
 });
+
+export const sortLocationSubmit = () => ({
+  type: SORT_LOCATION
+})
