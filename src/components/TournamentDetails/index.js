@@ -42,6 +42,8 @@ const TournamentDetails = ({
           <br/>
           <p> Cash-price:<span className="detailsTournament">{oneTournament.cash_price}</span></p>
           <br/>
+          <p> Small blind:<span className="detailsTournament">{oneTournament.small_blind}</span></p>
+          <br/>
           <p>Statut:  <span className="detailsTournament">{oneTournament.status}</span></p>
           <br/>
           <div className="tournament-containerDetail__comment">
