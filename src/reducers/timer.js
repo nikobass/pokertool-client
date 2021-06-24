@@ -38,8 +38,8 @@ const initialState = {
         previousBB: 0,
         smallBlind: 10,
         bigBlind: 20,
-        nextSB: 0,
-        nextBB: 0,
+        nextSB: 20,
+        nextBB: 40,
     },
     currentStructure: [
         { stage: 1, smallBlind: 10, bigBlind: 20 },
@@ -110,18 +110,18 @@ const timer = (state = initialState, action = {}) => {
                             state.currentValues.stage,
 
                     //gestion des blinds
-                    previousSB: 
-                    state.currentStructure[state.currentValues.stage - 2]
-                    ?
-                    state.currentStructure[state.currentValues.stage - 2].smallBlind
-                    :
-                    0,
+                    previousSB:
+                        state.currentStructure[state.currentValues.stage - 2]
+                            ?
+                            state.currentStructure[state.currentValues.stage - 2].smallBlind
+                            :
+                            0,
 
                     previousBB: state.currentStructure[state.currentValues.stage - 2]
-                    ?
+                        ?
                         state.currentStructure[state.currentValues.stage - 2].bigBlind
-                    :
-                    0,
+                        :
+                        0,
                     smallBlind:
                         state.currentStructure[state.currentValues.stage - 1].smallBlind,
 
@@ -158,6 +158,18 @@ const timer = (state = initialState, action = {}) => {
                         state.currentValues.stage - 1
                         :
                         state.currentValues.stage,
+                    previousSB:
+                        state.currentValues.stage > 2
+                            ?
+                            state.currentStructure[state.currentValues.stage - 2].smallBlind
+                            :
+                            0,
+
+                    previousBB: state.currentValues.stage > 2
+                        ?
+                        state.currentStructure[state.currentValues.stage - 2].bigBlind
+                        :
+                        0,
                     smallBlind: state.currentValues.stage > 1
                         ?
                         state.currentStructure[state.currentValues.stage - 2].smallBlind
@@ -167,7 +179,17 @@ const timer = (state = initialState, action = {}) => {
                         ?
                         state.currentStructure[state.currentValues.stage - 2].bigBlind
                         :
-                        state.currentValues.bigBlind
+                        state.currentValues.bigBlind,
+                    nextSB: state.currentValues.stage > 1
+                        ?
+                        state.currentStructure[state.currentValues.stage - 1].smallBlind
+                        :
+                        state.currentValues.nextSB,
+                    nextBB: state.currentValues.stage > 1
+                        ?
+                        state.currentStructure[state.currentValues.stage - 1].bigBlind
+                        :
+                        state.currentValues.nextBB,
                 }
             }
 
@@ -183,6 +205,18 @@ const timer = (state = initialState, action = {}) => {
                         state.currentValues.stage + 1
                         :
                         state.currentValues.stage,
+                    previousSB:
+                        state.currentStructure[state.currentValues.stage - 1]
+                            ?
+                            state.currentStructure[state.currentValues.stage - 1].smallBlind
+                            :
+                            0,
+
+                    previousBB: state.currentStructure[state.currentValues.stage - 1]
+                        ?
+                        state.currentStructure[state.currentValues.stage - 1].bigBlind
+                        :
+                        0,
                     smallBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
                         ?
                         state.currentStructure[state.currentValues.stage].smallBlind
@@ -192,7 +226,19 @@ const timer = (state = initialState, action = {}) => {
                         ?
                         state.currentStructure[state.currentValues.stage].bigBlind
                         :
-                        state.currentValues.bigBlind
+                        state.currentValues.bigBlind,
+                    nextSB:
+                        state.currentStructure[state.currentValues.stage + 1]
+                            ?
+                            state.currentStructure[state.currentValues.stage + 1].smallBlind
+                            :
+                            0,
+
+                    nextBB: state.currentStructure[state.currentValues.stage + 1]
+                        ?
+                        state.currentStructure[state.currentValues.stage + 1].bigBlind
+                        :
+                        0,
                 }
             }
 

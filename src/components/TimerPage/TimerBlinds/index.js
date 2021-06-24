@@ -14,10 +14,10 @@ const TimerBlinds = ({
 <div className="timerBlinds">
     <div className="timerBlinds__aside">
         <div className="timerBlinds__aside__amount">
-            {previousBB ? previousSB : ""}<span className="timerBlinds__aside__amount__slash">{previousBB ? "/" : ""}</span>{previousBB ? previousBB : ""}
+            {previousBB ? previousSB : "--"}<span className="timerBlinds__aside__amount__slash">/</span>{previousBB ? previousBB : "--"}
         </div>
         <div className="timerBlinds__aside__text">
-            {previousBB ? "Blinds précédentes": ""}
+            Blinds précédentes
         </div>
     </div>
 
@@ -32,10 +32,10 @@ const TimerBlinds = ({
 
     <div className="timerBlinds__aside">
         <div className="timerBlinds__aside__amount">
-        {nextSB ? nextSB : ""}<span className="timerBlinds__aside__amount__slash">{nextSB ? "/" : ""}</span>{nextBB ? nextBB : ""}
+        {nextSB ? nextSB : "--"}<span className="timerBlinds__aside__amount__slash">/</span>{nextBB ? nextBB : "--"}
         </div>
         <div className="timerBlinds__aside__text">
-            { nextBB ? "Blinds suivantes" : ""}
+            Blinds suivantes
         </div>
     </div>
 </div>
