@@ -18,7 +18,11 @@ export const TOGGLE_MODIFY_TOURNAMENT = 'TOGGLE_MODIFY_TOURNAMENT'
 export const SUBMIT_TOURNAMENT_UPDATE = 'SUBMIT_TOURNAMENT_UPDATE'
 export const MODIFY_TOURNAMENT_SUCESS ='MODIFY_TOURNAMENT_SUCESS'
 export const MODIFY_TOURNAMENT_VALIDATE = 'MODIFY_TOURNAMENT_VALIDATE'
-
+export const GET_STRUCTURE_TOURNAMENT = 'GET_STRUCTURE_TOURNAMENT'
+export const GET_STRUCTURE_TOURNAMENT_SUCCESS = 'GET_STRUCTURE_TOURNAMENT_SUCCESS'
+export const CREATE_STRUCTURE ='CREATE_STRUCTURE'
+export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
+export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 
 import {HIDE_MODAL} from './user'
 
@@ -75,6 +79,29 @@ export const getOneTournamentUser = () => ({
 export const getOneTournamentUserSuccess = (tournaments) => ({
   type : GET_ONE_TOURNAMENT_USER_SUCCESS,
   tournaments
+})
+
+// récupération structure tournoi
+export const getStructureTournament = () => ({
+  type: GET_STRUCTURE_TOURNAMENT
+})
+
+export const getStructureTournamentSuccess = (structure) => ({
+  type: GET_STRUCTURE_TOURNAMENT_SUCCESS,
+  structure
+})
+
+export const createStructure = () => ({
+  type: CREATE_STRUCTURE
+})
+
+export const addStructureToState = (structure) => ({
+  type : ADD_STRUCTURE_TO_STATE,
+  structure
+})
+
+export const clearTournament = () => ({
+  type : CLEAR_TOURNAMENT
 })
 
 /************************* POST Tournaments ******************************/

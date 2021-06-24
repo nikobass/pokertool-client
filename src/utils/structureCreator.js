@@ -2,7 +2,7 @@ function roundnum(num, round){
     return Math.round(num / round)*round;
     }
 
-const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
+ export const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
 
     const totalChips = nbPlayer * startingStack;
     let stage = 1;
@@ -10,8 +10,8 @@ const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
     let currentBB = currentSB*2;
     const structure = [{
         stage: stage,
-        smallBlind: currentSB,
-        bigBlind: currentBB,
+        small_blind: currentSB,
+        big_blind: currentBB,
     }];
 
 
@@ -21,16 +21,17 @@ const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
 
         structure.push({
             stage: stage+=1,
-            smallBlind: currentSB,
-            bigBlind: currentBB,
+            small_blind: currentSB,
+            big_blind: currentBB,
         })
     }
 
-    const duration = (stageTime * structure.length) / 60;
-    return {
-        structure,
-        'durée aproximative': `${Math.round(duration*2)/2} heures`
-    };
-}
+   
+    return structure;
+        
+        
+    
+};
 
-console.log(structureCreator(25, 5, 10000, 20));
+//voila comment lancer la fonction
+structureCreator(25, 5, 10000, 20);

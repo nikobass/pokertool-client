@@ -8,11 +8,18 @@ import {
   createTournamentModal,
   submitCreatTournamentValues,
   tournamentSubmit,
+  getStructureTournament,
+  createStructure
 
   } 
   from 'src/actions/tournament';
-import Modal from 'src/components/Modal';
 
+
+import {
+  importChips
+} from 'src/actions/distributor'
+
+import Modal from 'src/components/Modal';
 import TournamentElement from 'src/components/TournamentElement';
 import TournamentDetails from 'src/components/TournamentDetails';
 import TournamentUpdate from 'src/components/TournamentUpdate';
@@ -183,6 +190,9 @@ const Tournaments = ({
             <label htmlFor="starting_stack" className="creatTournamentForm__label">Tapis de départ:</label>
             <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input" />
 
+            <label htmlFor="small_blind" className="creatTournamentForm__label">Small blind:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input" />
+
             <label htmlFor="comments" className="creatTournamentForm__label">commentaires:</label>
             <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input" />
 
@@ -223,6 +233,8 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleShowModal: () => {
     dispatch(createTournamentModal())
+    
+   // dispatch(getStructureTournament())
   },
 
   handleCreatTournamentChange: (event) => {
@@ -231,7 +243,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleTournamentSubmit: (event) => {
     event.preventDefault();
-    dispatch(tournamentSubmit())
+    // création d'une action qui va stocker dans le state la structure de tournoi.
+    dispatch(createStructure())
+    //Quand c'est fait, RDV dans le middleware
+    //dispatch(tournamentSubmit()) //A supprimer puisque ce sera appelé dans l'action que tu crées juste au dessus
   }
 
 })

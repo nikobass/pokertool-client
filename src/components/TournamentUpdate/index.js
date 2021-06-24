@@ -9,6 +9,7 @@ import {
   submitTournamentUpdate,
   changeInputValue,
   modifyTournamentValidate,
+  getStructureTournament
   
 } from 'src/actions/tournament'
 
@@ -29,7 +30,8 @@ const TournamentUpdate = ({
   speedValue,
   nbPlayersValue,
   startingStackValue,
-  commentsValue
+  commentsValue,
+  smallBlindValue,
   
   
 
@@ -68,6 +70,9 @@ const TournamentUpdate = ({
       <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
       <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
 
+      <label htmlFor="small_blind" className="tournamentUpdate__form__label">Small blind</label>
+      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={modifying ? "" : "disabled"}  />
+
       <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
       <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue} disabled={modifying ? "" : "disabled"}  />
 
@@ -100,6 +105,7 @@ const mapStateToProps = (state) => ({
   speedValue:state.tournament.oneTournament.speed,
   commentsValue:state.tournament.oneTournament.comments,
   nbPlayersValue:state.tournament.oneTournament.nb_players,
+  smallBlindValue: state.tournament.oneTournament.small_blind,
   startingStackValue:state.tournament.oneTournament.starting_stack,
   errorMessage: state.tournament.errorMessage,
   openUpdateModal : state.tournament.openUpdateModal,
@@ -109,6 +115,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>({
   handleModifyTournament: (event) => {
     event.preventDefault();
+    dispatch(getStructureTournament())
     dispatch(toggleModifyTournament())
     
   },

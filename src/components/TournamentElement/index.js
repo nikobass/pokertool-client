@@ -8,10 +8,12 @@ import {
   tournamentDeleteModal,
   getOneTournamentUser,
   tounamentUpdateModale,
-  tounamentUpdateModaleTest,
-  
- 
+  getStructureTournament
 } from 'src/actions/tournament';
+
+import {
+  importChips
+} from 'src/actions/distributor'
 
 import './tournamentElement.scss'
 
@@ -94,6 +96,8 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
     dispatch(tournamentDetailsModal(ownprops.currentId))
     {console.log(ownprops.currentId)}
     dispatch(getOneTournamentUser())
+    dispatch(importChips())
+    dispatch(getStructureTournament())
    
   },
   handleTournamentDelete: () => {
@@ -102,6 +106,8 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentUpdate: () => {
     dispatch(tounamentUpdateModale(ownprops.currentId))
     dispatch(getOneTournamentUser())
+    dispatch(importChips())
+    dispatch(getStructureTournament())
 
 }
 })

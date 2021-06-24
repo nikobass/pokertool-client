@@ -14,7 +14,10 @@ import {
   OPEN_MODAL_TOURNAMENT_UPDATE,
   CHANGE_INPUT_VALUE,
   TOGGLE_MODIFY_TOURNAMENT,
-  MODIFY_TOURNAMENT_SUCESS
+  MODIFY_TOURNAMENT_SUCESS,
+  GET_STRUCTURE_TOURNAMENT_SUCCESS,
+  ADD_STRUCTURE_TO_STATE,
+  CLEAR_TOURNAMENT
 
 } from 'src/actions/tournament'
 
@@ -43,8 +46,10 @@ const initialState = {
     status: null,
     comments: null,
     starting_stack: null,
-
+    small_blind: null,
+    chips_user: false,
   },
+  structureTournament:[],
   modifying: false,
   errorMessage: null,
 }
@@ -99,6 +104,11 @@ const reducer = (state = initialState, action = {}) => {
             loading: false,
             refreshTournaments: false,
           }  
+          case CLEAR_TOURNAMENT :
+            return {
+              ...state,
+              tournamentList: []
+            }
           case GET_ONE_TOURNAMENT_USER :
             return {
               ...state,
@@ -111,6 +121,19 @@ const reducer = (state = initialState, action = {}) => {
               oneTournament: action.tournaments
 
             }
+          
+          case GET_STRUCTURE_TOURNAMENT_SUCCESS:
+            return{
+              ...state,
+              structureTournament: action.structure,
+              
+            }
+
+           case ADD_STRUCTURE_TO_STATE:
+             return{
+               ...state,
+               structureTournament: action.structure
+             } 
 
           /************************* POST Tournaments ******************************/
          
