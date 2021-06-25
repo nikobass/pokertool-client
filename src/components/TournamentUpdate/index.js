@@ -10,7 +10,8 @@ import {
   changeInputValue,
   modifyTournamentValidate,
   getStructureTournament,
-  hideModalDelete
+  hideModalDelete,
+  addCashprice
   
 } from 'src/actions/tournament'
 
@@ -33,7 +34,9 @@ const TournamentUpdate = ({
   startingStackValue,
   commentsValue,
   smallBlindValue,
-  
+  cash_price,
+  nbCashPriceInput,
+  handleAddCashprice
   
 
 }) => {
@@ -68,14 +71,27 @@ const TournamentUpdate = ({
       <label htmlFor="buy_in" className="tournamentUpdate__form__label">Buy in</label>
       <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input" value={buyInValue} disabled={modifying ? "" : "disabled"}  />
 
-      <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
-      <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
+       {
+         nbCashPriceInput.map((cashPrice) => ( 
+           <div key={cashPrice.position} className="tournamentUpdate__form__label__cashprice">
+             <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
+             <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
 
+           </div>
+         ))
+       }
+
+       <button onClick={handleAddCashprice}  disabled={modifying ? "" : "disabled"} className={modifying ? "active" : "invisible"} >Ajouter un Cash price supplémentaire</button>
+
+     
       <label htmlFor="small_blind" className="tournamentUpdate__form__label">Small blind</label>
       <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={modifying ? "" : "disabled"}  />
 
+      
+
+       
       <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
-      <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue}  disabled={modifying ? "" : "disabled"}  />
 
 
       <label htmlFor="comments" className="tournamentUpdate__form__label">Commentaire</label>
@@ -110,10 +126,17 @@ const mapStateToProps = (state) => ({
   startingStackValue:state.tournament.oneTournament.starting_stack,
   errorMessage: state.tournament.errorMessage,
   openUpdateModal : state.tournament.openUpdateModal,
-  currentId: state.tournament.currentId
+  currentId: state.tournament.currentId,
+  cash_price: state.tournament.cash_price,
+  nbCashPriceInput: state.tournament.cash_priceInput
 })
 
 const mapDispatchToProps = (dispatch) =>({
+  handleAddCashprice: (event) => {
+    event.preventDefault()
+    dispatch(addCashprice())
+  },
+
   handleModifyTournament: (event) => {
     event.preventDefault();
     dispatch(getStructureTournament())

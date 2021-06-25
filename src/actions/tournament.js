@@ -24,7 +24,7 @@ export const CREATE_STRUCTURE ='CREATE_STRUCTURE'
 export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
 export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 export const ERROR_MESSAGE ='ERROR_MESSAGE'
-
+export const ADD_CASH_PRICE = 'ADD_CASH_PRICE'
 import {HIDE_MODAL} from './user'
 
 /*************************** Modal Tournaments ****************************/
@@ -50,6 +50,10 @@ export const createTournamentModal = () => ({
 export const tounamentUpdateModale = (currentId) => ({
   type: OPEN_MODAL_TOURNAMENT_UPDATE,
   currentId
+})
+
+export const addCashprice = () => ({
+  type: ADD_CASH_PRICE
 })
 /*********************************** PATCH  **************************/
 
@@ -77,9 +81,10 @@ export const getOneTournamentUser = () => ({
 })
 
 // retour du middleware pour les details d'un tournoi
-export const getOneTournamentUserSuccess = (tournaments) => ({
+export const getOneTournamentUserSuccess = (tournaments, cashPrice) => ({
   type : GET_ONE_TOURNAMENT_USER_SUCCESS,
-  tournaments
+  tournaments,
+  cashPrice
 })
 
 // récupération structure tournoi

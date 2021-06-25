@@ -18,7 +18,8 @@ import {
   GET_STRUCTURE_TOURNAMENT_SUCCESS,
   ADD_STRUCTURE_TO_STATE,
   CLEAR_TOURNAMENT,
-  ERROR_MESSAGE
+  ERROR_MESSAGE,
+  ADD_CASH_PRICE
 
 } from 'src/actions/tournament'
 
@@ -37,19 +38,24 @@ const initialState = {
   oneTournament:[],
   showCreateTournamentModal: false,
   creatTournament: {
-    name: null,
-    date: null,
-    location: null,
-    speed: null,
-    nb_players: null,
-    buy_in: null,
-    cash_price: null,
-    status: null,
-    comments: null,
-    starting_stack: null,
-    small_blind: null,
+    name: "",
+    date: "",
+    location: "",
+    speed: "",
+    nb_players: "",
+    buy_in: "",
+    status: "",
+    comments: "",
+    starting_stack: "",
+    small_blind: "",
     chips_user: false,
   },
+  cash_price: [],
+  cash_priceInput: [{
+    position:0,
+    amount:""
+  }],
+  nbCashPrice: 1,
   structureTournament:[],
   modifying: false,
   errorMessage: null,
@@ -98,6 +104,18 @@ const reducer = (state = initialState, action = {}) => {
           errorMessage: action.errMessage
           
         }
+        case ADD_CASH_PRICE:
+          return {
+            ...state,
+            nbCashPrice: state.cash_priceInput.position +1,
+            cash_priceInput: [
+              ...state.cash_priceInput,
+              {
+                position: state.cash_priceInput.nbCashPrice,
+               
+              }
+            ]
+          }
           /************************* GET Tournaments ******************************/
         case GET_TOURNAMENTS_ALL_USER :
           return{
@@ -126,7 +144,8 @@ const reducer = (state = initialState, action = {}) => {
             return {
               ...state,
               loading: false,
-              oneTournament: action.tournaments
+              oneTournament: action.tournaments,
+              cash_price: action.cashPrice,
 
             }
           

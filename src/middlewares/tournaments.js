@@ -61,8 +61,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));
          
         })
-        .catch((error) => console.log(error));
-        store.dispatch(errMessage(err.response.data.message))
+        .catch((err) => console.log(err));
+       
       break;
     }
 
@@ -80,7 +80,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             store.dispatch(deleteTournamentSucces(tournamentId));
           })
           .catch((error) => console.log(error));
-          store.dispatch(errMessage(err.response.data.message))
+         
         break;
       }
 
@@ -102,15 +102,17 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             speed:state.tournament.creatTournament.speed,
             nb_players:state.tournament.creatTournament.nb_players,
             comments:state.tournament.creatTournament.comments,
-            cash_price:state.tournament.creatTournament.cash_price,
+            // cash price todo comme structure
+          
             buy_in:state.tournament.creatTournament.buy_in,
             starting_stack: state.tournament.creatTournament.starting_stack,
             small_blind: state.tournament.creatTournament.small_blind,
             chips_user: false,
           },
           
-            state.tournament.structureTournament
+            state.tournament.structureTournament,
 
+            state.tournament.cash_price,
           
         ]
 
@@ -187,7 +189,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         
       })
       .catch((err) => console.log(err));
-      store.dispatch(errMessage(err.response.data.message))
+      
       break;
     }
 
