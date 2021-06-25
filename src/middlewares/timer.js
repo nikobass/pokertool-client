@@ -85,6 +85,7 @@ const timerMiddleware = (store) => (next) => (action) => {
         case STOP_TIMER: {
             const state = store.getState();
             const intervalId = state.timer.intervalId;
+            
             if (state.timer.isLaunch) {
                 clearInterval(intervalId);
             }

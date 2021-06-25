@@ -11,6 +11,8 @@ export const SKIP_BACK = 'SKIP_BACK';
 export const SKIP_FORWARD = 'SKIP_FORWARD';
 export const REFRESH_TIME = 'REFRESH_TIME';
 export const SHOW_TIME = 'SHOW_TIME';
+export const SHOW_QUIT_TIMER_MODAL = 'SHOW_QUIT_TIMER_MODAL';
+export const CLOSE_QUIT_TIMER_MODAL = 'CLOSE_QUIT_TIMER_MODAL';
 
 export const launchTimer = () => ({
     type: LAUNCH_TIMER
@@ -64,4 +66,12 @@ export const refreshTime = ()  => ({
 export const show_time = (time) => ({
     type: SHOW_TIME,
     time
+})
+
+export const showQuitTimerModal = () => ({
+    type: SHOW_QUIT_TIMER_MODAL
+})
+
+export const closeQuitTimerModal = () => ({
+    type: CLOSE_QUIT_TIMER_MODAL
 })

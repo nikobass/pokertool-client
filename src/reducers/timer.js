@@ -9,12 +9,19 @@ import {
     SKIP_BACK,
     SKIP_FORWARD,
     SHOW_TIME,
+    SHOW_QUIT_TIMER_MODAL,
+    CLOSE_QUIT_TIMER_MODAL,
 
 } from 'src/actions/timer';
+
+import {
+    HIDE_MODAL,
+  } from 'src/actions/user'
 
 const now = new Date();
 
 const initialState = {
+    isQuitTimerModalOpen: false,
     currentTime: {
         hour: now.getHours(),
         minute: now.getMinutes(),
@@ -73,6 +80,28 @@ const initialState = {
 const timer = (state = initialState, action = {}) => {
 
     switch (action.type) {
+        case SHOW_QUIT_TIMER_MODAL:
+            return {
+                ...state,
+                isQuitTimerModalOpen: true,
+            }
+
+        case CLOSE_QUIT_TIMER_MODAL:
+            return{
+                ...state,
+                isQuitTimerModalOpen: false,
+            }
+
+        case HIDE_MODAL :
+            return{
+                ...state,
+                openDetailsModal: false,
+                openDeleteModal: false,
+                showCreateTournamentModal: false,
+                openUpdateModal: false,
+                isQuitTimerModalOpen: false,
+            }
+
         case SHOW_TIME: {
             return {
                 ...state,
