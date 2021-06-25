@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Timer from './Timer';
 import TimerBlinds from './TimerBlinds';
@@ -10,14 +10,28 @@ import { showQuitTimerModal, closeQuitTimerModal } from 'src/actions/timer';
 import Modal from 'src/components/Modal';
 import { Link } from 'react-router-dom';
 
+import sound from 'src/assets/sound/bell.mp3';
+
+const bell = new Audio(sound);
+
 import './timerPage.scss';
 import { connect } from 'react-redux';
 
 const TimerPage = ({ 
     handleShowQuitTimerModal,
     isQuitTimerModalOpen,
-    handleCloseQuitTimerModal
- }) => (
+    handleCloseQuitTimerModal,
+    isAudioPlaying,
+ }) => {
+     
+    
+    useEffect(() => {
+        if(isAudioPlaying){
+            bell.play();
+        }
+    })
+    
+    return (
     <>
         <div className="timerPage">
             <div className="timerPage__header">
@@ -66,10 +80,11 @@ const TimerPage = ({
   />
   </>
 
-        )
+        )}
 
 const mapStateToProps = (state) => ({
     isQuitTimerModalOpen: state.timer.isQuitTimerModalOpen,
+    isAudioPlaying: state.timer.isAudioPlaying,
 })
 
 const mapDispatchToProps = (dispatch) => ({

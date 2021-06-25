@@ -28,6 +28,7 @@ const initialState = {
         second: now.getSeconds(),
     },
     isLaunch: false,
+    isAudioPlaying: false,
     intervalId: null,
     //TODO secondesLeft = durée du tournoi en secondes
     secondesLeft: 300,
@@ -124,6 +125,12 @@ const timer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 intervalId: action.intervalId,
+                isAudioPlaying:
+                state.currentValues.minute === 0 && state.currentValues.seconde === 0
+                ?
+                true
+                :
+                false,
                 secondesLeft: state.currentValues.minute * 60 + state.currentValues.seconde,
                 currentValues: {
                     ...state.currentValues,
