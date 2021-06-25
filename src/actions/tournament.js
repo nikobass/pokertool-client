@@ -9,7 +9,9 @@ export const OPEN_MODAL_TOURNAMENT_DELETE = 'OPEN_MODAL_TOURNAMENT_DELETE';
 export const GET_ONE_TOURNAMENT_USER = 'GET_ONE_TOURNAMENT_USER';
 export const GET_ONE_TOURNAMENT_USER_SUCCESS = 'GET_ONE_TOURNAMENT_USER_SUCCESS';
 export const SORT_TOURNAMENT_BY_LOCATION_SUCCESS = 'SORT_TOURNAMENT_BY_LOCATION_SUCCESS';
-export const SORT_LOCATION = 'SORT_LOCATION'
+export const SORT_LOCATION = 'SORT_LOCATION';
+export const SORT_NAME = 'SORT_NAME';
+export const SORT_TOURNAMENT_BY_NAME_SUCCESS = 'SORT_TOURNAMENT_BY_NAME_SUCCESS';
 
 import {HIDE_MODAL} from './user';
 
@@ -81,12 +83,22 @@ export const hideModalDelete = () => ({
   type: HIDE_MODAL,
 });
 
-// trie les tournois par nom
+// trie les tournois par lieu
 export const sortTournamentByLocationSuccess = (tournaments) => ({
   type: SORT_TOURNAMENT_BY_LOCATION_SUCCESS,
   tournaments,
 });
 
 export const sortLocationSubmit = () => ({
-  type: SORT_LOCATION
-})
+  type: SORT_LOCATION,
+});
+
+// trie les tournois par nom
+export const sortNameSubmit = () => ({
+  type: SORT_NAME,
+});
+
+export const sortTournamentByNameSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_NAME_SUCCESS,
+  tournaments,
+});

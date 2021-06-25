@@ -5,7 +5,8 @@ import {
   getTournamentUser,
   deleteTournamentUser,
   hideModalDelete,
-  sortLocationSubmit
+  sortLocationSubmit,
+  sortNameSubmit,
 } from 'src/actions/tournament';
 import Modal from 'src/components/Modal';
 
@@ -19,9 +20,9 @@ const Tournaments = ({
   showDeleteTournamentModal,
   submitDeleteTournament,
   handleCloseModal,
-  refreshTournaments,
   oneTournament,
   handleOnclickSortTournamentByLocation,
+  handleOnclickSortTournamentByName,
 }) => {
   const dispatch = useDispatch();
 
@@ -52,7 +53,9 @@ const Tournaments = ({
           <span>
             Nom
             <button 
-            className="chevron-down"
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByName}
+              type="button"
             
             >
               <ChevronDown  size={15} />
@@ -67,8 +70,9 @@ const Tournaments = ({
           <span>
             Lieu
             <button 
-            className="chevron-down"
-            onClick={handleOnclickSortTournamentByLocation} 
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByLocation}
+              type="button"
             >
               <ChevronDown  size={15} />
             </button>
@@ -175,8 +179,11 @@ const mapDispatchToProps = (dispatch) => ({
   submitDeleteTournament: () => {
     dispatch(deleteTournamentUser());
   },
-  handleOnclickSortTournamentByLocation: () => {    
+  handleOnclickSortTournamentByLocation: () => {
     dispatch(sortLocationSubmit());
+  },
+  handleOnclickSortTournamentByName: () => {
+    dispatch(sortNameSubmit());
   },
 
 });

@@ -8,6 +8,7 @@ import {
   GET_ONE_TOURNAMENT_USER,
   GET_ONE_TOURNAMENT_USER_SUCCESS,
   SORT_TOURNAMENT_BY_LOCATION_SUCCESS,
+  SORT_TOURNAMENT_BY_NAME_SUCCESS,
 
 } from 'src/actions/tournament';
 
@@ -87,9 +88,15 @@ const reducer = (state = initialState, action = {}) => {
       };
     case SORT_TOURNAMENT_BY_LOCATION_SUCCESS:
       return {
-        ...state,       
-        tournamentList: action.tournaments,  
-        refreshTournaments: true
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
+      };
+    case SORT_TOURNAMENT_BY_NAME_SUCCESS:
+      return {
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
       };
     default:
       return state;
