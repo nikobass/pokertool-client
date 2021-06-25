@@ -121,7 +121,7 @@ const Tournaments = ({
           </span>
         </li>
         
-        {
+        {tournaments &&
           tournaments.map((tournament) => (
             <li  className="tournaments--list-grid"
              key={tournament.id}>

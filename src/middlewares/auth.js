@@ -25,7 +25,6 @@ const authMiddleware = (store) => (next) => (action) => {
     case SUBMIT_LOGIN: {
       //on récupère le state
       const state = store.getState();
-
       axios({
         method: 'post',
         url: `http://localhost:3000/signin`,
@@ -57,10 +56,8 @@ const authMiddleware = (store) => (next) => (action) => {
           password: state.user.signup.password
         },
       })
-        .then(response => {         
-          store.dispatch(signUpSuccess(response.data));
-          localStorage.setItem('userId', response.data.id);
-          localStorage.setItem('nickname', response.data.user_name);
+        .then(() => {         
+          store.dispatch(signUpSuccess());
         })
         .catch((err) => {          
           store.dispatch(signUpError((err.response.data.message)));
