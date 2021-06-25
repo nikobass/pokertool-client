@@ -19,8 +19,9 @@ import {
   addStructureToState,
   tournamentSubmit,
   clearTournament,
-  errMessage
-
+  errMessage,
+  SUBMIT_WITH_MY_CHIPS,
+  submitFromMyChipsSuccess
 } from 'src/actions/tournament';
 
 
@@ -29,8 +30,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
       case GET_TOURNAMENTS_ALL_USER :
         const tournamentUserId = localStorage.getItem('userId');
-        const token = localStorage.getItem('token');  
-        
+        const token = localStorage.getItem('token'); 
+      
         axios({
           method: 'get',
           url: `http://localhost:3000/tournaments/${tournamentUserId}`,
@@ -50,7 +51,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       case GET_ONE_TOURNAMENT_USER : {
         const state = store.getState();
         const tournamentId = state.tournament.currentId;
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');      
 
         axios({
           method:'get',
@@ -58,8 +59,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           headers: { "Authorization": `Bearer ${token}` }
         })
         .then((response) => {
-          store.dispatch(getOneTournamentUserSuccess(response.data));
-         
+          store.dispatch(getOneTournamentUserSuccess(response.data));         
         })
         .catch((error) => console.log(error));
         store.dispatch(errMessage(err.response.data.message))
@@ -83,13 +83,25 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           store.dispatch(errMessage(err.response.data.message))
         break;
       }
+      
+      case SUBMIT_WITH_MY_CHIPS: {
+        const state = store.getState();        
+        const chips = state.chip.chips;
+        const isMyChipsChecked = state.tournament.creatTournament.chips_user;
+     
+        const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
+
+        if(isMyChipsChecked) {          
+          store.dispatch(submitFromMyChipsSuccess(parseInt(smallestChipValue)));
+        };           
+      
+        break;
+      }
 
       case TOURNAMENT_SUBMIT: {
         const state = store.getState();
         const userId = localStorage.getItem('userId');
-        const token = localStorage.getItem('token');
-        
-  
+        const token = localStorage.getItem('token'); 
 
         axios ({
           method: 'post',
@@ -106,17 +118,13 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             buy_in:state.tournament.creatTournament.buy_in,
             starting_stack: state.tournament.creatTournament.starting_stack,
             small_blind: state.tournament.creatTournament.small_blind,
-            chips_user: false,
-          },
-          
-            state.tournament.structureTournament
-
-          
-        ]
-
+            chips_user: state.tournament.creatTournament.chips_user,
+          },          
+            state.tournament.structureTournament          
+                ]
         })
-          .then(response => {
-           
+          .then(response => {           
+            
             // Créer une autre action qui modifie le state (donc la dispatch)
             // le return de la fonction structureCreator remplacera structureTournament dans le state
             store.dispatch(tournamentSubmitSuccess(response.data));

@@ -9,10 +9,15 @@ import {
   submitCreatTournamentValues,
   tournamentSubmit,
   getStructureTournament,
-  createStructure
-
+  createStructure,
+  checkboxChips,
+  submitFromMyChips,
+  dontUseMyChips
   } 
   from 'src/actions/tournament';
+import {
+  getChipsFromAPI
+} from 'src/actions/chip';
 
 
 import {
@@ -38,14 +43,18 @@ const Tournaments = ({
   handleShowModal,
   handleCreatTournamentChange,
   errorMessage,
+  isChipsChecked,
+  handleIsChipsUsed,
+  smallBlindValue,
+  chipsList
 }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTournamentUser())
+    dispatch(getTournamentUser());
+    dispatch(getChipsFromAPI());
   }, [refreshTournaments]);
-
-
+  
   return (
     <div className="tournaments-container">
       <div className="tournaments--header">
@@ -169,6 +178,14 @@ const Tournaments = ({
           title='Création de mon tournoi'
           content={(
             <form onSubmit= { handleTournamentSubmit } className="creatTournamentForm">
+
+            {chipsList.length > 0 && 
+            <div className="creatTournamentForm__checkbox">
+            <label className="creatTournamentForm__label">Utiliser mes jetons préconfiguré</label>
+            <input onChange={ handleIsChipsUsed } checked={isChipsChecked} type="checkbox"/>
+            </div>
+            }
+
             <label htmlFor="name" className="creatTournamentForm__label">Nom du tournoi: </label>
             <input onChange={ handleCreatTournamentChange } type="text" name="name" className="creatTournamentForm__input" />
 
@@ -195,7 +212,7 @@ const Tournaments = ({
             <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input" />
 
             <label htmlFor="small_blind" className="creatTournamentForm__label">Small blind:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input" />
+            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input" required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
 
             <label htmlFor="comments" className="creatTournamentForm__label">commentaires:</label>
             <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input" />
@@ -220,9 +237,10 @@ const mapStateToProps = (state) => ({
   showDeleteTournamentModal : state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
   showCreateTournamentModal: state.tournament.showCreateTournamentModal,
-  errorMessage: state.tournament.errorMessage
- 
-
+  errorMessage: state.tournament.errorMessage,
+  isChipsChecked: state.tournament.creatTournament.chips_user,
+  smallBlindValue: state.tournament.creatTournament.small_blind,
+  chipsList: state.chip.chips
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -247,6 +265,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(submitCreatTournamentValues(event.target.value, event.target.name))
   },
 
+  handleIsChipsUsed: (event) => {   
+    dispatch(checkboxChips(event.target.checked));
+    if(event.target.checked) {      
+      dispatch(submitFromMyChips());
+    } else {
+      dispatch(dontUseMyChips())
+    }   
+  },
+
   handleTournamentSubmit: (event) => {
     event.preventDefault();
     // création d'une action qui va stocker dans le state la structure de tournoi.
@@ -254,8 +281,7 @@ const mapDispatchToProps = (dispatch) => ({
     //Quand c'est fait, RDV dans le middleware
     //dispatch(tournamentSubmit()) //A supprimer puisque ce sera appelé dans l'action que tu crées juste au dessus
     if (!errorMessage){
-      dispatch(hideModalDelete())
-
+      dispatch(hideModalDelete());
     }
   }
 
