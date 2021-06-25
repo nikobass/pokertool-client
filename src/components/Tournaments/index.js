@@ -5,21 +5,39 @@ import {
   getTournamentUser,
   deleteTournamentUser,
   hideModalDelete,
-  } from 'src/actions/tournament';
-import Modal from 'src/components/Modal'
+  createTournamentModal,
+  submitCreatTournamentValues,
+  tournamentSubmit,
+  getStructureTournament,
+  createStructure
 
-import TournamentElement from 'src/components/TournamentElement'
-import TournamentDetails from '../TournamentDetails';
+  } 
+  from 'src/actions/tournament';
+
+
+import {
+  importChips
+} from 'src/actions/distributor'
+
+import Modal from 'src/components/Modal';
+import TournamentElement from 'src/components/TournamentElement';
+import TournamentDetails from 'src/components/TournamentDetails';
+import TournamentUpdate from 'src/components/TournamentUpdate';
 
 import './tournaments.scss'
 
 const Tournaments = ({
+  handleTournamentSubmit,
   tournaments,
   showDeleteTournamentModal,
+  showCreateTournamentModal,
   submitDeleteTournament,
   handleCloseModal,
   refreshTournaments,
-  oneTournament
+  oneTournament,
+  handleShowModal,
+  handleCreatTournamentChange,
+  errorMessage,
 }) => {
   const dispatch = useDispatch();
 
@@ -30,13 +48,22 @@ const Tournaments = ({
 
   return (
     <div className="tournaments-container">
-      <h2 className="tournaments--title">
-        Mes Tournois
-      </h2>
+      <div className="tournaments--header">
+          <h2 className="tournaments--title">
+            Mes Tournois
+          </h2>
+          <button 
+            className="addButton"
+            onClick={handleShowModal}
+          >
+            Créer un tournoi
+          </button>
+        </div>
+      <div className="tournaments--list-grid">
       <ul>
         <li className="tournaments--list">
 
-          <span>
+          <span className="tournaments--list__name" >
             Nom
             <button className="chevron-down">
               <ChevronDown  size={15} />
@@ -80,9 +107,10 @@ const Tournaments = ({
           </span>
         </li>
         
-        {
+        {tournaments &&
           tournaments.map((tournament) => (
-            <li key={tournament.id}>
+            <li  className="tournaments--list-grid"
+             key={tournament.id}>
               <TournamentElement
                 currentId={tournament.id}
                 name={tournament.name}
@@ -101,10 +129,15 @@ const Tournaments = ({
           ))
         }
       </ul>
+      </div>
       {!oneTournament &&(
-      <TournamentDetails 
-      
-      /> )
+      <TournamentDetails /> )
+      }
+      {
+        !oneTournament &&(
+          <TournamentUpdate/>
+
+        )
       }
       
       <Modal
@@ -131,6 +164,48 @@ const Tournaments = ({
         </div>
       )}
     />
+     <Modal
+          isOpen={showCreateTournamentModal}
+          title='Création de mon tournoi'
+          content={(
+            <form onSubmit= { handleTournamentSubmit } className="creatTournamentForm">
+            <label htmlFor="name" className="creatTournamentForm__label">Nom du tournoi: </label>
+            <input onChange={ handleCreatTournamentChange } type="text" name="name" className="creatTournamentForm__input" />
+
+            <label htmlFor="date" className="creatTournamentForm__label">date du tournoi:</label>
+            <input onChange={ handleCreatTournamentChange } type="date" name="date" className="creatTournamentForm__input" />
+
+            <label htmlFor="location" className="creatTournamentForm__label">Lieu du tournoi:</label>
+            <input onChange={ handleCreatTournamentChange } type="text" name="location" className="creatTournamentForm__input" />
+
+            <label htmlFor="nb_players" className="creatTournamentForm__label">Nombre de joueurs:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="creatTournamentForm__input" />
+
+            <label htmlFor="speed" className="creatTournamentForm__label">Durée des étapes:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="creatTournamentForm__input" />
+
+            <label htmlFor="buy_in" className="creatTournamentForm__label">Buy in:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input" />
+
+            <label htmlFor="cash_price" className="creatTournamentForm__label">Cash price:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="cash_price" className="creatTournamentForm__input" />
+
+
+            <label htmlFor="starting_stack" className="creatTournamentForm__label">Tapis de départ:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input" />
+
+            <label htmlFor="small_blind" className="creatTournamentForm__label">Small blind:</label>
+            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input" />
+
+            <label htmlFor="comments" className="creatTournamentForm__label">commentaires:</label>
+            <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input" />
+
+            {errorMessage && <p className="errorMessage"> { errorMessage }</p>}
+            <button type="submit" className="creatTournamentForm__submit">Valider</button>
+
+        </form>
+          )}
+        />  
     </div>
   );
 };
@@ -144,6 +219,8 @@ const mapStateToProps = (state) => ({
   tournaments : state.tournament.tournamentList,
   showDeleteTournamentModal : state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
+  showCreateTournamentModal: state.tournament.showCreateTournamentModal,
+  errorMessage: state.tournament.errorMessage
  
 
 })
@@ -158,6 +235,28 @@ const mapDispatchToProps = (dispatch) => ({
   submitDeleteTournament: () => {
    
     dispatch(deleteTournamentUser())
+  },
+
+  handleShowModal: () => {
+    dispatch(createTournamentModal())
+    
+   // dispatch(getStructureTournament())
+  },
+
+  handleCreatTournamentChange: (event) => {
+    dispatch(submitCreatTournamentValues(event.target.value, event.target.name))
+  },
+
+  handleTournamentSubmit: (event) => {
+    event.preventDefault();
+    // création d'une action qui va stocker dans le state la structure de tournoi.
+    dispatch(createStructure())
+    //Quand c'est fait, RDV dans le middleware
+    //dispatch(tournamentSubmit()) //A supprimer puisque ce sera appelé dans l'action que tu crées juste au dessus
+    if (!errorMessage){
+      dispatch(hideModalDelete())
+
+    }
   }
 
 })

@@ -58,7 +58,7 @@ const initialState = {
         {quantity: 50, color: '#00b0ff', value: 20},
         {quantity: 50, color: '#789f30', value: 100},
         {quantity: 50, color: '#cec56c', value: 500},
-        {quantity: 50, color: '#cec56c', value: 1000},
+        {quantity: 50, color: '#78c56c', value: 1000},
     ]
 }
 

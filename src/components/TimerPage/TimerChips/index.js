@@ -8,7 +8,7 @@ const TimerChips = ({ chips }) => (
     <div className="timerChips">
         {
             chips.map(chip => (
-                <div key={chip.value} className="timerChips__chip">
+                <div key={chip.color} className="timerChips__chip">
                     <div className="timerChips__chip__img">
                         <svg fill={chip.color} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 296.477 296.477" style={{ enableBackground: 'new 0 0 296.477 296.477' }} xmlSpace="preserve">
                             <g>
@@ -65,7 +65,7 @@ const TimerChips = ({ chips }) => (
                             </g>
                         </svg>
                     </div>
-                    <div div className="timerChips__chip__value">
+                    <div className="timerChips__chip__value">
                         {chip.value}
                     </div>
                 </div>
