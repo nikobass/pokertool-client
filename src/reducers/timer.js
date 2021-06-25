@@ -217,13 +217,13 @@ const timer = (state = initialState, action = {}) => {
                     previousSB:
                         state.currentValues.stage > 2
                             ?
-                            state.currentStructure[state.currentValues.stage - 2].smallBlind
+                            state.currentStructure[state.currentValues.stage - 3].smallBlind
                             :
                             0,
 
                     previousBB: state.currentValues.stage > 2
                         ?
-                        state.currentStructure[state.currentValues.stage - 2].bigBlind
+                        state.currentStructure[state.currentValues.stage - 3].bigBlind
                         :
                         0,
                     smallBlind: state.currentValues.stage > 1
@@ -262,17 +262,18 @@ const timer = (state = initialState, action = {}) => {
                         :
                         state.currentValues.stage,
                     previousSB:
-                        state.currentStructure[state.currentValues.stage - 1]
-                            ?
-                            state.currentStructure[state.currentValues.stage - 1].smallBlind
-                            :
-                            0,
+                        state.currentStructure[state.currentValues.stage]
+                        ?
+                        state.currentStructure[state.currentValues.stage - 1].smallBlind
+                        :
+                        state.currentStructure[state.currentValues.stage - 2].smallBlind,
 
-                    previousBB: state.currentStructure[state.currentValues.stage - 1]
+                    previousBB: 
+                        state.currentStructure[state.currentValues.stage]
                         ?
                         state.currentStructure[state.currentValues.stage - 1].bigBlind
                         :
-                        0,
+                        state.currentStructure[state.currentValues.stage - 2].bigBlind,
                     smallBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
                         ?
                         state.currentStructure[state.currentValues.stage].smallBlind
