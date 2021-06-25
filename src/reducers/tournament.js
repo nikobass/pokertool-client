@@ -9,6 +9,11 @@ import {
   GET_ONE_TOURNAMENT_USER_SUCCESS,
   SORT_TOURNAMENT_BY_LOCATION_SUCCESS,
   SORT_TOURNAMENT_BY_NAME_SUCCESS,
+  SORT_TOURNAMENT_BY_DATE_SUCCESS,
+  SORT_TOURNAMENT_BY_BUY_IN_SUCCESS,
+  SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS,
+  SORT_TOURNAMENT_BY_STATUS_SUCCESS,
+  SORT_TOURNAMENT_BY_PLAYER_SUCCESS,
 
 } from 'src/actions/tournament';
 
@@ -84,8 +89,10 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         openDeleteModal: false,
-        refreshTournaments: true,
+        refreshTournaments: false,
       };
+
+/************************* TRI les Tournaments ******************************/
     case SORT_TOURNAMENT_BY_LOCATION_SUCCESS:
       return {
         ...state,
@@ -93,6 +100,36 @@ const reducer = (state = initialState, action = {}) => {
         refreshTournaments: true,
       };
     case SORT_TOURNAMENT_BY_NAME_SUCCESS:
+      return {
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
+      };
+    case SORT_TOURNAMENT_BY_DATE_SUCCESS:
+      return {
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
+      };
+    case SORT_TOURNAMENT_BY_BUY_IN_SUCCESS:
+      return {
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
+      };
+    case SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS:
+      return {
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
+      };
+    case SORT_TOURNAMENT_BY_STATUS_SUCCESS:
+      return {
+        ...state,
+        tournamentList: action.tournaments,
+        refreshTournaments: true,
+      };
+    case SORT_TOURNAMENT_BY_PLAYER_SUCCESS:
       return {
         ...state,
         tournamentList: action.tournaments,

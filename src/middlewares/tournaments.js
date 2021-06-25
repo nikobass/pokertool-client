@@ -11,9 +11,18 @@ import {
   SORT_LOCATION,
   SORT_NAME,
   sortTournamentByNameSuccess,
+  SORT_DATE,
+  sortTournamentByDateSuccess,
+  SORT_BUY_IN,
+  sortTournamentByBuyInSuccess,
+  SORT_CASH_PRICE,
+  sortTournamentByCashPriceSuccess,
+  SORT_STATUS,
+  sortTournamentByStatusSuccess,
+  SORT_PLAYER,
+  sortTournamentByPlayerSuccess,
 
 } from 'src/actions/tournament';
-
 
 const tournamentsMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -27,11 +36,11 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           store.dispatch(getTournamentUserSuccess(response.data))
-      })
+        })
         .catch((err) => console.log(err));
       break;
 
-    case GET_ONE_TOURNAMENT_USER : {
+    case GET_ONE_TOURNAMENT_USER: {
       const state = store.getState();
       const tournamentId = state.tournament.currentId;
       const token = localStorage.getItem('token');
@@ -69,15 +78,96 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       const state = store.getState();
       const compareName = (a, b) => {
         if (a.name < b.name) {
-          return 1;
+          return -1;
         }
         if (a.name > b.name) {
-          return -1;
+          return 1;
         }
         return 0;
       };
       const tournamentListByName = state.tournament.tournamentList.sort(compareName);
       store.dispatch(sortTournamentByNameSuccess(tournamentListByName));
+      break;
+    }
+
+    case SORT_DATE: {
+      const state = store.getState();
+      const compareDate = (a, b) => {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
+      };
+      const tournamentListByDate = state.tournament.tournamentList.sort(compareDate);
+      store.dispatch(sortTournamentByDateSuccess(tournamentListByDate));
+      break;
+    }
+
+    case SORT_BUY_IN: {
+      const state = store.getState();
+      const compareBuyIn = (a, b) => {
+        if (a.buy_in < b.buy_in) {
+          return 1;
+        }
+        if (a.buy_in > b.buy_in) {
+          return -1;
+        }
+        return 0;
+      };
+      const tournamentListByBuyIn = state.tournament.tournamentList.sort(compareBuyIn);
+      store.dispatch(sortTournamentByBuyInSuccess(tournamentListByBuyIn));
+      break;
+    }
+
+    case SORT_CASH_PRICE: {
+      const state = store.getState();
+      const compareCashPrice = (a, b) => {
+        if (a.cash_price < b.cash_price) {
+          return 1;
+        }
+        if (a.cash_price > b.cash_price) {
+          return -1;
+        }
+        return 0;
+      };
+      const tournamentListByCashPrice = state.tournament.tournamentList.sort(compareCashPrice);
+      store.dispatch(sortTournamentByCashPriceSuccess(tournamentListByCashPrice));
+      break;
+    }
+
+    case SORT_STATUS: {
+      const state = store.getState();
+      const compareStatus = (a, b) => {
+        if (a.status < b.status) {
+          return 1;
+        }
+        if (a.status > b.status) {
+          return -1;
+        }
+        return 0;
+      };
+      const tournamentListByStatus = state.tournament.tournamentList.sort(compareStatus);
+      store.dispatch(sortTournamentByStatusSuccess(tournamentListByStatus));
+      break;
+    }
+
+    case SORT_PLAYER: {
+      const state = store.getState();
+      const comparePlayer = (a, b) => {
+        if (a.nb_players < b.nb_players) {
+          return 1;
+        }
+        if (a.nb_players > b.nb_players) {
+          return -1;
+        }
+        return 0;
+      };
+      const tournamentListByPlayer = state.tournament.tournamentList.sort(comparePlayer);
+      store.dispatch(sortTournamentByPlayerSuccess(tournamentListByPlayer));
+      break;
     }
 
     case DELETE_TOURNAMENT_USER: {

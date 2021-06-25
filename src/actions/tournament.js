@@ -12,6 +12,16 @@ export const SORT_TOURNAMENT_BY_LOCATION_SUCCESS = 'SORT_TOURNAMENT_BY_LOCATION_
 export const SORT_LOCATION = 'SORT_LOCATION';
 export const SORT_NAME = 'SORT_NAME';
 export const SORT_TOURNAMENT_BY_NAME_SUCCESS = 'SORT_TOURNAMENT_BY_NAME_SUCCESS';
+export const SORT_DATE = 'SORT_DATE';
+export const SORT_TOURNAMENT_BY_DATE_SUCCESS = 'SORT_TOURNAMENT_BY_DATE_SUCCESS';
+export const SORT_BUY_IN = 'SORT_BUY_IN';
+export const SORT_TOURNAMENT_BY_BUY_IN_SUCCESS = 'SORT_TOURNAMENT_BY_BUY_IN_SUCCESS';
+export const SORT_CASH_PRICE = 'SORT_CASH_PRICE';
+export const SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS = 'SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS';
+export const SORT_STATUS = 'SORT_STATUS';
+export const SORT_TOURNAMENT_BY_STATUS_SUCCESS = 'SORT_TOURNAMENT_BY_STATUS_SUCCESS';
+export const SORT_PLAYER = 'SORT_PLAYER';
+export const SORT_TOURNAMENT_BY_PLAYER_SUCCESS = 'SORT_TOURNAMENT_BY_PLAYER_SUCCESS';
 
 import {HIDE_MODAL} from './user';
 
@@ -100,5 +110,50 @@ export const sortNameSubmit = () => ({
 
 export const sortTournamentByNameSuccess = (tournaments) => ({
   type: SORT_TOURNAMENT_BY_NAME_SUCCESS,
+  tournaments,
+});
+
+export const sortDateSubmit = () => ({
+  type: SORT_DATE,
+});
+
+export const sortTournamentByDateSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_DATE_SUCCESS,
+  tournaments,
+});
+
+export const sortBuyInSubmit = () => ({
+  type: SORT_BUY_IN,
+});
+
+export const sortTournamentByBuyInSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_BUY_IN_SUCCESS,
+  tournaments,
+});
+
+export const sortCashPriceSubmit = () => ({
+  type: SORT_CASH_PRICE,
+});
+
+export const sortTournamentByCashPriceSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS,
+  tournaments,
+});
+
+export const sortStatusSubmit = () => ({
+  type: SORT_STATUS,
+});
+
+export const sortTournamentByStatusSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_STATUS_SUCCESS,
+  tournaments,
+});
+
+export const sortPlayerSubmit = () => ({
+  type: SORT_PLAYER,
+});
+
+export const sortTournamentByPlayerSuccess = (tournaments) => ({
+  type: SORT_TOURNAMENT_BY_PLAYER_SUCCESS,
   tournaments,
 });
