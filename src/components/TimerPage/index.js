@@ -3,6 +3,7 @@ import React from 'react';
 import Timer from './Timer';
 import TimerBlinds from './TimerBlinds';
 import TimerHeader from './TimerHeader';
+import TimerChips from './TimerChips';
 
 import './timerPage.scss';
 
@@ -19,8 +20,8 @@ const TimerPage = () => (
                 <Timer />
             </div>
             <div className="timerPage__infos__chips">
-
-            </div>
+                <TimerChips />
+            </div>  
         </div>
         <div className="timerPage__blinds">
             <TimerBlinds />

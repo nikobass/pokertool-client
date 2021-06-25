@@ -52,8 +52,17 @@ const initialState = {
         { stage: 8, smallBlind: 80, bigBlind: 160 },
         { stage: 9, smallBlind: 90, bigBlind: 180 },
         { stage: 10, smallBlind: 100, bigBlind: 200 },
+    ],
+    currentChips: [
+        {quantity: 50, color: '#dddddd', value: 10},
+        {quantity: 50, color: '#00b0ff', value: 20},
+        {quantity: 50, color: '#789f30', value: 100},
+        {quantity: 50, color: '#cec56c', value: 500},
+        {quantity: 50, color: '#cec56c', value: 1000},
     ]
 }
+
+
 
 const timer = (state = initialState, action = {}) => {
 
@@ -127,11 +136,17 @@ const timer = (state = initialState, action = {}) => {
 
                     bigBlind:
                         state.currentStructure[state.currentValues.stage - 1].bigBlind,
-                    nextSB:
-                        state.currentStructure[state.currentValues.stage].smallBlind,
-
-                    nextBB:
-                        state.currentStructure[state.currentValues.stage].bigBlind,
+                    nextSB: 
+                    state.currentStructure[state.currentValues.stage]
+                    ?
+                    state.currentStructure[state.currentValues.stage].smallBlind
+                    :
+                    0,
+                    nextBB: state.currentStructure[state.currentValues.stage]
+                    ?
+                    state.currentStructure[state.currentValues.stage].bigBlind
+                    :
+                    0,
 
                 }
             }
