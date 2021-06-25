@@ -1,6 +1,7 @@
 import {
 
-    TOGGLE_TIMER,
+    LAUNCH_TIMER,
+    STOP_TIMER,
     CHANGE_CURRENT_VALUES,
     RESET_CURRENT_VALUES,
     LOAD_PREVIOUS_STAGE,
@@ -59,6 +60,11 @@ const initialState = {
         {quantity: 50, color: '#789f30', value: 100},
         {quantity: 50, color: '#cec56c', value: 500},
         {quantity: 50, color: '#78c56c', value: 1000},
+    ],
+    cashPrice: [
+        {position : 1, amount : 500},
+        {position : 2, amount : 200},
+        {position : 3, amount : 100},
     ]
 }
 
@@ -73,10 +79,16 @@ const timer = (state = initialState, action = {}) => {
                 currentTime: action.time,
             }
         }
-        case TOGGLE_TIMER:
+        case LAUNCH_TIMER:
             return {
                 ...state,
-                isLaunch: !state.isLaunch,
+                isLaunch: true,
+            }
+        
+        case STOP_TIMER:
+            return {
+                ...state,
+                isLaunch: false,
             }
 
         case CHANGE_CURRENT_VALUES:

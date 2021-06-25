@@ -9,11 +9,13 @@
     &__infos{
         display: flex;
         justify-content: space-around;
+        align-items: center;
+        position: relative;
+        right: 5rem;
 
         &__timer{
             display: flex;
             justify-content: center;
-            margin-top: 1.5rem;
         }
     }
 }

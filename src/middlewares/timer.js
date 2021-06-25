@@ -1,6 +1,5 @@
 import {
 
-    TOGGLE_TIMER,
     changeCurrentValues,
     RESET_TIMER,
     resetCurrentValues,
@@ -9,7 +8,9 @@ import {
     GO_TO_NEXT_STAGE,
     loadNextStage,
     REFRESH_TIME,
-    show_time
+    show_time,
+    LAUNCH_TIMER,
+    STOP_TIMER,
 
 } from 'src/actions/timer';
 
@@ -67,23 +68,31 @@ const timerMiddleware = (store) => (next) => (action) => {
 
             break;
         }
-        case TOGGLE_TIMER: {
+        case LAUNCH_TIMER: {
 
             const state = store.getState();
-            const intervalId = state.timer.intervalId;
-
 
             if (!state.timer.isLaunch) {
                 const intervalId = setInterval(() => {
                     store.dispatch(changeCurrentValues(intervalId));
                 }, 1000)
-            } else {
+            }
+
+            next(action);
+            break;
+        }
+
+        case STOP_TIMER: {
+            const state = store.getState();
+            const intervalId = state.timer.intervalId;
+            if (state.timer.isLaunch) {
                 clearInterval(intervalId);
             }
 
             next(action);
             break;
         }
+
 
         default:
             next(action);

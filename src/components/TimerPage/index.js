@@ -4,6 +4,7 @@ import Timer from './Timer';
 import TimerBlinds from './TimerBlinds';
 import TimerHeader from './TimerHeader';
 import TimerChips from './TimerChips';
+import TimerCashPrice from './TimerCashPrice';
 
 import './timerPage.scss';
 
@@ -14,7 +15,7 @@ const TimerPage = () => (
         </div>
         <div className="timerPage__infos">
             <div className="timerPage__infos__cashPrice">
-
+            <TimerCashPrice />
             </div>
             <div className="timerPage__infos__timer">
                 <Timer />

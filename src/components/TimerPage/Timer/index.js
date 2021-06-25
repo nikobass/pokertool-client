@@ -13,7 +13,8 @@ import { connect } from 'react-redux';
 import './timer.scss';
 
 import {
-    toggleTimer,
+    launchTimer,
+    stopTimer,
     resetTimer,
     goToPreviousStage,
     goToNextStage,
@@ -26,12 +27,13 @@ const Timer = ({
     seconde,
     stage,
     isLaunch,
-    handleToggleTimer,
+    handleLaunchTimer,
     handleResetTimer,
     handlePreviousStage,
     handleNextStage,
     handleSkipBack,
     handleSkipForward,
+    handleStopTimer
 }) => (
     <div className="firstBorder">
         <div className="secondBorder">
@@ -68,9 +70,9 @@ const Timer = ({
                 <div className="timer__controllers__play">
                     {
                         isLaunch ?
-                            <Pause onClick={handleToggleTimer} size={80} strokeWidth="3px" className="icon" />
+                            <Pause onClick={handleStopTimer} size={80} strokeWidth="3px" className="icon" />
                             :
-                            <Play onClick={handleToggleTimer} size={80} strokeWidth="3px" className="icon" />
+                            <Play onClick={handleLaunchTimer} size={80} strokeWidth="3px" className="icon" />
                     }
                 </div>
                 <div className={isLaunch ? "invisible" : "timer__controllers__skipForward"}>
@@ -95,8 +97,15 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    handleToggleTimer: () => {
-        dispatch(toggleTimer());
+    handleLaunchTimer: () => {
+        dispatch(launchTimer());
+    },
+    handleStopTimer: () => {
+
+        setTimeout(() => {
+            dispatch(stopTimer());
+        }, 1000)
+        
     },
     handleResetTimer: () => {
         dispatch(resetTimer());

@@ -1,4 +1,5 @@
-export const TOGGLE_TIMER = 'TOGGLE_TIMER';
+export const LAUNCH_TIMER = 'TOGGLE_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
 export const CHANGE_CURRENT_VALUES = 'CHANGE_CURRENT_VALUES';
 export const RESET_TIMER = 'RESET_TIMER';
 export const RESET_CURRENT_VALUES = 'RESET_CURRENT_VALUES';
@@ -11,8 +12,12 @@ export const SKIP_FORWARD = 'SKIP_FORWARD';
 export const REFRESH_TIME = 'REFRESH_TIME';
 export const SHOW_TIME = 'SHOW_TIME';
 
-export const toggleTimer = () => ({
-    type: TOGGLE_TIMER
+export const launchTimer = () => ({
+    type: LAUNCH_TIMER
+})
+
+export const stopTimer =() => ({
+    type: STOP_TIMER
 })
 
 export const changeCurrentValues = (intervalId) => ({
