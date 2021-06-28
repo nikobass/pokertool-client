@@ -140,10 +140,6 @@ const reducer = (state = initialState, action = {}) => {
         openDeleteModal: false,
         refreshTournaments: false,
       };
-=======
-
-
-
     case OPEN_MODAL_TOURNAMENT_STRUCTURE :
       return{
         ...state,
@@ -286,6 +282,7 @@ const reducer = (state = initialState, action = {}) => {
                 ...state.creatTournament,
                 small_blind: ''
               }
+            }
             
 
 
@@ -293,50 +290,43 @@ const reducer = (state = initialState, action = {}) => {
     case SORT_TOURNAMENT_BY_LOCATION_SUCCESS:
       return {
         ...state,
-        tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
+        tournamentList: action.tournaments,      
         isFiltred: !state.isFiltred  
       };
     case SORT_TOURNAMENT_BY_NAME_SUCCESS:
       return {
         ...state,
-        tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
+        tournamentList: action.tournaments,      
         isFiltred: !state.isFiltred     
       };
     case SORT_TOURNAMENT_BY_DATE_SUCCESS:
       return {
         ...state,
-        tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
+        tournamentList: action.tournaments,   
         isFiltred: !state.isFiltred  
       };
     case SORT_TOURNAMENT_BY_BUY_IN_SUCCESS:
       return {
         ...state,
-        tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
+        tournamentList: action.tournaments,  
         isFiltred: !state.isFiltred  
       };
     case SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS:
       return {
         ...state,
-        tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
+        tournamentList: action.tournaments,   
         isFiltred: !state.isFiltred  
       };
     case SORT_TOURNAMENT_BY_STATUS_SUCCESS:
       return {
         ...state,
         tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
         isFiltred: !state.isFiltred  
       };
     case SORT_TOURNAMENT_BY_PLAYER_SUCCESS:
       return {
         ...state,
-        tournamentList: action.tournaments,
-        refreshTournaments: !state.refreshTournaments,
+        tournamentList: action.tournaments,       
         isFiltred: !state.isFiltred  
       };
     default:

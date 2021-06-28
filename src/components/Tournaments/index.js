@@ -12,7 +12,7 @@ import {
   createStructure,
   checkboxChips,
   submitFromMyChips,
-  dontUseMyChips
+  dontUseMyChips,
   sortLocationSubmit,
   sortNameSubmit,
   sortDateSubmit,
@@ -49,7 +49,6 @@ const Tournaments = ({
   handleCloseModal,
   oneTournament,
   refreshTournaments,
-
   handleOnclickSortTournamentByLocation,
   handleOnclickSortTournamentByName,
   handleOnclickSortTournamentByDate,
@@ -58,7 +57,6 @@ const Tournaments = ({
   handleOnclickSortTournamentByStatus,
   handleOnclickSortTournamentByPlayer,
   isFiltred,
-  oneTournament,
   handleShowModal,
   handleCreatTournamentChange,
   errorMessage,
@@ -345,8 +343,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(hideModalDelete());
     }
   }
-})
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tournaments);

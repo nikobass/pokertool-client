@@ -319,7 +319,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           })
           .catch((error) => {
           store.dispatch(errMessage(err.response.data.message))
-        }          
+        });         
         break;
       }
       
