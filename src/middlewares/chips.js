@@ -43,7 +43,7 @@ const chipsMiddleware = (store) => (next) => (action) => {
           store.dispatch(chipsError(msg));
         }
       });
-      
+
       if (checkForDuplicates(arrayOfChips, 'color')){
         const msg = "Plusieurs jetons ont la même couleur. Veuillez vérifier votre saisie."
         store.dispatch(chipsError(msg)); 
