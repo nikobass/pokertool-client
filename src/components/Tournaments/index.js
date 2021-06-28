@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { ChevronDown } from 'react-feather';
+import { ChevronDown, ChevronUp } from 'react-feather';
 import {
   getTournamentUser,
   deleteTournamentUser,
@@ -34,11 +34,12 @@ const Tournaments = ({
   handleOnclickSortTournamentByCashPrice,
   handleOnclickSortTournamentByStatus,
   handleOnclickSortTournamentByPlayer,
+  isFiltred
 }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getTournamentUser());
+  useEffect(() => { 
+      dispatch(getTournamentUser());  
   }, []);
 
   
@@ -67,7 +68,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByName}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
@@ -77,7 +78,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByDate}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
@@ -87,7 +88,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByLocation}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
@@ -97,7 +98,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByBuyIn}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
@@ -107,7 +108,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByCashPrice}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
@@ -117,7 +118,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByStatus}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
@@ -127,7 +128,7 @@ const Tournaments = ({
               onClick={handleOnclickSortTournamentByPlayer}
               type="button"
             >
-              <ChevronDown size={15} />
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
         </li>
@@ -187,6 +188,7 @@ const mapStateToProps = (state) => ({
   tournaments: state.tournament.tournamentList,
   showDeleteTournamentModal: state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
+  isFiltred: state.tournament.isFiltred
 });
 
 const mapDispatchToProps = (dispatch) => ({

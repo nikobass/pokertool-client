@@ -60,38 +60,74 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
     case SORT_LOCATION: {
       const state = store.getState();
-      const compareLocation = (a, b) => {
-        if (a.location < b.location) {
-          return -1;
-        }
-        if (a.location > b.location) {
-          return 1;
-        }
-        return 0;
-      };
-      const tournamentListByLocation = state.tournament.tournamentList.sort(compareLocation);
-      store.dispatch(sortTournamentByLocationSuccess(tournamentListByLocation));
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
+        const compareLocation = (a, b) => {
+          if (a.location < b.location) {
+            return -1;
+          }
+          if (a.location > b.location) {
+            return 1;
+          }
+          return 0;
+        };
+        const tournamentListByLocation = state.tournament.tournamentList.sort(compareLocation);
+        store.dispatch(sortTournamentByLocationSuccess(tournamentListByLocation));
+      } else {
+        const compareLocation = (a, b) => {
+          if (a.location < b.location) {
+            return 1;
+          }
+          if (a.location > b.location) {
+            return -1;
+          }
+          return 0;
+        };
+        const tournamentListByLocation = state.tournament.tournamentList.sort(compareLocation);
+        store.dispatch(sortTournamentByLocationSuccess(tournamentListByLocation));
+      }
+   
       break;
     }
 
     case SORT_NAME: {
       const state = store.getState();
-      const compareName = (a, b) => {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
-      };
-      const tournamentListByName = state.tournament.tournamentList.sort(compareName);
-      store.dispatch(sortTournamentByNameSuccess(tournamentListByName));
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
+        const compareName = (a, b) => {
+          if (a.name < b.name) {
+            return 1;
+          }
+          if (a.name > b.name) {
+            return -1;
+          }
+          return 0;
+        };
+        const tournamentListByName = state.tournament.tournamentList.sort(compareName);
+        store.dispatch(sortTournamentByNameSuccess(tournamentListByName));
+      } else {
+        const compareName = (a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        };
+        const tournamentListByName = state.tournament.tournamentList.sort(compareName);
+        store.dispatch(sortTournamentByNameSuccess(tournamentListByName));
+      }     
       break;
     }
 
     case SORT_DATE: {
       const state = store.getState();
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
       const compareDate = (a, b) => {
         if (a.date < b.date) {
           return 1;
@@ -103,27 +139,59 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       };
       const tournamentListByDate = state.tournament.tournamentList.sort(compareDate);
       store.dispatch(sortTournamentByDateSuccess(tournamentListByDate));
+    } else {
+      const compareDate = (a, b) => {
+        if (a.date < b.date) {
+          return -1;
+        }
+        if (a.date > b.date) {
+          return 1;
+        }
+        return 0;
+      };
+      const tournamentListByDate = state.tournament.tournamentList.sort(compareDate);
+      store.dispatch(sortTournamentByDateSuccess(tournamentListByDate));
+    }
       break;
     }
 
     case SORT_BUY_IN: {
       const state = store.getState();
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
+        const compareBuyIn = (a, b) => {
+          if (a.buy_in < b.buy_in) {
+            return 1;
+          }
+          if (a.buy_in > b.buy_in) {
+            return -1;
+          }
+          return 0;
+      };
+      const tournamentListByBuyIn = state.tournament.tournamentList.sort(compareBuyIn);
+      store.dispatch(sortTournamentByBuyInSuccess(tournamentListByBuyIn));
+    } else {
       const compareBuyIn = (a, b) => {
         if (a.buy_in < b.buy_in) {
-          return 1;
+          return -1;
         }
         if (a.buy_in > b.buy_in) {
-          return -1;
+          return 1;
         }
         return 0;
       };
       const tournamentListByBuyIn = state.tournament.tournamentList.sort(compareBuyIn);
       store.dispatch(sortTournamentByBuyInSuccess(tournamentListByBuyIn));
+    }
       break;
     }
 
     case SORT_CASH_PRICE: {
       const state = store.getState();
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
       const compareCashPrice = (a, b) => {
         if (a.cash_price < b.cash_price) {
           return 1;
@@ -135,11 +203,27 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       };
       const tournamentListByCashPrice = state.tournament.tournamentList.sort(compareCashPrice);
       store.dispatch(sortTournamentByCashPriceSuccess(tournamentListByCashPrice));
+    } else {
+      const compareCashPrice = (a, b) => {
+        if (a.cash_price < b.cash_price) {
+          return -1;
+        }
+        if (a.cash_price > b.cash_price) {
+          return 1;
+        }
+        return 0;
+      };
+      const tournamentListByCashPrice = state.tournament.tournamentList.sort(compareCashPrice);
+      store.dispatch(sortTournamentByCashPriceSuccess(tournamentListByCashPrice));
+    }
       break;
     }
 
     case SORT_STATUS: {
       const state = store.getState();
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
       const compareStatus = (a, b) => {
         if (a.status < b.status) {
           return 1;
@@ -151,11 +235,27 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       };
       const tournamentListByStatus = state.tournament.tournamentList.sort(compareStatus);
       store.dispatch(sortTournamentByStatusSuccess(tournamentListByStatus));
+    } else {
+      const compareStatus = (a, b) => {
+        if (a.status < b.status) {
+          return -1;
+        }
+        if (a.status > b.status) {
+          return 1;
+        }
+        return 0;
+      };
+      const tournamentListByStatus = state.tournament.tournamentList.sort(compareStatus);
+      store.dispatch(sortTournamentByStatusSuccess(tournamentListByStatus));
+    }
       break;
     }
 
     case SORT_PLAYER: {
       const state = store.getState();
+      const isFiltred = state.tournament.isFiltred
+
+      if(!isFiltred) {
       const comparePlayer = (a, b) => {
         if (a.nb_players < b.nb_players) {
           return 1;
@@ -167,6 +267,19 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       };
       const tournamentListByPlayer = state.tournament.tournamentList.sort(comparePlayer);
       store.dispatch(sortTournamentByPlayerSuccess(tournamentListByPlayer));
+    } else {
+      const comparePlayer = (a, b) => {
+        if (a.nb_players < b.nb_players) {
+          return -1;
+        }
+        if (a.nb_players > b.nb_players) {
+          return 1;
+        }
+        return 0;
+      };
+      const tournamentListByPlayer = state.tournament.tournamentList.sort(comparePlayer);
+      store.dispatch(sortTournamentByPlayerSuccess(tournamentListByPlayer));
+    }
       break;
     }
 
