@@ -21,7 +21,8 @@ import {
   ERROR_MESSAGE,
   CHECKBOX_CHIPS,
   SUBMIT_WITH_MY_CHIPS_SUCCESS,
-  USE_OWN_SMALL_BLIND
+  USE_OWN_SMALL_BLIND,
+  OPEN_MODAL_TOURNAMENT_STRUCTURE
 } from 'src/actions/tournament'
 
 import {
@@ -32,6 +33,7 @@ const initialState = {
   openDetailsModal: false,
   openDeleteModal: false,
   openUpdateModal: false,
+  structureTournamentOpen : false,
   tournamentList : [],
   loading: false,
   currentId: null,
@@ -59,6 +61,11 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type){
+    case OPEN_MODAL_TOURNAMENT_STRUCTURE :
+      return{
+        ...state,
+        structureTournamentOpen: true
+      }
     case OPEN_MODAL_TOURNAMENT_DETAILS :
       return {
         ...state,

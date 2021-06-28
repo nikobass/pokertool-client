@@ -21,7 +21,8 @@ import {
   clearTournament,
   errMessage,
   SUBMIT_WITH_MY_CHIPS,
-  submitFromMyChipsSuccess
+  submitFromMyChipsSuccess,
+  getStructureTournament
 } from 'src/actions/tournament';
 
 
@@ -59,10 +60,11 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           headers: { "Authorization": `Bearer ${token}` }
         })
         .then((response) => {
-          store.dispatch(getOneTournamentUserSuccess(response.data));         
+          store.dispatch(getOneTournamentUserSuccess(response.data));
+          store.dispatch(getStructureTournament())         
         })
         .catch((error) => console.log(error));
-        store.dispatch(errMessage(err.response.data.message))
+        
       break;
     }
 
@@ -195,7 +197,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         
       })
       .catch((err) => console.log(err));
-      store.dispatch(errMessage(err.response.data.message))
+      
       break;
     }
 

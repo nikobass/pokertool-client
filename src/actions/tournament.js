@@ -28,6 +28,7 @@ export const CHECKBOX_CHIPS = 'CHECKBOX_CHIPS'
 export const SUBMIT_WITH_MY_CHIPS = 'SUBMIT_WITH_MY_CHIPS'
 export const SUBMIT_WITH_MY_CHIPS_SUCCESS = 'SUBMIT_WITH_MY_CHIPS_SUCCESS'
 export const USE_OWN_SMALL_BLIND = 'USE_OWN_SMALL_BLIND';
+export const OPEN_MODAL_TOURNAMENT_STRUCTURE = 'OPEN_MODAL_TOURNAMENT_STRUCTURE'
 
 import {HIDE_MODAL} from './user'
 
@@ -43,6 +44,10 @@ export const tournamentDetailsModal = (currentId ) => ({
 export const tournamentDeleteModal = (currentId) => ({
   type : OPEN_MODAL_TOURNAMENT_DELETE,
   currentId
+})
+
+export const openModalStructureTournament = () => ({
+  type : OPEN_MODAL_TOURNAMENT_STRUCTURE
 })
 
 
