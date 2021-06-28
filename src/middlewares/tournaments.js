@@ -122,9 +122,9 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             // Créer une autre action qui modifie le state (donc la dispatch)
             // le return de la fonction structureCreator remplacera structureTournament dans le state
             store.dispatch(tournamentSubmitSuccess(response.data));
-            
           })
           .catch((err) => {          
+            console.log( state.tournament.cash_price)
             console.log(err.response.data.message)
             store.dispatch(errMessage(err.response.data.message))
             
@@ -210,13 +210,6 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
     }
     
-    //Ici tu vas gérer le case pour ton action qui créer la structure
-    // Dans cette action tu vas appeler la fonction structureCreator(small_blind, nb_players, starting_stack, speed)
-    // Tu vas lancer une action qui prend en paramètre la fonction qui retourne la structure
-    // tu peux récupérer toutes les données du state grâce a store.getState();
-    // store.dispatch(addStructureToState(structureCreator(small_blind, nb_players, starting_stack, speed)))
-    // DAns cette action, tu vas éxécuter l'action qui créer le tournoi
-    // Donc store.dispatch(tournamentSubmit())
 
      
     

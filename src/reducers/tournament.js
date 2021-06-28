@@ -52,7 +52,7 @@ const initialState = {
   },
   cash_price: [],
   cash_priceInput: [{
-    position:0,
+    position:1,
     amount:""
   }],
   nbCashPrice: 1,
@@ -112,10 +112,18 @@ const reducer = (state = initialState, action = {}) => {
             cash_priceInput: [
               ...state.cash_priceInput,
               {
+                position: state.cash_priceInput.nbCashPrice
+
+              }
+            ],
+            cash_price:[
+              ...state.cash_priceInput,
+              {
                 position: state.cash_priceInput.nbCashPrice,
-               
+                amount : action.cash_price
               }
             ]
+            
           }
           /************************* GET Tournaments ******************************/
         case GET_TOURNAMENTS_ALL_USER :
