@@ -14,17 +14,17 @@ const Cards = () => {
     {
       image: tournament,
       title:'Gérer vos Tournois',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat pariatur perferendis quisquam doloribus. Dolores cupiditate delectus assumenda, dicta nesciunt fuga iusto odio maiores eaque quisquam! Excepturi, libero.',
+      description: 'Créez vos propres tournois en les paramétrant entièrement: Nom, Date, Lieu, Cash-Price, Tapis de départ, Blinds etc... !!!',
     },
     {
       image:chip,
       title:'Gérer vos Jetons',
-      description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat pariatur perferendis quisquam doloribus. Dolores cupiditate delectus assumenda, dicta nesciunt fuga iusto odio maiores eaque quisquam! Excepturi, libero.',
+      description:'Virtualisez les jetons de votre propre mallette de poker ! Choisissez leur couleur, leur valeur et le nombre.',
     },
     {
       image:timer,
       title:'Gérer votre Timer',
-      description:'oh le jolie timer, Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat pariatur perferendis quisquam doloribus. Dolores cupiditate delectus assumenda, dicta nesciunt fuga iusto odio maiores eaque quisquam! Excepturi, libero.',
+      description:'Le timer est un outil qui permet aux joueurs de connaître les diverses informations indispensables au bon déroulement d’une partie.',
     }
   ]
   
