@@ -71,15 +71,14 @@ const TournamentUpdate = ({
       <label htmlFor="buy_in" className="tournamentUpdate__form__label">Buy in</label>
       <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input" value={buyInValue} disabled={modifying ? "" : "disabled"}  />
 
-       {
-         nbCashPriceInput.map((cashPrice) => ( 
-           <div key={cashPrice.position} className="tournamentUpdate__form__label__cashprice">
+     
+    
+           <div  className="tournamentUpdate__form__label__cashprice">
              <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
              <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
 
            </div>
-         ))
-       }
+   
 
        <button onClick={handleAddCashprice}  disabled={modifying ? "" : "disabled"} className={modifying ? "active" : "invisible"} >Ajouter un Cash price supplémentaire</button>
 
@@ -117,7 +116,7 @@ const mapStateToProps = (state) => ({
   locationValue: state.tournament.oneTournament.location,
   dateValue : state.tournament.oneTournament.date,
   statusValue :state.tournament.oneTournament.status,
-  cashPriceValue:state.tournament.oneTournament.cash_price,
+  cashPriceValue:state.tournament.oneTournament.cashprice,
   buyInValue:state.tournament.oneTournament.buy_in,
   speedValue:state.tournament.oneTournament.speed,
   commentsValue:state.tournament.oneTournament.comments,
@@ -128,7 +127,7 @@ const mapStateToProps = (state) => ({
   openUpdateModal : state.tournament.openUpdateModal,
   currentId: state.tournament.currentId,
   cash_price: state.tournament.cash_price,
-  nbCashPriceInput: state.tournament.cash_priceInput
+  nbCashPriceInput: state.tournament.nbCashPrice
 })
 
 const mapDispatchToProps = (dispatch) =>({

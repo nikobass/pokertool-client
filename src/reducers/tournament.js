@@ -51,10 +51,6 @@ const initialState = {
     chips_user: false,
   },
   cash_price: [],
-  cash_priceInput: [{
-    position:1,
-    amount:""
-  }],
   nbCashPrice: 1,
   structureTournament:[],
   modifying: false,
@@ -108,22 +104,14 @@ const reducer = (state = initialState, action = {}) => {
         case ADD_CASH_PRICE:
           return {
             ...state,
-            nbCashPrice: state.cash_priceInput.position +1,
-            cash_priceInput: [
-              ...state.cash_priceInput,
-              {
-                position: state.cash_priceInput.nbCashPrice
-
-              }
-            ],
+            // nbCashPrice: state.csh_priceInput.position +1,                  
             cash_price:[
-              ...state.cash_priceInput,
+              ...state.cash_price,
               {
-                position: state.cash_priceInput.nbCashPrice,
-                amount : action.cash_price
+                position: 0,
+                amount : 100
               }
-            ]
-            
+            ]            
           }
           /************************* GET Tournaments ******************************/
         case GET_TOURNAMENTS_ALL_USER :
@@ -198,6 +186,11 @@ const reducer = (state = initialState, action = {}) => {
                 ...state.oneTournament,
                 [action.inputName]: action.newInputValue
               },
+              cash_price: state.cash_price.map(
+                (price, i) => i == action.index
+                ? {...price, [action.inputName]: action.newInputValue}
+                : price
+              ),
               modifying: true,
             }
           

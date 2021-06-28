@@ -10,7 +10,8 @@ import {
   submitCreatTournamentValues,
   createStructure,
   errMessage,
-  addCashprice
+  addCashprice,
+  changeInputValue
 
   } 
   from 'src/actions/tournament';
@@ -24,6 +25,7 @@ import Modal from 'src/components/Modal';
 import TournamentElement from 'src/components/TournamentElement';
 import TournamentDetails from 'src/components/TournamentDetails';
 import TournamentUpdate from 'src/components/TournamentUpdate';
+import ButtonAddCashprice from 'src/components/ButtonAddCashprice'
 
 import './tournaments.scss'
 
@@ -51,7 +53,9 @@ const Tournaments = ({
   locationValue,
   handleAddCashprice,
   nbCashPriceInput,
-  cash_price
+  cash_price,
+  cashPriceAmount,
+  cashPricePosition
 }) => {
   const dispatch = useDispatch();
 
@@ -131,7 +135,7 @@ const Tournaments = ({
                 date={tournament.date}
                 location={tournament.location}
                 buyIn={tournament.buy_in}
-                cashPrice={tournament.cash_price}
+                cashPrice={tournament.cashprices}
                 statut={tournament.status}
                 nbPlayers={tournament.nb_players}
                 
@@ -202,15 +206,10 @@ const Tournaments = ({
 
             <label htmlFor="buy_in" className="creatTournamentForm__label">Buy in:</label>
             <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input" value={buyInValue}/>
-            {
-              nbCashPriceInput.map((cashPrice) => (
-                < div className="creatTournamentForm__cashPrice" key={cashPrice.position} >
-                  <label htmlFor="cash_price" className="creatTournamentForm__label">Cash price:</label>                    <input onChange={ handleCreatTournamentChange } type="number" name="cash_price" className="creatTournamentForm__input" value={cashPriceValue}/>
-                  </div>
-              ))
-            }
-              <button onClick={handleAddCashprice} className=" ">Ajouter un Cash price supplémentaire</button>
+         
+           <ButtonAddCashprice/>
 
+           <button onClick={handleAddCashprice} className=" ">Ajouter un Cash price supplémentaire</button>
 
             <label htmlFor="starting_stack" className="creatTournamentForm__label">Tapis de départ:</label>
             <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input" value={startingStackValue}/>
@@ -258,7 +257,7 @@ Tournaments.propTypes = {
   locationValue: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownprops) => ({
   tournaments : state.tournament.tournamentList,
   showDeleteTournamentModal : state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
@@ -268,7 +267,7 @@ const mapStateToProps = (state) => ({
   locationValue: state.tournament.creatTournament.location,
   dateValue : state.tournament.creatTournament.date,
   statusValue :state.tournament.creatTournament.status,
-  cashPriceValue:state.tournament.creatTournament.cash_price, //cash_price.amount,
+  cashPriceValue:state.tournament.cash_price, //cash_price.amount,
   buyInValue:state.tournament.creatTournament.buy_in,
   speedValue:state.tournament.creatTournament.speed,
   commentsValue:state.tournament.creatTournament.comments,
@@ -276,9 +275,9 @@ const mapStateToProps = (state) => ({
   smallBlindValue: state.tournament.creatTournament.small_blind,
   startingStackValue:state.tournament.creatTournament.starting_stack,
   nbCashPriceInput : state.tournament.cash_priceInput,
-  cash_price: state.tournament.cash_price
- 
-
+  cash_price: state.tournament.cash_price,
+  //cashPriceAmount: state.tournament.cash_price[ownprops.index].amount,
+  //cashPricePosition:state.tournament.cash_price[ownprops.index].position
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -304,7 +303,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleCreatTournamentChange: (event) => {
-    dispatch(submitCreatTournamentValues(event.target.value, event.target.name))
+    dispatch(changeInputValue(event.target.value, event.target.name))
   },
 
   handleTournamentSubmit: (event) => {

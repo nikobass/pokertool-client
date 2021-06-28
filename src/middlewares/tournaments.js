@@ -38,6 +38,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         })
         .then((response) =>{
           store.dispatch(getTournamentUserSuccess(response.data))
+          console.log(response.data)
           
         })
         .catch((err) =>{  console.log(err),
