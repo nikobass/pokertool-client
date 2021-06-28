@@ -18,8 +18,10 @@ import {
   GET_STRUCTURE_TOURNAMENT_SUCCESS,
   ADD_STRUCTURE_TO_STATE,
   CLEAR_TOURNAMENT,
-  ERROR_MESSAGE
-
+  ERROR_MESSAGE,
+  CHECKBOX_CHIPS,
+  SUBMIT_WITH_MY_CHIPS_SUCCESS,
+  USE_OWN_SMALL_BLIND
 } from 'src/actions/tournament'
 
 import {
@@ -47,7 +49,7 @@ const initialState = {
     status: null,
     comments: null,
     starting_stack: null,
-    small_blind: null,
+    small_blind: '',
     chips_user: false,
   },
   structureTournament:[],
@@ -85,7 +87,13 @@ const reducer = (state = initialState, action = {}) => {
             openDetailsModal: false,
             openDeleteModal: false,
             showCreateTournamentModal: false,
-            openUpdateModal: false
+            openUpdateModal: false,
+            creatTournament: {
+              ...state.creatTournament,
+              small_blind: '',
+              chips_user: false,
+              refreshTournaments: true
+            }
           }
         case SHOW_CREATE_TOURNAMENT_MODAL:
       return {
@@ -178,18 +186,42 @@ const reducer = (state = initialState, action = {}) => {
                 return {
                   ...state,
                   creatTournament: {
-                    ...state.creatTournament,
+                    ...state.creatTournament,                    
                     [action.inputName]: action.newInputValue,
-                  },
-                 
-                };
+                  },                 
+                }
+          case CHECKBOX_CHIPS: 
+                return {
+                  ...state,
+                  creatTournament: {
+                    ...state.creatTournament,
+                    chips_user: action.checkboxValue,
+                    refreshTournaments: true
+                  }
+                }
+          case SUBMIT_WITH_MY_CHIPS_SUCCESS:
+                return {
+                  ...state,
+                  creatTournament: {
+                    ...state.creatTournament,
+                    small_blind: action.smallestChipValue,
+                    refreshTournaments: true
+                  }
+                }
           case TOURNAMENT_SUBMIT_SUCCESS:
                 return {
                     ...state,
                     showCreateTournamentModal: false,
                     refreshTournaments: true
-                  };
-
+                  }
+          case USE_OWN_SMALL_BLIND:
+            return {
+              ...state,
+              creatTournament: {
+                ...state.creatTournament,
+                small_blind: ''
+              }
+            }
 
           /************************* DELETE Tournaments ******************************/
           case DELETE_TOURNAMENT_USER :

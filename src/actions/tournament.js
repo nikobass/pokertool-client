@@ -24,6 +24,10 @@ export const CREATE_STRUCTURE ='CREATE_STRUCTURE'
 export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
 export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 export const ERROR_MESSAGE ='ERROR_MESSAGE'
+export const CHECKBOX_CHIPS = 'CHECKBOX_CHIPS'
+export const SUBMIT_WITH_MY_CHIPS = 'SUBMIT_WITH_MY_CHIPS'
+export const SUBMIT_WITH_MY_CHIPS_SUCCESS = 'SUBMIT_WITH_MY_CHIPS_SUCCESS'
+export const USE_OWN_SMALL_BLIND = 'USE_OWN_SMALL_BLIND';
 
 import {HIDE_MODAL} from './user'
 
@@ -174,4 +178,22 @@ export const hideModalDelete = () => ({
 export const errMessage = (errMessage) => ({
   type : ERROR_MESSAGE,
   errMessage
+})
+
+export const checkboxChips = (checkboxValue) => ({
+  type: CHECKBOX_CHIPS,
+  checkboxValue
+})
+
+export const submitFromMyChips = () => ({
+  type: SUBMIT_WITH_MY_CHIPS,
+})
+
+export const submitFromMyChipsSuccess = (smallestChipValue) => ({
+  type: SUBMIT_WITH_MY_CHIPS_SUCCESS,
+  smallestChipValue
+})
+
+export const dontUseMyChips = () => ({
+  type: USE_OWN_SMALL_BLIND
 })
