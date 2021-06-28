@@ -7,9 +7,14 @@ import {
   tournamentDetailsModal,
   tournamentDeleteModal,
   getOneTournamentUser,
+  tounamentUpdateModale,
+  getStructureTournament
 } from 'src/actions/tournament';
+import {
+  importChips
+} from 'src/actions/distributor'
 
-import './tournamentElement.scss';
+import './tournamentElement.scss'
 
 const TournamentElement = ({
   name,
@@ -21,12 +26,13 @@ const TournamentElement = ({
   date,
   handleTournamentDetails,
   handleTournamentDelete,
+  handleTournamentUpdate
   
   
 }) => {
   return (
     <div className="tournament--element" >
-      <span>
+      <span >
         {name}
       </span>
       <span>
@@ -44,7 +50,7 @@ const TournamentElement = ({
       <span>
         {statut}
       </span>
-      <span>
+      <span >
         {nbPlayers}
       </span>
     
@@ -52,7 +58,10 @@ const TournamentElement = ({
         
         <Eye />
       </button>
-      <button className="modify-tournament">
+      <button
+       className="modify-tournament"
+       onClick={handleTournamentUpdate}
+       >
         <Edit />
       </button>
       <button 
@@ -81,13 +90,22 @@ TournamentElement.propTypes = {
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
-    dispatch(tournamentDetailsModal(ownprops.currentId));
-    {console.log(ownprops.currentId)};
-    dispatch(getOneTournamentUser());
+    dispatch(tournamentDetailsModal(ownprops.currentId))
+    {console.log(ownprops.currentId)}
+    dispatch(getOneTournamentUser())
+    dispatch(importChips())
+    dispatch(getStructureTournament())   
   },
   handleTournamentDelete: () => {
     dispatch(tournamentDeleteModal(ownprops.currentId));
-  },
-});
+},
+  handleTournamentUpdate: () => {
+    dispatch(tounamentUpdateModale(ownprops.currentId))
+    dispatch(getOneTournamentUser())
+    dispatch(importChips())
+    dispatch(getStructureTournament())
+
+}
+})
 
 export default connect(null, mapDispatchToProps)(TournamentElement);

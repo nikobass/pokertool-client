@@ -1,11 +1,27 @@
 import axios from 'axios';
 
+import { structureCreator } from 'src/utils/structureCreator'
+
 import {
   GET_TOURNAMENTS_ALL_USER,
   getTournamentUserSuccess,
   DELETE_TOURNAMENT_USER,
   deleteTournamentSucces,
   getOneTournamentUserSuccess,
+  tournamentSubmitSuccess,
+  TOURNAMENT_SUBMIT,
+  modifyTournamentSuccess,
+  MODIFY_TOURNAMENT_VALIDATE,
+  GET_STRUCTURE_TOURNAMENT,
+  getStructureTournamentSuccess,
+  CREATE_STRUCTURE,
+  addStructureToState,
+  tournamentSubmit,
+  clearTournament,
+  errMessage,
+  SUBMIT_WITH_MY_CHIPS,
+  submitFromMyChipsSuccess,
+  getStructureTournament,
   GET_ONE_TOURNAMENT_USER,
   sortTournamentByLocationSuccess,
   SORT_LOCATION,
@@ -20,30 +36,31 @@ import {
   SORT_STATUS,
   sortTournamentByStatusSuccess,
   SORT_PLAYER,
-  sortTournamentByPlayerSuccess,
-
+  sortTournamentByPlayerSuccess
 } from 'src/actions/tournament';
 
 const tournamentsMiddleware = (store) => (next) => (action) => {
-  switch (action.type) {
-    case GET_TOURNAMENTS_ALL_USER :
-      const tournamentUserId = localStorage.getItem('userId');
-      const token = localStorage.getItem('token');
-      axios({
-        method: 'get',
-        url: `http://localhost:3000/tournaments/${tournamentUserId}`,
-        headers: {"Authorization" : `Bearer ${token}`}
-      })
-        .then((response) => {
-          store.dispatch(getTournamentUserSuccess(response.data))
-        })
-        .catch((err) => console.log(err));
-      break;
 
-    case GET_ONE_TOURNAMENT_USER: {
-      const state = store.getState();
-      const tournamentId = state.tournament.currentId;
-      const token = localStorage.getItem('token');
+
+    switch (action.type) {
+      case GET_TOURNAMENTS_ALL_USER :
+        const tournamentUserId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token'); 
+      
+        axios({
+          method: 'get',
+          url: `http://localhost:3000/tournaments/${tournamentUserId}`,
+          headers: {"Authorization" : `Bearer ${token}`}
+        })
+        .then((response) =>{
+
+          store.dispatch(getTournamentUserSuccess(response.data))
+        })        
+      break;
+      case GET_ONE_TOURNAMENT_USER : {
+        const state = store.getState();
+        const tournamentId = state.tournament.currentId;
+        const token = localStorage.getItem('token');   
 
       axios({
         method: 'get',
@@ -52,9 +69,13 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));
-          console.log(response.data)
+          store.dispatch(getStructureTournament())         
         })
-        .catch((error) => console.log(error));
+         .catch((err) =>{  console.log(err),
+        store.dispatch(clearTournament());
+        store.dispatch(errMessage(err.response.data.message))
+        });
+        
       break;
     }
 
@@ -250,8 +271,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
     }
       break;
     }
-
-    case SORT_PLAYER: {
+        
+        case SORT_PLAYER: {
       const state = store.getState();
       const isFiltred = state.tournament.isFiltred
 
@@ -283,22 +304,157 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    case DELETE_TOURNAMENT_USER: {
-      const state = store.getState();
-      const tournamentId = state.tournament.currentId;
-      const token = localStorage.getItem('token');
-      axios({
-        method: 'delete',
-        url: `http://localhost:3000/tournament/${tournamentId}`,
-        headers: { "Authorization": `Bearer ${token}` }
-      })
-        .then((response) => {
-          store.dispatch(deleteTournamentSucces(tournamentId));
+      case DELETE_TOURNAMENT_USER: {
+        const state = store.getState();
+        const tournamentId = state.tournament.currentId;
+        const token = localStorage.getItem('token');
+  
+        axios({
+          method: 'delete',
+          url: `http://localhost:3000/tournament/${tournamentId}`,
+          headers: { "Authorization": `Bearer ${token}` }
         })
-        .catch((error) => console.log(error));
+          .then((response) => {
+            store.dispatch(deleteTournamentSucces(tournamentId));
+          })
+          .catch((error) => {
+          store.dispatch(errMessage(err.response.data.message))
+        }          
+        break;
+      }
+      
+      case SUBMIT_WITH_MY_CHIPS: {
+        const state = store.getState();        
+        const chips = state.chip.chips;
+        const isMyChipsChecked = state.tournament.creatTournament.chips_user;
+     
+        const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
+
+        if(isMyChipsChecked) {          
+          store.dispatch(submitFromMyChipsSuccess(parseInt(smallestChipValue)));
+        };           
+      
+        break;
+      }
+
+      case TOURNAMENT_SUBMIT: {
+        const state = store.getState();
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token'); 
+
+        axios ({
+          method: 'post',
+          url: `http://localhost:3000/tournament/${userId}`,
+          headers: { "Authorization": `Bearer ${token}` },
+          data:  [    {
+            name: state.tournament.creatTournament.name,
+            date: state.tournament.creatTournament.date,
+            location: state.tournament.creatTournament.location,
+            speed:state.tournament.creatTournament.speed,
+            nb_players:state.tournament.creatTournament.nb_players,
+            comments:state.tournament.creatTournament.comments,
+            cash_price:state.tournament.creatTournament.cash_price,
+            buy_in:state.tournament.creatTournament.buy_in,
+            starting_stack: state.tournament.creatTournament.starting_stack,
+            small_blind: state.tournament.creatTournament.small_blind,
+            chips_user: state.tournament.creatTournament.chips_user,
+          },          
+            state.tournament.structureTournament          
+                ]
+        })
+          .then(response => {           
+            
+            // Créer une autre action qui modifie le state (donc la dispatch)
+            // le return de la fonction structureCreator remplacera structureTournament dans le state
+            store.dispatch(tournamentSubmitSuccess(response.data));
+            
+          })
+          .catch((err) => {          
+            console.log(err.response.data.message)
+            store.dispatch(errMessage(err.response.data.message))
+            
+          });
+        break;
+      }
+      case MODIFY_TOURNAMENT_VALIDATE : {
+        const state = store.getState();
+        const tournamentId = state.tournament.currentId;
+        const token = localStorage.getItem('token');
+
+
+        axios({
+          method:'patch',
+          url: `http://localhost:3000/tournament/${tournamentId}`,
+          headers: { "Authorization": `Bearer ${token}` },
+          data: [    {
+            name: state.tournament.oneTournament.name,
+            date: state.tournament.oneTournament.date,
+            location: state.tournament.oneTournament.location,
+            speed:state.tournament.oneTournament.speed,
+            nb_players:state.tournament.oneTournament.nb_players,
+            comments:state.tournament.oneTournament.comments,
+            cash_price:state.tournament.oneTournament.cash_price,
+            buy_in:state.tournament.oneTournament.buy_in,
+            starting_stack: state.tournament.oneTournament.starting_stack,
+            small_blind: state.tournament.oneTournament.small_blind,
+            status: state.tournament.oneTournament.status,
+            chips_user: false,
+          },
+            state.tournament.structureTournament
+
+          
+        ]
+        })
+        .then((response) => {
+
+          store.dispatch(modifyTournamentSuccess(response.data));
+        })
+        .catch((err) => console.log(err.response.data.message));
+        store.dispatch(errMessage(err.response.data.message))
+      
       break;
     }
 
+    case GET_STRUCTURE_TOURNAMENT :{ 
+      const state = store.getState();
+      const tournamentId = state.tournament.currentId;
+      const token = localStorage.getItem('token');  
+      
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/structure/${tournamentId}`,
+        headers: {"Authorization" : `Bearer ${token}`},
+        data:{
+          structure : state.tournament.structureTournament
+
+        }
+      })
+      .then((response) =>{
+        store.dispatch(getStructureTournamentSuccess(response.data))
+        
+      })
+      .catch((err) => console.log(err));
+      
+      break;
+    }
+
+    case CREATE_STRUCTURE :{
+      const state = store.getState()
+     // const token = localStorage.getItem('token');  
+      
+      store.dispatch(addStructureToState(
+        structureCreator(
+          state.tournament.creatTournament.small_blind,
+          state.tournament.creatTournament.nb_players,
+          state.tournament.creatTournament.starting_stack,
+          state.tournament.creatTournament.speed
+          )));
+      store.dispatch(tournamentSubmit())
+      
+      break;
+    }    
+ 
+   
     default:
       next(action);
       break;

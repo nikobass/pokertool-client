@@ -36,6 +36,13 @@ const chipsMiddleware = (store) => (next) => (action) => {
       function checkForDuplicates(array, keyName) {
         return new Set(array.map(item => item[keyName])).size !== array.length
       }
+      
+      arrayOfChips.forEach((chip) => {
+        if(chip.quantity == 0 || chip.value == 0) {  
+          const msg = "La quantité ou la valeur d'un jeton ne peut pas être à 0. Veuillez vérifier votre saisie."
+          store.dispatch(chipsError(msg));
+        }
+      });
 
       if (checkForDuplicates(arrayOfChips, 'color')){
         const msg = "Plusieurs jetons ont la même couleur. Veuillez vérifier votre saisie."

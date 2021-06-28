@@ -4,8 +4,6 @@
   justify-content: space-around;
   flex-direction: column;
   padding-bottom: 5rem;
-  
-  
 }
 
 
@@ -26,6 +24,37 @@
   width: 100rem;
   font-weight: bold;
   font-size: 1.2rem;
+
+  &____name{
+    grid-column-start:1;
+  }
+
+}
+
+
+.tournaments--header {
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+}
+
+.addButton {
+  margin-top: 2rem;
+  background-color: #ee581e;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 0rem 2rem;
+  
+  
+
+  &:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #ee581e;
+    transition : 0.4s ease-out;
+    border: 1px solid black;
+  }
 }
 
 ul{
@@ -74,3 +103,91 @@ ul{
     color: #EE581E;
   }
 }
+
+.creatTournamentForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #19191e;
+  max-height: 50rem;
+  overflow-y: scroll;
+
+  &__input{
+      width: 400px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+
+      &::placeholder{
+          color: black;
+      }
+  }
+
+  &__checkbox{
+    display: flex;
+    margin-bottom: 2rem;
+  }
+  
+  &__label{
+      width: 100%;
+      text-align: left;
+      margin-bottom: 0.3rem;
+      color: #ee581e;
+      font-weight: bold;
+  }
+
+  &__submit{
+      background-color: #ee581e;
+      color: #f2f2f2;
+      padding: 0.8rem 2rem;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: 2px solid #19191e;
+      margin-top: 0.5rem;
+
+      &:hover{
+          cursor: pointer;
+          background-color: #19191e;
+          border: 2px solid #f2f2f2;
+          color: #EE581E;
+      }
+  }
+}
+
+.deleteTournament__submit{
+ 
+    background-color: #ee581e;
+    color: #f2f2f2;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: 2px solid #19191e;
+    margin-top: 0.5rem;
+    margin: 1rem;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #19191e;
+        border: 2px solid #f2f2f2;
+        color: #EE581E;
+    
+    }
+}
+
+.tournaments--list-grid{
+  width: 100%;
+  display: grid;
+  grid-auto-columns: minmax(10px, auto);
+  
+ 
+
+}
+
+.errorMessage{
+  width: 25rem;
+}
+
