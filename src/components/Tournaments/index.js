@@ -25,7 +25,7 @@ import Modal from 'src/components/Modal';
 import TournamentElement from 'src/components/TournamentElement';
 import TournamentDetails from 'src/components/TournamentDetails';
 import TournamentUpdate from 'src/components/TournamentUpdate';
-import ButtonAddCashprice from 'src/components/ButtonAddCashprice'
+import TournamentsCashPriceInputs from 'src/components/TournamentsCashPriceInputs'
 
 import './tournaments.scss'
 
@@ -135,7 +135,7 @@ const Tournaments = ({
                 date={tournament.date}
                 location={tournament.location}
                 buyIn={tournament.buy_in}
-                cashPrice={tournament.cashprices}
+                cashPrice={tournament.cash_price}
                 statut={tournament.status}
                 nbPlayers={tournament.nb_players}
                 
@@ -207,7 +207,7 @@ const Tournaments = ({
             <label htmlFor="buy_in" className="creatTournamentForm__label">Buy in:</label>
             <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input" value={buyInValue}/>
          
-           <ButtonAddCashprice/>
+           {cash_price.map((chip, i) => <TournamentsCashPriceInputs index={i} key={i} />)}
 
            <button onClick={handleAddCashprice} className=" ">Ajouter un Cash price supplémentaire</button>
 
@@ -257,7 +257,7 @@ Tournaments.propTypes = {
   locationValue: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state, ownprops) => ({
+const mapStateToProps = (state) => ({
   tournaments : state.tournament.tournamentList,
   showDeleteTournamentModal : state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
@@ -276,8 +276,6 @@ const mapStateToProps = (state, ownprops) => ({
   startingStackValue:state.tournament.creatTournament.starting_stack,
   nbCashPriceInput : state.tournament.cash_priceInput,
   cash_price: state.tournament.cash_price,
-  //cashPriceAmount: state.tournament.cash_price[ownprops.index].amount,
-  //cashPricePosition:state.tournament.cash_price[ownprops.index].position
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -303,7 +301,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleCreatTournamentChange: (event) => {
-    dispatch(changeInputValue(event.target.value, event.target.name))
+    dispatch(submitCreatTournamentValues(event.target.value, event.target.name))
   },
 
   handleTournamentSubmit: (event) => {

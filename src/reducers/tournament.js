@@ -179,6 +179,8 @@ const reducer = (state = initialState, action = {}) => {
               creatTournament: [],
               refreshTournaments: true,
             }    
+
+          //pour l'udpate
           case CHANGE_INPUT_VALUE:
             return{
               ...state,
@@ -186,14 +188,11 @@ const reducer = (state = initialState, action = {}) => {
                 ...state.oneTournament,
                 [action.inputName]: action.newInputValue
               },
-              cash_price: state.cash_price.map(
-                (price, i) => i == action.index
-                ? {...price, [action.inputName]: action.newInputValue}
-                : price
-              ),
+              
               modifying: true,
             }
           
+          //pour modifier les champs controlés
           case SUBMIT_CREAT_TOURNAMENT_VALUES:
                 return {
                   ...state,
@@ -201,6 +200,14 @@ const reducer = (state = initialState, action = {}) => {
                     ...state.creatTournament,
                     [action.inputName]: action.newInputValue,
                   },
+                  cash_price: state.cash_price.map(
+                    (price, i) => i == action.index
+                    ? {
+                      ...price, 
+                      [action.inputName]: action.newInputValue
+                    }
+                    : price
+                  ),
                  
                 };
           case TOURNAMENT_SUBMIT_SUCCESS:

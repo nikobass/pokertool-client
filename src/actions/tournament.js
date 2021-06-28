@@ -118,20 +118,22 @@ export const tournamentSubmit = () => ({
 })
 
 // recupère les infos des inputs
-export const submitCreatTournamentValues = (newInputValue, inputName ) => ({
+export const submitCreatTournamentValues = (newInputValue, inputName, index) => ({
   type: SUBMIT_CREAT_TOURNAMENT_VALUES,
   newInputValue,
   inputName,
+  index
 });
 
 export const tournamentSubmitSuccess = () => ({
   type : TOURNAMENT_SUBMIT_SUCCESS
 });
 
-export const changeInputValue = (newInputValue, inputName) => ({
+export const changeInputValue = (newInputValue, inputName, index) => ({
   type: CHANGE_INPUT_VALUE,
   newInputValue,
   inputName,
+  index
 });
 
 export const toggleModifyTournament = (tournaments) => ({
