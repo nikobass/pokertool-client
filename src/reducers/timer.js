@@ -122,6 +122,7 @@ const timer = (state = initialState, action = {}) => {
             }
 
         case CHANGE_CURRENT_VALUES:
+            console.log(state.currentValues.stage !== state.currentStructure[state.currentStructure.length-1].stage)
             return {
                 ...state,
                 intervalId: action.intervalId,
@@ -150,9 +151,13 @@ const timer = (state = initialState, action = {}) => {
                     minute:
                         state.currentValues.seconde === 0
                             ?
-                            state.currentValues.minute === 0
+                            state.currentValues.minute === 0 && state.currentValues.stage !== state.currentStructure[state.currentStructure.length-1].stage
                                 ?
                                 state.currentTournament.minute
+                                :
+                                state.currentValues.stage === state.currentStructure[state.currentStructure.length-1].stage && state.currentValues.minute === 0
+                                ?
+                                0
                                 :
                                 state.currentValues.minute - 1
                             :
@@ -160,7 +165,7 @@ const timer = (state = initialState, action = {}) => {
 
                     //gestion de l'étape
                     stage:
-                        state.currentValues.minute === 0 && state.currentValues.seconde === 0
+                        state.currentValues.minute === 0 && state.currentValues.seconde === 0 && state.currentStructure[state.currentValues.stage]
                             ?
                             state.currentValues.stage += 1
                             :
@@ -212,6 +217,7 @@ const timer = (state = initialState, action = {}) => {
         case LOAD_PREVIOUS_STAGE:
             return {
                 ...state,
+                isLaunch: false,
                 currentValues: {
                     ...state.currentValues,
                     minute: state.currentTournament.minute,
@@ -259,6 +265,7 @@ const timer = (state = initialState, action = {}) => {
         case LOAD_NEXT_STAGE:
             return {
                 ...state,
+                isLaunch: false,
                 currentValues: {
                     ...state.currentValues,
                     minute: state.currentTournament.minute,

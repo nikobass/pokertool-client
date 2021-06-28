@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import './distributor.scss';
 
@@ -14,7 +13,6 @@ import {
 } from 'src/actions/distributor';
 
 const Distributor = ({
-    nbChips,
     handleAddChip,
     chips,
     handleLaunchDistributor,
