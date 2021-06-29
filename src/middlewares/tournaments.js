@@ -56,9 +56,11 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           headers: {"Authorization" : `Bearer ${token}`}
         })
         .then((response) =>{
-
           store.dispatch(getTournamentUserSuccess(response.data))
-        })        
+        })
+        .catch((err) =>{  console.log(err),       
+        store.dispatch(clearTournament());        
+        });           
       break;
       case GET_ONE_TOURNAMENT_USER : {
         const state = store.getState();
@@ -71,7 +73,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then((response) => {
-          store.dispatch(getOneTournamentUserSuccess(response.data));
+          store.dispatch(getOneTournamentUserSuccess(response.data));   
           store.dispatch(getStructureTournament())         
         })      
          .catch((err) =>{
@@ -304,7 +306,6 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       const tournamentListByPlayer = state.tournament.tournamentList.sort(comparePlayer);
       store.dispatch(sortTournamentByPlayerSuccess(tournamentListByPlayer));
     }
-
       break;
     }
 
@@ -322,8 +323,9 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             store.dispatch(deleteTournamentSucces(tournamentId));
           })
           .catch((error) => {
-          store.dispatch(errMessage(err.response.data.message))
-        });         
+          store.dispatch(errMessage(error.response.data.message))
+        });       
+
         break;
       }
       
@@ -372,24 +374,25 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             speed:state.tournament.creatTournament.speed,
             nb_players:state.tournament.creatTournament.nb_players,
             comments:state.tournament.creatTournament.comments,
-            cash_price:state.tournament.creatTournament.cash_price,
+            // cash price todo comme structure
+          
             buy_in:state.tournament.creatTournament.buy_in,
             starting_stack: state.tournament.creatTournament.starting_stack,
             small_blind: state.tournament.creatTournament.small_blind,
-            chips_user: state.tournament.creatTournament.chips_user,
+            chips_user: state.tournament.creatTournament.chips_user         
           },          
-            state.tournament.structureTournament          
-                ]
+            state.tournament.structureTournament,
+            state.tournament.cash_price,          
+        ]
         })
           .then(response => {           
             
             // Créer une autre action qui modifie le state (donc la dispatch)
             // le return de la fonction structureCreator remplacera structureTournament dans le state
             store.dispatch(tournamentSubmitSuccess(response.data));
-            
           })
           .catch((err) => {          
-            console.log(err.response.data.message)
+           
             store.dispatch(errMessage(err.response.data.message))
             
           });
@@ -411,15 +414,15 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             location: state.tournament.oneTournament.location,
             speed:state.tournament.oneTournament.speed,
             nb_players:state.tournament.oneTournament.nb_players,
-            comments:state.tournament.oneTournament.comments,
-            cash_price:state.tournament.oneTournament.cash_price,
+            comments:state.tournament.oneTournament.comments,           
             buy_in:state.tournament.oneTournament.buy_in,
             starting_stack: state.tournament.oneTournament.starting_stack,
             small_blind: state.tournament.oneTournament.small_blind,
             status: state.tournament.oneTournament.status,
             chips_user: state.tournament.oneTournament.chips_user,
           },
-            state.tournament.structureTournament
+            state.tournament.structureTournament,
+            state.tournament.oneTournament.cashprices
 
           
         ]
@@ -428,8 +431,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
           store.dispatch(modifyTournamentSuccess(response.data));
         })
-        .catch((err) => console.log(err.response.data.message));
-        store.dispatch(errMessage(err.response.data.message))
+        .catch((err) => store.dispatch(errMessage(err.response.data.message)));
+        
       
       break;
     }
@@ -471,13 +474,11 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       store.dispatch(tournamentSubmit())
       
       break;
-    }    
- 
-   
-    default:
-      next(action);
-      break;
-  }
+    }
+      default:
+        next(action);
+        break;
+    }
 };
 
 export default tournamentsMiddleware;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Edit, Eye, Trash2 } from 'react-feather';
 import PropTypes from 'prop-types';
+import { formatDate } from 'src/utils/date';
 
 import { connect } from 'react-redux';
 import {
@@ -26,17 +27,18 @@ const TournamentElement = ({
   date,
   handleTournamentDetails,
   handleTournamentDelete,
-  handleTournamentUpdate
-  
-  
+  handleTournamentUpdate   
 }) => {
+
+  const formattedDate = formatDate(date, false);
+
   return (
     <div className="tournament--element" >
       <span >
         {name}
       </span>
       <span>
-        {date}
+        {formattedDate}
       </span>
       <span>
         {location}
@@ -91,7 +93,6 @@ TournamentElement.propTypes = {
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
     dispatch(tournamentDetailsModal(ownprops.currentId))
-    {console.log(ownprops.currentId)}
     dispatch(getOneTournamentUser())
     dispatch(importChips())
     dispatch(getStructureTournament())   

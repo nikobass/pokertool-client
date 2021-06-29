@@ -47,12 +47,18 @@
           }
       }
 
+      
+
       &__label{
           width: 100%;
           text-align: left;
           margin-bottom: 0.3rem;
           color: #ee581e;
           font-weight: bold;
+          &__cashprice{
+            display: flex;
+            flex-direction: column;
+          }
       }
 
       &__errorMsg{
@@ -98,4 +104,8 @@
 
 .invisible{
   display: none;
+}
+
+.active{
+  display: block;
 }

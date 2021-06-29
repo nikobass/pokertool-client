@@ -24,6 +24,9 @@ export const CREATE_STRUCTURE ='CREATE_STRUCTURE'
 export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
 export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 export const ERROR_MESSAGE ='ERROR_MESSAGE'
+export const ADD_CASH_PRICE = 'ADD_CASH_PRICE'
+export const CHANGE_INPUT_CASHPRICE = 'CHANGE_INPUT_CASHPRICE'
+export const ADD_CASH_PRICE_ONE_TOURNAMENT = 'ADD_CASH_PRICE_ONE_TOURNAMENT'
 export const CHECKBOX_CHIPS = 'CHECKBOX_CHIPS'
 export const SUBMIT_WITH_MY_CHIPS = 'SUBMIT_WITH_MY_CHIPS'
 export const SUBMIT_WITH_MY_CHIPS_UPDATE = 'SUBMIT_WITH_MY_CHIPS_UPDATE'
@@ -74,6 +77,14 @@ export const createTournamentModal = () => ({
 export const tounamentUpdateModale = (currentId) => ({
   type: OPEN_MODAL_TOURNAMENT_UPDATE,
   currentId
+})
+
+export const addCashprice = () => ({
+  type: ADD_CASH_PRICE
+})
+
+export const addCashpriceOneTournament = () => ({
+  type: ADD_CASH_PRICE_ONE_TOURNAMENT
 })
 /*********************************** PATCH  **************************/
 
@@ -137,20 +148,29 @@ export const tournamentSubmit = () => ({
 })
 
 // recupère les infos des inputs
-export const submitCreatTournamentValues = (newInputValue, inputName ) => ({
+export const submitCreatTournamentValues = (newInputValue, inputName, index) => ({
   type: SUBMIT_CREAT_TOURNAMENT_VALUES,
   newInputValue,
   inputName,
+  index
 });
 
 export const tournamentSubmitSuccess = () => ({
   type : TOURNAMENT_SUBMIT_SUCCESS
 });
 
-export const changeInputValue = (newInputValue, inputName) => ({
+export const changeInputValue = (newInputValue, inputName, index) => ({
   type: CHANGE_INPUT_VALUE,
   newInputValue,
   inputName,
+  index
+});
+
+export const changeCashPriceValue = (newInputValue, inputName, index) => ({
+  type: CHANGE_INPUT_CASHPRICE,
+  newInputValue,
+  inputName,
+  index
 });
 
 export const toggleModifyTournament = (tournaments) => ({
