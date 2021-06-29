@@ -1,12 +1,15 @@
 import React from 'react';
-import Modal from '../Modal';
 import { connect } from 'react-redux';
+import Modal from 'src/components/Modal';
 
 import 'src/components/TournamentDetails/tournamentDetails.scss'
+
+
 
 const TournamentDetails = ({
   openDetailsModal,
   oneTournament,
+  structureTournament
 } ) => {
 
   return (
@@ -17,8 +20,7 @@ const TournamentDetails = ({
       content={(
      
         <div className="tournament-containerDetail">    
-               
-               
+
           <p>Nom du tournoi: <span className="detailsTournament">{oneTournament.name} </span></p>
           <br/>
           <p>date du tournoi: <span className="detailsTournament">{oneTournament.date}</span></p>
@@ -41,6 +43,28 @@ const TournamentDetails = ({
           <br/>
           <p>Statut:  <span className="detailsTournament">{oneTournament.status}</span></p>
           <br/>
+          <div>
+            <p>Structure du tournoi</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Stage</th>
+                  <th>Small blind</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  structureTournament.map((structure) => (
+                    
+                 <tr key={structure.id}>
+                  <td className="detailsTournament">{structure.stage}</td>
+                  <td className="detailsTournament">{structure.small_blind}</td>
+                 </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
           <div className="tournament-containerDetail__comment">
             <p>Commentaire(s) du tournoi:</p>
             <p className="detailsTournament"> {oneTournament.comments}</p>
@@ -59,8 +83,12 @@ const TournamentDetails = ({
 
 const mapStateToProps = (state) => ({
 	openDetailsModal: state.tournament.openDetailsModal,
-  oneTournament : state.tournament.oneTournament
+  oneTournament : state.tournament.oneTournament,
+  handleModalStructureDetails : state.tournament.structureTournamentOpen,
+  structureTournament : state.tournament.structureTournament
 });
+
+
 
 export default connect (mapStateToProps)(TournamentDetails);
 

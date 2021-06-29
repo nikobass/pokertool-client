@@ -1,10 +1,10 @@
-import React , { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import {ChevronDown} from 'react-feather';
+import { ChevronDown, ChevronUp } from 'react-feather';
 import {
   getTournamentUser,
   deleteTournamentUser,
-  hideModalDelete,
+  hideModalDelete,  
   createTournamentModal,
   submitCreatTournamentValues,
   tournamentSubmit,
@@ -12,9 +12,22 @@ import {
   createStructure,
   checkboxChips,
   submitFromMyChips,
-  dontUseMyChips
-  } 
-  from 'src/actions/tournament';
+  dontUseMyChips,
+  sortLocationSubmit,
+  sortNameSubmit,
+  sortDateSubmit,
+  sortBuyInSubmit,
+  sortCashPriceSubmit,
+  sortStatusSubmit,
+  sortPlayerSubmit,
+} from 'src/actions/tournament';
+
+import Modal from 'src/components/Modal';
+import TournamentElement from 'src/components/TournamentElement';
+import TournamentDetails from '../TournamentDetails';
+import TournamentUpdate from 'src/components/TournamentUpdate';
+
+
 import {
   getChipsFromAPI
 } from 'src/actions/chip';
@@ -24,12 +37,8 @@ import {
   importChips
 } from 'src/actions/distributor'
 
-import Modal from 'src/components/Modal';
-import TournamentElement from 'src/components/TournamentElement';
-import TournamentDetails from 'src/components/TournamentDetails';
-import TournamentUpdate from 'src/components/TournamentUpdate';
 
-import './tournaments.scss'
+import './tournaments.scss';
 
 const Tournaments = ({
   handleTournamentSubmit,
@@ -38,8 +47,16 @@ const Tournaments = ({
   showCreateTournamentModal,
   submitDeleteTournament,
   handleCloseModal,
-  refreshTournaments,
   oneTournament,
+  refreshTournaments,
+  handleOnclickSortTournamentByLocation,
+  handleOnclickSortTournamentByName,
+  handleOnclickSortTournamentByDate,
+  handleOnclickSortTournamentByBuyIn,
+  handleOnclickSortTournamentByCashPrice,
+  handleOnclickSortTournamentByStatus,
+  handleOnclickSortTournamentByPlayer,
+  isFiltred,
   handleShowModal,
   handleCreatTournamentChange,
   errorMessage,
@@ -53,8 +70,9 @@ const Tournaments = ({
   useEffect(() => {
     dispatch(getTournamentUser());
     dispatch(getChipsFromAPI());
-  }, [refreshTournaments]);
+  }, [refreshTournaments]);  
   
+
   return (
     <div className="tournaments-container">
       <div className="tournaments--header">
@@ -74,48 +92,75 @@ const Tournaments = ({
 
           <span className="tournaments--list__name" >
             Nom
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByName}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
             Date
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByDate}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
             Lieu
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByLocation}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
             Buy-in
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByBuyIn}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
             Cash-price
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByCashPrice}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
             Statut
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button 
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByStatus}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
           <span>
             Joueurs
-            <button className="chevron-down">
-              <ChevronDown  size={15} />
+            <button 
+              className="chevron-down"
+              onClick={handleOnclickSortTournamentByPlayer}
+              type="button"
+            >
+              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
-        </li>
-        
+        </li>        
         {tournaments &&
           tournaments.map((tournament) => (
             <li  className="tournaments--list-grid"
@@ -141,32 +186,30 @@ const Tournaments = ({
       {
         !oneTournament &&(
           <TournamentUpdate/>
-
         )
-      }
-      
+      }      
+
       <Modal
-      isOpen={ showDeleteTournamentModal}
-      title='Supprimer un tournoi'
-      content={(
-        <div>
-          <p>Voulez-vous vraiment supprimer ce tournoi ?</p>
-          
+        isOpen={ showDeleteTournamentModal}
+        title= 'Supprimer un tournoi'
+        content={(
+          <div>
+            <p>Voulez-vous vraiment supprimer ce tournoi ?</p>
             <button 
-            type="submit" 
-            className="deleteTournament__submit"
-            onClick={submitDeleteTournament}    
+              type="submit"
+              className="deleteTournament__submit"
+              onClick={submitDeleteTournament}
             >
               OK
             </button>
-         
-          <button          
-          className="deleteTournament__submit"
-          onClick={handleCloseModal}
-          >
-            Annuler
-          </button>
-        </div>
+
+            <button
+              className="deleteTournament__submit"
+              onClick={handleCloseModal}
+            >
+             Annuler
+            </button>
+          </div>
       )}
     />
      <Modal
@@ -228,11 +271,11 @@ Tournaments.defaultProps = {
   tournaments: null,
 };
 
-
 const mapStateToProps = (state) => ({
-  tournaments : state.tournament.tournamentList,
-  showDeleteTournamentModal : state.tournament.openDeleteModal,
+  tournaments: state.tournament.tournamentList,
+  showDeleteTournamentModal: state.tournament.openDeleteModal,
   refreshTournaments: state.tournament.refreshTournaments,
+  isFiltred: state.tournament.isFiltred,
   showCreateTournamentModal: state.tournament.showCreateTournamentModal,
   errorMessage: state.tournament.errorMessage,
   isChipsChecked: state.tournament.creatTournament.chips_user,
@@ -240,18 +283,38 @@ const mapStateToProps = (state) => ({
   chipsList: state.chip.chips
 })
 
-const mapDispatchToProps = (dispatch) => ({
 
+const mapDispatchToProps = (dispatch) => ({
 
   handleCloseModal: () => {
     dispatch(hideModalDelete());
   },
 
   submitDeleteTournament: () => {
-   
-    dispatch(deleteTournamentUser())
-  },
 
+    dispatch(deleteTournamentUser());
+  },
+  handleOnclickSortTournamentByLocation: () => {
+    dispatch(sortLocationSubmit());
+  },
+  handleOnclickSortTournamentByName: () => {
+    dispatch(sortNameSubmit());
+  },
+  handleOnclickSortTournamentByDate: () => {
+    dispatch(sortDateSubmit());
+  },
+  handleOnclickSortTournamentByBuyIn: () => {
+    dispatch(sortBuyInSubmit());
+  },
+  handleOnclickSortTournamentByCashPrice: () => {
+    dispatch(sortCashPriceSubmit());
+  },
+  handleOnclickSortTournamentByStatus: () => {
+    dispatch(sortStatusSubmit());
+  },
+  handleOnclickSortTournamentByPlayer: () => {
+    dispatch(sortPlayerSubmit());
+  },
   handleShowModal: () => {
     dispatch(createTournamentModal())
     
@@ -281,9 +344,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(hideModalDelete());
     }
   }
+});
 
-})
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps )(Tournaments);
+export default connect(mapStateToProps, mapDispatchToProps)(Tournaments);
