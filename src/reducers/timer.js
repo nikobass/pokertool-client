@@ -122,7 +122,6 @@ const timer = (state = initialState, action = {}) => {
             }
 
         case CHANGE_CURRENT_VALUES:
-            console.log(state.currentValues.stage !== state.currentStructure[state.currentStructure.length-1].stage)
             return {
                 ...state,
                 intervalId: action.intervalId,
