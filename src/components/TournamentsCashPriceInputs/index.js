@@ -25,9 +25,6 @@ const TournamentsCashPriceInputs = (
 };
 
 const mapStateToProps = (state, ownprops) => {
-
-    console.log("ici ", state.tournament.cash_price[ownprops.index].amount);
-
   
   return {
 

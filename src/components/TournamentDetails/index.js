@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '../Modal';
 import { connect } from 'react-redux';
 
+import { formatDate } from 'src/utils/date';
 import 'src/components/TournamentDetails/tournamentDetails.scss'
 
 
@@ -25,6 +26,8 @@ const TournamentDetails = ({
 
 } ) => {
 
+  const formattedDate = formatDate(oneTournament.date, false)
+
   return (
    
       <Modal
@@ -37,7 +40,7 @@ const TournamentDetails = ({
                
           <p>Nom du tournoi: <span className="detailsTournament" value={nameValue}>{oneTournament.name} </span></p>
           <br/>
-          <p>date du tournoi: <span className="detailsTournament" value={dateValue}>{oneTournament.date}</span></p>
+          <p>date du tournoi: <span className="detailsTournament" value={dateValue}>{formattedDate}</span></p>
           <br/>
           <p>Lieu du tournoi: <span className="detailsTournament" value={locationValue}>{oneTournament.location}</span></p>
           <br/>

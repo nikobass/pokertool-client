@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import 'src/components/TournamentUpdate/tournamentUpdate.scss'
 import TournamentUpdateInputs from 'src/components/TournamentUpdateInputs'
+import { formatDate } from 'src/utils/date';   
 
 import {
   toggleModifyTournament,
@@ -14,6 +15,7 @@ import {
   hideModalDelete,
   addCashpriceOneTournament  
 } from 'src/actions/tournament'
+
 
 const TournamentUpdate = ({
   modifying,
@@ -40,7 +42,8 @@ const TournamentUpdate = ({
   handleChangeCashPrice
 }) => {
 
-  console.log(cashPriceValue)
+
+  const formattedDate = formatDate(dateValue, true);
 
   return (
     <div>
@@ -55,7 +58,7 @@ const TournamentUpdate = ({
       <input onChange={handleInputChange} type="text" name="name" className="tournamentUpdate__form__input" value={nameValue} disabled={modifying ? "" : "disabled"} required/>
 
       <label htmlFor="date" className="tournamentUpdate__form__label">date</label>
-      <input onChange={handleInputChange} type="date" name="date"className="tournamentUpdate__form__input" value={dateValue} disabled={modifying ? "" : "disabled"} required/>
+      <input onChange={handleInputChange} type="date" name="date"className="tournamentUpdate__form__input" value={formattedDate} disabled={modifying ? "" : "disabled"} required/>
 
       <label htmlFor="location" className="tournamentUpdate__form__label">lieu</label>
       <input onChange={handleInputChange} type="text" name="location" className="tournamentUpdate__form__input" value={locationValue} disabled={modifying ? "" : "disabled"}  />

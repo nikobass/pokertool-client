@@ -99,8 +99,7 @@ const authMiddleware = (store) => (next) => (action) => {
         .then((response) => {         
           store.dispatch(submitProfilSuccess());
         })
-        .catch(err => {
-          console.log(err.response.data.message)
+        .catch(err => {        
           store.dispatch(UpdateProfilError(err.response.data.message))
         });
 

@@ -221,7 +221,8 @@ const reducer = (state = initialState, action = {}) => {
                     }
                     : price
                 )
-            }
+            },
+            modifying: false
           }
           
           //pour modifier les champs controlés

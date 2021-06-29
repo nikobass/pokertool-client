@@ -18,8 +18,7 @@ const distributorMiddleware = (store) => (next) => (action) => {
                 url: `http://localhost:3000/chip/${loggedUserId}`,
                 headers: { "Authorization": `Bearer ${token}` }
               })
-              .then((response) => {
-                console.log(response);
+              .then((response) => {              
                 store.dispatch(importChipsSuccess(response.data))
               })
               .catch(error => console.log(error.response.data.message));
