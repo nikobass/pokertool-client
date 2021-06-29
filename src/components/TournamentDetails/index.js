@@ -4,24 +4,14 @@ import Modal from 'src/components/Modal';
 
 import 'src/components/TournamentDetails/tournamentDetails.scss'
 
-import {
- 
-} 
-from 'src/actions/tournament';
-
-
-
 
 
 const TournamentDetails = ({
   openDetailsModal,
   oneTournament,
-  structureTournament,
-  
-
+  structureTournament
 } ) => {
 
- 
   return (
    
       <Modal
@@ -46,6 +36,8 @@ const TournamentDetails = ({
           <p> Buy-in: <span className="detailsTournament">{oneTournament.buy_in}</span></p>
           <br/>
           <p> Cash-price:<span className="detailsTournament">{oneTournament.cash_price}</span></p>
+          <br/>
+          <p> J'utilise mes jetons pour ce tournoi :<span className="detailsTournament">{oneTournament.chips_user ? "oui" : "non"}</span></p>
           <br/>
           <p> Small blind:<span className="detailsTournament">{oneTournament.small_blind}</span></p>
           <br/>
@@ -94,7 +86,6 @@ const mapStateToProps = (state) => ({
   oneTournament : state.tournament.oneTournament,
   handleModalStructureDetails : state.tournament.structureTournamentOpen,
   structureTournament : state.tournament.structureTournament
-  
 });
 
 

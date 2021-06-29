@@ -176,7 +176,7 @@ const Tournaments = ({
                 nbPlayers={tournament.nb_players}
                 />
             </li>
-        ))
+          ))
         }
       </ul>
       </div>
@@ -220,8 +220,9 @@ const Tournaments = ({
 
             {chipsList.length > 0 && 
             <div className="creatTournamentForm__checkbox">
-            <label className="creatTournamentForm__label">Utiliser mes jetons préconfiguré</label>
-            <input onChange={ handleIsChipsUsed } checked={isChipsChecked} type="checkbox"/>
+              <label className="creatTournamentForm__label">Utiliser mes jetons préconfiguré</label>
+              
+              <input onChange={ handleIsChipsUsed } checked={isChipsChecked} type="checkbox"/>
             </div>
             }
 
@@ -317,20 +318,20 @@ const mapDispatchToProps = (dispatch) => ({
   handleShowModal: () => {
     dispatch(createTournamentModal())
     
-   // dispatch(getStructureTournament())
+    dispatch(getStructureTournament())
   },
 
   handleCreatTournamentChange: (event) => {
     dispatch(submitCreatTournamentValues(event.target.value, event.target.name))
   },
 
-  handleIsChipsUsed: (event) => {   
+  handleIsChipsUsed: (event) => {
     dispatch(checkboxChips(event.target.checked));
-    if(event.target.checked) {      
+    if(event.target.checked) {
       dispatch(submitFromMyChips());
     } else {
       dispatch(dontUseMyChips())
-    }   
+    }
   },
 
   handleTournamentSubmit: (event) => {

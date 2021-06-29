@@ -20,6 +20,8 @@ import {
   clearTournament,
   errMessage,
   SUBMIT_WITH_MY_CHIPS,
+  SUBMIT_WITH_MY_CHIPS_UPDATE,  
+  submitFromMyChipsUpdateSuccess,
   submitFromMyChipsSuccess,
   getStructureTournament,
   GET_ONE_TOURNAMENT_USER,
@@ -37,6 +39,7 @@ import {
   sortTournamentByStatusSuccess,
   SORT_PLAYER,
   sortTournamentByPlayerSuccess
+
 } from 'src/actions/tournament';
 
 const tournamentsMiddleware = (store) => (next) => (action) => {
@@ -70,8 +73,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));
           store.dispatch(getStructureTournament())         
-        })
-         .catch((err) =>{  console.log(err),
+        })      
+         .catch((err) =>{,
         store.dispatch(clearTournament());
         store.dispatch(errMessage(err.response.data.message))
         });
@@ -301,6 +304,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       const tournamentListByPlayer = state.tournament.tournamentList.sort(comparePlayer);
       store.dispatch(sortTournamentByPlayerSuccess(tournamentListByPlayer));
     }
+
       break;
     }
 
@@ -324,7 +328,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       }
       
       case SUBMIT_WITH_MY_CHIPS: {
-        const state = store.getState();        
+        const state = store.getState();
         const chips = state.chip.chips;
         const isMyChipsChecked = state.tournament.creatTournament.chips_user;
      
@@ -336,6 +340,21 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       
         break;
       }
+
+      case SUBMIT_WITH_MY_CHIPS_UPDATE: {
+        const state = store.getState();
+        const chips = state.chip.chips;
+        const isMyChipsChecked = state.tournament.oneTournament.chips_user;
+     
+        const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
+
+        if(isMyChipsChecked) {          
+          store.dispatch(submitFromMyChipsUpdateSuccess(parseInt(smallestChipValue)));
+        };           
+      
+        break;
+      }
+      
 
       case TOURNAMENT_SUBMIT: {
         const state = store.getState();
@@ -398,7 +417,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             starting_stack: state.tournament.oneTournament.starting_stack,
             small_blind: state.tournament.oneTournament.small_blind,
             status: state.tournament.oneTournament.status,
-            chips_user: false,
+            chips_user: state.tournament.oneTournament.chips_user,
           },
             state.tournament.structureTournament
 

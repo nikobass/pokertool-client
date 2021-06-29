@@ -20,6 +20,7 @@ import {
   ERROR_MESSAGE,
   CHECKBOX_CHIPS,
   SUBMIT_WITH_MY_CHIPS_SUCCESS,
+  SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS,
   USE_OWN_SMALL_BLIND,
   OPEN_MODAL_TOURNAMENT_STRUCTURE,
   SORT_TOURNAMENT_BY_LOCATION_SUCCESS,
@@ -29,8 +30,7 @@ import {
   SORT_TOURNAMENT_BY_CASH_PRICE_SUCCESS,
   SORT_TOURNAMENT_BY_STATUS_SUCCESS,
   SORT_TOURNAMENT_BY_PLAYER_SUCCESS,
-} from 'src/actions/tournament';
-
+} from 'src/actions/tournament'
 
 import {
   HIDE_MODAL,
@@ -269,6 +269,14 @@ const reducer = (state = initialState, action = {}) => {
                     refreshTournaments: true
                   }
                 }
+          case SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS:
+            return {
+              ...state,
+              oneTournament: {
+                ...state.oneTournament,
+                small_blind: action.smallestChipValue
+              },
+              }
           case TOURNAMENT_SUBMIT_SUCCESS:
                 return {
                     ...state,

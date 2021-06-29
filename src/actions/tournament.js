@@ -1,6 +1,3 @@
-import {
-
-} from './user';
 export const OPEN_MODAL_TOURNAMENT_DETAILS = 'OPEN_MODAL_TOURNAMENT_DETAILS'
 export const CLOSE_TOURNAMENT_DETAILS_MODAL = 'CLOSE_TOURNAMENT_DETAILS_MODAL'
 export const GET_TOURNAMENTS_ALL_USER = 'GET_TOURNAMENTS_ALL_USER'
@@ -29,6 +26,8 @@ export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 export const ERROR_MESSAGE ='ERROR_MESSAGE'
 export const CHECKBOX_CHIPS = 'CHECKBOX_CHIPS'
 export const SUBMIT_WITH_MY_CHIPS = 'SUBMIT_WITH_MY_CHIPS'
+export const SUBMIT_WITH_MY_CHIPS_UPDATE = 'SUBMIT_WITH_MY_CHIPS_UPDATE'
+export const SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS = 'SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS'
 export const SUBMIT_WITH_MY_CHIPS_SUCCESS = 'SUBMIT_WITH_MY_CHIPS_SUCCESS'
 export const USE_OWN_SMALL_BLIND = 'USE_OWN_SMALL_BLIND';
 export const OPEN_MODAL_TOURNAMENT_STRUCTURE = 'OPEN_MODAL_TOURNAMENT_STRUCTURE'
@@ -98,7 +97,7 @@ export const getTournamentUserSuccess = (tournaments) => ({
 
 // récupération des détails d'un tournoi
 export const getOneTournamentUser = () => ({
-  type: GET_ONE_TOURNAMENT_USER,
+  type : GET_ONE_TOURNAMENT_USER
 });
 
 // retour du middleware pour les details d'un tournoi
@@ -274,12 +273,20 @@ export const submitFromMyChips = () => ({
   type: SUBMIT_WITH_MY_CHIPS,
 })
 
+export const submitFromMyChipsUpdate = () => ({
+  type: SUBMIT_WITH_MY_CHIPS_UPDATE,
+})
+
 export const submitFromMyChipsSuccess = (smallestChipValue) => ({
   type: SUBMIT_WITH_MY_CHIPS_SUCCESS,
+  smallestChipValue
+})
+
+export const submitFromMyChipsUpdateSuccess = (smallestChipValue) => ({
+  type: SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS,
   smallestChipValue
 })
 
 export const dontUseMyChips = () => ({
   type: USE_OWN_SMALL_BLIND
 })
-
