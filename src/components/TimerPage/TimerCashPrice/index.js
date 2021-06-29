@@ -7,8 +7,8 @@ const TimerCashPrice = ({cashPrice}) => (
 
     <div className="timerCashPrice">
         <h2 className="timerCashPrice__title">Cash Price</h2>
-        {cashPrice.map(price => (
-            <li className="timerCashPrice__amount" key={price.position+price.amount}>{price.position}ème : {price.amount}€</li>
+        {cashPrice.map((price, i) => (
+            <li className="timerCashPrice__amount" key={price.position+price.amount}>{i === 0 ? `${price.position}er : ${price.amount}€` : `${price.position}ème : ${price.amount}€`}</li>
         ))}
     </div>
 )

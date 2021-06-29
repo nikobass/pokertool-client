@@ -60,7 +60,7 @@ const initialState = {
         { stage: 7, smallBlind: 70, bigBlind: 140 },
         { stage: 8, smallBlind: 80, bigBlind: 160 },
         { stage: 9, smallBlind: 90, bigBlind: 180 },
-        { stage: 10, smallBlind: 100, bigBlind: 200 },
+        { stage: 10, smallBlind: 10000, bigBlind: 20000 },
     ],
     currentChips: [
         {quantity: 50, color: '#dddddd', value: 10},
