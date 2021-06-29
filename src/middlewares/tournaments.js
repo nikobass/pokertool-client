@@ -74,7 +74,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));
           store.dispatch(getStructureTournament())         
         })      
-         .catch((err) =>{,
+         .catch((err) =>{
         store.dispatch(clearTournament());
         store.dispatch(errMessage(err.response.data.message))
         });
