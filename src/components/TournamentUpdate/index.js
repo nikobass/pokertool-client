@@ -1,7 +1,6 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import Modal from 'src/components/Modal';
-import { connect } from 'react-redux';
-
+import { connect, useDispatch } from 'react-redux';
 import 'src/components/TournamentUpdate/tournamentUpdate.scss'
 import TournamentUpdateInputs from 'src/components/TournamentUpdateInputs'
 import { formatDate } from 'src/utils/date';   
@@ -13,7 +12,8 @@ import {
   modifyTournamentValidate,
   getStructureTournament,
   hideModalDelete,
-  addCashpriceOneTournament  
+  addCashpriceOneTournament,
+  submitFromMyChipsUpdate
 } from 'src/actions/tournament'
 
 
@@ -39,7 +39,10 @@ const TournamentUpdate = ({
   cash_price,
   nbCashPriceInput,
   handleAddCashprice,
-  handleChangeCashPrice
+  handleChangeCashPrice,
+  chipsUserValue,
+  chipsList,
+  handleIsChipsUsed
 }) => {
 
 
@@ -83,14 +86,21 @@ const TournamentUpdate = ({
                  
               )}            
 
-           </div>
-   
+           </div>  
+
 
        <button onClick={handleAddCashprice}  disabled={modifying ? "" : "disabled"} className={modifying ? "active" : "invisible"} >Ajouter un Cash price supplémentaire</button>
-
      
+      {chipsList.length > 0 && 
+      <div>
+        <label htmlFor="chips_user" className="tournamentUpdate__form__label">j'utilise mes jetons pour ce tournoi</label>
+        
+        <input className="tournamentUpdate__form__checkbox" onChange={handleIsChipsUsed} name="chips_user" checked={chipsUserValue} disabled={modifying ? "" : "disabled"} type="checkbox"/>
+      </div>
+      }
+
       <label htmlFor="small_blind" className="tournamentUpdate__form__label">Small blind</label>
-      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={(modifying && !chipsUserValue)? "" : "disabled"}  />
 
       
 
@@ -102,19 +112,17 @@ const TournamentUpdate = ({
       <label htmlFor="comments" className="tournamentUpdate__form__label">Commentaire</label>
       <input onChange={handleInputChange} type="text" name="comments" className="tournamentUpdate__form__input" value={commentsValue} disabled={modifying ? "" : "disabled"}  />
 
-
-
       {errorMessage && <p className="tournamentUpdate__form__errorMsg">{errorMessage}</p>}
+
       <button type="submit" onClick={handleModifyTournamentConfirm} className={modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Valider</button>
+     
       <button onClick={handleModifyTournament} className={!modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Modifier mon tournoi</button>
       </form>
       )}
       />
-      
     </div>
   );
 };
-
 
 const mapStateToProps = (state) => ({
   modifying: state.tournament.modifying,
@@ -127,28 +135,39 @@ const mapStateToProps = (state) => ({
   speedValue:state.tournament.oneTournament.speed,
   commentsValue:state.tournament.oneTournament.comments,
   nbPlayersValue:state.tournament.oneTournament.nb_players,
+  chipsUserValue: state.tournament.oneTournament.chips_user,
   smallBlindValue: state.tournament.oneTournament.small_blind,
-  startingStackValue:state.tournament.oneTournament.starting_stack,
+  startingStackValue: state.tournament.oneTournament.starting_stack,
   errorMessage: state.tournament.errorMessage,
   openUpdateModal : state.tournament.openUpdateModal,
   currentId: state.tournament.currentId,
+  chipsList: state.chip.chips
 })
 
 const mapDispatchToProps = (dispatch) =>({
   handleAddCashprice: (event) => {
     event.preventDefault()
     dispatch(addCashpriceOneTournament())
-  },
+  }
+})
+
 
   handleModifyTournament: (event) => {
     event.preventDefault();
-    dispatch(getStructureTournament())
     dispatch(toggleModifyTournament())
-    
+    dispatch(getStructureTournament())
   },
   handleInputChange: (event) => {
     dispatch(changeInputValue(event.target.value, event.target.name))
   },
+
+  handleIsChipsUsed: (event) => {
+    dispatch(changeInputValue(event.target.checked, event.target.name));
+    if(event.target.checked) {
+      dispatch(submitFromMyChipsUpdate());
+    }
+  },
+
   handleSubmitUpdateTournament: (event) => {
     event.preventDefault();
     dispatch(submitTournamentUpdate())

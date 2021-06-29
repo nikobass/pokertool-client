@@ -126,11 +126,17 @@ ul{
       }
   }
 
+
   &__cashPrice{
     display: flex;
     flex-direction: column;
   }
 
+  &__checkbox{
+    display: flex;
+    margin-bottom: 2rem;
+  }
+  
   &__label{
       width: 100%;
       text-align: left;

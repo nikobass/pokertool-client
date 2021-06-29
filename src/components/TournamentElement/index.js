@@ -11,7 +11,6 @@ import {
   tounamentUpdateModale,
   getStructureTournament
 } from 'src/actions/tournament';
-
 import {
   importChips
 } from 'src/actions/distributor'
@@ -68,8 +67,8 @@ const TournamentElement = ({
         <Edit />
       </button>
       <button 
-      className="modify-tournament"
-      onClick={handleTournamentDelete}
+        className="modify-tournament"
+        onClick={handleTournamentDelete}
       >
         <Trash2 />
       </button>
@@ -82,23 +81,21 @@ const TournamentElement = ({
 
 TournamentElement.propTypes = {
   name: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired, 
+  location: PropTypes.string.isRequired,
+  cashPrice: PropTypes.array.isRequired,
   nbPlayers: PropTypes.number.isRequired,
   buyIn: PropTypes.number.isRequired,
-  statut:PropTypes.string.isRequired,
+  statut: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  handleTournamentDetails : PropTypes.func.isRequired,
-
-}
-
+  handleTournamentDetails: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
     dispatch(tournamentDetailsModal(ownprops.currentId))
     dispatch(getOneTournamentUser())
     dispatch(importChips())
-    dispatch(getStructureTournament())
-   
+    dispatch(getStructureTournament())   
   },
   handleTournamentDelete: () => {
     dispatch(tournamentDeleteModal(ownprops.currentId));
@@ -112,4 +109,4 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
 }
 })
 
-export default connect (null, mapDispatchToProps) (TournamentElement);
+export default connect(null, mapDispatchToProps)(TournamentElement);

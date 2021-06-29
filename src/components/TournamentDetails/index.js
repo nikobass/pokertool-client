@@ -1,13 +1,9 @@
 import React from 'react';
-import Modal from '../Modal';
 import { connect } from 'react-redux';
+import Modal from 'src/components/Modal';
 
 import { formatDate } from 'src/utils/date';
 import 'src/components/TournamentDetails/tournamentDetails.scss'
-
-
-
-
 
 const TournamentDetails = ({
   openDetailsModal,
@@ -23,7 +19,6 @@ const TournamentDetails = ({
   dateValue,
   locationValue,
   statusValue
-
 } ) => {
 
   const formattedDate = formatDate(oneTournament.date, false)
@@ -35,8 +30,7 @@ const TournamentDetails = ({
       title= 'Détails du tournoi'
       content={(
      
-        <div className="tournament-containerDetail">    
-               
+        <div className="tournament-containerDetail">                  
                
           <p>Nom du tournoi: <span className="detailsTournament" value={nameValue}>{oneTournament.name} </span></p>
           <br/>
@@ -54,10 +48,34 @@ const TournamentDetails = ({
           <br/>
           <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice) => cashprice.position + ': ' + cashprice.amount + ' / ')}</span></p>
           <br/>
+          <p> J'utilise mes jetons pour ce tournoi :<span className="detailsTournament">{oneTournament.chips_user ? "oui" : "non"}</span></p>
+          <br/>
           <p> Small blind:<span className="detailsTournament" value={smallBlindValue}>{oneTournament.small_blind}</span></p>
           <br/>
           <p>Statut:  <span className="detailsTournament" value={statusValue}>{oneTournament.status}</span></p>
           <br/>
+          <div>
+            <p>Structure du tournoi</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Stage</th>
+                  <th>Small blind</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  structureTournament.map((structure) => (
+                    
+                 <tr key={structure.id}>
+                  <td className="detailsTournament">{structure.stage}</td>
+                  <td className="detailsTournament">{structure.small_blind}</td>
+                 </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
           <div className="tournament-containerDetail__comment">
             <p>Commentaire(s) du tournoi:</p>
             <p className="detailsTournament" value={commentsValue}> {oneTournament.comments}</p>
@@ -88,10 +106,12 @@ const mapStateToProps = (state) => ({
   nbPlayersValue:state.tournament.oneTournament.nb_players,
   smallBlindValue: state.tournament.oneTournament.small_blind,
   startingStackValue:state.tournament.oneTournament.starting_stack,
-  statusValue: state.tournament.oneTournament.status
- 
-  
+  statusValue: state.tournament.oneTournament.status,
+  handleModalStructureDetails : state.tournament.structureTournamentOpen,
+  structureTournament : state.tournament.structureTournament
 });
+
+
 
 export default connect (mapStateToProps)(TournamentDetails);
 
