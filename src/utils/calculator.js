@@ -64,12 +64,10 @@ export const calculator = (chips, nbPlayer, startingStack) => {
         result.reverse();
 
         result.forEach((chip, i) => {
-            while (chip.value <= diff && chip.quantity > 0){
-                console.log("total : ", chipNumber, " je retire : ", chip.value )
+            while (chip.value <= diff && chip.quantity > 0){              
                     chipNumber -= chip.value;
                     diff = chipNumber - startingStack;
-                    chip.quantity -= 1;
-                    console.log(result)
+                    chip.quantity -= 1;                  
             }
             if(chip.quantity == 0){
                 result.splice(i, 1);

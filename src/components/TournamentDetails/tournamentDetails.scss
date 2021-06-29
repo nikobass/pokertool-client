@@ -2,6 +2,8 @@
   color: #ee581e;
   font-size: 1.5rem;
   line-height: 2.5rem;
+  overflow-y: scroll;
+  height: 50rem;
 
 
   display: flex;
@@ -10,12 +12,22 @@
 
 
   &__comment{
-    
+    padding-top: 1rem;
 
   }
 }
 
 .detailsTournament{
   color: #f2f2f2;
+  padding: 1rem;
+}
+
+th{
+  border: 1px solid #ee581e;
+  padding: 1rem;
+}
+
+td{
+  border: 1px solid #ee581e;
   padding: 1rem;
 }
