@@ -5,27 +5,26 @@
   width: 350px;
   border-radius: 15px;
   overflow: hidden;
-  border : solid 1px #19191e;
+  // border : solid 1px #19191e;
   border-radius: 20px ;
   color: #19191e;
   background-color: #f2f2f2;
   height: auto;
   width: 30vw;
+  font-size: 1.3rem;
 
-  
-
-  
 
   &--image{
-    
       width: 100%;
-      height: 80%;
       padding-bottom: 1rem;
+      margin-bottom: 1rem;
     
   }
 
   &--description{
-    padding: 0.8rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    height: 10vh;
   }
 
   &--title{
