@@ -25,7 +25,7 @@ const TournamentDetails = ({
 
 } ) => {
 
- 
+ console.log(cashPriceValue);
   return (
    
       <Modal
@@ -50,7 +50,7 @@ const TournamentDetails = ({
           <br/>
           <p> Buy-in: <span className="detailsTournament" value={buyInValue}>{oneTournament.buy_in}</span></p>
           <br/>
-          <p> Cash-price:<span className="detailsTournament" value={cashPriceValue}>{oneTournament.cash_price}</span></p>
+          <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice) => cashprice.position + ': ' + cashprice.amount + ' / ')}</span></p>
           <br/>
           <p> Small blind:<span className="detailsTournament" value={smallBlindValue}>{oneTournament.small_blind}</span></p>
           <br/>
@@ -79,7 +79,7 @@ const mapStateToProps = (state) => ({
   locationValue: state.tournament.oneTournament.location,
   dateValue : state.tournament.oneTournament.date,
   statusValue :state.tournament.oneTournament.status,
-  cashPriceValue:state.tournament.oneTournament.cash_price,
+  cashPriceValue:state.tournament.oneTournament.cashprices,
   buyInValue:state.tournament.oneTournament.buy_in,
   speedValue:state.tournament.oneTournament.speed,
   commentsValue:state.tournament.oneTournament.comments,

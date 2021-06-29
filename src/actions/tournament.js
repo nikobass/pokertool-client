@@ -81,10 +81,9 @@ export const getOneTournamentUser = () => ({
 })
 
 // retour du middleware pour les details d'un tournoi
-export const getOneTournamentUserSuccess = (tournaments, cashPrice) => ({
+export const getOneTournamentUserSuccess = (tournaments) => ({
   type : GET_ONE_TOURNAMENT_USER_SUCCESS,
-  tournaments,
-  cashPrice
+  tournaments
 })
 
 // récupération structure tournoi

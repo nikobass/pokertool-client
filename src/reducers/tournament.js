@@ -142,9 +142,7 @@ const reducer = (state = initialState, action = {}) => {
             return {
               ...state,
               loading: false,
-              oneTournament: action.tournaments,
-              cash_price: action.cashPrice,
-
+              oneTournament: action.tournaments            
             }
           
           case GET_STRUCTURE_TOURNAMENT_SUCCESS:

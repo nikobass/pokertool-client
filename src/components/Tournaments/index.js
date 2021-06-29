@@ -135,7 +135,7 @@ const Tournaments = ({
                 date={tournament.date}
                 location={tournament.location}
                 buyIn={tournament.buy_in}
-                cashPrice={tournament.cash_price}
+                cashPrice={tournament.cashprices && tournament.cashprices.reduce((accumulator, current) => accumulator + current.amount, 0)}
                 statut={tournament.status}
                 nbPlayers={tournament.nb_players}
                 
@@ -207,7 +207,7 @@ const Tournaments = ({
             <label htmlFor="buy_in" className="creatTournamentForm__label">Buy in:</label>
             <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input" value={buyInValue}/>
          
-           {cash_price.map((chip, i) => <TournamentsCashPriceInputs index={i} key={i} />)}
+           {cash_price && cash_price.map((chip, i) => <TournamentsCashPriceInputs index={i} key={i} />)}
 
            <button onClick={handleAddCashprice} className=" ">Ajouter un Cash price supplémentaire</button>
 
