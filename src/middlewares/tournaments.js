@@ -38,9 +38,11 @@ import {
   SORT_STATUS,
   sortTournamentByStatusSuccess,
   SORT_PLAYER,
-  sortTournamentByPlayerSuccess
-
+  sortTournamentByPlayerSuccess,
+  LAUNCH_TOURNAMENT,
 } from 'src/actions/tournament';
+
+import { launchTournamentSucess } from 'src/actions/timer';
 
 const tournamentsMiddleware = (store) => (next) => (action) => {
 
@@ -473,6 +475,25 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           )));
       store.dispatch(tournamentSubmit())
       
+      break;
+    }
+
+    case LAUNCH_TOURNAMENT: {
+      
+      const tournamentId = action.tournamentId;
+      const token = localStorage.getItem('token'); 
+
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/timer/${tournamentId}`,
+        headers: {"Authorization" : `Bearer ${token}`},
+      })
+      .then((response) =>{
+        store.dispatch(launchTournamentSucess(response.data));
+        
+      })
+      .catch((error) => console.log(error));
+
       break;
     }
       default:
