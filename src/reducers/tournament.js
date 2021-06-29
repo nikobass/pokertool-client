@@ -19,8 +19,9 @@ import {
   ADD_STRUCTURE_TO_STATE,
   CLEAR_TOURNAMENT,
   ERROR_MESSAGE,
-  ADD_CASH_PRICE
-
+  ADD_CASH_PRICE,
+  CHANGE_INPUT_CASHPRICE,
+  ADD_CASH_PRICE_ONE_TOURNAMENT
 } from 'src/actions/tournament'
 
 import {
@@ -113,6 +114,24 @@ const reducer = (state = initialState, action = {}) => {
               }
             ]            
           }
+
+          case ADD_CASH_PRICE_ONE_TOURNAMENT:
+          return {
+            ...state,
+            // nbCashPrice: state.csh_priceInput.position +1,  
+            oneTournament: {
+              ...state.oneTournament,
+              cashprices: [
+                ...state.oneTournament.cashprices,
+                {
+                  position: 0,
+                  amount : 100
+                }
+              ]
+            }                        
+          }
+
+
           /************************* GET Tournaments ******************************/
         case GET_TOURNAMENTS_ALL_USER :
           return{
@@ -185,10 +204,25 @@ const reducer = (state = initialState, action = {}) => {
               oneTournament: {
                 ...state.oneTournament,
                 [action.inputName]: action.newInputValue
-              },
-              
+              },              
               modifying: true,
             }
+
+          case CHANGE_INPUT_CASHPRICE:
+            return {
+              ...state,
+              oneTournament: {
+                ...state.oneTournament,
+                cashprices: state.oneTournament.cashprices.map(
+                  (price, i) => i == action.index
+                    ? {
+                      ...price, 
+                      [action.inputName]: action.newInputValue
+                    }
+                    : price
+                )
+            }
+          }
           
           //pour modifier les champs controlés
           case SUBMIT_CREAT_TOURNAMENT_VALUES:

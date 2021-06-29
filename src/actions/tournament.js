@@ -25,6 +25,8 @@ export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
 export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 export const ERROR_MESSAGE ='ERROR_MESSAGE'
 export const ADD_CASH_PRICE = 'ADD_CASH_PRICE'
+export const CHANGE_INPUT_CASHPRICE = 'CHANGE_INPUT_CASHPRICE'
+export const ADD_CASH_PRICE_ONE_TOURNAMENT = 'ADD_CASH_PRICE_ONE_TOURNAMENT'
 import {HIDE_MODAL} from './user'
 
 /*************************** Modal Tournaments ****************************/
@@ -54,6 +56,10 @@ export const tounamentUpdateModale = (currentId) => ({
 
 export const addCashprice = () => ({
   type: ADD_CASH_PRICE
+})
+
+export const addCashpriceOneTournament = () => ({
+  type: ADD_CASH_PRICE_ONE_TOURNAMENT
 })
 /*********************************** PATCH  **************************/
 
@@ -130,6 +136,13 @@ export const tournamentSubmitSuccess = () => ({
 
 export const changeInputValue = (newInputValue, inputName, index) => ({
   type: CHANGE_INPUT_VALUE,
+  newInputValue,
+  inputName,
+  index
+});
+
+export const changeCashPriceValue = (newInputValue, inputName, index) => ({
+  type: CHANGE_INPUT_CASHPRICE,
   newInputValue,
   inputName,
   index

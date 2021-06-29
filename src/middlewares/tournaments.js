@@ -150,15 +150,15 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             location: state.tournament.oneTournament.location,
             speed:state.tournament.oneTournament.speed,
             nb_players:state.tournament.oneTournament.nb_players,
-            comments:state.tournament.oneTournament.comments,
-            cash_price:state.tournament.oneTournament.cash_price,
+            comments:state.tournament.oneTournament.comments,           
             buy_in:state.tournament.oneTournament.buy_in,
             starting_stack: state.tournament.oneTournament.starting_stack,
             small_blind: state.tournament.oneTournament.small_blind,
             status: state.tournament.oneTournament.status,
             chips_user: false,
           },
-            state.tournament.structureTournament
+            state.tournament.structureTournament,
+            state.tournament.oneTournament.cashprices
 
           
         ]
@@ -167,8 +167,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
           store.dispatch(modifyTournamentSuccess(response.data));
         })
-        .catch((err) => console.log(err.response.data.message));
-        store.dispatch(errMessage(err.response.data.message))
+        .catch((err) => store.dispatch(errMessage(err.response.data.message)));
+        
       
       break;
     }

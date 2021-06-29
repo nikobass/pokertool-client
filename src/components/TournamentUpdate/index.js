@@ -3,6 +3,7 @@ import Modal from 'src/components/Modal';
 import { connect } from 'react-redux';
 
 import 'src/components/TournamentUpdate/tournamentUpdate.scss'
+import TournamentUpdateInputs from 'src/components/TournamentUpdateInputs'
 
 import {
   toggleModifyTournament,
@@ -11,8 +12,7 @@ import {
   modifyTournamentValidate,
   getStructureTournament,
   hideModalDelete,
-  addCashprice
-  
+  addCashpriceOneTournament  
 } from 'src/actions/tournament'
 
 const TournamentUpdate = ({
@@ -36,10 +36,11 @@ const TournamentUpdate = ({
   smallBlindValue,
   cash_price,
   nbCashPriceInput,
-  handleAddCashprice
-  
-
+  handleAddCashprice,
+  handleChangeCashPrice
 }) => {
+
+  console.log(cashPriceValue)
 
   return (
     <div>
@@ -71,11 +72,13 @@ const TournamentUpdate = ({
       <label htmlFor="buy_in" className="tournamentUpdate__form__label">Buy in</label>
       <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input" value={buyInValue} disabled={modifying ? "" : "disabled"}  />
 
-     
+      {/* <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice) => cashprice.position + ': ' + cashprice.amount + ' / ')}</span></p> */}
     
            <div  className="tournamentUpdate__form__label__cashprice">
-             <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
-             <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
+              {
+                cashPriceValue && cashPriceValue.map((chip, i) => <TournamentUpdateInputs index={i} key={i}/>
+                 
+              )}            
 
            </div>
    
@@ -116,7 +119,7 @@ const mapStateToProps = (state) => ({
   locationValue: state.tournament.oneTournament.location,
   dateValue : state.tournament.oneTournament.date,
   statusValue :state.tournament.oneTournament.status,
-  cashPriceValue:state.tournament.oneTournament.cashprice,
+  cashPriceValue:state.tournament.oneTournament.cashprices,
   buyInValue:state.tournament.oneTournament.buy_in,
   speedValue:state.tournament.oneTournament.speed,
   commentsValue:state.tournament.oneTournament.comments,
@@ -126,14 +129,12 @@ const mapStateToProps = (state) => ({
   errorMessage: state.tournament.errorMessage,
   openUpdateModal : state.tournament.openUpdateModal,
   currentId: state.tournament.currentId,
-  cash_price: state.tournament.cash_price,
-  nbCashPriceInput: state.tournament.nbCashPrice
 })
 
 const mapDispatchToProps = (dispatch) =>({
   handleAddCashprice: (event) => {
     event.preventDefault()
-    dispatch(addCashprice())
+    dispatch(addCashpriceOneTournament())
   },
 
   handleModifyTournament: (event) => {
