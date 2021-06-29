@@ -12,14 +12,16 @@
   &__form {
       display: flex; 
       height: 60vh;  
-      width: 40vw; 
+      
 
       &__chips {
         display: flex;
         flex-direction: column;
         align-items: center;    
         overflow-y: auto;
-        height: 60vh;    
+        width: 40vw;   
+       
+        font-weight: bold;
     }
 
       &__subtitle{
