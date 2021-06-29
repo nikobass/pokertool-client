@@ -21,7 +21,9 @@ import {
   clearTournament,
   errMessage,
   SUBMIT_WITH_MY_CHIPS,
-  submitFromMyChipsSuccess
+  SUBMIT_WITH_MY_CHIPS_UPDATE,
+  submitFromMyChipsSuccess,
+  submitFromMyChipsUpdateSuccess
 } from 'src/actions/tournament';
 
 
@@ -61,8 +63,11 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(getOneTournamentUserSuccess(response.data));         
         })
-        .catch((error) => console.log(error));
-        store.dispatch(errMessage(err.response.data.message))
+        .catch((error) => {
+          console.log(error.response.data.message)
+          // store.dispatch(errMessage(error.response.data.message))
+        });
+       
       break;
     }
 
@@ -85,7 +90,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       }
       
       case SUBMIT_WITH_MY_CHIPS: {
-        const state = store.getState();        
+        const state = store.getState();
         const chips = state.chip.chips;
         const isMyChipsChecked = state.tournament.creatTournament.chips_user;
      
@@ -97,6 +102,21 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       
         break;
       }
+
+      case SUBMIT_WITH_MY_CHIPS_UPDATE: {
+        const state = store.getState();
+        const chips = state.chip.chips;
+        const isMyChipsChecked = state.tournament.oneTournament.chips_user;
+     
+        const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
+
+        if(isMyChipsChecked) {          
+          store.dispatch(submitFromMyChipsUpdateSuccess(parseInt(smallestChipValue)));
+        };           
+      
+        break;
+      }
+      
 
       case TOURNAMENT_SUBMIT: {
         const state = store.getState();
@@ -159,7 +179,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             starting_stack: state.tournament.oneTournament.starting_stack,
             small_blind: state.tournament.oneTournament.small_blind,
             status: state.tournament.oneTournament.status,
-            chips_user: false,
+            chips_user: state.tournament.oneTournament.chips_user,
           },
             state.tournament.structureTournament
 

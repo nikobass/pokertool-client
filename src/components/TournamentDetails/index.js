@@ -4,18 +4,11 @@ import { connect } from 'react-redux';
 
 import 'src/components/TournamentDetails/tournamentDetails.scss'
 
-
-
-
-
 const TournamentDetails = ({
   openDetailsModal,
   oneTournament,
-  
-
 } ) => {
 
- 
   return (
    
       <Modal
@@ -42,6 +35,8 @@ const TournamentDetails = ({
           <br/>
           <p> Cash-price:<span className="detailsTournament">{oneTournament.cash_price}</span></p>
           <br/>
+          <p> J'utilise mes jetons pour ce tournoi :<span className="detailsTournament">{oneTournament.chips_user ? "oui" : "non"}</span></p>
+          <br/>
           <p> Small blind:<span className="detailsTournament">{oneTournament.small_blind}</span></p>
           <br/>
           <p>Statut:  <span className="detailsTournament">{oneTournament.status}</span></p>
@@ -65,7 +60,6 @@ const TournamentDetails = ({
 const mapStateToProps = (state) => ({
 	openDetailsModal: state.tournament.openDetailsModal,
   oneTournament : state.tournament.oneTournament
-  
 });
 
 export default connect (mapStateToProps)(TournamentDetails);

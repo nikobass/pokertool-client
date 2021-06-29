@@ -21,7 +21,9 @@ import {
   ERROR_MESSAGE,
   CHECKBOX_CHIPS,
   SUBMIT_WITH_MY_CHIPS_SUCCESS,
-  USE_OWN_SMALL_BLIND
+  SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS,
+  USE_OWN_SMALL_BLIND,
+
 } from 'src/actions/tournament'
 
 import {
@@ -208,6 +210,14 @@ const reducer = (state = initialState, action = {}) => {
                     refreshTournaments: true
                   }
                 }
+          case SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS:
+            return {
+              ...state,
+              oneTournament: {
+                ...state.oneTournament,
+                small_blind: action.smallestChipValue
+              },
+              }
           case TOURNAMENT_SUBMIT_SUCCESS:
                 return {
                     ...state,

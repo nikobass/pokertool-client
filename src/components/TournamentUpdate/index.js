@@ -1,7 +1,6 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import Modal from 'src/components/Modal';
-import { connect } from 'react-redux';
-
+import { connect, useDispatch } from 'react-redux';
 import 'src/components/TournamentUpdate/tournamentUpdate.scss'
 
 import {
@@ -10,8 +9,8 @@ import {
   changeInputValue,
   modifyTournamentValidate,
   getStructureTournament,
-  hideModalDelete
-  
+  hideModalDelete,
+   submitFromMyChipsUpdate,
 } from 'src/actions/tournament'
 
 const TournamentUpdate = ({
@@ -33,9 +32,9 @@ const TournamentUpdate = ({
   startingStackValue,
   commentsValue,
   smallBlindValue,
-  
-  
-
+  chipsUserValue,
+  chipsList,
+  handleIsChipsUsed,
 }) => {
 
   return (
@@ -71,8 +70,16 @@ const TournamentUpdate = ({
       <label htmlFor="cash_price" className="tournamentUpdate__form__label">Cash price</label>
       <input onChange={handleInputChange} type="number" name="cash_price" className="tournamentUpdate__form__input" value={cashPriceValue} disabled={modifying ? "" : "disabled"}  />
 
+      {chipsList.length > 0 && 
+      <div>
+        <label htmlFor="chips_user" className="tournamentUpdate__form__label">j'utilise mes jetons pour ce tournoi</label>
+        
+        <input className="tournamentUpdate__form__checkbox" onChange={handleIsChipsUsed} name="chips_user" checked={chipsUserValue} disabled={modifying ? "" : "disabled"} type="checkbox"/>
+      </div>
+      }
+
       <label htmlFor="small_blind" className="tournamentUpdate__form__label">Small blind</label>
-      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={(modifying && !chipsUserValue)? "" : "disabled"}  />
 
       <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
       <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue} disabled={modifying ? "" : "disabled"}  />
@@ -81,48 +88,56 @@ const TournamentUpdate = ({
       <label htmlFor="comments" className="tournamentUpdate__form__label">Commentaire</label>
       <input onChange={handleInputChange} type="text" name="comments" className="tournamentUpdate__form__input" value={commentsValue} disabled={modifying ? "" : "disabled"}  />
 
-
-
       {errorMessage && <p className="tournamentUpdate__form__errorMsg">{errorMessage}</p>}
+
       <button type="submit" onClick={handleModifyTournamentConfirm} className={modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Valider</button>
+     
       <button onClick={handleModifyTournament} className={!modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Modifier mon tournoi</button>
       </form>
       )}
       />
-      
     </div>
   );
 };
-
 
 const mapStateToProps = (state) => ({
   modifying: state.tournament.modifying,
   nameValue: state.tournament.oneTournament.name,
   locationValue: state.tournament.oneTournament.location,
-  dateValue : state.tournament.oneTournament.date,
-  statusValue :state.tournament.oneTournament.status,
-  cashPriceValue:state.tournament.oneTournament.cash_price,
-  buyInValue:state.tournament.oneTournament.buy_in,
-  speedValue:state.tournament.oneTournament.speed,
-  commentsValue:state.tournament.oneTournament.comments,
-  nbPlayersValue:state.tournament.oneTournament.nb_players,
+  dateValue: state.tournament.oneTournament.date,
+  statusValue: state.tournament.oneTournament.status,
+  cashPriceValue: state.tournament.oneTournament.cash_price,
+  chipsUserValue: state.tournament.oneTournament.chips_user,
+  buyInValue: state.tournament.oneTournament.buy_in,
+  speedValue: state.tournament.oneTournament.speed,
+  commentsValue: state.tournament.oneTournament.comments,
+  nbPlayersValue: state.tournament.oneTournament.nb_players,
   smallBlindValue: state.tournament.oneTournament.small_blind,
-  startingStackValue:state.tournament.oneTournament.starting_stack,
+  startingStackValue: state.tournament.oneTournament.starting_stack,
   errorMessage: state.tournament.errorMessage,
-  openUpdateModal : state.tournament.openUpdateModal,
-  currentId: state.tournament.currentId
+  openUpdateModal: state.tournament.openUpdateModal,
+  currentId: state.tournament.currentId,
+  chipsList: state.chip.chips
 })
 
 const mapDispatchToProps = (dispatch) =>({
+  
   handleModifyTournament: (event) => {
     event.preventDefault();
-    dispatch(getStructureTournament())
     dispatch(toggleModifyTournament())
-    
+    dispatch(getStructureTournament())
   },
   handleInputChange: (event) => {
     dispatch(changeInputValue(event.target.value, event.target.name))
   },
+
+  handleIsChipsUsed: (event) => {
+    dispatch(changeInputValue(event.target.checked, event.target.name));
+    if(event.target.checked) {
+      dispatch(submitFromMyChipsUpdate());
+    }
+  },
+
   handleSubmitUpdateTournament: (event) => {
     event.preventDefault();
     dispatch(submitTournamentUpdate())

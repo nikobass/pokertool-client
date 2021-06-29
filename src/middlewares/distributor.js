@@ -19,7 +19,6 @@ const distributorMiddleware = (store) => (next) => (action) => {
                 headers: { "Authorization": `Bearer ${token}` }
               })
               .then((response) => {
-                console.log(response);
                 store.dispatch(importChipsSuccess(response.data))
               })
               .catch(error => console.log(error.response.data.message));
