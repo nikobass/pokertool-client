@@ -18,7 +18,8 @@ const TournamentDetails = ({
   nameValue,
   dateValue,
   locationValue,
-  statusValue
+  statusValue,
+  structureTournament
 } ) => {
 
   const formattedDate = formatDate(oneTournament.date, false)

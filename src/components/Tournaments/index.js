@@ -80,8 +80,7 @@ const Tournaments = ({
   cashPriceAmount,
   cashPricePosition,
   isChipsChecked,
-  handleIsChipsUsed,
-  smallBlindValue,
+  handleIsChipsUsed,  
   chipsList
 }) => {
   const dispatch = useDispatch();
@@ -406,7 +405,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createStructure())
     //Quand c'est fait, RDV dans le middleware
     //dispatch(tournamentSubmit()) //A supprimer puisque ce sera appelé dans l'action que tu crées juste au dessus
-    if (!errorMessage){
+    if (!errMessage){
       dispatch(hideModalDelete());
     }
   }

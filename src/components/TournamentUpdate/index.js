@@ -148,9 +148,7 @@ const mapDispatchToProps = (dispatch) =>({
   handleAddCashprice: (event) => {
     event.preventDefault()
     dispatch(addCashpriceOneTournament())
-  }
-})
-
+  },
 
   handleModifyTournament: (event) => {
     event.preventDefault();

@@ -291,8 +291,7 @@ const reducer = (state = initialState, action = {}) => {
                     }
                     : price
                 )
-            },
-            modifying: false
+            }
           }
           
           //pour modifier les champs controlés
@@ -312,9 +311,7 @@ const reducer = (state = initialState, action = {}) => {
                     : price
                   ),
                  
-                };
-                  },                 
-                }
+                }                               
           case CHECKBOX_CHIPS: 
                 return {
                   ...state,
