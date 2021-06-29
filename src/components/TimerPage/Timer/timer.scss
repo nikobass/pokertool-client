@@ -1,0 +1,88 @@
+.timer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 500px;
+    height: 500px;
+    border: 6px solid #DADADA;
+    border-radius: 50%;
+    color: #f2f2f2;
+    position: relative;
+
+    &__reset{
+        margin-top: 1rem;
+    }
+
+    &__stage{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 1rem;
+        font-size: 4rem;
+        font-weight: bold;
+
+        &__stage, &__chevronLeft, &__chevronRight{
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        &__stage{
+            margin: 0 1.2rem;
+        }
+    }
+
+    &__timer{
+        display: flex;
+        position: absolute;
+        top: 38%;
+        font-size: 9rem;
+        font-weight: bold;
+        color: #ee581e;
+        
+        &__minute{
+            text-align: right;
+            width: 200px;
+        }
+        &__seconde{
+            text-align: left;
+            width: 200px;
+        }
+    }
+
+    &__controllers{
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      top: 73%
+    }
+
+    
+}
+
+.icon{
+    color: #f2f2f2;
+
+    &:hover{
+        color: #ee581e;
+        cursor: pointer;
+    }
+}
+
+.invisible{
+    display: none;
+}
+
+.firstBorder{
+    border: 6px solid #DADADA;
+    border-radius: 50%;
+    height: min-content;
+}
+
+.secondBorder{
+    border: 20px solid white;
+    border-radius: 50%;
+}

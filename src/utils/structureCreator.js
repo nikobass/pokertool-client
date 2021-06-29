@@ -26,11 +26,7 @@ function roundnum(num, round){
         })
     }
 
-   
-    return structure;
-        
-        
-    
+    return structure;  
 };
 
 //voila comment lancer la fonction

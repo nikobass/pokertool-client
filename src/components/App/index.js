@@ -1,7 +1,8 @@
 // == Import npm
 import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { hideModal, checkIsLogged } from 'src/actions/user';
 
 // == Import
@@ -15,12 +16,11 @@ import Faq from 'src/components/Faq';
 import Profil from 'src/components/Profil';
 import About from 'src/components/About';
 import Cgu from 'src/components/Cgu';
-import Tournaments from 'src/components/Tournaments'
-import { useDispatch } from 'react-redux';
+import Tournaments from 'src/components/Tournaments';
 import ResetPassword from 'src/components/ResetPasswordHome';
-import { connect } from 'react-redux';
+import Distributor from 'src/components/Distributor';
+import TimerPage from 'src/components/TimerPage';
 import ChipCaseForm from 'src/components/ChipCaseForm';
-import Distributor from '../Distributor';
 
 
 
@@ -59,16 +59,11 @@ const App = ({ isLogged }) => {
           <Faq />
           <Footer />
         </Route>
-        <Route exact path="/distributor">
-          <Header />
-          <Distributor />
-          <Footer />
-        </Route>
         <Route path="/resetPassword">
               <Header />
               <ResetPassword />
               <Footer />
-            </Route>
+        </Route>
         {isLogged ?
           <>
             <Route exact path="/tournaments">
@@ -82,13 +77,17 @@ const App = ({ isLogged }) => {
               <Footer />
             </Route>
             <Route exact path="/distributor">
-              <Header />
+            <Header />
+              <Distributor />
               <Footer />
             </Route>
             <Route path="/profil">
               <Header />
               <Profil />
               <Footer />
+            </Route>
+            <Route path="/timer">
+              <TimerPage />
             </Route>
           </>
           :

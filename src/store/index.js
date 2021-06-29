@@ -1,6 +1,8 @@
 
 import { createStore, applyMiddleware } from 'redux';
 
+import reducer from 'src/reducers';
+
 import authMiddleware from '../middlewares/auth';
 import chipMiddleware from '../middlewares/chips';
 
@@ -8,13 +10,17 @@ import tournamentsMiddleware from '../middlewares/tournaments';
 
 import distributorMiddleware from '../middlewares/distributor';
 
-
-import reducer from 'src/reducers';
+import timerMiddleware from '../middlewares/timer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancers = composeEnhancers(
-  applyMiddleware(authMiddleware, chipMiddleware, distributorMiddleware, tournamentsMiddleware),
+  applyMiddleware(authMiddleware, 
+  distributorMiddleware, 
+  tournamentsMiddleware, 
+  timerMiddleware,
+  chipMiddleware
+    ),
 );
 
 const store = createStore(reducer, enhancers);

@@ -9,6 +9,11 @@ export const calculator = (chips, nbPlayer, startingStack) => {
 
     const isChipTooBig = chips.find(chip => chip.value > startingStack);
 
+    chips.forEach(chip => {
+        chip.value = parseInt(chip.value);
+        chip.quantity = parseInt(chip.quantity);
+    })
+    
 
 
     // je vérifie si il y a deux couleurs identiques

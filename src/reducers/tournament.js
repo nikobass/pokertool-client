@@ -73,8 +73,15 @@ const initialState = {
   nbCashPrice: 1,
   structureTournament:[],
   modifying: false,
-  errorMessage: null
-};
+  errorMessage: null,
+
+  cashPrice: [
+    {1: 100},
+    {2: 50},
+    {3: 25},
+  ]
+}
+
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
