@@ -365,7 +365,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('token'); 
 
-        const zizi = [    {
+        const data = [    {
           name: state.tournament.createTournamentInputs.name,
           date: state.tournament.createTournamentInputs.date,
           location: state.tournament.createTournamentInputs.location,
@@ -381,15 +381,13 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         },          
           state.tournament.structureTournament,
           state.tournament.cash_price,          
-      ]
-
-      console.log(zizi);
+      ] 
 
         axios ({
           method: 'post',
           url: `http://localhost:3000/tournament/${userId}`,
           headers: { "Authorization": `Bearer ${token}` },
-          data:  zizi
+          data:  data
         })
           .then(response => {           
             
