@@ -49,6 +49,7 @@ export const SORT_TOURNAMENT_BY_STATUS_SUCCESS = 'SORT_TOURNAMENT_BY_STATUS_SUCC
 export const SORT_PLAYER = 'SORT_PLAYER';
 export const SORT_TOURNAMENT_BY_PLAYER_SUCCESS = 'SORT_TOURNAMENT_BY_PLAYER_SUCCESS';
 export const LAUNCH_TOURNAMENT = 'LAUNCH_TOURNAMENT';
+export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 
 import {HIDE_MODAL} from './user'
 
@@ -92,6 +93,10 @@ export const addCashpriceOneTournament = () => ({
 export const modifyTournamentValidate = () =>({
   type: MODIFY_TOURNAMENT_VALIDATE,
   
+})
+
+export const updateStructure = () => ({
+  type : UPDATE_STRUCTURE
 })
 /************************* GET Tournaments ******************************/
 

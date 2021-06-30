@@ -40,6 +40,7 @@ import {
   SORT_PLAYER,
   sortTournamentByPlayerSuccess,
   LAUNCH_TOURNAMENT,
+  UPDATE_STRUCTURE,
 } from 'src/actions/tournament';
 
 import { launchTournamentSucess } from 'src/actions/timer';
@@ -407,8 +408,26 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const tournamentId = state.tournament.currentId;
         const token = localStorage.getItem('token');
 
+        const test = [    {
+          name: state.tournament.oneTournament.name,
+          date: state.tournament.oneTournament.date,
+          location: state.tournament.oneTournament.location,
+          speed:state.tournament.oneTournament.speed,
+          nb_players:state.tournament.oneTournament.nb_players,
+          comments:state.tournament.oneTournament.comments,           
+          buy_in:state.tournament.oneTournament.buy_in,
+          starting_stack: state.tournament.oneTournament.starting_stack,
+          small_blind: state.tournament.oneTournament.small_blind,
+          status: state.tournament.oneTournament.status,
+          chips_user: state.tournament.oneTournament.chips_user,
+        },
+          state.tournament.structureTournament,
+          state.tournament.oneTournament.cashprices
 
-        axios({
+        
+      ]
+      console.log(test)
+            axios({
           method:'patch',
           url: `http://localhost:3000/tournament/${tournamentId}`,
           headers: { "Authorization": `Bearer ${token}` },
@@ -460,6 +479,22 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         
       })
       .catch((err) => console.log(err));
+      
+      break;
+    }
+
+  case  UPDATE_STRUCTURE :{
+      const state = store.getState()
+     // const token = localStorage.getItem('token');  
+      
+      store.dispatch(addStructureToState(
+        structureCreator(
+          state.tournament.oneTournament.small_blind,
+          state.tournament.oneTournament.nb_players,
+          state.tournament.oneTournament.starting_stack,
+          state.tournament.oneTournament.speed
+          )));
+      
       
       break;
     }
