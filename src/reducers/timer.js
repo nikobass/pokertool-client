@@ -31,17 +31,17 @@ const initialState = {
     isLaunch: false,
     isAudioPlaying: false,
     intervalId: null,
-    //TODO secondesLeft = durée du tournoi en secondes
-    secondesLeft: 1200,
+    secondesLeft: 300,
     currentTournament: {
-        minute: 20,
+        name: 'Pas de nom de tournoi',
+        minute: 5,
         seconde: 0,
         stage: 1,
         smallBlind: 10,
         bigBlind: 20,
     },
     currentValues: {
-        minute: 20,
+        minute: 5,
         seconde: 0,
         stage: 1,
         previousSB: 0,
@@ -364,6 +364,7 @@ const timer = (state = initialState, action = {}) => {
                 ...state,
                 secondesLeft: action.tournament[0].speed * 60,
                 currentTournament: {
+                    name: action.tournament[0].name,
                     minute: action.tournament[0].speed,
                     seconde: 0,
                     stage: 1,
