@@ -48,6 +48,7 @@ export const SORT_STATUS = 'SORT_STATUS';
 export const SORT_TOURNAMENT_BY_STATUS_SUCCESS = 'SORT_TOURNAMENT_BY_STATUS_SUCCESS';
 export const SORT_PLAYER = 'SORT_PLAYER';
 export const SORT_TOURNAMENT_BY_PLAYER_SUCCESS = 'SORT_TOURNAMENT_BY_PLAYER_SUCCESS';
+export const LAUNCH_TOURNAMENT = 'LAUNCH_TOURNAMENT';
 
 import {HIDE_MODAL} from './user'
 
@@ -310,3 +311,9 @@ export const submitFromMyChipsUpdateSuccess = (smallestChipValue) => ({
 export const dontUseMyChips = () => ({
   type: USE_OWN_SMALL_BLIND
 })
+
+export const launchTournament = (tournamentId) => ({
+  type: LAUNCH_TOURNAMENT,
+  tournamentId
+})
+
