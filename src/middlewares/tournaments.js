@@ -431,27 +431,10 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           method:'patch',
           url: `http://localhost:3000/tournament/${tournamentId}`,
           headers: { "Authorization": `Bearer ${token}` },
-          data: [    {
-            name: state.tournament.oneTournament.name,
-            date: state.tournament.oneTournament.date,
-            location: state.tournament.oneTournament.location,
-            speed:state.tournament.oneTournament.speed,
-            nb_players:state.tournament.oneTournament.nb_players,
-            comments:state.tournament.oneTournament.comments,           
-            buy_in:state.tournament.oneTournament.buy_in,
-            starting_stack: state.tournament.oneTournament.starting_stack,
-            small_blind: state.tournament.oneTournament.small_blind,
-            status: state.tournament.oneTournament.status,
-            chips_user: state.tournament.oneTournament.chips_user,
-          },
-            state.tournament.structureTournament,
-            state.tournament.oneTournament.cashprices
-
-          
-        ]
+          data: test
         })
         .then((response) => {
-
+          console.log(response)
           store.dispatch(modifyTournamentSuccess(response.data));
         })
         .catch((err) => store.dispatch(errMessage(err.response.data.message)));
@@ -485,7 +468,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
   case  UPDATE_STRUCTURE :{
       const state = store.getState()
-     // const token = localStorage.getItem('token');  
+     // const token = localStorage.getItem('token');
       
       store.dispatch(addStructureToState(
         structureCreator(

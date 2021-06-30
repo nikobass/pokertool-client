@@ -262,6 +262,7 @@ const reducer = (state = initialState, action = {}) => {
             }
 
            case ADD_STRUCTURE_TO_STATE:
+             console.log(action.structure);
              return{
                ...state,
                structureTournament: action.structure
