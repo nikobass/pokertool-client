@@ -86,7 +86,7 @@ const ChipElement = ({
           value={value}
           required
           onChange={handleInputChipChange}
-          className="chipElement__field__inputColor"
+          className="chipElement__field__inputNumber"
         />
       </div>
       <div className="chipElement__field">
@@ -98,7 +98,7 @@ const ChipElement = ({
           value={quantity}
           required
           onChange={handleInputChipChange}
-          className="chipElement__field__inputColor"
+          className="chipElement__field__inputNumber"
         />
       </div>
       <Trash2 onClick={handleRemoveChip} className="chipElement__field__logo"/>
