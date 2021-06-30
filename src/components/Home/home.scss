@@ -11,7 +11,7 @@
 
   &__title {
     margin-bottom: 0rem;
-    padding-top: 2rem;
+    padding-top: 4rem;
     padding-bottom: 0rem;
     font-size: 2rem;
     font-weight: bold;
@@ -26,7 +26,7 @@
 
 .signup{
   text-align: center;
-  padding-top: 5rem;
+  padding-top: 2rem;
   margin-bottom: 2rem;
 
   &__button{
@@ -38,6 +38,7 @@
    font-weight: bold;
   //  box-shadow: 1px 3px 2px #f2f2f2;
    padding : 1rem 2rem;
+   margin-bottom: 3rem;
   }
 }
 

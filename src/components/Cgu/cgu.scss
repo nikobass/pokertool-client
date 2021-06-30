@@ -1,8 +1,8 @@
 .cgu{
-  margin-top: 3rem;
   margin-left: 1.5rem;
   width: 70%;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: 4rem;
 
   &__mainTitle{
     font-weight: bold;
@@ -20,5 +20,6 @@
 
   &__articleContent{
     margin-bottom: 1.5rem;
+    line-height: 1.5rem;
   }
 }

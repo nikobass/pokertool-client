@@ -10,24 +10,30 @@
   color: #19191e;
   background-color: #f2f2f2;
   height: auto;
-  width: 30vw;
+  width: 25vw;
   font-size: 1.3rem;
+  margin-top: 2rem;
+
 
 
   &--image{
-      width: 100%;
-      padding-bottom: 1rem;
-      margin-bottom: 1rem;
+      height: 25rem;
+      padding: auto;
+      margin-bottom: 0rem;
     
   }
 
   &--description{
-    padding: 0.5rem;
+    padding: auto;
     margin-top: 0.5rem;
+    line-height: 1rem;
     height: 10vh;
+    line-height: 1.5rem;
+    margin-bottom: rem;
   }
 
   &--title{
     font-weight: bold;
+    padding-top: 0.5rem;
   }
 }
