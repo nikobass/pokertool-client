@@ -52,9 +52,9 @@ const TournamentElement = ({
       <span>
         {cashPrice}
       </span>
-      <span>
+      {/* <span>
         {statut}
-      </span>
+      </span> */}
       <span >
         {nbPlayers}
       </span>

@@ -335,17 +335,17 @@ const reducer = (state = initialState, action = {}) => {
           case CHECKBOX_CHIPS: 
                 return {
                   ...state,
-                  creatTournament: {
-                    ...state.creatTournament,
+                  createTournamentInputs: {
+                    ...state.createTournamentInputs,
                     chips_user: action.checkboxValue,
-                    refreshTournaments: trues
+                    refreshTournaments: true
                   }
                 }
           case SUBMIT_WITH_MY_CHIPS_SUCCESS:
                 return {
                   ...state,
-                  creatTournament: {
-                    ...state.creatTournament,
+                  createTournamentInputs: {
+                    ...state.createTournamentInputs,
                     small_blind: action.smallestChipValue,
                     refreshTournaments: true
                   }
@@ -379,8 +379,8 @@ const reducer = (state = initialState, action = {}) => {
           case USE_OWN_SMALL_BLIND:
             return {
               ...state,
-              creatTournament: {
-                ...state.creatTournament,
+              createTournamentInputs: {
+                ...state.createTournamentInputs,
                 small_blind: ''
               }
             }

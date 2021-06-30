@@ -16,6 +16,11 @@ import {
   UpdateProfilError,
   signUpError,
 } from 'src/actions/user';
+
+import {
+  chipsClear
+} from 'src/actions/chip';
+
 import { deleteUserAccountSucces } from '../actions/user';
 
 const authMiddleware = (store) => (next) => (action) => {
@@ -34,6 +39,7 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       })
         .then(response => {
+          store.dispatch(chipsClear());
           store.dispatch(loginSuccess(response.data));
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('nickname', response.data.nickname);

@@ -4,7 +4,8 @@ import {
   GET_CHIPS_SUCCESS,
   REMOVE_CHIP,
   SUBMIT_CHIPS_SUCCESS,
-  CHIPS_ERROR_MSG
+  CHIPS_ERROR_MSG,
+  CHIPS_CLEAR
 } from 'src/actions/chip';
 
 const initialState = { 
@@ -61,6 +62,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         errorMsgChips: action.msgError
+      }
+    case CHIPS_CLEAR:
+      return {
+        ...state,
+        chips: []
       }
     default:
       return state;

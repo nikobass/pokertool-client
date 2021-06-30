@@ -158,7 +158,7 @@ const Tournaments = ({
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
           </span>
-          <span>
+          {/* <span>
             Statut
             <button 
               className="chevron-down"
@@ -167,7 +167,7 @@ const Tournaments = ({
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
             </button>
-          </span>
+          </span> */}
           <span>
             Joueurs
             <button 

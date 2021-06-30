@@ -230,6 +230,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         return 0;
       };
       const tournamentListByCashPrice = state.tournament.tournamentList.sort(compareCashPrice);
+      console.log(tournamentListByCashPrice);
       store.dispatch(sortTournamentByCashPriceSuccess(tournamentListByCashPrice));
     } else {
       const compareCashPrice = (a, b) => {
@@ -334,7 +335,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       case SUBMIT_WITH_MY_CHIPS: {
         const state = store.getState();
         const chips = state.chip.chips;
-        const isMyChipsChecked = state.tournament.creatTournament.chips_user;
+        const isMyChipsChecked = state.tournament.createTournamentInputs.chips_user;
      
         const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
 
@@ -366,6 +367,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const token = localStorage.getItem('token'); 
 
         const body = [    {
+
           name: state.tournament.createTournamentInputs.name,
           date: state.tournament.createTournamentInputs.date,
           location: state.tournament.createTournamentInputs.location,
@@ -380,8 +382,8 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           chips_user: state.tournament.createTournamentInputs.chips_user         
         },          
           state.tournament.structureTournament,
-          state.tournament.cash_price,          
-      ]
+          state.tournament.cash_price        
+      ] 
 
         axios ({
           method: 'post',

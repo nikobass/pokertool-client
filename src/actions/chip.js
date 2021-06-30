@@ -6,6 +6,7 @@ export const GET_CHIPS_FROM_API = 'GET_CHIPS_FROM_API';
 export const GET_CHIPS_SUCCESS = 'GET_CHIPS_SUCCESS';
 export const REMOVE_CHIP = 'REMOVE_CHIP';
 export const CHIPS_ERROR_MSG = 'CHIPS_ERROR_MSG';
+export const CHIPS_CLEAR = 'CHIPS_CLEAR'
 
 export const submitChips = () => ({
   type: SUBMIT_CHIPS_FORM
@@ -44,4 +45,8 @@ export const removeChip= (index) => ({
 export const chipsError = (msgError) => ({
   type: CHIPS_ERROR_MSG,
   msgError
+})
+
+export const chipsClear = () => ({
+  type: CHIPS_CLEAR
 })
