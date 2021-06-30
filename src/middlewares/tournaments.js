@@ -365,27 +365,31 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('token'); 
 
+        const zizi = [    {
+          name: state.tournament.createTournamentInputs.name,
+          date: state.tournament.createTournamentInputs.date,
+          location: state.tournament.createTournamentInputs.location,
+          speed:state.tournament.createTournamentInputs.speed,
+          nb_players:state.tournament.createTournamentInputs.nb_players,
+          comments:state.tournament.createTournamentInputs.comments,
+          // cash price todo comme structure
+        
+          buy_in:state.tournament.createTournamentInputs.buy_in,
+          starting_stack: state.tournament.createTournamentInputs.starting_stack,
+          small_blind: state.tournament.createTournamentInputs.small_blind,
+          chips_user: state.tournament.createTournamentInputs.chips_user         
+        },          
+          state.tournament.structureTournament,
+          state.tournament.cash_price,          
+      ]
+
+      console.log(zizi);
+
         axios ({
           method: 'post',
           url: `http://localhost:3000/tournament/${userId}`,
           headers: { "Authorization": `Bearer ${token}` },
-          data:  [    {
-            name: state.tournament.creatTournament.name,
-            date: state.tournament.creatTournament.date,
-            location: state.tournament.creatTournament.location,
-            speed:state.tournament.creatTournament.speed,
-            nb_players:state.tournament.creatTournament.nb_players,
-            comments:state.tournament.creatTournament.comments,
-            // cash price todo comme structure
-          
-            buy_in:state.tournament.creatTournament.buy_in,
-            starting_stack: state.tournament.creatTournament.starting_stack,
-            small_blind: state.tournament.creatTournament.small_blind,
-            chips_user: state.tournament.creatTournament.chips_user         
-          },          
-            state.tournament.structureTournament,
-            state.tournament.cash_price,          
-        ]
+          data:  zizi
         })
           .then(response => {           
             
@@ -468,10 +472,10 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       
       store.dispatch(addStructureToState(
         structureCreator(
-          state.tournament.creatTournament.small_blind,
-          state.tournament.creatTournament.nb_players,
-          state.tournament.creatTournament.starting_stack,
-          state.tournament.creatTournament.speed
+          state.tournament.createTournamentInputs.small_blind,
+          state.tournament.createTournamentInputs.nb_players,
+          state.tournament.createTournamentInputs.starting_stack,
+          state.tournament.createTournamentInputs.speed
           )));
       store.dispatch(tournamentSubmit())
       

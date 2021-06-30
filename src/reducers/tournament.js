@@ -56,6 +56,19 @@ const initialState = {
   refreshTournaments: false,
   oneTournament:[],
   showCreateTournamentModal: false,
+  createTournamentInputs: {
+    name: "",
+    date: "",
+    location: "",
+    speed: "",
+    nb_players: "",
+    buy_in: "",
+    status: "",
+    comments: "",
+    starting_stack: "",
+    small_blind: "",
+    chips_user: false,
+  },
   creatTournament: {
     name: "",
     date: "",
@@ -108,7 +121,7 @@ const reducer = (state = initialState, action = {}) => {
               ...state.creatTournament,
               small_blind: '',
               chips_user: false,
-              refreshTournaments: true
+              refreshTournaments: !state.refreshTournaments,
             }
           }
       /************************* GET Tournaments ******************************/
@@ -123,7 +136,7 @@ const reducer = (state = initialState, action = {}) => {
         // copie les tounois dans la tournamentList
         tournamentList: action.tournaments,
         loading: false,
-        refreshTournaments: true,
+        refreshTournaments: false,
       };
     case GET_ONE_TOURNAMENT_USER:
       return {
@@ -149,7 +162,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         openDeleteModal: false,
-        refreshTournaments: false,
+        refreshTournaments: !state.refreshTournaments,
       };
     case OPEN_MODAL_TOURNAMENT_STRUCTURE :
       return{
@@ -214,7 +227,7 @@ const reducer = (state = initialState, action = {}) => {
           return{
             ...state,
             loading: true,
-            refreshTournaments: true,
+            refreshTournaments: false,
           }
         case GET_TOURNAMENTS_SUCCESS :
           return {
@@ -303,10 +316,11 @@ const reducer = (state = initialState, action = {}) => {
           
           //pour modifier les champs controlés
           case SUBMIT_CREAT_TOURNAMENT_VALUES:
+            console.log(action.newInputValue)
                 return {
                   ...state,
-                  creatTournament: {
-                    ...state.creatTournament,                    
+                  createTournamentInputs: {
+                    ...state.createTournamentInputs,                    
                     [action.inputName]: action.newInputValue,
                   },
                   cash_price: state.cash_price.map(
@@ -317,7 +331,6 @@ const reducer = (state = initialState, action = {}) => {
                     }
                     : price
                   ),
-                 
                 }                               
           case CHECKBOX_CHIPS: 
                 return {
@@ -325,7 +338,7 @@ const reducer = (state = initialState, action = {}) => {
                   creatTournament: {
                     ...state.creatTournament,
                     chips_user: action.checkboxValue,
-                    refreshTournaments: true
+                    refreshTournaments: trues
                   }
                 }
           case SUBMIT_WITH_MY_CHIPS_SUCCESS:
@@ -349,7 +362,19 @@ const reducer = (state = initialState, action = {}) => {
                 return {
                     ...state,
                     showCreateTournamentModal: false,
-                    refreshTournaments: true
+                    refreshTournaments: true,
+                    creatTournament: {
+                      ...state.creatTournament,                    
+                      [action.inputName]: action.newInputValue,
+                    },
+                    cash_price: state.cash_price.map(
+                      (price, i) => i == action.index
+                      ? {
+                        ...price, 
+                        [action.inputName]: action.newInputValue
+                      }
+                      : price
+                    ),
                   }
           case USE_OWN_SMALL_BLIND:
             return {

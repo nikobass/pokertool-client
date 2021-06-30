@@ -156,8 +156,9 @@ export const submitCreatTournamentValues = (newInputValue, inputName, index) => 
   index
 });
 
-export const tournamentSubmitSuccess = () => ({
-  type : TOURNAMENT_SUBMIT_SUCCESS
+export const tournamentSubmitSuccess = (tournament) => ({
+  type : TOURNAMENT_SUBMIT_SUCCESS,
+  tournament
 });
 
 export const changeInputValue = (newInputValue, inputName, index) => ({
