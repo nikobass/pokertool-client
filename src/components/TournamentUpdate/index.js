@@ -105,8 +105,8 @@ const TournamentUpdate = ({
       
 
        
-      <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
-      <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue}  disabled={modifying ? "" : "disabled"}  />
+      {/* <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
+      <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue}  disabled={modifying ? "" : "disabled"}  /> */}
 
 
       <label htmlFor="comments" className="tournamentUpdate__form__label">Commentaire</label>

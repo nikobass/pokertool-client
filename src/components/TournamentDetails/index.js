@@ -53,8 +53,8 @@ const TournamentDetails = ({
           <br/>
           <p> Small blind:<span className="detailsTournament" value={smallBlindValue}>{oneTournament.small_blind}</span></p>
           <br/>
-          <p>Statut:  <span className="detailsTournament" value={statusValue}>{oneTournament.status}</span></p>
-          <br/>
+          {/* <p>Statut:  <span className="detailsTournament" value={statusValue}>{oneTournament.status}</span></p>
+          <br/> */}
           <div>
             <p>Structure du tournoi</p>
             <table>
