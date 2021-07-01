@@ -18,14 +18,10 @@ return(
 
 <div>        
     <div className="creatTournamentForm__cashPrice">
-        <label htmlFor="amount" className="creatTournamentForm__label">Cash price:</label>
-        <input onChange={ handleCashPriceInputChange } type="number" name="amount" className="creatTournamentForm__input"
-        min={0} onWheel={(e) => e.target.blur()}
-        value={amount} disabled={modifying ? "" : "disabled"}/>
-        <label htmlFor="position" className="creatTournamentForm__label">Cash price position:</label>
-        <input onChange={ handleCashPriceInputChange } type="number" name="position" className="creatTournamentForm__input"
-        min={0} onWheel={(e) => e.target.blur()}
-        value={position} disabled={modifying ? "" : "disabled"}/>
+        <label htmlFor="amount" className="creatTournamentForm__label">Cash price du n°{position}:</label>
+        <input onChange={ handleCashPriceInputChange } type="number" name="amount" min={0} onWheel={(e) => e.target.blur()} className="creatTournamentForm__input" value={amount} disabled={modifying ? "" : "disabled"}/>
+        <label htmlFor="position" className="creatTournamentForm__label display">Cash price position:</label>
+        <input onChange={ handleCashPriceInputChange } type="number" name="position" className="creatTournamentForm__input display" value={position} disabled={modifying ? "" : "disabled"}/>
     </div>           
 </div>
 )}

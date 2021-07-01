@@ -47,7 +47,7 @@ const TournamentDetails = ({
           <br/>
           <p> Buy-in: <span className="detailsTournament" value={buyInValue}>{oneTournament.buy_in}</span></p>
           <br/>
-          <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice) => cashprice.position + ': ' + cashprice.amount + ' / ')}</span></p>
+          <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice, i) => cashprice.position + ': ' + cashprice.amount + (i === cashPriceValue.length-1 ? ' ' : ' / '))}</span></p>
           <br/>
           <p> J'utilise mes jetons pour ce tournoi :<span className="detailsTournament">{oneTournament.chips_user ? "oui" : "non"}</span></p>
           <br/>
