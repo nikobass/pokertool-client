@@ -1,106 +1,96 @@
 .distributor{
     display: flex;
     flex-direction: column;
-    height: 75vh;
+    height: 65vh;
     padding: 2rem 1rem;
-    margin: 2rem auto;
-    background-color: #19191e;
+    margin: 4rem auto;
+    background-color: #19191E;
     margin-bottom: 95px;
     width: min-content;
+    border-radius: 10px;
 
     &__form{
         display: flex;
-
         &__chips {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            background-color: #19191e;
+            background-color: #19191E;
             height: 550px;
             width: 550px;
         }
-
         &__subtitle{
-            color: #f2f2f2;
+            color: #F2F2F2;
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 2rem;
             text-align: center;
         }
-
         &__importChips{
-            background-color: #ee581e;
-            color: #f2f2f2;
+            background-color: #EE581E;
+            color: #F2F2F2;
             padding: 0.5rem 1rem;
             border-radius: 5px;
             font-weight: 700;
             font-size: 0.8rem;
-            border: 2px solid #19191e;
+            border: 2px solid #19191E;
             margin-bottom: 1rem;
-
             &:hover{
                 cursor: pointer;
-                background-color: #19191e;
-                border: 2px solid #f2f2f2;
+                background-color: #19191E;
+                border: 2px solid #F2F2F2;
                 color: #EE581E;
             }
         }
 
         &__calculate{
-            background-color: #ee581e;
-            color: #f2f2f2;
+            background-color: #EE581E;
+            color: #F2F2F2;
             padding: 1rem 2rem;
             border-radius: 5px;
             font-weight: 700;
             font-size: 1.1rem;
-            border: 2px solid #19191e;
+            border: 2px solid #19191E;
             margin-top: 2rem;
-
             &:hover{
                 cursor: pointer;
-                background-color: #19191e;
-                border: 2px solid #f2f2f2;
+                background-color: #19191E;
+                border: 2px solid #F2F2F2;
                 color: #EE581E;
             }
         }
-
         &__container{
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-y: scroll;
             width: 560px;
-            
+
             &__buttons{
                 display: flex;
-
                 &__button{
                     display: flex;
-                    background-color: #19191e;
-                    color: #f2f2f2;
+                    background-color: #19191E;
+                    color: #F2F2F2;
                     border-radius: 5px;
                     font-weight: 700;
                     font-size: 1rem;
-                    border: 2px solid #19191e;
+                    border: 2px solid #19191E;
                     margin-top: 0.5rem;
                     align-items: center;
                     margin-left: 1rem;
-    
                     &:hover{
-                        color: #ee581e;
+                        color: #EE581E;
                     }
                 }
                 &__addChip{
-
-
                     &::before{
                         content: "+";
                         margin-right: .5rem;
                         font-size: 2rem;
                     }
                 }
-    
                 &__removeChip{
                     &::before{
                         content: "-";
@@ -111,7 +101,6 @@
                 }
             }
         }
-
         &__tournament{
             display: flex;
             flex-direction: column;
@@ -119,22 +108,19 @@
             justify-content: flex-start;
             padding-left: 1rem;
             width: 550px;
-
                 &__inputs{
                     display: flex;
                     justify-content: space-between;
                     width: 100%;
                     margin-top: 1rem;
-
                     &__container{
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
                         width: 100%;
-
                         &__label{
-                            color: #ee581e;
+                            color: #EE581E;
                             width: 110px;
                             text-align: left;
                             margin-bottom: .2rem;
@@ -142,7 +128,6 @@
                             font-weight: bold;
                             padding-left: .1rem;
                         }
-
                         &__input{
                             width: 110px;
                             padding: .7rem;
@@ -150,43 +135,35 @@
                             font-weight: bold;
                         }
                     }
-    
-                    
                 }
 
                 &__result{
-                    // border: 2px solid #f2f2f2;
+                    // border: 2px solid #F2F2F2;
                     padding: 1rem 1rem 2rem 1rem;
                     width: 100%;
                     text-align: center;
-
                     &__title{
-                        color: #f2f2f2;
+                        color: #F2F2F2;
                         font-size: 1.5rem;
                         font-weight: bold;
                     }
-
                     &__text{
-                        color: #f2f2f2;
+                        color: #F2F2F2;
                         margin: 1rem auto;
                     }
-
                     &__chips{
                         display: flex;
                         justify-content: center;
                         flex-wrap: wrap;
-
                         &__errorTitle{
-                            color: #ee581e;
+                            color: #EE581E;
                             font-size: 2rem;
                             font-weight: bold;
                             margin-top: 2rem;
                             text-align: center;
-
                         }
-
                         &__error{
-                            color: #f2f2f2;
+                            color: #F2F2F2;
                             font-size: 1.2rem;
                             font-weight: bold;
                             margin-top: 2rem;
@@ -197,4 +174,3 @@
         }
     }
 }
-

@@ -1,8 +1,9 @@
 .cgu{
-  margin-top: 3rem;
   margin-left: 1.5rem;
   width: 70%;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: 4rem;
+  overflow-y: scroll;
 
   &__mainTitle{
     font-weight: bold;
@@ -15,10 +16,12 @@
     color: #ee581e;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    font-style: italic;
+    // font-style: italic;
   }
 
   &__articleContent{
     margin-bottom: 1.5rem;
+    line-height: 1.5rem;
+    text-align: justify;
   }
 }

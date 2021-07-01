@@ -6,7 +6,7 @@ import Card from 'src/components/Card';
 import './cards.scss'
 import chip from 'src/images/chips.jpg';
 import tournament from 'src/images/tournoi.jpg';
-import timer from 'src/images/timer.jpg';
+import timer from 'src/images/squared_timer.png';
 
 
 const Cards = () => {
@@ -14,17 +14,18 @@ const Cards = () => {
     {
       image: tournament,
       title:'Gérer vos Tournois',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat pariatur perferendis quisquam doloribus. Dolores cupiditate delectus assumenda, dicta nesciunt fuga iusto odio maiores eaque quisquam! Excepturi, libero.',
+      description: 'Créez vos propres tournois en les paramétrant entièrement: Nom, Date, Lieu, Cash-Price, Tapis de départ, Blinds etc... !!!',
+    },
+
+    {
+      image:timer,
+      title:'Gérer votre Timer',
+      description:'Le timer est un outil qui permet aux joueurs de connaître les diverses informations indispensables au bon déroulement d’une partie.',
     },
     {
       image:chip,
       title:'Gérer vos Jetons',
-      description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat pariatur perferendis quisquam doloribus. Dolores cupiditate delectus assumenda, dicta nesciunt fuga iusto odio maiores eaque quisquam! Excepturi, libero.',
-    },
-    {
-      image:timer,
-      title:'Gérer votre Timer',
-      description:'oh le jolie timer, Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat pariatur perferendis quisquam doloribus. Dolores cupiditate delectus assumenda, dicta nesciunt fuga iusto odio maiores eaque quisquam! Excepturi, libero.',
+      description:'Virtualisez les jetons de votre propre mallette de poker ! Choisissez leur couleur, leur valeur et le nombre.',
     }
   ]
   
