@@ -104,72 +104,28 @@ const Tournaments = ({
 
           <p className="tournaments--list--header--element" >
             Nom
-             <button 
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByName}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
           </p>
           <p className="tournaments--list--header--element" >
-            Date
-            <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByDate}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            Date           
           </p>
           <p className="tournaments--list--header--element" >
-            Lieu
-            <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByLocation}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            Lieu          
           </p>
           <p className="tournaments--list--header--element" >
-            Buy-in
-            <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByBuyIn}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            Buy-in          
           </p>
           <p className="tournaments--list--header--element" >
-            Cash-price
-            <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByCashPrice}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            Cash-price            
           </p>
           <p className="tournaments--list--header--element" >
             Joueurs
-            <button 
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByPlayer}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
           </p>
-          
             <button 
               className="addButton"
               onClick={handleShowModal}
             >
               Créer un tournoi
-            </button>
-          
+            </button>          
         </li>
 
         {tournaments &&
@@ -296,7 +252,7 @@ const Tournaments = ({
                 {errorMessage && <p className="errorMessage"> { errorMessage }</p>}
                 
                 <button type="submit" className="tournamentCreate__main__actionsButtons__action">Valider</button>
-              </div>
+              </div>            
         </form>
           )}
         />  
@@ -340,20 +296,20 @@ const mapStateToProps = (state) => ({
   isFiltred: state.tournament.isFiltred,
   showCreateTournamentModal: state.tournament.showCreateTournamentModal,
   errorMessage: state.tournament.errorMessage,
-  nameValue: state.tournament.creatTournament.name,
-  locationValue: state.tournament.creatTournament.location,
-  dateValue : state.tournament.creatTournament.date,
-  statusValue :state.tournament.creatTournament.status,
+  nameValue: state.tournament.createTournamentInputs.name,
+  locationValue: state.tournament.createTournamentInputs.location,
+  dateValue : state.tournament.createTournamentInputs.date,
+  statusValue :state.tournament.createTournamentInputs.status,
   cashPriceValue:state.tournament.cash_price, //cash_price.amount,
-  buyInValue:state.tournament.creatTournament.buy_in,
-  speedValue:state.tournament.creatTournament.speed,
-  commentsValue:state.tournament.creatTournament.comments,
-  nbPlayersValue:state.tournament.creatTournament.nb_players,
-  smallBlindValue: state.tournament.creatTournament.small_blind,
-  startingStackValue:state.tournament.creatTournament.starting_stack,
+  buyInValue:state.tournament.createTournamentInputs.buy_in,
+  speedValue:state.tournament.createTournamentInputs.speed,
+  commentsValue:state.tournament.createTournamentInputs.comments,
+  nbPlayersValue:state.tournament.createTournamentInputs.nb_players,
+  smallBlindValue: state.tournament.createTournamentInputs.small_blind,
+  startingStackValue:state.tournament.createTournamentInputs.starting_stack,
   nbCashPriceInput : state.tournament.cash_priceInput,
   cash_price: state.tournament.cash_price,
-  isChipsChecked: state.tournament.creatTournament.chips_user,
+  isChipsChecked: state.tournament.createTournamentInputs.chips_user,
   chipsList: state.chip.chips
 })
  

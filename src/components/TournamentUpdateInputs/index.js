@@ -16,6 +16,7 @@ const TournamentUpdateInputs = ({
 }) => {
 return(
 
+
 <div className="tournamentUpdate__main__cashPrice__main">
         <label htmlFor="amount" className="tournamentUpdate__main__cashPrice__main__label">Cash price du n°{position}:</label>
         <input onChange={ handleCashPriceInputChange } type="number" name="amount" className="tournamentUpdate__main__cashPrice__main__input"

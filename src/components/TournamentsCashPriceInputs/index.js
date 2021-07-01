@@ -5,6 +5,7 @@ import {
   submitCreatTournamentValues
 } from 'src/actions/tournament';
 
+
 import 'src/components/Tournaments/tournaments.scss';
 
 const TournamentsCashPriceInputs = (
@@ -32,10 +33,8 @@ const TournamentsCashPriceInputs = (
 const mapStateToProps = (state, ownprops) => {
   
   return {
-
   amount: state.tournament.cash_price[ownprops.index].amount,
   position: state.tournament.cash_price[ownprops.index].position
-  
   }};
 
 const mapDispatchToProps = (dispatch, ownprops) => ({

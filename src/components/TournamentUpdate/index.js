@@ -13,7 +13,8 @@ import {
   getStructureTournament,
   hideModalDelete,
   addCashpriceOneTournament,
-  submitFromMyChipsUpdate
+  submitFromMyChipsUpdate,
+  updateStructure
 } from 'src/actions/tournament'
 
 
@@ -176,11 +177,13 @@ const mapDispatchToProps = (dispatch) =>({
 
   handleSubmitUpdateTournament: (event) => {
     event.preventDefault();
+   
     dispatch(submitTournamentUpdate())
   },
 
   handleModifyTournamentConfirm: (event) => {
     event.preventDefault();
+    dispatch(updateStructure())
     dispatch(modifyTournamentValidate())
     dispatch(hideModalDelete())
   }

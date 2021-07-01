@@ -1,10 +1,11 @@
 import {
   CHANGE_CHIP_INPUT,
-  ADD_CHIP,
+  ADD_CHIP_MY_CHIPS,
   GET_CHIPS_SUCCESS,
   REMOVE_CHIP,
   SUBMIT_CHIPS_SUCCESS,
-  CHIPS_ERROR_MSG
+  CHIPS_ERROR_MSG,
+  CHIPS_CLEAR
 } from 'src/actions/chip';
 
 const initialState = { 
@@ -15,7 +16,7 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case ADD_CHIP:
+    case ADD_CHIP_MY_CHIPS:
       return {
         ...state,
         nbChips: state.chips.length + 1,
@@ -61,6 +62,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         errorMsgChips: action.msgError
+      }
+    case CHIPS_CLEAR:
+      return {
+        ...state,
+        chips: []
       }
     default:
       return state;

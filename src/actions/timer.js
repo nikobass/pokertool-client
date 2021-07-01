@@ -13,6 +13,7 @@ export const REFRESH_TIME = 'REFRESH_TIME';
 export const SHOW_TIME = 'SHOW_TIME';
 export const SHOW_QUIT_TIMER_MODAL = 'SHOW_QUIT_TIMER_MODAL';
 export const CLOSE_QUIT_TIMER_MODAL = 'CLOSE_QUIT_TIMER_MODAL';
+export const LAUNCH_TOURNAMENT_SUCCESS = 'LAUNCH_TOURNAMENT_SUCCESS';
 
 export const launchTimer = () => ({
     type: LAUNCH_TIMER
@@ -75,3 +76,8 @@ export const showQuitTimerModal = () => ({
 export const closeQuitTimerModal = () => ({
     type: CLOSE_QUIT_TIMER_MODAL
 })
+
+export const launchTournamentSucess = (tournament) => ({
+    type: LAUNCH_TOURNAMENT_SUCCESS,
+    tournament
+  })

@@ -2,6 +2,7 @@ import React from 'react';
 import { Edit, Eye, Trash2 } from 'react-feather';
 import PropTypes from 'prop-types';
 import { formatDate } from 'src/utils/date';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import {
@@ -9,7 +10,8 @@ import {
   tournamentDeleteModal,
   getOneTournamentUser,
   tounamentUpdateModale,
-  getStructureTournament
+  getStructureTournament,
+  launchTournament
 } from 'src/actions/tournament';
 import {
   importChips
@@ -27,7 +29,8 @@ const TournamentElement = ({
   date,
   handleTournamentDetails,
   handleTournamentDelete,
-  handleTournamentUpdate   
+  handleTournamentUpdate,
+  handleLaunchTournament
 }) => {
 
   const formattedDate = formatDate(date, false);
@@ -108,8 +111,11 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
     dispatch(getOneTournamentUser())
     dispatch(importChips())
     dispatch(getStructureTournament())
-
+},
+handleLaunchTournament :() => {
+    dispatch(launchTournament(ownprops.currentId))
 }
+
 })
 
 export default connect(null, mapDispatchToProps)(TournamentElement);

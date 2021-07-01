@@ -11,6 +11,7 @@ import {
     SHOW_TIME,
     SHOW_QUIT_TIMER_MODAL,
     CLOSE_QUIT_TIMER_MODAL,
+    LAUNCH_TOURNAMENT_SUCCESS
 
 } from 'src/actions/timer';
 
@@ -30,9 +31,9 @@ const initialState = {
     isLaunch: false,
     isAudioPlaying: false,
     intervalId: null,
-    //TODO secondesLeft = durée du tournoi en secondes
     secondesLeft: 300,
     currentTournament: {
+        name: 'Pas de nom de tournoi',
         minute: 5,
         seconde: 0,
         stage: 1,
@@ -51,16 +52,16 @@ const initialState = {
         nextBB: 40,
     },
     currentStructure: [
-        { stage: 1, smallBlind: 10, bigBlind: 20 },
-        { stage: 2, smallBlind: 20, bigBlind: 40 },
-        { stage: 3, smallBlind: 30, bigBlind: 60 },
-        { stage: 4, smallBlind: 40, bigBlind: 80 },
-        { stage: 5, smallBlind: 50, bigBlind: 100 },
-        { stage: 6, smallBlind: 60, bigBlind: 120 },
-        { stage: 7, smallBlind: 70, bigBlind: 140 },
-        { stage: 8, smallBlind: 80, bigBlind: 160 },
-        { stage: 9, smallBlind: 90, bigBlind: 180 },
-        { stage: 10, smallBlind: 10000, bigBlind: 20000 },
+        { stage: 1, small_blind: 10, big_blind: 20 },
+        { stage: 2, small_blind: 20, big_blind: 40 },
+        { stage: 3, small_blind: 30, big_blind: 60 },
+        { stage: 4, small_blind: 40, big_blind: 80 },
+        { stage: 5, small_blind: 50, big_blind: 100 },
+        { stage: 6, small_blind: 60, big_blind: 120 },
+        { stage: 7, small_blind: 70, big_blind: 140 },
+        { stage: 8, small_blind: 80, big_blind: 160 },
+        { stage: 9, small_blind: 90, big_blind: 180 },
+        { stage: 10, small_blind: 10000, big_blind: 20000 },
     ],
     currentChips: [
         {quantity: 50, color: '#dddddd', value: 10},
@@ -174,29 +175,29 @@ const timer = (state = initialState, action = {}) => {
                     previousSB:
                         state.currentStructure[state.currentValues.stage - 2]
                             ?
-                            state.currentStructure[state.currentValues.stage - 2].smallBlind
+                            state.currentStructure[state.currentValues.stage - 2].small_blind
                             :
                             0,
 
                     previousBB: state.currentStructure[state.currentValues.stage - 2]
                         ?
-                        state.currentStructure[state.currentValues.stage - 2].bigBlind
+                        state.currentStructure[state.currentValues.stage - 2].big_blind
                         :
                         0,
                     smallBlind:
-                        state.currentStructure[state.currentValues.stage - 1].smallBlind,
+                        state.currentStructure[state.currentValues.stage - 1].small_blind,
 
                     bigBlind:
-                        state.currentStructure[state.currentValues.stage - 1].bigBlind,
+                        state.currentStructure[state.currentValues.stage - 1].big_blind,
                     nextSB: 
                     state.currentStructure[state.currentValues.stage]
                     ?
-                    state.currentStructure[state.currentValues.stage].smallBlind
+                    state.currentStructure[state.currentValues.stage].small_blind
                     :
                     0,
                     nextBB: state.currentStructure[state.currentValues.stage]
                     ?
-                    state.currentStructure[state.currentValues.stage].bigBlind
+                    state.currentStructure[state.currentValues.stage].big_blind
                     :
                     0,
 
@@ -207,8 +208,7 @@ const timer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isLaunch: false,
-                //TODO secondesLeft = durée du tournoi en secondes
-                secondesLeft: 300,
+                secondesLeft: state.currentTournament.minute * 60,
                 currentValues: state.currentTournament,
                 rangeValue: 0,
             }
@@ -229,33 +229,33 @@ const timer = (state = initialState, action = {}) => {
                     previousSB:
                         state.currentValues.stage > 2
                             ?
-                            state.currentStructure[state.currentValues.stage - 3].smallBlind
+                            state.currentStructure[state.currentValues.stage - 3].small_blind
                             :
                             0,
 
                     previousBB: state.currentValues.stage > 2
                         ?
-                        state.currentStructure[state.currentValues.stage - 3].bigBlind
+                        state.currentStructure[state.currentValues.stage - 3].big_blind
                         :
                         0,
                     smallBlind: state.currentValues.stage > 1
                         ?
-                        state.currentStructure[state.currentValues.stage - 2].smallBlind
+                        state.currentStructure[state.currentValues.stage - 2].small_blind
                         :
                         state.currentValues.smallBlind,
                     bigBlind: state.currentValues.stage > 1
                         ?
-                        state.currentStructure[state.currentValues.stage - 2].bigBlind
+                        state.currentStructure[state.currentValues.stage - 2].big_blind
                         :
                         state.currentValues.bigBlind,
                     nextSB: state.currentValues.stage > 1
                         ?
-                        state.currentStructure[state.currentValues.stage - 1].smallBlind
+                        state.currentStructure[state.currentValues.stage - 1].small_blind
                         :
                         state.currentValues.nextSB,
                     nextBB: state.currentValues.stage > 1
                         ?
-                        state.currentStructure[state.currentValues.stage - 1].bigBlind
+                        state.currentStructure[state.currentValues.stage - 1].big_blind
                         :
                         state.currentValues.nextBB,
                 }
@@ -277,36 +277,36 @@ const timer = (state = initialState, action = {}) => {
                     previousSB:
                         state.currentStructure[state.currentValues.stage]
                         ?
-                        state.currentStructure[state.currentValues.stage - 1].smallBlind
+                        state.currentStructure[state.currentValues.stage - 1].small_blind
                         :
-                        state.currentStructure[state.currentValues.stage - 2].smallBlind,
+                        state.currentStructure[state.currentValues.stage - 2].small_blind,
 
                     previousBB: 
                         state.currentStructure[state.currentValues.stage]
                         ?
-                        state.currentStructure[state.currentValues.stage - 1].bigBlind
+                        state.currentStructure[state.currentValues.stage - 1].big_blind
                         :
-                        state.currentStructure[state.currentValues.stage - 2].bigBlind,
+                        state.currentStructure[state.currentValues.stage - 2].big_blind,
                     smallBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
                         ?
-                        state.currentStructure[state.currentValues.stage].smallBlind
+                        state.currentStructure[state.currentValues.stage].small_blind
                         :
                         state.currentValues.smallBlind,
                     bigBlind: state.currentValues.stage < state.currentStructure[state.currentStructure.length - 1].stage
                         ?
-                        state.currentStructure[state.currentValues.stage].bigBlind
+                        state.currentStructure[state.currentValues.stage].big_blind
                         :
                         state.currentValues.bigBlind,
                     nextSB:
                         state.currentStructure[state.currentValues.stage + 1]
                             ?
-                            state.currentStructure[state.currentValues.stage + 1].smallBlind
+                            state.currentStructure[state.currentValues.stage + 1].small_blind
                             :
                             0,
 
                     nextBB: state.currentStructure[state.currentValues.stage + 1]
                         ?
-                        state.currentStructure[state.currentValues.stage + 1].bigBlind
+                        state.currentStructure[state.currentValues.stage + 1].big_blind
                         :
                         0,
                 }
@@ -356,6 +356,36 @@ const timer = (state = initialState, action = {}) => {
                             :
                             0
                 }
+            }
+
+        case LAUNCH_TOURNAMENT_SUCCESS:
+            console.log(action.tournament);
+            return {
+                ...state,
+                secondesLeft: action.tournament[0].speed * 60,
+                currentTournament: {
+                    name: action.tournament[0].name,
+                    minute: action.tournament[0].speed,
+                    seconde: 0,
+                    stage: 1,
+                    smallBlind: action.tournament[0].small_blind,
+                    bigBlind: action.tournament[0].small_blind * 2,
+                },
+                currentValues: {
+                    minute: action.tournament[0].speed,
+                    seconde: 0,
+                    stage: 1,
+                    previousSB: 0,
+                    previousBB: 0,
+                    smallBlind: action.tournament[0].small_blind,
+                    bigBlind: action.tournament[0].small_blind * 2,
+                    nextSB: action.tournament[0].Structures[state.currentValues.stage].small_blind,
+                    nextBB: action.tournament[0].Structures[state.currentValues.stage].big_blind,
+                },
+                currentStructure: action.tournament[0].Structures,
+                currentChips: action.tournament[0].user.chips,
+                cashPrice: action.tournament[0].cashprices,
+
             }
     }
     return state;

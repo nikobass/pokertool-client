@@ -48,6 +48,8 @@ export const SORT_STATUS = 'SORT_STATUS';
 export const SORT_TOURNAMENT_BY_STATUS_SUCCESS = 'SORT_TOURNAMENT_BY_STATUS_SUCCESS';
 export const SORT_PLAYER = 'SORT_PLAYER';
 export const SORT_TOURNAMENT_BY_PLAYER_SUCCESS = 'SORT_TOURNAMENT_BY_PLAYER_SUCCESS';
+export const LAUNCH_TOURNAMENT = 'LAUNCH_TOURNAMENT';
+export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 
 import {HIDE_MODAL} from './user'
 
@@ -91,6 +93,10 @@ export const addCashpriceOneTournament = () => ({
 export const modifyTournamentValidate = () =>({
   type: MODIFY_TOURNAMENT_VALIDATE,
   
+})
+
+export const updateStructure = () => ({
+  type : UPDATE_STRUCTURE
 })
 /************************* GET Tournaments ******************************/
 
@@ -155,8 +161,9 @@ export const submitCreatTournamentValues = (newInputValue, inputName, index) => 
   index
 });
 
-export const tournamentSubmitSuccess = () => ({
-  type : TOURNAMENT_SUBMIT_SUCCESS
+export const tournamentSubmitSuccess = (tournament) => ({
+  type : TOURNAMENT_SUBMIT_SUCCESS,
+  tournament
 });
 
 export const changeInputValue = (newInputValue, inputName, index) => ({
@@ -310,3 +317,9 @@ export const submitFromMyChipsUpdateSuccess = (smallestChipValue) => ({
 export const dontUseMyChips = () => ({
   type: USE_OWN_SMALL_BLIND
 })
+
+export const launchTournament = (tournamentId) => ({
+  type: LAUNCH_TOURNAMENT,
+  tournamentId
+})
+

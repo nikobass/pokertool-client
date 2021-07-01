@@ -33,6 +33,28 @@
   font-size: 1.2rem;
 }
 
+.addButton {
+  margin-left: auto;
+  margin-right: 0.5rem;
+  background-color: #EE581E;
+  border: 2px solid #000000;
+  color: #f2f2f2;
+  padding: 0.8rem 1.4rem;
+  border-radius: 5px;
+  border-color: #f2f2f2;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: 0.3s ;
+  
+
+  &:hover{
+    cursor: pointer;
+    background-color: #000000;
+    border: 2px solid #f2f2f2;
+    color: #EE581E;
+  }
+}
+
 .tournaments--list--header--element{
   display: flex;
   align-items: center;

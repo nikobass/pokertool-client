@@ -86,7 +86,7 @@ const ChipElement = ({
           value={value}
           required
           onChange={handleInputChipChange}
-          className="chipElement__field__inputColor"
+          className="chipElement__field__inputNumber"
           min={0} onWheel={(e) => e.target.blur()}
         />
       </div>
@@ -99,7 +99,7 @@ const ChipElement = ({
           value={quantity}
           required
           onChange={handleInputChipChange}
-          className="chipElement__field__inputColor"
+          className="chipElement__field__inputNumber"
           min={0} onWheel={(e) => e.target.blur()}
         />
       </div>

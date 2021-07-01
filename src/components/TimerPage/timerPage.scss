@@ -1,4 +1,7 @@
-.timerPage{
+.timerPage{  
+    
+    user-select: none;      
+
     width: 100vw;
     height: 100vh;
     background-image: url('../../assets/images/bg-timer.png');
@@ -38,7 +41,7 @@
         justify-content: space-around;
         align-items: center;
         position: relative;
-        right: 5rem;
+        right: 5rem;      
 
         &__timer{
             display: flex;
@@ -174,7 +177,8 @@
         &__header{
       
             &__quit{
-                top: 5rem;
+                top: 3rem;
+                right: 0.4rem;
 
             }
 
