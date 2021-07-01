@@ -51,6 +51,7 @@ const Header = ({
                     to="/"
                     exact
                     className="header__logo"
+                    activeClassName="header__logo"
                 >
                     {/* En attente du logo */}
                     <img className="header__logo__img" src={logo} alt="Logo" />

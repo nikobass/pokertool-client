@@ -45,10 +45,12 @@ const Distributor = ({
                             children.map(chip => chip)
                         }
 
-                        <div className="distributor__form__container__buttons">
-                            <button onClick={handleAddChip} className="distributor__form__container__buttons__button distributor__form__container__buttons__addChip">Ajouter un jeton</button>
-                        </div>
+                        
 
+                    </div>
+                    <div className="distributor__form__container__buttons__container">
+                    <div className="distributor__form__container__buttons">
+                            <button onClick={handleAddChip} className="distributor__form__container__buttons__button distributor__form__container__buttons__addChip">Ajouter un jeton</button>
                     </div>
                     <div className="distributor__form__tournament__inputs">
 
@@ -61,6 +63,7 @@ const Distributor = ({
                             <input onChange={handleTournamentInfo} value={startingStack} type="number" name="startingStack" className="distributor__form__tournament__inputs__container__input" min="1" onWheel={(e) => e.target.blur()}/>
                         </div>
                     </div >
+                    </div>
                     <button className="distributor__form__calculate">Lancer le répartiteur</button>
                 </div>
                 {

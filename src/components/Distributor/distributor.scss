@@ -1,7 +1,7 @@
 .distributor{
     display: flex;
     flex-direction: column;
-    height: 65vh;
+    height: 70vh;
     padding: 2rem 1rem;
     margin: 4rem auto;
     background-color: #19191E;
@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: space-between;
             background-color: #19191E;
-            height: 550px;
+            height: 590px;
             width: 550px;
         }
         &__subtitle{
@@ -64,8 +64,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-y: scroll;
+            overflow-y: auto;
             width: 560px;
+            height: 500px;
 
             &__buttons{
                 display: flex;
@@ -173,4 +174,12 @@
                 }
         }
     }
+}
+
+.distributor__form__container__buttons__container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
