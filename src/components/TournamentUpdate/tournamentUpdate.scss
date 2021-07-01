@@ -43,7 +43,6 @@
 
             &:disabled{
                 background-color: #c0c0c0;
-                border: none;
             }
         }
 
@@ -61,7 +60,6 @@
 
           &:disabled{
               background-color: #c0c0c0;
-              border: none;
           }
         }
 
@@ -73,7 +71,6 @@
           text-align: left;
         }
     }
-
 
     &__cashPrice{
       border-top: 1px solid #f2f2f2;
@@ -91,7 +88,6 @@
           margin-bottom: 0.3rem;
           color: #ee581e;
           font-size: 1rem;
-
         }
 
         &__input{
@@ -108,7 +104,6 @@
 
             &:disabled{
                 background-color: #c0c0c0;
-                border: none;
             }
         }
       }
@@ -151,14 +146,14 @@
         padding: 0.5rem 0.5rem;
         width: 250px;
         margin: 0.5rem auto 0rem auto;
-        //margin-top: 0.5rem
+
         &:hover{
             cursor: pointer;
             background-color: #19191e;
             border: 2px solid #f2f2f2;
             color: #EE581E;
         }
-    }
+      }
 
       &__delete{
           color: #f2f2f2;
@@ -177,9 +172,6 @@
     }
   }
 }
-
-
-
 
 .invisible{
   display: none;
