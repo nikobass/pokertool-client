@@ -97,91 +97,40 @@ const Tournaments = ({
           <h2 className="tournaments--title">
             Mes Tournois
           </h2>
-          <button 
-            className="addButton"
-            onClick={handleShowModal}
-          >
-            Créer un tournoi
-          </button>
-        </div>
-      <div className="tournaments--list-grid">
+      </div>
+      <div className="tournaments--list">
       <ul>
-        <li className="tournaments--list">
+        <li className="tournaments--list--header">
 
-          <span className="tournaments--list__name" >
+          <p className="tournaments--list--header--element" >
             Nom
-            {/* <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByName}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button> */}
-          </span>
-          <span>
-            Date
-            {/* <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByDate}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button> */}
-          </span>
-          <span>
-            Lieu
-            {/* <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByLocation}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button> */}
-          </span>
-          <span>
-            Buy-in
-            {/* <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByBuyIn}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button> */}
-          </span>
-          <span>
-            Cash-price
-            {/* <button
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByCashPrice}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button> */}
-          </span>
-          {/* <span>
-            Statut
-            <button 
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByStatus}
-              type="button"
-            >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
-          </span> */}
-          <span>
+          </p>
+          <p className="tournaments--list--header--element" >
+            Date           
+          </p>
+          <p className="tournaments--list--header--element" >
+            Lieu          
+          </p>
+          <p className="tournaments--list--header--element" >
+            Buy-in          
+          </p>
+          <p className="tournaments--list--header--element" >
+            Cash-price            
+          </p>
+          <p className="tournaments--list--header--element" >
             Joueurs
-            {/* <button 
-              className="chevron-down"
-              onClick={handleOnclickSortTournamentByPlayer}
-              type="button"
+          </p>
+            <button 
+              className="addButton"
+              onClick={handleShowModal}
             >
-              {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button> */}
-          </span>
-        </li>        
+              Créer un tournoi
+            </button>          
+        </li>
+
         {tournaments &&
           tournaments.map((tournament) => (
-            <li  className="tournaments--list-grid"
+            <li 
              key={tournament.id}>
               <TournamentElement
                 currentId={tournament.id}
@@ -236,68 +185,74 @@ const Tournaments = ({
           isOpen={showCreateTournamentModal}
           title='Création de mon tournoi'
           content={(
-            <form onSubmit= { handleTournamentSubmit } className="creatTournamentForm">
+            <form onSubmit= { handleTournamentSubmit } className="tournamentCreate">
+              <div className="tournamentCreate__main">
+                {/* DETAILS */}
+                <div className="tournamentCreate__main__form">
 
-            {chipsList.length > 0 && 
-            <div className="creatTournamentForm__checkbox">
-              <label className="creatTournamentForm__label">Utiliser mes jetons préconfiguré</label>
-              
-              <input onChange={ handleIsChipsUsed } checked={isChipsChecked} type="checkbox"/>
-            </div>
-            }
+                  <label htmlFor="name" className="tournamentCreate__main__form__label">Nom du tournoi</label>
+                  <input onChange={ handleCreatTournamentChange } type="text" name="name" className="tournamentCreate__main__form__input"value={nameValue} />
 
-            <label htmlFor="name" className="creatTournamentForm__label">Nom du tournoi: </label>
-            <input onChange={ handleCreatTournamentChange } type="text" name="name" className="creatTournamentForm__input" 
-            value={nameValue} />
+                  <label htmlFor="date" className="tournamentCreate__main__form__label">Date du tournoi</label>
+                  <input onChange={ handleCreatTournamentChange } type="date" name="date" className="tournamentCreate__main__form__input" value={dateValue}/>
 
-            <label htmlFor="date" className="creatTournamentForm__label">date du tournoi:</label>
-            <input onChange={ handleCreatTournamentChange } type="date" name="date" className="creatTournamentForm__input"
-            min={0} onWheel={(e) => e.target.blur()}
-            value={dateValue}/>
+                  <label htmlFor="location" className="tournamentCreate__main__form__label">Lieu du tournoi</label>
+                  <input onChange={ handleCreatTournamentChange } type="text" name="location" className="tournamentCreate__main__form__input" value={locationValue}/>
 
-            <label htmlFor="location" className="creatTournamentForm__label">Lieu du tournoi:</label>
-            <input onChange={ handleCreatTournamentChange } type="text" name="location" className="creatTournamentForm__input"
-            value={locationValue}/>
+                  <label htmlFor="nb_players" className="tournamentCreate__main__form__label">Nombre de joueurs</label>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={nbPlayersValue}/>
 
-            <label htmlFor="nb_players" className="creatTournamentForm__label">Nombre de joueurs:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="creatTournamentForm__input"
-            min={0} onWheel={(e) => e.target.blur()}
-            value={nbPlayersValue}/>
+                  <label htmlFor="speed" className="tournamentCreate__main__form__label">Durée des étapes</label>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={speedValue}/>
 
-            <label htmlFor="speed" className="creatTournamentForm__label">Durée des étapes:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="creatTournamentForm__input"
-            min={0} onWheel={(e) => e.target.blur()}
-            value={speedValue}/>
+                  <label htmlFor="starting_stack" className="tournamentCreate__main__form__label">Tapis de départ</label>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={startingStackValue}/>
 
-            <label htmlFor="buy_in" className="creatTournamentForm__label">Buy in:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input"
-            min={0} onWheel={(e) => e.target.blur()}
-            value={buyInValue}/>
-         
-           {cash_price && cash_price.map((chip, i) => <TournamentsCashPriceInputs index={i} key={i} />)}
+                  <label htmlFor="buy_in" className="tournamentCreate__main__form__label">Buy in</label>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={buyInValue}/>
+                </div>
 
-           <button onClick={handleAddCashprice} className=" ">Ajouter un Cash price supplémentaire</button>
+                  {/* CASH PRICE +++ */}
+                <div  className="tournamentCreate__main__form">
+                  
+                  {chipsList.length > 0 && 
+                    <div>
+                      <label className="tournamentCreate__main__form__label">j'utilise mes jetons pour ce tournoi</label>
+                      <input className="tournamentCreate__main__form__checkbox" onChange={ handleIsChipsUsed } checked={isChipsChecked} type="checkbox"/>
+                    </div>
+                  }
 
-            <label htmlFor="starting_stack" className="creatTournamentForm__label">Tapis de départ:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input"
-            min={0} onWheel={(e) => e.target.blur()}
-            value={startingStackValue}/>
+                  <label htmlFor="small_blind" className="tournamentCreate__main__form__label">Small blind</label>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="tournamentCreate__main__form__input"
+                  min={0} onWheel={(e) => e.target.blur()} required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
 
-            <label htmlFor="small_blind" className="creatTournamentForm__label">Small blind:</label>
-        
+                  <label htmlFor="comments" className="tournamentCreate__main__form__label">Commentaires</label>
+                  <textarea rows="3" cols="20" onChange={ handleCreatTournamentChange } type="text" name="comments" className="tournamentCreate__main__form__comments"  value={commentsValue}/>
+                  
+                  {/* cash price */}
+                  <div className="tournamentCreate__main__cashPrice">
+                    {cash_price && cash_price.map((chip, i) => <TournamentsCashPriceInputs index={i} key={i} />)}
+                  </div>
 
-            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input"
-            min={0} onWheel={(e) => e.target.blur()}
-            required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
+                  <button onClick={handleAddCashprice} className="tournamentCreate__main__actionsButtons__actionSmall ">Ajouter un Cash price</button>
+                </div>
+              </div>
 
+              {/* BOUTONS */}
+              <div className="tournamentCreate__main__actionsButtons">
 
-            <label htmlFor="comments" className="creatTournamentForm__label">commentaires:</label>
-            <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input"
-            value={commentsValue}/>
-
-            {errorMessage && <p className="errorMessage"> { errorMessage }</p>}
-            <button type="submit" className="creatTournamentForm__submit">Valider</button>
-
+                {errorMessage && <p className="errorMessage"> { errorMessage }</p>}
+                
+                <button type="submit" className="tournamentCreate__main__actionsButtons__action">Valider</button>
+              </div>            
         </form>
           )}
         />  

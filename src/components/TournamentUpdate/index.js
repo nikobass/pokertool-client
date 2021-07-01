@@ -1,7 +1,7 @@
 import React , { useEffect } from 'react';
 import Modal from 'src/components/Modal';
 import { connect, useDispatch } from 'react-redux';
-import 'src/components/TournamentUpdate/tournamentUpdate.scss'
+import 'src/components/TournamentUpdate/tournamentUpdate.scss';
 import TournamentUpdateInputs from 'src/components/TournamentUpdateInputs'
 import { formatDate } from 'src/utils/date';   
 
@@ -55,82 +55,78 @@ const TournamentUpdate = ({
       isOpen={openUpdateModal}
       title= 'Modifier mon tournoi'
       content = {(
-        <form className="tournamentUpdate__form" onSubmit={handleSubmitUpdateTournament} >
-      <h2 className="tournamentUpdate__form__subtitle">Mon Tournoi</h2>
+        <form className="tournamentUpdate" onSubmit={handleSubmitUpdateTournament} >
+          <div className="tournamentUpdate__main">
+            {/* DETAILS */}
+            <div className="tournamentUpdate__main__form">
 
-      <label htmlFor="name" className="tournamentUpdate__form__label">name</label>
-      <input onChange={handleInputChange} type="text" name="name" className="tournamentUpdate__form__input" value={nameValue} disabled={modifying ? "" : "disabled"} required/>
+              <label htmlFor="name" className="tournamentUpdate__main__form__label">Nom du tournoi</label>
+              <input onChange={handleInputChange} type="text" name="name" className="tournamentUpdate__main__form__input" value={nameValue} disabled={modifying ? "" : "disabled"} required/>
 
-      <label htmlFor="date" className="tournamentUpdate__form__label">date</label>
-      <input onChange={handleInputChange} type="date" name="date"className="tournamentUpdate__form__input" 
-      min={0} onWheel={(e) => e.target.blur()}
-      value={formattedDate} disabled={modifying ? "" : "disabled"} required/>
+              <label htmlFor="date" className="tournamentUpdate__main__form__label">Date du tournoi</label>
+              <input onChange={handleInputChange} type="date" name="date" id="date" className="tournamentUpdate__main__form__input" value={formattedDate} disabled={modifying ? "" : "disabled"} required/>
 
-      <label htmlFor="location" className="tournamentUpdate__form__label">lieu</label>
-      <input onChange={handleInputChange} type="text" name="location" className="tournamentUpdate__form__input" value={locationValue} disabled={modifying ? "" : "disabled"}  />
+              <label htmlFor="location" className="tournamentUpdate__main__form__label">Lieu</label>
+              <input onChange={handleInputChange} type="text" name="location" className="tournamentUpdate__main__form__input" value={locationValue} disabled={modifying ? "" : "disabled"}  />
 
-      <label htmlFor="nb_players" className="tournamentUpdate__form__label">Nombre de joueurs</label>
-      <input onChange={handleInputChange} type="number" name="nb_players" className="tournamentUpdate__form__input" 
-      min={0} onWheel={(e) => e.target.blur()}
-      value={nbPlayersValue} disabled={modifying ? "" : "disabled"}  />
+              <label htmlFor="nb_players" className="tournamentUpdate__main__form__label">Nombre de joueurs</label>
+              <input onChange={handleInputChange} type="number" name="nb_players" className="tournamentUpdate__main__form__input"
+              min={0} onWheel={(e) => e.target.blur()}
+              value={nbPlayersValue} disabled={modifying ? "" : "disabled"}  />
 
-      <label htmlFor="speed" className="tournamentUpdate__form__label">vitesse</label>
-      <input onChange={handleInputChange} type="number" name="speed" className="tournamentUpdate__form__input" 
-      min={0} onWheel={(e) => e.target.blur()}
-      value={speedValue} disabled={modifying ? "" : "disabled"}  />
+              <label htmlFor="speed" className="tournamentUpdate__main__form__label">Durée des étapes</label>
+              <input onChange={handleInputChange} type="number" name="speed" className="tournamentUpdate__main__form__input"
+              min={0} onWheel={(e) => e.target.blur()}
+              value={speedValue} disabled={modifying ? "" : "disabled"}  />
 
-      <label htmlFor="starting_stack" className="tournamentUpdate__form__label">Tapis de départ</label>
-      <input onChange={handleInputChange} type="number" name="starting_stack" className="tournamentUpdate__form__input"
-      min={0} onWheel={(e) => e.target.blur()}
-      value={startingStackValue} disabled={modifying ? "" : "disabled"}  />
+              <label htmlFor="starting_stack" className="tournamentUpdate__main__form__label">Tapis de départ</label>
+              <input onChange={handleInputChange} type="number" name="starting_stack" className="tournamentUpdate__main__form__input"
+              min={0} onWheel={(e) => e.target.blur()}
+              value={startingStackValue} disabled={modifying ? "" : "disabled"}  />
 
-      <label htmlFor="buy_in" className="tournamentUpdate__form__label">Buy in</label>
-      <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input"
-      min={0} onWheel={(e) => e.target.blur()}
-      value={buyInValue} disabled={modifying ? "" : "disabled"}  />
+              <label htmlFor="buy_in" className="tournamentUpdate__main__form__label">Buy in</label>
+              <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__main__form__input"
+              min={0} onWheel={(e) => e.target.blur()}
+              value={buyInValue} disabled={modifying ? "" : "disabled"}  />
+            </div>
+            
+            {/* CASH PRICE +++ */}
+            <div  className="tournamentUpdate__main__form">
+              {chipsList.length > 0 && 
+                <div>
+                  <label htmlFor="chips_user" className="tournamentUpdate__main__form__label">j'utilise mes jetons pour ce tournoi</label>
+                  <input className="tournamentUpdate__main__form__checkbox" onChange={handleIsChipsUsed} name="chips_user" checked={chipsUserValue} disabled={modifying ? "" : "disabled"} type="checkbox"/>
+                </div>
+              }
 
-      {/* <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice) => cashprice.position + ': ' + cashprice.amount + ' / ')}</span></p> */}
-    
-           <div  className="tournamentUpdate__form__label__cashprice">
-              {
-                cashPriceValue && cashPriceValue.map((chip, i) => <TournamentUpdateInputs index={i} key={i}/>
-                 
-              )}            
+              <label htmlFor="small_blind" className="tournamentUpdate__main__form__label">Small blind</label>
+              <input onChange={handleInputChange} type="number" name="small_blind" className="tournamentUpdate__main__form__input"
+              min={0} onWheel={(e) => e.target.blur()}
+              value={smallBlindValue} disabled={(modifying && !chipsUserValue)? "" : "disabled"}  />
 
-           </div>  
+              <label htmlFor="comments" className="tournamentUpdate__main__form__label">Commentaire</label>
+              <textarea rows="3" cols="20" onChange={handleInputChange} name="comments" className="tournamentUpdate__main__form__comments" value={commentsValue} disabled={modifying ? "" : "disabled"}  />
+              
+              {/* cash price */}
+              <div className="tournamentUpdate__main__cashPrice">
+                {cashPriceValue && cashPriceValue.map((chip, i) => <TournamentUpdateInputs index={i} key={i}/>)}
+              </div>
 
+              <button onClick={handleAddCashprice}  disabled={modifying ? "" : "disabled"} className={modifying ? "tournamentUpdate__main__actionsButtons__actionSmall active" : "tournamentUpdate__main__actionsButtons__actionSmall invisible"} >Ajouter un Cash price</button>
 
-       <button onClick={handleAddCashprice}  disabled={modifying ? "" : "disabled"} className={modifying ? "active" : "invisible"} >Ajouter un Cash price supplémentaire</button>
-     
-      {chipsList.length > 0 && 
-      <div>
-        <label htmlFor="chips_user" className="tournamentUpdate__form__label">j'utilise mes jetons pour ce tournoi</label>
-        
-        <input className="tournamentUpdate__form__checkbox" onChange={handleIsChipsUsed} name="chips_user" checked={chipsUserValue} disabled={modifying ? "" : "disabled"} type="checkbox"/>
-      </div>
-      }
+            </div>
+          </div>
+          
+          {/* BOUTONS */}
+          <div className="tournamentUpdate__main__actionsButtons">
+            
+              {errorMessage && <p className="tournamentUpdate__main__actionsButtons__errorMsg">{errorMessage}</p>}
 
-      <label htmlFor="small_blind" className="tournamentUpdate__form__label">Small blind</label>
-      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input"
-      min={0} onWheel={(e) => e.target.blur()}
-      value={smallBlindValue} disabled={(modifying && !chipsUserValue)? "" : "disabled"}  />
-
-      
-
-       
-      {/* <label htmlFor="status" className="tournamentUpdate__form__label">status</label>
-      <input onChange={handleInputChange} type="text" name="status" className="tournamentUpdate__form__input" value={statusValue}  disabled={modifying ? "" : "disabled"}  /> */}
-
-
-      <label htmlFor="comments" className="tournamentUpdate__form__label">Commentaire</label>
-      <input onChange={handleInputChange} type="text" name="comments" className="tournamentUpdate__form__input" value={commentsValue} disabled={modifying ? "" : "disabled"}  />
-
-      {errorMessage && <p className="tournamentUpdate__form__errorMsg">{errorMessage}</p>}
-
-      <button type="submit" onClick={handleModifyTournamentConfirm} className={modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Valider</button>
-     
-      <button onClick={handleModifyTournament} className={!modifying ? "tournamentUpdate__form__button" : "tournamentUpdate__form__button invisible"}>Modifier mon tournoi</button>
-      </form>
+              <button type="submit" onClick={handleModifyTournamentConfirm} className={modifying ? "tournamentUpdate__main__actionsButtons__action" : "tournamentUpdate__main__actionsButtons__action invisible"}>Valider</button>
+            
+              <button onClick={handleModifyTournament} className={!modifying ? "tournamentUpdate__main__actionsButtons__action" : "tournamentUpdate__main__actionsButtons__action invisible"}>Modifier mon tournoi</button>
+          </div>
+        </form>
       )}
       />
     </div>
