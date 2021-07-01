@@ -77,7 +77,9 @@ const TournamentElement = ({
           <Trash2 />
         </button>
 
-        <button className="tournaments--play">Lancer le tournoi</button>
+        <Link to="/timer">
+          <button onClick={handleLaunchTournament} className="tournaments--play">Lancer le tournoi</button>
+        </Link>
       </div>
     </div>
     

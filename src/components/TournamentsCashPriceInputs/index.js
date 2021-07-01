@@ -7,6 +7,7 @@ import {
 
 
 import 'src/components/Tournaments/tournaments.scss';
+import 'src/components/TournamentsCashPriceInputs/tournamentsCashPriceInputs.scss';
 
 const TournamentsCashPriceInputs = (
   {
