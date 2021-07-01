@@ -116,6 +116,7 @@ ul{
   max-height: 50rem;
   overflow-y: scroll;
 
+
   &__input{
       width: 400px;
       padding: 1rem;
@@ -126,6 +127,12 @@ ul{
       &::placeholder{
           color: black;
       }
+  }
+
+
+  &__cashPrice{
+    display: flex;
+    flex-direction: column;
   }
 
   &__checkbox{

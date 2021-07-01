@@ -20,6 +20,8 @@ import {
   clearTournament,
   errMessage,
   SUBMIT_WITH_MY_CHIPS,
+  SUBMIT_WITH_MY_CHIPS_UPDATE,  
+  submitFromMyChipsUpdateSuccess,
   submitFromMyChipsSuccess,
   getStructureTournament,
   GET_ONE_TOURNAMENT_USER,
@@ -36,8 +38,12 @@ import {
   SORT_STATUS,
   sortTournamentByStatusSuccess,
   SORT_PLAYER,
-  sortTournamentByPlayerSuccess
+  sortTournamentByPlayerSuccess,
+  LAUNCH_TOURNAMENT,
+  UPDATE_STRUCTURE,
 } from 'src/actions/tournament';
+
+import { launchTournamentSucess } from 'src/actions/timer';
 
 const tournamentsMiddleware = (store) => (next) => (action) => {
 
@@ -53,9 +59,11 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           headers: {"Authorization" : `Bearer ${token}`}
         })
         .then((response) =>{
-
           store.dispatch(getTournamentUserSuccess(response.data))
-        })        
+        })
+        .catch((err) =>{  console.log(err),       
+        store.dispatch(clearTournament());        
+        });           
       break;
       case GET_ONE_TOURNAMENT_USER : {
         const state = store.getState();
@@ -68,10 +76,10 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` }
       })
         .then((response) => {
-          store.dispatch(getOneTournamentUserSuccess(response.data));
+          store.dispatch(getOneTournamentUserSuccess(response.data));   
           store.dispatch(getStructureTournament())         
-        })
-         .catch((err) =>{  console.log(err),
+        })      
+         .catch((err) =>{
         store.dispatch(clearTournament());
         store.dispatch(errMessage(err.response.data.message))
         });
@@ -223,6 +231,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         return 0;
       };
       const tournamentListByCashPrice = state.tournament.tournamentList.sort(compareCashPrice);
+      console.log(tournamentListByCashPrice);
       store.dispatch(sortTournamentByCashPriceSuccess(tournamentListByCashPrice));
     } else {
       const compareCashPrice = (a, b) => {
@@ -318,15 +327,16 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
             store.dispatch(deleteTournamentSucces(tournamentId));
           })
           .catch((error) => {
-          store.dispatch(errMessage(err.response.data.message))
-        });         
+          store.dispatch(errMessage(error.response.data.message))
+        });       
+
         break;
       }
       
       case SUBMIT_WITH_MY_CHIPS: {
-        const state = store.getState();        
+        const state = store.getState();
         const chips = state.chip.chips;
-        const isMyChipsChecked = state.tournament.creatTournament.chips_user;
+        const isMyChipsChecked = state.tournament.createTournamentInputs.chips_user;
      
         const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
 
@@ -337,40 +347,59 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         break;
       }
 
+      case SUBMIT_WITH_MY_CHIPS_UPDATE: {
+        const state = store.getState();
+        const chips = state.chip.chips;
+        const isMyChipsChecked = state.tournament.oneTournament.chips_user;
+     
+        const smallestChipValue = Math.min.apply(Math, chips.map((chip) =>  chip.value));
+
+        if(isMyChipsChecked) {          
+          store.dispatch(submitFromMyChipsUpdateSuccess(parseInt(smallestChipValue)));
+        };           
+      
+        break;
+      }
+      
+
       case TOURNAMENT_SUBMIT: {
         const state = store.getState();
         const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('token'); 
 
+        const body = [    {
+
+          name: state.tournament.createTournamentInputs.name,
+          date: state.tournament.createTournamentInputs.date,
+          location: state.tournament.createTournamentInputs.location,
+          speed:state.tournament.createTournamentInputs.speed,
+          nb_players:state.tournament.createTournamentInputs.nb_players,
+          comments:state.tournament.createTournamentInputs.comments,
+          // cash price todo comme structure
+        
+          buy_in:state.tournament.createTournamentInputs.buy_in,
+          starting_stack: state.tournament.createTournamentInputs.starting_stack,
+          small_blind: state.tournament.createTournamentInputs.small_blind,
+          chips_user: state.tournament.createTournamentInputs.chips_user         
+        },          
+          state.tournament.structureTournament,
+          state.tournament.cash_price        
+      ] 
+
         axios ({
           method: 'post',
           url: `http://localhost:3000/tournament/${userId}`,
           headers: { "Authorization": `Bearer ${token}` },
-          data:  [    {
-            name: state.tournament.creatTournament.name,
-            date: state.tournament.creatTournament.date,
-            location: state.tournament.creatTournament.location,
-            speed:state.tournament.creatTournament.speed,
-            nb_players:state.tournament.creatTournament.nb_players,
-            comments:state.tournament.creatTournament.comments,
-            cash_price:state.tournament.creatTournament.cash_price,
-            buy_in:state.tournament.creatTournament.buy_in,
-            starting_stack: state.tournament.creatTournament.starting_stack,
-            small_blind: state.tournament.creatTournament.small_blind,
-            chips_user: state.tournament.creatTournament.chips_user,
-          },          
-            state.tournament.structureTournament          
-                ]
+          data:  body
         })
           .then(response => {           
             
             // Créer une autre action qui modifie le state (donc la dispatch)
             // le return de la fonction structureCreator remplacera structureTournament dans le state
             store.dispatch(tournamentSubmitSuccess(response.data));
-            
           })
           .catch((err) => {          
-            console.log(err.response.data.message)
+           
             store.dispatch(errMessage(err.response.data.message))
             
           });
@@ -381,36 +410,37 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         const tournamentId = state.tournament.currentId;
         const token = localStorage.getItem('token');
 
+        const test = [    {
+          name: state.tournament.oneTournament.name,
+          date: state.tournament.oneTournament.date,
+          location: state.tournament.oneTournament.location,
+          speed:state.tournament.oneTournament.speed,
+          nb_players:state.tournament.oneTournament.nb_players,
+          comments:state.tournament.oneTournament.comments,           
+          buy_in:state.tournament.oneTournament.buy_in,
+          starting_stack: state.tournament.oneTournament.starting_stack,
+          small_blind: state.tournament.oneTournament.small_blind,
+          status: state.tournament.oneTournament.status,
+          chips_user: state.tournament.oneTournament.chips_user,
+        },
+          state.tournament.structureTournament,
+          state.tournament.oneTournament.cashprices
 
-        axios({
+        
+      ]
+      console.log(test)
+            axios({
           method:'patch',
           url: `http://localhost:3000/tournament/${tournamentId}`,
           headers: { "Authorization": `Bearer ${token}` },
-          data: [    {
-            name: state.tournament.oneTournament.name,
-            date: state.tournament.oneTournament.date,
-            location: state.tournament.oneTournament.location,
-            speed:state.tournament.oneTournament.speed,
-            nb_players:state.tournament.oneTournament.nb_players,
-            comments:state.tournament.oneTournament.comments,
-            cash_price:state.tournament.oneTournament.cash_price,
-            buy_in:state.tournament.oneTournament.buy_in,
-            starting_stack: state.tournament.oneTournament.starting_stack,
-            small_blind: state.tournament.oneTournament.small_blind,
-            status: state.tournament.oneTournament.status,
-            chips_user: false,
-          },
-            state.tournament.structureTournament
-
-          
-        ]
+          data: test
         })
         .then((response) => {
-
+          console.log(response)
           store.dispatch(modifyTournamentSuccess(response.data));
         })
-        .catch((err) => console.log(err.response.data.message));
-        store.dispatch(errMessage(err.response.data.message))
+        .catch((err) => store.dispatch(errMessage(err.response.data.message)));
+        
       
       break;
     }
@@ -438,27 +468,61 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+  case  UPDATE_STRUCTURE :{
+      const state = store.getState()
+     // const token = localStorage.getItem('token');
+      
+      store.dispatch(addStructureToState(
+        structureCreator(
+          state.tournament.oneTournament.small_blind,
+          state.tournament.oneTournament.nb_players,
+          state.tournament.oneTournament.starting_stack,
+          state.tournament.oneTournament.speed
+          )));
+      
+      
+      break;
+    }
+
     case CREATE_STRUCTURE :{
       const state = store.getState()
      // const token = localStorage.getItem('token');  
       
       store.dispatch(addStructureToState(
         structureCreator(
-          state.tournament.creatTournament.small_blind,
-          state.tournament.creatTournament.nb_players,
-          state.tournament.creatTournament.starting_stack,
-          state.tournament.creatTournament.speed
+          state.tournament.createTournamentInputs.small_blind,
+          state.tournament.createTournamentInputs.nb_players,
+          state.tournament.createTournamentInputs.starting_stack,
+          state.tournament.createTournamentInputs.speed
           )));
       store.dispatch(tournamentSubmit())
       
       break;
-    }    
- 
-   
-    default:
-      next(action);
+    }
+
+    case LAUNCH_TOURNAMENT: {
+      
+      const tournamentId = action.tournamentId;
+      const token = localStorage.getItem('token'); 
+
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/timer/${tournamentId}`,
+        headers: {"Authorization" : `Bearer ${token}`},
+      })
+      .then((response) =>{
+        console.log(response.data)
+        store.dispatch(launchTournamentSucess(response.data));
+        
+      })
+      .catch((error) => console.log(error));
+
       break;
-  }
+    }
+      default:
+        next(action);
+        break;
+    }
 };
 
 export default tournamentsMiddleware;

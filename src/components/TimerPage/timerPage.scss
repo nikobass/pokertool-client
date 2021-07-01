@@ -1,0 +1,281 @@
+.timerPage{  
+    
+    user-select: none;      
+
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/images/bg-timer.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+
+    &__header{
+
+        position: relative;
+
+        &__quit{
+            
+            font-size: 2rem;
+            font-weight: bold;
+            border: 5px solid #f2f2f2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            position: absolute;
+            right: 1.5rem;
+            top: 6rem;
+
+            &:hover{
+                color: #EE581E;
+                border: 5px solid #EE581E;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__infos{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+        right: 5rem;      
+
+        &__timer{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+.timerModal{
+
+    &__buttons{
+        display: flex;
+        justify-content: center;
+
+        &__button{
+        background-color: #ee581e;
+        color: #f2f2f2;
+        padding: 0.8rem 2rem;
+        border-radius: 5px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid #19191e;
+        margin-top: 1rem;
+
+        &:first-child{
+            margin-right: 1rem;
+        }
+
+        &:hover{
+            cursor: pointer;
+            background-color: #19191e;
+            border: 2px solid #f2f2f2;
+            color: #EE581E;
+        }
+    }}
+}
+
+
+@media all and (max-width: 1500px){
+
+  .timerPage{
+
+    &__infos{
+        position: relative;
+        justify-content: center;
+
+        &__cashPrice{
+            display: none;
+        }
+
+        &__timer{
+
+            margin-left: 15rem;
+        }
+
+        &__chips{
+
+            margin-left: 20rem;
+        }
+    }
+
+    &__header{
+
+        &__quit{
+            top: 4rem;
+
+        }
+
+        &__quit{
+            top: 7rem;
+
+        }
+    }
+  }
+}
+
+@media all and (max-width: 1100px){
+
+    .timerHeader{
+
+        padding: 0;
+
+        justify-content: center;
+
+        &__time{
+            display: none;
+        }
+
+        &__name{
+            text-align: center;
+            padding: 0.5rem;
+        }
+    }
+
+    .timerPage{
+
+        &__header{
+
+            &__quit{
+
+                top: 4rem;
+            }
+        }
+
+        &__infos{
+
+        position: static;
+
+        
+        &__timer{
+            margin-top: 1rem;
+            margin-left: 0;
+
+        }
+        
+        &__cashPrice{
+              display: none;
+        }
+          
+        &__chips{
+              display: none;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 800px){
+
+    .timerPage {
+
+        background-position-x: -350px ;
+
+        &__header{
+      
+            &__quit{
+                top: 3rem;
+                right: 0.4rem;
+
+            }
+
+        }
+
+    .timerBlinds{
+
+        &__aside{
+
+            display: none;
+            font-size: 2rem;
+        }
+
+        &__current{
+            &__amount{
+                font-size: 3.4rem;
+
+                &__slash{
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+
+    &__infos{
+
+        &__timer{
+            margin-top: 2rem;
+        }
+
+        &__chips{
+            margin-left: 0;
+        }
+    }
+
+    .firstBorder{
+        border: none;
+    }
+    .secondBorder{
+        border: none;
+    }
+
+    .timer{
+        border: none;
+        background: none;
+        width: auto;
+
+        &__reset{
+
+            position: absolute;
+            top: -2rem;
+        }
+
+        &__stage{
+
+            position: absolute;
+            top: 2.5rem;
+            width: 360px;
+        }
+
+        &__controllers{
+
+            top: 15rem;
+        }
+
+        &__timer{
+
+            font-size: 7rem;
+            top: 7rem;
+
+
+            &__minute{
+
+            }
+
+            &__seconde{
+
+            }
+        }
+
+        &__stage{
+
+            margin: 0;
+
+            &__stage {
+                font-size: 3rem;
+            }
+        }
+
+        &__controllers{
+
+            &__play{
+
+                margin: 0 2rem;
+            }
+        }
+    }
+
+  }
+}

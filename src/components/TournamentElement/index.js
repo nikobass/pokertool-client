@@ -1,6 +1,8 @@
 import React from 'react';
 import { Edit, Eye, Trash2 } from 'react-feather';
 import PropTypes from 'prop-types';
+import { formatDate } from 'src/utils/date';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import {
@@ -8,7 +10,8 @@ import {
   tournamentDeleteModal,
   getOneTournamentUser,
   tounamentUpdateModale,
-  getStructureTournament
+  getStructureTournament,
+  launchTournament
 } from 'src/actions/tournament';
 import {
   importChips
@@ -26,17 +29,19 @@ const TournamentElement = ({
   date,
   handleTournamentDetails,
   handleTournamentDelete,
-  handleTournamentUpdate
-  
-  
+  handleTournamentUpdate,
+  handleLaunchTournament
 }) => {
+
+  const formattedDate = formatDate(date, false);
+
   return (
     <div className="tournament--element" >
       <span >
         {name}
       </span>
       <span>
-        {date}
+        {formattedDate}
       </span>
       <span>
         {location}
@@ -47,9 +52,9 @@ const TournamentElement = ({
       <span>
         {cashPrice}
       </span>
-      <span>
+      {/* <span>
         {statut}
-      </span>
+      </span> */}
       <span >
         {nbPlayers}
       </span>
@@ -70,7 +75,9 @@ const TournamentElement = ({
       >
         <Trash2 />
       </button>
-      <button className="tournaments--play">Commencer</button>
+      <Link to="/timer">
+      <button onClick={handleLaunchTournament} className="tournaments--play">Commencer</button>
+      </Link>
     </div>
     
      
@@ -80,7 +87,7 @@ const TournamentElement = ({
 TournamentElement.propTypes = {
   name: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  cashPrice: PropTypes.number.isRequired,
+  cashPrice: PropTypes.array.isRequired,
   nbPlayers: PropTypes.number.isRequired,
   buyIn: PropTypes.number.isRequired,
   statut: PropTypes.string.isRequired,
@@ -91,7 +98,6 @@ TournamentElement.propTypes = {
 const mapDispatchToProps = (dispatch, ownprops) => ({
   handleTournamentDetails : () => {
     dispatch(tournamentDetailsModal(ownprops.currentId))
-    {console.log(ownprops.currentId)}
     dispatch(getOneTournamentUser())
     dispatch(importChips())
     dispatch(getStructureTournament())   
@@ -104,8 +110,11 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
     dispatch(getOneTournamentUser())
     dispatch(importChips())
     dispatch(getStructureTournament())
-
+},
+handleLaunchTournament :() => {
+    dispatch(launchTournament(ownprops.currentId))
 }
+
 })
 
 export default connect(null, mapDispatchToProps)(TournamentElement);

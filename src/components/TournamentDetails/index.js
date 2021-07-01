@@ -2,26 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'src/components/Modal';
 
+import { formatDate } from 'src/utils/date';
 import 'src/components/TournamentDetails/tournamentDetails.scss'
-
-import {
- 
-} 
-from 'src/actions/tournament';
-
-
-
-
 
 const TournamentDetails = ({
   openDetailsModal,
   oneTournament,
-  structureTournament,
-  
-
+  cashPriceValue,
+  buyInValue,
+  speedValue,
+  nbPlayersValue,
+  startingStackValue,
+  commentsValue,
+  smallBlindValue,
+  nameValue,
+  dateValue,
+  locationValue,
+  statusValue,
+  structureTournament
 } ) => {
 
- 
+  const formattedDate = formatDate(oneTournament.date, false)
+
   return (
    
       <Modal
@@ -29,28 +31,30 @@ const TournamentDetails = ({
       title= 'Détails du tournoi'
       content={(
      
-        <div className="tournament-containerDetail">    
-
-          <p>Nom du tournoi: <span className="detailsTournament">{oneTournament.name} </span></p>
+        <div className="tournament-containerDetail">                  
+               
+          <p>Nom du tournoi: <span className="detailsTournament" value={nameValue}>{oneTournament.name} </span></p>
           <br/>
-          <p>date du tournoi: <span className="detailsTournament">{oneTournament.date}</span></p>
+          <p>date du tournoi: <span className="detailsTournament" value={dateValue}>{formattedDate}</span></p>
           <br/>
-          <p>Lieu du tournoi: <span className="detailsTournament">{oneTournament.location}</span></p>
+          <p>Lieu du tournoi: <span className="detailsTournament" value={locationValue}>{oneTournament.location}</span></p>
           <br/>
-          <p>Nombre de joueurs: <span className="detailsTournament">{oneTournament.nb_players}</span></p>
+          <p>Nombre de joueurs: <span className="detailsTournament" value={nbPlayersValue}>{oneTournament.nb_players}</span></p>
           <br/>
-          <p>Durée des étapes: <span className="detailsTournament"> {oneTournament.speed}</span></p>
+          <p>Durée des étapes: <span className="detailsTournament" value={speedValue} > {oneTournament.speed}</span></p>
           <br/>
-          <p>Tapis de départ: <span className="detailsTournament">{oneTournament.starting_stack}</span></p>
+          <p>Tapis de départ: <span className="detailsTournament" value={startingStackValue}>{oneTournament.starting_stack}</span></p>
           <br/>
-          <p> Buy-in: <span className="detailsTournament">{oneTournament.buy_in}</span></p>
+          <p> Buy-in: <span className="detailsTournament" value={buyInValue}>{oneTournament.buy_in}</span></p>
           <br/>
-          <p> Cash-price:<span className="detailsTournament">{oneTournament.cash_price}</span></p>
+          <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice, i) => cashprice.position + ': ' + cashprice.amount + (i === cashPriceValue.length-1 ? ' ' : ' / '))}</span></p>
           <br/>
-          <p> Small blind:<span className="detailsTournament">{oneTournament.small_blind}</span></p>
+          <p> J'utilise mes jetons pour ce tournoi :<span className="detailsTournament">{oneTournament.chips_user ? "oui" : "non"}</span></p>
           <br/>
-          <p>Statut:  <span className="detailsTournament">{oneTournament.status}</span></p>
+          <p> Small blind:<span className="detailsTournament" value={smallBlindValue}>{oneTournament.small_blind}</span></p>
           <br/>
+          {/* <p>Statut:  <span className="detailsTournament" value={statusValue}>{oneTournament.status}</span></p>
+          <br/> */}
           <div>
             <p>Structure du tournoi</p>
             <table>
@@ -75,7 +79,7 @@ const TournamentDetails = ({
           </div>
           <div className="tournament-containerDetail__comment">
             <p>Commentaire(s) du tournoi:</p>
-            <p className="detailsTournament"> {oneTournament.comments}</p>
+            <p className="detailsTournament" value={commentsValue}> {oneTournament.comments}</p>
           </div>
           
         </div>
@@ -92,9 +96,20 @@ const TournamentDetails = ({
 const mapStateToProps = (state) => ({
 	openDetailsModal: state.tournament.openDetailsModal,
   oneTournament : state.tournament.oneTournament,
+  nameValue: state.tournament.oneTournament.name,
+  locationValue: state.tournament.oneTournament.location,
+  dateValue : state.tournament.oneTournament.date,
+  statusValue :state.tournament.oneTournament.status,
+  cashPriceValue:state.tournament.oneTournament.cashprices,
+  buyInValue:state.tournament.oneTournament.buy_in,
+  speedValue:state.tournament.oneTournament.speed,
+  commentsValue:state.tournament.oneTournament.comments,
+  nbPlayersValue:state.tournament.oneTournament.nb_players,
+  smallBlindValue: state.tournament.oneTournament.small_blind,
+  startingStackValue:state.tournament.oneTournament.starting_stack,
+  statusValue: state.tournament.oneTournament.status,
   handleModalStructureDetails : state.tournament.structureTournamentOpen,
   structureTournament : state.tournament.structureTournament
-  
 });
 
 

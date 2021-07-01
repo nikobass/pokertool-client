@@ -1,6 +1,3 @@
-import {
-
-} from './user';
 export const OPEN_MODAL_TOURNAMENT_DETAILS = 'OPEN_MODAL_TOURNAMENT_DETAILS'
 export const CLOSE_TOURNAMENT_DETAILS_MODAL = 'CLOSE_TOURNAMENT_DETAILS_MODAL'
 export const GET_TOURNAMENTS_ALL_USER = 'GET_TOURNAMENTS_ALL_USER'
@@ -27,8 +24,13 @@ export const CREATE_STRUCTURE ='CREATE_STRUCTURE'
 export const ADD_STRUCTURE_TO_STATE = 'ADD_STRUCTURE_TO_STATE'
 export const CLEAR_TOURNAMENT = 'CLEAR_TOURNAMENT'
 export const ERROR_MESSAGE ='ERROR_MESSAGE'
+export const ADD_CASH_PRICE = 'ADD_CASH_PRICE'
+export const CHANGE_INPUT_CASHPRICE = 'CHANGE_INPUT_CASHPRICE'
+export const ADD_CASH_PRICE_ONE_TOURNAMENT = 'ADD_CASH_PRICE_ONE_TOURNAMENT'
 export const CHECKBOX_CHIPS = 'CHECKBOX_CHIPS'
 export const SUBMIT_WITH_MY_CHIPS = 'SUBMIT_WITH_MY_CHIPS'
+export const SUBMIT_WITH_MY_CHIPS_UPDATE = 'SUBMIT_WITH_MY_CHIPS_UPDATE'
+export const SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS = 'SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS'
 export const SUBMIT_WITH_MY_CHIPS_SUCCESS = 'SUBMIT_WITH_MY_CHIPS_SUCCESS'
 export const USE_OWN_SMALL_BLIND = 'USE_OWN_SMALL_BLIND';
 export const OPEN_MODAL_TOURNAMENT_STRUCTURE = 'OPEN_MODAL_TOURNAMENT_STRUCTURE'
@@ -46,6 +48,8 @@ export const SORT_STATUS = 'SORT_STATUS';
 export const SORT_TOURNAMENT_BY_STATUS_SUCCESS = 'SORT_TOURNAMENT_BY_STATUS_SUCCESS';
 export const SORT_PLAYER = 'SORT_PLAYER';
 export const SORT_TOURNAMENT_BY_PLAYER_SUCCESS = 'SORT_TOURNAMENT_BY_PLAYER_SUCCESS';
+export const LAUNCH_TOURNAMENT = 'LAUNCH_TOURNAMENT';
+export const UPDATE_STRUCTURE = 'UPDATE_STRUCTURE'
 
 import {HIDE_MODAL} from './user'
 
@@ -76,11 +80,23 @@ export const tounamentUpdateModale = (currentId) => ({
   type: OPEN_MODAL_TOURNAMENT_UPDATE,
   currentId
 })
+
+export const addCashprice = () => ({
+  type: ADD_CASH_PRICE
+})
+
+export const addCashpriceOneTournament = () => ({
+  type: ADD_CASH_PRICE_ONE_TOURNAMENT
+})
 /*********************************** PATCH  **************************/
 
 export const modifyTournamentValidate = () =>({
   type: MODIFY_TOURNAMENT_VALIDATE,
   
+})
+
+export const updateStructure = () => ({
+  type : UPDATE_STRUCTURE
 })
 /************************* GET Tournaments ******************************/
 
@@ -98,7 +114,7 @@ export const getTournamentUserSuccess = (tournaments) => ({
 
 // récupération des détails d'un tournoi
 export const getOneTournamentUser = () => ({
-  type: GET_ONE_TOURNAMENT_USER,
+  type : GET_ONE_TOURNAMENT_USER
 });
 
 // retour du middleware pour les details d'un tournoi
@@ -138,20 +154,30 @@ export const tournamentSubmit = () => ({
 })
 
 // recupère les infos des inputs
-export const submitCreatTournamentValues = (newInputValue, inputName ) => ({
+export const submitCreatTournamentValues = (newInputValue, inputName, index) => ({
   type: SUBMIT_CREAT_TOURNAMENT_VALUES,
   newInputValue,
   inputName,
+  index
 });
 
-export const tournamentSubmitSuccess = () => ({
-  type : TOURNAMENT_SUBMIT_SUCCESS
+export const tournamentSubmitSuccess = (tournament) => ({
+  type : TOURNAMENT_SUBMIT_SUCCESS,
+  tournament
 });
 
-export const changeInputValue = (newInputValue, inputName) => ({
+export const changeInputValue = (newInputValue, inputName, index) => ({
   type: CHANGE_INPUT_VALUE,
   newInputValue,
   inputName,
+  index
+});
+
+export const changeCashPriceValue = (newInputValue, inputName, index) => ({
+  type: CHANGE_INPUT_CASHPRICE,
+  newInputValue,
+  inputName,
+  index
 });
 
 export const toggleModifyTournament = (tournaments) => ({
@@ -274,12 +300,26 @@ export const submitFromMyChips = () => ({
   type: SUBMIT_WITH_MY_CHIPS,
 })
 
+export const submitFromMyChipsUpdate = () => ({
+  type: SUBMIT_WITH_MY_CHIPS_UPDATE,
+})
+
 export const submitFromMyChipsSuccess = (smallestChipValue) => ({
   type: SUBMIT_WITH_MY_CHIPS_SUCCESS,
   smallestChipValue
 })
 
+export const submitFromMyChipsUpdateSuccess = (smallestChipValue) => ({
+  type: SUBMIT_WITH_MY_CHIPS_UPDATE_SUCCESS,
+  smallestChipValue
+})
+
 export const dontUseMyChips = () => ({
   type: USE_OWN_SMALL_BLIND
+})
+
+export const launchTournament = (tournamentId) => ({
+  type: LAUNCH_TOURNAMENT,
+  tournamentId
 })
 

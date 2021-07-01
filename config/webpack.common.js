@@ -2,6 +2,8 @@ const paths = require('./paths');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const SRC = path.resolve(__dirname, 'src/main/js');
 
 module.exports = {
   entry: [
@@ -73,6 +75,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        use: 'file-loader'
+      }
     ],
   },
 };
