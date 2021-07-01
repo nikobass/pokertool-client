@@ -5,6 +5,8 @@ import {
   submitCreatTournamentValues
 } from 'src/actions/tournament';
 
+import 'src/components/TournamentsCashPriceInputs/tournamentsCashPriceInputs.scss';
+
 const TournamentsCashPriceInputs = (
   {
     handleCashPriceInputChange,
@@ -15,10 +17,10 @@ const TournamentsCashPriceInputs = (
   return (
     <div>        
       <div className="creatTournamentForm__cashPrice">
-        <label htmlFor="amount" className="creatTournamentForm__label">Cash price:</label>
-        <input onChange={ handleCashPriceInputChange } type="number" name="amount" className="creatTournamentForm__input" value={amount}/>
-        <label htmlFor="position" className="creatTournamentForm__label">Cash price position:</label>
-        <input onChange={ handleCashPriceInputChange } type="number" name="position" className="creatTournamentForm__input" value={position}/>
+        <label htmlFor="amount" className="creatTournamentForm__label">Cash price du n°{position}:</label>
+        <input onChange={ handleCashPriceInputChange } type="number" name="amount" className="creatTournamentForm__input" value={amount}/>    
+        <label htmlFor="position" className="creatTournamentForm__label display">Cash price position:</label>
+        <input onChange={ handleCashPriceInputChange } type="number" name="position" className="creatTournamentForm__input display" value={position}/>
       </div>           
     </div>
   );
@@ -27,10 +29,8 @@ const TournamentsCashPriceInputs = (
 const mapStateToProps = (state, ownprops) => {
   
   return {
-
   amount: state.tournament.cash_price[ownprops.index].amount,
   position: state.tournament.cash_price[ownprops.index].position
-  
   }};
 
 const mapDispatchToProps = (dispatch, ownprops) => ({

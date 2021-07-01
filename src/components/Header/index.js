@@ -79,8 +79,7 @@ const Header = ({
                     <NavLink
                         to="/distributor"
                         className="header__navbar__element"
-                        activeClassName="header__navbar__element--selected"
-                        onMouseDown={!isLogged ? handleUnauthorizedModal : undefined}
+                        activeClassName="header__navbar__element--selected"                       
                     >Répartiteur</NavLink>
                     <NavLink
                         to="/faq"
