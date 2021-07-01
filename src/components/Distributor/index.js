@@ -54,11 +54,11 @@ const Distributor = ({
 
                         <div className="distributor__form__tournament__inputs__container">
                             <label className="distributor__form__tournament__inputs__container__label">Joueurs</label>
-                            <input onChange={handleTournamentInfo} value={nbPlayer} type="number" name="nbPlayer" className="distributor__form__tournament__inputs__container__input" min="2"/>
+                            <input onChange={handleTournamentInfo} value={nbPlayer} type="number" name="nbPlayer" className="distributor__form__tournament__inputs__container__input" min="2"   onWheel={(e) => e.target.blur()}/>
                         </div>
                         <div className="distributor__form__tournament__inputs__container">
                             <label className="distributor__form__tournament__inputs__container__label">Tapis de départ</label>
-                            <input onChange={handleTournamentInfo} value={startingStack} type="number" name="startingStack" className="distributor__form__tournament__inputs__container__input" min="1"/>
+                            <input onChange={handleTournamentInfo} value={startingStack} type="number" name="startingStack" className="distributor__form__tournament__inputs__container__input" min="1" onWheel={(e) => e.target.blur()}/>
                         </div>
                     </div >
                     <button className="distributor__form__calculate">Lancer le répartiteur</button>
@@ -129,3 +129,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Distributor);
+

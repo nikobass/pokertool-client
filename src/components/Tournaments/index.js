@@ -235,7 +235,7 @@ const Tournaments = ({
                 <div className="tournamentCreate__main__form">
 
                   <label htmlFor="name" className="tournamentCreate__main__form__label">Nom du tournoi</label>
-                  <input onChange={ handleCreatTournamentChange } type="text" name="name" className="tournamentCreate__main__form__input" value={nameValue} />
+                  <input onChange={ handleCreatTournamentChange } type="text" name="name" className="tournamentCreate__main__form__input"value={nameValue} />
 
                   <label htmlFor="date" className="tournamentCreate__main__form__label">Date du tournoi</label>
                   <input onChange={ handleCreatTournamentChange } type="date" name="date" className="tournamentCreate__main__form__input" value={dateValue}/>
@@ -244,16 +244,24 @@ const Tournaments = ({
                   <input onChange={ handleCreatTournamentChange } type="text" name="location" className="tournamentCreate__main__form__input" value={locationValue}/>
 
                   <label htmlFor="nb_players" className="tournamentCreate__main__form__label">Nombre de joueurs</label>
-                  <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="tournamentCreate__main__form__input" value={nbPlayersValue}/>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={nbPlayersValue}/>
 
                   <label htmlFor="speed" className="tournamentCreate__main__form__label">Durée des étapes</label>
-                  <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="tournamentCreate__main__form__input" value={speedValue}/>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={speedValue}/>
 
                   <label htmlFor="starting_stack" className="tournamentCreate__main__form__label">Tapis de départ</label>
-                  <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="tournamentCreate__main__form__input" value={startingStackValue}/>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={startingStackValue}/>
 
                   <label htmlFor="buy_in" className="tournamentCreate__main__form__label">Buy in</label>
-                  <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="tournamentCreate__main__form__input" value={buyInValue}/>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="tournamentCreate__main__form__input"
+                  onWheel={(e) => e.target.blur()}
+                  value={buyInValue}/>
                 </div>
 
                   {/* CASH PRICE +++ */}
@@ -267,7 +275,8 @@ const Tournaments = ({
                   }
 
                   <label htmlFor="small_blind" className="tournamentCreate__main__form__label">Small blind</label>
-                  <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="tournamentCreate__main__form__input" required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
+                  <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="tournamentCreate__main__form__input"
+                  min={0} onWheel={(e) => e.target.blur()} required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
 
                   <label htmlFor="comments" className="tournamentCreate__main__form__label">Commentaires</label>
                   <textarea rows="3" cols="20" onChange={ handleCreatTournamentChange } type="text" name="comments" className="tournamentCreate__main__form__comments"  value={commentsValue}/>
