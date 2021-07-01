@@ -10,11 +10,12 @@
   width: 30vw; 
   overflow-y: auto;
   white-space: nowrap;
-  max-height: 65vh;
+  // max-height: 65vh;
 
   &__form {
       display: flex; 
-      overflow-y: auto;
+      // overflow-y: auto;
+      // white-space: nowrap;
 
       &__chips {
         display: flex;
@@ -23,6 +24,8 @@
         width: 40vw;   
         font-weight: bold;
         overflow-y: auto;
+        white-space: nowrap;
+        max-height: 65vh;
 
     }
 
