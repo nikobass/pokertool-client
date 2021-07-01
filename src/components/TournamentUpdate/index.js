@@ -62,22 +62,32 @@ const TournamentUpdate = ({
       <input onChange={handleInputChange} type="text" name="name" className="tournamentUpdate__form__input" value={nameValue} disabled={modifying ? "" : "disabled"} required/>
 
       <label htmlFor="date" className="tournamentUpdate__form__label">date</label>
-      <input onChange={handleInputChange} type="date" name="date"className="tournamentUpdate__form__input" value={formattedDate} disabled={modifying ? "" : "disabled"} required/>
+      <input onChange={handleInputChange} type="date" name="date"className="tournamentUpdate__form__input" 
+      min={0} onWheel={(e) => e.target.blur()}
+      value={formattedDate} disabled={modifying ? "" : "disabled"} required/>
 
       <label htmlFor="location" className="tournamentUpdate__form__label">lieu</label>
       <input onChange={handleInputChange} type="text" name="location" className="tournamentUpdate__form__input" value={locationValue} disabled={modifying ? "" : "disabled"}  />
 
       <label htmlFor="nb_players" className="tournamentUpdate__form__label">Nombre de joueurs</label>
-      <input onChange={handleInputChange} type="number" name="nb_players" className="tournamentUpdate__form__input" value={nbPlayersValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="number" name="nb_players" className="tournamentUpdate__form__input" 
+      min={0} onWheel={(e) => e.target.blur()}
+      value={nbPlayersValue} disabled={modifying ? "" : "disabled"}  />
 
       <label htmlFor="speed" className="tournamentUpdate__form__label">vitesse</label>
-      <input onChange={handleInputChange} type="number" name="speed" className="tournamentUpdate__form__input" value={speedValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="number" name="speed" className="tournamentUpdate__form__input" 
+      min={0} onWheel={(e) => e.target.blur()}
+      value={speedValue} disabled={modifying ? "" : "disabled"}  />
 
       <label htmlFor="starting_stack" className="tournamentUpdate__form__label">Tapis de départ</label>
-      <input onChange={handleInputChange} type="number" name="starting_stack" className="tournamentUpdate__form__input" value={startingStackValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="number" name="starting_stack" className="tournamentUpdate__form__input"
+      min={0} onWheel={(e) => e.target.blur()}
+      value={startingStackValue} disabled={modifying ? "" : "disabled"}  />
 
       <label htmlFor="buy_in" className="tournamentUpdate__form__label">Buy in</label>
-      <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input" value={buyInValue} disabled={modifying ? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="number" name="buy_in" className="tournamentUpdate__form__input"
+      min={0} onWheel={(e) => e.target.blur()}
+      value={buyInValue} disabled={modifying ? "" : "disabled"}  />
 
       {/* <p> Cash-price:<span className="detailsTournament" value={cashPriceValue && cashPriceValue}>{cashPriceValue && cashPriceValue.map((cashprice) => cashprice.position + ': ' + cashprice.amount + ' / ')}</span></p> */}
     
@@ -101,7 +111,9 @@ const TournamentUpdate = ({
       }
 
       <label htmlFor="small_blind" className="tournamentUpdate__form__label">Small blind</label>
-      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input" value={smallBlindValue} disabled={(modifying && !chipsUserValue)? "" : "disabled"}  />
+      <input onChange={handleInputChange} type="text" name="small_blind" className="tournamentUpdate__form__input"
+      min={0} onWheel={(e) => e.target.blur()}
+      value={smallBlindValue} disabled={(modifying && !chipsUserValue)? "" : "disabled"}  />
 
       
 

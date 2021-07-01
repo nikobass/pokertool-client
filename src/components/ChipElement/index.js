@@ -87,6 +87,7 @@ const ChipElement = ({
           required
           onChange={handleInputChipChange}
           className="chipElement__field__inputNumber"
+          min={0} onWheel={(e) => e.target.blur()}
         />
       </div>
       <div className="chipElement__field">
@@ -99,6 +100,7 @@ const ChipElement = ({
           required
           onChange={handleInputChipChange}
           className="chipElement__field__inputNumber"
+          min={0} onWheel={(e) => e.target.blur()}
         />
       </div>
       <Trash2 onClick={handleRemoveChip} className="chipElement__field__logo"/>

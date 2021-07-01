@@ -82,12 +82,16 @@ const DistributorChipElement = ({
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Valeur</label>
-            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber" value={value} min="1" required/>
+            <input onChange={handleDistributorFormInput} type="number" name="value" className="chipElement__field__inputNumber"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={value} min="1" required/>
         </div>
 
         <div className="chipElement__field">
             <label className="chipElement__field__label">Nombre</label>
-            <input onChange={handleDistributorFormInput} type="number" name="quantity" className="chipElement__field__inputNumber" value={quantity} min="1" required/>
+            <input onChange={handleDistributorFormInput} type="number" name="quantity" className="chipElement__field__inputNumber"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={quantity} min="1" required/>
         </div>
         <Trash2 onClick={handleRemoveChip} className="chipElement__field__logo" />
     </li>

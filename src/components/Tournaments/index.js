@@ -247,38 +247,53 @@ const Tournaments = ({
             }
 
             <label htmlFor="name" className="creatTournamentForm__label">Nom du tournoi: </label>
-            <input onChange={ handleCreatTournamentChange } type="text" name="name" className="creatTournamentForm__input" value={nameValue} />
+            <input onChange={ handleCreatTournamentChange } type="text" name="name" className="creatTournamentForm__input" 
+            value={nameValue} />
 
             <label htmlFor="date" className="creatTournamentForm__label">date du tournoi:</label>
-            <input onChange={ handleCreatTournamentChange } type="date" name="date" className="creatTournamentForm__input" value={dateValue}/>
+            <input onChange={ handleCreatTournamentChange } type="date" name="date" className="creatTournamentForm__input"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={dateValue}/>
 
             <label htmlFor="location" className="creatTournamentForm__label">Lieu du tournoi:</label>
-            <input onChange={ handleCreatTournamentChange } type="text" name="location" className="creatTournamentForm__input" value={locationValue}/>
+            <input onChange={ handleCreatTournamentChange } type="text" name="location" className="creatTournamentForm__input"
+            value={locationValue}/>
 
             <label htmlFor="nb_players" className="creatTournamentForm__label">Nombre de joueurs:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="creatTournamentForm__input" value={nbPlayersValue}/>
+            <input onChange={ handleCreatTournamentChange } type="number" name="nb_players" className="creatTournamentForm__input"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={nbPlayersValue}/>
 
             <label htmlFor="speed" className="creatTournamentForm__label">Durée des étapes:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="creatTournamentForm__input" value={speedValue}/>
+            <input onChange={ handleCreatTournamentChange } type="number" name="speed" className="creatTournamentForm__input"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={speedValue}/>
 
             <label htmlFor="buy_in" className="creatTournamentForm__label">Buy in:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input" value={buyInValue}/>
+            <input onChange={ handleCreatTournamentChange } type="number" name="buy_in" className="creatTournamentForm__input"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={buyInValue}/>
          
            {cash_price && cash_price.map((chip, i) => <TournamentsCashPriceInputs index={i} key={i} />)}
 
            <button onClick={handleAddCashprice} className=" ">Ajouter un Cash price supplémentaire</button>
 
             <label htmlFor="starting_stack" className="creatTournamentForm__label">Tapis de départ:</label>
-            <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input" value={startingStackValue}/>
+            <input onChange={ handleCreatTournamentChange } type="number" name="starting_stack" className="creatTournamentForm__input"
+            min={0} onWheel={(e) => e.target.blur()}
+            value={startingStackValue}/>
 
             <label htmlFor="small_blind" className="creatTournamentForm__label">Small blind:</label>
         
 
-            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input" required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
+            <input onChange={ handleCreatTournamentChange } type="number" name="small_blind" className="creatTournamentForm__input"
+            min={0} onWheel={(e) => e.target.blur()}
+            required={!isChipsChecked}  value={smallBlindValue} disabled={isChipsChecked}/>
 
 
             <label htmlFor="comments" className="creatTournamentForm__label">commentaires:</label>
-            <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input"  value={commentsValue}/>
+            <input onChange={ handleCreatTournamentChange } type="text" name="comments" className="creatTournamentForm__input"
+            value={commentsValue}/>
 
             {errorMessage && <p className="errorMessage"> { errorMessage }</p>}
             <button type="submit" className="creatTournamentForm__submit">Valider</button>
