@@ -1,42 +1,60 @@
 .tournamentUpdate{
   display: flex;
-  justify-content: center;
-  margin: 2rem auto;
-  padding: 1rem;
-  
+  flex-direction: column;
+  padding: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-  &__form{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-      margin: 2rem auto;
-      background-color: #19191e;
-      overflow-y: scroll;
-      height: 40rem;
+  &__main {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-      &__subtitle{
-          color: #f2f2f2;
-          font-size: 1.5rem;
-          font-weight: bold;
-          margin-bottom: 2rem;
-      }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        background-color: #19191e;
 
-      
-      &__checkbox{
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-bottom: 2rem;
-        margin-left: 1rem;
-      }
+        height: auto;
+        max-height: 60vh;
+        width: 350px;
 
-      &__input{
-          width: 400px;
-          padding: 1rem;
+        font-weight: bold;
+        
+        &__label{
+          width: 100%;
+          text-align: left;
+          margin-bottom: 0.3rem;
+          color: #ee581e;
+        }
+
+        &__input{
+            width: 100%;
+            min-height: 40px;
+            padding: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            &::placeholder{
+                color: black;
+            }
+
+            &:disabled{
+                background-color: #c0c0c0;
+                border: none;
+            }
+        }
+
+        &__comments{
+          width: 100%;
+          min-height: 70px;
+          min-width: 300px;
+          padding: 0.5rem;
           margin-bottom: 1.5rem;
-          font-size: 1.3rem;
+          font-size: 1rem;
           font-weight: bold;
-
           &::placeholder{
               color: black;
           }
@@ -45,28 +63,67 @@
               background-color: #c0c0c0;
               border: none;
           }
-      }
+        }
 
+        &__checkbox{
+          width: 1rem;
+          height: 1rem;
+          margin-bottom: 2rem;
+          margin-left: 1rem;
+          text-align: left;
+        }
+    }
+
+
+    &__cashPrice{
+      border-top: 1px solid #f2f2f2;
+      padding-top: 1rem;
       
+      &__main{
+        display: flex;
+        flex-direction: column;
+        background-color: #19191e;
+        width: 350px;
 
-      &__label{
+        &__label{
           width: 100%;
           text-align: left;
           margin-bottom: 0.3rem;
           color: #ee581e;
-          font-weight: bold;
-          &__cashprice{
-            display: flex;
-            flex-direction: column;
-          }
+          font-size: 1rem;
+
+        }
+
+        &__input{
+            width: auto;
+            padding: 0.5rem;
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+
+            &::placeholder{
+                color: black;
+            }
+
+            &:disabled{
+                background-color: #c0c0c0;
+                border: none;
+            }
+        }
       }
+    }
+  
+    &__actionsButtons{
+      justify-content: center;
+      margin: 1rem 0;
 
       &__errorMsg{
           color: #f2f2f2;
           width: 400px;
-          text-align: center;
       }
-      &__button{
+
+      &__action{
           background-color: #ee581e;
           color: #f2f2f2;
           padding: 0.8rem 2rem;
@@ -84,6 +141,25 @@
           }
       }
 
+      &__actionSmall{
+        background-color: #ee581e;
+        color: #f2f2f2;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1rem;
+        border: 2px solid #19191e;
+        padding: 0.5rem 0.5rem;
+        width: 250px;
+        margin: 0.5rem auto 0rem auto;
+        //margin-top: 0.5rem
+        &:hover{
+            cursor: pointer;
+            background-color: #19191e;
+            border: 2px solid #f2f2f2;
+            color: #EE581E;
+        }
+    }
+
       &__delete{
           color: #f2f2f2;
           margin-top: 2rem;
@@ -98,9 +174,12 @@
               color: #ee581e;
           }
       }
-
+    }
   }
 }
+
+
+
 
 .invisible{
   display: none;

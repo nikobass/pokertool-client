@@ -5,6 +5,8 @@ import {
   submitCreatTournamentValues
 } from 'src/actions/tournament';
 
+import 'src/components/Tournaments/tournaments.scss';
+
 const TournamentsCashPriceInputs = (
   {
     handleCashPriceInputChange,
@@ -13,13 +15,13 @@ const TournamentsCashPriceInputs = (
   }
 ) => {
   return (
-    <div>        
-      <div className="creatTournamentForm__cashPrice">
-        <label htmlFor="amount" className="creatTournamentForm__label">Cash price:</label>
-        <input onChange={ handleCashPriceInputChange } type="number" name="amount" className="creatTournamentForm__input" value={amount}/>
-        <label htmlFor="position" className="creatTournamentForm__label">Cash price position:</label>
-        <input onChange={ handleCashPriceInputChange } type="number" name="position" className="creatTournamentForm__input" value={position}/>
-      </div>           
+    <div>
+      <div className="tournamentUpdate__main__cashPrice__main">
+        <label htmlFor="amount" className="tournamentUpdate__main__cashPrice__main__label">Cash price:</label>
+        <input onChange={ handleCashPriceInputChange } type="number" name="amount" className="tournamentUpdate__main__cashPrice__main__input" value={amount}/>
+        <label htmlFor="position" className="tournamentUpdate__main__cashPrice__main__label">Cash price position:</label>
+        <input onChange={ handleCashPriceInputChange } type="number" name="position" className="tournamentUpdate__main__cashPrice__main__input" value={position}/>
+      </div>
     </div>
   );
 };

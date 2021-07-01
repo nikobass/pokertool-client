@@ -13,9 +13,9 @@ import {
 } from 'src/actions/tournament';
 import {
   importChips
-} from 'src/actions/distributor'
+} from 'src/actions/distributor';
 
-import './tournamentElement.scss'
+import './tournamentElement.scss';
 
 const TournamentElement = ({
   name,
@@ -33,46 +33,49 @@ const TournamentElement = ({
   const formattedDate = formatDate(date, false);
 
   return (
-    <div className="tournament--element" >
-      <span >
-        {name}
-      </span>
-      <span>
-        {formattedDate}
-      </span>
-      <span>
-        {location}
-      </span>
-      <span>
-        {buyIn}
-      </span>
-      <span>
-        {cashPrice}
-      </span>
-      <span>
-        {statut}
-      </span>
-      <span >
-        {nbPlayers}
-      </span>
-    
-      <button onClick={handleTournamentDetails} className="modify-tournament">
-        
-        <Eye />
-      </button>
-      <button
-       className="modify-tournament"
-       onClick={handleTournamentUpdate}
-       >
-        <Edit />
-      </button>
-      <button 
+    <div className="tournament--list">
+      <div className="tournament--list--row">
+        <p className="tournament--list--row--element">
+          {name}
+        </p>
+        <p className="tournament--list--row--element">
+          {formattedDate}
+        </p>
+        <p className="tournament--list--row--element">
+          {location}
+        </p>
+        <p className="tournament--list--row--element">
+          {buyIn}
+        </p>
+        <p className="tournament--list--row--element">
+          {cashPrice}
+        </p>
+        <p className="tournament--list--row--element">
+          {nbPlayers}
+        </p>
+      </div>
+
+      <div className="tournament--list--row--action"> 
+        <button onClick={handleTournamentDetails} className="modify-tournament">
+          <Eye />
+        </button>
+
+        <button
         className="modify-tournament"
-        onClick={handleTournamentDelete}
-      >
-        <Trash2 />
-      </button>
-      <button className="tournaments--play">Commencer</button>
+        onClick={handleTournamentUpdate}
+        >
+          <Edit />
+        </button>
+
+        <button 
+          className="modify-tournament"
+          onClick={handleTournamentDelete}
+        >
+          <Trash2 />
+        </button>
+
+        <button className="tournaments--play">Lancer le tournoi</button>
+      </div>
     </div>
     
      
