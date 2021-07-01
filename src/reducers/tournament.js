@@ -117,6 +117,7 @@ const reducer = (state = initialState, action = {}) => {
             openDeleteModal: false,
             showCreateTournamentModal: false,
             openUpdateModal: false,
+            errorMessage: '',
             creatTournament: {
               ...state.creatTournament,
               small_blind: '',
@@ -192,30 +193,31 @@ const reducer = (state = initialState, action = {}) => {
           errorMessage: action.errMessage
           
         }
+
+        // lors de la création d'un tournament
         case ADD_CASH_PRICE:
           return {
-            ...state,
-            // nbCashPrice: state.csh_priceInput.position +1,                  
+            ...state,                         
             cash_price:[
               ...state.cash_price,
               {
-                position: 0,
-                amount : 100
+                position: state.cash_price.length+1,
+                amount : ''
               }
             ]            
           }
-
+          
+          //pour le update tournament
           case ADD_CASH_PRICE_ONE_TOURNAMENT:
           return {
-            ...state,
-            // nbCashPrice: state.csh_priceInput.position +1,  
+            ...state,   
             oneTournament: {
               ...state.oneTournament,
               cashprices: [
                 ...state.oneTournament.cashprices,
                 {
-                  position: 0,
-                  amount : 100
+                  position: state.oneTournament.cashprices.length+1,
+                  amount : ''
                 }
               ]
             }                        

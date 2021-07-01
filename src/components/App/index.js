@@ -59,11 +59,16 @@ const App = ({ isLogged }) => {
           <Faq />
           <Footer />
         </Route>
+        <Route exact path="/distributor">
+            <Header />
+            <Distributor />
+            <Footer />
+        </Route>
         <Route path="/resetPassword">
               <Header />
               <ResetPassword />
               <Footer />
-        </Route>
+        </Route>    
         {isLogged ?
           <>
             <Route exact path="/tournaments">
@@ -91,7 +96,7 @@ const App = ({ isLogged }) => {
             </Route>
           </>
           :
-          <>
+          <>      
             <Route exact path="/tournaments">
               <Header />
               <Home />
@@ -101,12 +106,7 @@ const App = ({ isLogged }) => {
               <Header />
               <ChipCaseForm />
               <Footer />
-            </Route>
-            <Route exact path="/distributor">
-              <Header />
-              <Home />
-              <Footer />
-            </Route>
+            </Route>            
             <Route path="/profil">
               <Header />
               <Home />

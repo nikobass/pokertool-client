@@ -110,53 +110,53 @@ const Tournaments = ({
 
           <span className="tournaments--list__name" >
             Nom
-            <button
+            {/* <button
               className="chevron-down"
               onClick={handleOnclickSortTournamentByName}
               type="button"
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            </button> */}
           </span>
           <span>
             Date
-            <button
+            {/* <button
               className="chevron-down"
               onClick={handleOnclickSortTournamentByDate}
               type="button"
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            </button> */}
           </span>
           <span>
             Lieu
-            <button
+            {/* <button
               className="chevron-down"
               onClick={handleOnclickSortTournamentByLocation}
               type="button"
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            </button> */}
           </span>
           <span>
             Buy-in
-            <button
+            {/* <button
               className="chevron-down"
               onClick={handleOnclickSortTournamentByBuyIn}
               type="button"
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            </button> */}
           </span>
           <span>
             Cash-price
-            <button
+            {/* <button
               className="chevron-down"
               onClick={handleOnclickSortTournamentByCashPrice}
               type="button"
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            </button> */}
           </span>
           {/* <span>
             Statut
@@ -170,13 +170,13 @@ const Tournaments = ({
           </span> */}
           <span>
             Joueurs
-            <button 
+            {/* <button 
               className="chevron-down"
               onClick={handleOnclickSortTournamentByPlayer}
               type="button"
             >
               {isFiltred ? <ChevronUp size={15} /> : <ChevronDown size={15}/>}
-            </button>
+            </button> */}
           </span>
         </li>        
         {tournaments &&
